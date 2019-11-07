@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">LoginAndRegister</string>
+    <string name="phone">Phone</string>
+    <string name="email">Email</string>
+    <string name="fullname">Fullname</string>
+    <string name="address">Address</string>
+    <string name="dateofbirth">Date of Birth</string>
+    <string name="gender">Gender</string>
+    <string name="password">Password</string>
 </resources>
