@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity">
+
+    <EditText
+        android:id="@+id/password"
+        android:hint="Password"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+    <EditText
+        android:id="@+id/fullName"
+        android:hint="Full name"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+    <EditText
+        android:id="@+id/email"
+        android:hint="Email"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+    <EditText
+        android:id="@+id/phone"
+        android:hint="Phone"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+    <EditText
+        android:id="@+id/address"
+        android:hint="Address"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+    <EditText
+        android:id="@+id/dob"
+        android:hint="Day of Birth"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+    <EditText
+        android:id="@+id/gender"
+        android:hint="Gender"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+    <Button
+        android:visibility="gone"
+        android:id="@+id/back"
+        android:text="Back to Login Screen"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"/>
+    <Button
+        android:id="@+id/register_button"
+        android:text="Register"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"/>
+</LinearLayout>
