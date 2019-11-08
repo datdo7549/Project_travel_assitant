@@ -13,14 +13,22 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.example.loginandregister.Model.Message;
 import com.example.loginandregister.Model.RegisterResult;
 import com.example.loginandregister.Model.User_register;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -101,7 +109,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     mDob = parts[2]+"-"+parts[1]+"-"+parts[0];
                     sendRegister(mPassword, mFullname, mEmail, mPhone, mAddress, mDob, mGender);
                 }
-
                 break;
             }
             case R.id.back:
@@ -133,13 +140,36 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             public void onResponse(Call<RegisterResult> call, Response<RegisterResult> response) {
                 if(!response.isSuccessful())
                 {
-                    Toast.makeText(RegisterActivity.this,"Failed",Toast.LENGTH_SHORT).show();
+                    if(response.code()==400) {
+                        try {
+                            JSONObject jObjError = null;
+                            if (response.errorBody() != null) {
+                                jObjError = new JSONObject(response.errorBody().string());
+                            }
+                            Gson gson = new Gson();
+                            Type type = new TypeToken<ArrayList<Message>>(){}.getType();
+                            ArrayList<Message> contactList = gson.fromJson(jObjError.get("message").toString(), type);
+                            String err="";
+                            for (Message mess : contactList){
+                                err+=mess.getMsg()+"and";
+                            }
+                            String result=err.substring(0,err.length()-3);
+                            Toast.makeText(RegisterActivity.this,"Error: "+result,Toast.LENGTH_SHORT).show();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
                     return;
                 }
-                progressDialog.dismiss();
-                back.setVisibility(View.VISIBLE);
-                register.setVisibility(View.GONE);
-                Toast.makeText(RegisterActivity.this,"Complete",Toast.LENGTH_SHORT).show();
+                else {
+                    progressDialog.dismiss();
+                    back.setVisibility(View.VISIBLE);
+                    register.setVisibility(View.GONE);
+                    Toast.makeText(RegisterActivity.this, "Complete", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
