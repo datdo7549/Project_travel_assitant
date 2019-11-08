@@ -1,19 +1,45 @@
 package com.example.loginandregister;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.loginandregister.Model.FacebookLoginResult;
+import com.example.loginandregister.Model.Fb_data_login;
 import com.example.loginandregister.Model.LoginResult;
 import com.example.loginandregister.Model.User_login;
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.Profile;
+import com.facebook.login.Login;
+import com.facebook.login.widget.LoginButton;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,14 +55,89 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button login;
     private TextView register;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
+    private ProgressDialog progressDialog;
+    CallbackManager callbackManager;
+    LoginButton loginButton;
+    String email,name,first_name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        callbackManager=CallbackManager.Factory.create();
         setContentView(R.layout.activity_login);
         mapping();
+        keyhash();
         login.setOnClickListener(this);
         register.setOnClickListener(this);
+        loginButton.setReadPermissions(Arrays.asList("public_profile","email"));
+        setLogin_Button();
+        
+    }
 
+    private void setLogin_Button() {
+        loginButton.registerCallback(callbackManager, new FacebookCallback<com.facebook.login.LoginResult>() {
+            @Override
+            public void onSuccess(com.facebook.login.LoginResult loginResult) {
+                result();
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+
+            }
+        });
+    }
+
+    private void result() {
+        GraphRequest graphRequest=GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+            @Override
+            public void onCompleted(JSONObject object, GraphResponse response) {
+                try {
+                    email=object.getString("email");
+                    name=object.getString("name");
+                    first_name=object.getString("first_name");
+                    final String token=AccessToken.getCurrentAccessToken().getToken();
+                    progressDialog=new ProgressDialog(LoginActivity.this);
+                    progressDialog.setTitle("Login Status");
+                    progressDialog.setMessage("Logging...");
+                    Fb_data_login login=new Fb_data_login(token);
+                    Call<FacebookLoginResult> call=jsonPlaceHolderApi.facebookLogin(login);
+                    call.enqueue(new Callback<FacebookLoginResult>() {
+                        @Override
+                        public void onResponse(Call<FacebookLoginResult> call, Response<FacebookLoginResult> response) {
+                            if(!response.isSuccessful())
+                            {
+                                if(response.code()==400)
+                                Toast.makeText(LoginActivity.this,"Login by facebook failed",Toast.LENGTH_LONG).show();
+                            }
+                            else
+                            {
+                                progressDialog.dismiss();
+                                Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                                startActivity(intent);
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<FacebookLoginResult> call, Throwable t) {
+                            Toast.makeText(LoginActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+                        }
+                    });
+                    Log.d("TOKEN",token);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "name,email,first_name");
+        graphRequest.setParameters(parameters);
+        graphRequest.executeAsync();
     }
 
     private void mapping() {
@@ -50,8 +151,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         jsonPlaceHolderApi=retrofit.create(JsonPlaceHolderApi.class);
+        loginButton=(LoginButton) findViewById(R.id.loginfb_button);
     }
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode,resultCode,data);
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId())
@@ -100,6 +206,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if(bundle!=null) {
             emailPhone.setText(bundle.getString("email", ""));
             password.setText(bundle.getString("password", ""));
+        }
+    }
+    public void keyhash()
+    {
+        try{
+            PackageInfo info=getPackageManager().getPackageInfo("com.example.loginandregister", PackageManager.GET_SIGNATURES);
+            for(Signature signature:info.signatures)
+            {
+                MessageDigest md=MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash:", Base64.encodeToString(md.digest(),Base64.DEFAULT));
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
         }
     }
 }
