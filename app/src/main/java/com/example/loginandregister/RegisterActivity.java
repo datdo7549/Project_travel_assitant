@@ -162,6 +162,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                             e.printStackTrace();
                         }
                     }
+                    if(response.code()==503)
+                    {
+                        Toast.makeText(RegisterActivity.this,"Server error on creating user",Toast.LENGTH_SHORT).show();
+                    }
                     return;
                 }
                 else {
