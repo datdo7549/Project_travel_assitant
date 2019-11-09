@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.loginandregister.Adapter.CustomAdapter;
 import com.example.loginandregister.Model.ListTour;
 import com.example.loginandregister.Model.Tour;
 import com.google.gson.Gson;
@@ -92,16 +93,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Toast.makeText(MainActivity.this,"Get thanh cong ",Toast.LENGTH_SHORT).show();
 
 
-                        //Sua cai nay ne, chuyen no thanh List View
-                        String content="";
-                        for(Tour temp:arrayList)
-                        {
-                            content+=temp.getId()+"\n";
-                            content+=temp.getName()+"\n\n";
-                        }
-                        TextView tx=findViewById(R.id.textCt);
-                        tx.setText(content);
+                        arrayList=new ArrayList<>(response.body().getTotal());
+                        arrayList=response.body().getTourList();
 
+                        ListView lv=findViewById(R.id.listTour);
+                        CustomAdapter arrayAdapternew= new CustomAdapter(MainActivity.this,R.layout.custom_layout_tour_listview,arrayList);
+
+
+                        //Sua cai nay ne, chuyen no thanh List View
+
+                        arrayAdapternew.notifyDataSetChanged();
+                        lv.setAdapter(arrayAdapternew);
+
+                        Toast.makeText(MainActivity.this,"Get thanh cong ",Toast.LENGTH_SHORT).show();
                         ////////////////////////////
                     }
 

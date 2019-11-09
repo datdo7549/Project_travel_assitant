@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="10dp">
+    
+    <ImageView
+        android:id="@+id/imageTour"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/imagetour"
+        android:layout_alignParentTop="true"></ImageView>
+
+    <ImageView
+        android:id="@+id/imageName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/placeholder"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/imageTour"
+        android:padding="5dp"></ImageView>
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:text="Hcm-Hanoi"
+        android:paddingTop="10dp"
+        android:layout_below="@+id/imageTour"
+        android:textStyle="bold"
+        android:textColor="#E2070606"
+        android:layout_toRightOf="@+id/imageName"
+        ></TextView>
+
+    <ImageButton
+        android:id="@+id/btncopy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/copy"
+        android:layout_below="@+id/imageTour"
+        android:layout_alignParentRight="true"></ImageButton>
+
+    <ImageView
+        android:id="@+id/imageDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/calendar"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/imageName"
+        android:padding="5dp"></ImageView>
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:text="14/06/2019-15/06/2019"
+        android:paddingTop="10dp"
+        android:layout_below="@+id/imageName"
+        android:textStyle="bold"
+        android:layout_toRightOf="@+id/imageDate"
+        ></TextView>
+
+    <ImageView
+        android:id="@+id/imageAdults"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/adult"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/imageDate"
+        android:padding="5dp"></ImageView>
+
+    <TextView
+        android:id="@+id/adults"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:text="2 adutls"
+        android:paddingTop="10dp"
+        android:layout_below="@+id/imageDate"
+        android:textStyle="bold"
+        android:layout_toRightOf="@+id/imageDate"
+        ></TextView>
+
+    <ImageView
+        android:id="@+id/imageChilds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baby"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/imageAdults"
+        android:padding="5dp"></ImageView>
+
+    <TextView
+        android:id="@+id/childs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:text="2 childs"
+        android:paddingTop="10dp"
+        android:layout_below="@+id/imageAdults"
+        android:textStyle="bold"
+        android:layout_toRightOf="@+id/imageDate"
+        ></TextView>
+
+    <ImageView
+        android:id="@+id/imageCost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/money"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/imageChilds"
+        android:padding="5dp"></ImageView>
+
+    <TextView
+        android:id="@+id/min_max_Cost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:text="500.000 - 1.000.000"
+        android:paddingTop="10dp"
+        android:layout_below="@+id/imageChilds"
+        android:textStyle="bold"
+        android:textColor="#FFA000"
+        android:layout_toRightOf="@+id/imageDate"
+        ></TextView>
+
+
+</RelativeLayout>
