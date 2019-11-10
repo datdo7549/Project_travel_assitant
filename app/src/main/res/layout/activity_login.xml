@@ -41,12 +41,14 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
     <com.facebook.login.widget.LoginButton
+        android:layout_marginTop="10dp"
         android:id="@+id/loginfb_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-    <Button
+    <com.google.android.gms.common.SignInButton
+        android:layout_marginTop="10dp"
         android:id="@+id/gglogin"
-        android:text="Login GG"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
 </LinearLayout>

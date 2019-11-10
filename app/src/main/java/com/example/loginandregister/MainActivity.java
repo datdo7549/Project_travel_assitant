@@ -2,6 +2,7 @@ package com.example.loginandregister;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import com.example.loginandregister.Adapter.CustomAdapter;
 import com.example.loginandregister.Model.ListTour;
 import com.example.loginandregister.Model.Tour;
+import com.facebook.login.LoginManager;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText byname;
     private EditText isDesc;
     private Button get;
+    private Button logout;
     private ListView listView;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     private String token;
@@ -46,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Bundle bundle=getIntent().getExtras();
         token=bundle.getString("token");
         get.setOnClickListener(this);
+        logout.setOnClickListener(this);
 
 
 
@@ -57,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         byname=findViewById(R.id.orderBy);
         isDesc=findViewById(R.id.isDesc);
         get=findViewById(R.id.getlist);
+        logout=findViewById(R.id.logout);
         //listView=findViewById(R.id.listview);
         Gson gson=new GsonBuilder().serializeNulls().create();
         Retrofit retrofit=new Retrofit.Builder()
@@ -114,6 +119,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Toast.makeText(MainActivity.this,t.getMessage(),Toast.LENGTH_SHORT).show();
                     }
                 });
+                break;
+            }
+            case R.id.logout:
+            {
+                LoginManager.getInstance().logOut();
+                Intent intent=new Intent(MainActivity.this,LoginActivity.class);
+                startActivity(intent);
                 break;
             }
         }

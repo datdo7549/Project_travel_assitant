@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 
 import com.example.loginandregister.Model.Tour;
 import com.example.loginandregister.R;
+import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -73,7 +74,10 @@ public class CustomAdapter extends ArrayAdapter<Tour> {
 
 
         // cho nay chen hinh anh string avatar  ??
-        viewHolder.imageTour.setImageResource(R.drawable.imagetour);
+        //viewHolder.imageTour.setImageResource(R.drawable.imagetour);
+        Picasso.get()
+                .load("https://www.w3schools.com/howto/img_snow.jpg")
+                .into(viewHolder.imageTour);
         // tim hinh anh phu hop
 //        viewHolder.imageName.setImageResource(R.drawable.pass);
 //        viewHolder.imageDate.setImageResource(R.drawable.pass);

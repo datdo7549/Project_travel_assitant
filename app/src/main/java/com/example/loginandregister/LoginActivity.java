@@ -41,6 +41,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.Scopes;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Scope;
 import com.google.gson.Gson;
@@ -67,7 +68,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText emailPhone;
     private EditText password;
     private Button login;
-    private Button googleLogin;
     private TextView register;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     private JsonPlaceHolderAPI2 jsonPlaceHolderAPI2;
@@ -75,6 +75,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private GoogleApiClient mGoogleApiClient;
     CallbackManager callbackManager;
     LoginButton loginButton;
+    SignInButton googleLogin;
     String email,name,first_name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -328,6 +329,30 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             e.printStackTrace();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
+        }
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
+        if(isLoggedIn)
+        {
+            Fb_data_login login=new Fb_data_login(accessToken.getToken());
+            Call<FacebookLoginResult> call=jsonPlaceHolderApi.facebookLogin(login);
+            call.enqueue(new Callback<FacebookLoginResult>() {
+                @Override
+                public void onResponse(Call<FacebookLoginResult> call, Response<FacebookLoginResult> response) {
+                        Bundle bundle=new Bundle();
+                        bundle.putString("token",response.body().getToken());
+                        Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                }
+                @Override
+                public void onFailure(Call<FacebookLoginResult> call, Throwable t) {
+                }
+            });
         }
     }
 }
