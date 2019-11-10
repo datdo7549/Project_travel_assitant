@@ -1,6 +1,7 @@
 package com.example.loginandregister;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
@@ -17,8 +18,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.loginandregister.Model.DataGoogleLogin;
 import com.example.loginandregister.Model.FacebookLoginResult;
 import com.example.loginandregister.Model.Fb_data_login;
+import com.example.loginandregister.Model.GGreesult;
+import com.example.loginandregister.Model.GgData;
+import com.example.loginandregister.Model.GoogleLoginResult;
 import com.example.loginandregister.Model.LoginResult;
 import com.example.loginandregister.Model.User_login;
 import com.facebook.AccessToken;
@@ -31,6 +36,13 @@ import com.facebook.GraphResponse;
 import com.facebook.Profile;
 import com.facebook.login.Login;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.Scopes;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.Scope;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -50,12 +62,17 @@ import retrofit2.http.POST;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String URL="http://35.197.153.192:3000/";
+    public static final String URL2="https://oauth2.googleapis.com/";
+    private static final int RC_GET_AUTH_CODE = 9003;
     private EditText emailPhone;
     private EditText password;
     private Button login;
+    private Button googleLogin;
     private TextView register;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
+    private JsonPlaceHolderAPI2 jsonPlaceHolderAPI2;
     private ProgressDialog progressDialog;
+    private GoogleApiClient mGoogleApiClient;
     CallbackManager callbackManager;
     LoginButton loginButton;
     String email,name,first_name;
@@ -69,6 +86,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         keyhash();
         login.setOnClickListener(this);
         register.setOnClickListener(this);
+        googleLogin.setOnClickListener(this);
         loginButton.setReadPermissions(Arrays.asList("public_profile","email"));
         setLogin_Button();
         
@@ -118,7 +136,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             else
                             {
                                 progressDialog.dismiss();
+                                Bundle bundle=new Bundle();
+                                bundle.putString("token",response.body().getToken());
                                 Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                                intent.putExtras(bundle);
                                 startActivity(intent);
                             }
                         }
@@ -150,12 +171,73 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 .baseUrl(URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
+        Retrofit retrofit2=new Retrofit.Builder()
+                .baseUrl(URL2)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+        jsonPlaceHolderAPI2=retrofit2.create(JsonPlaceHolderAPI2.class);
         jsonPlaceHolderApi=retrofit.create(JsonPlaceHolderApi.class);
         loginButton=(LoginButton) findViewById(R.id.loginfb_button);
+        googleLogin=findViewById(R.id.gglogin);
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_GET_AUTH_CODE) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            Log.d("ALO", "onActivityResult:GET_AUTH_CODE:success:" + result.getStatus().isSuccess());
+
+            if (result.isSuccess()) {
+                // [START get_auth_code]
+                GoogleSignInAccount acct = result.getSignInAccount();
+                String authCode = acct.getServerAuthCode();
+                GgData temp=new GgData("authorization_code","827444390877-bsuer8sr7nu42ed3pehntbn33s3ob5rh.apps.googleusercontent.com","YTgaVwtEasppbD2y7Nsc_hUA","",acct.getIdToken(),authCode);
+                Call<GGreesult> call=jsonPlaceHolderAPI2.getAccess(temp);
+                call.enqueue(new Callback<GGreesult>() {
+                    @Override
+                    public void onResponse(Call<GGreesult> call, Response<GGreesult> response) {
+                        if(!response.isSuccessful())
+                        {
+                            Toast.makeText(LoginActivity.this,"Dang nhap google khong thanh cong",Toast.LENGTH_LONG).show();
+                        }
+                        else
+                        {
+                            Log.d("TOKEN",response.body().getAccess_token());
+                            DataGoogleLogin dataGoogleLogin=new DataGoogleLogin(response.body().getAccess_token());
+                            Call<GoogleLoginResult> call2=jsonPlaceHolderApi.googleLogin(dataGoogleLogin);
+                            call2.enqueue(new Callback<GoogleLoginResult>() {
+                                @Override
+                                public void onResponse(Call<GoogleLoginResult> call, Response<GoogleLoginResult> response) {
+                                    if(!response.isSuccessful())
+                                    {
+                                        Toast.makeText(LoginActivity.this,"Dang nhap google khong thanh cong",Toast.LENGTH_LONG).show();
+                                    }
+                                    else
+                                    {
+                                        Toast.makeText(LoginActivity.this,"Dang nhap google thanh cong",Toast.LENGTH_LONG).show();
+                                        Bundle bundle=new Bundle();
+                                        bundle.putString("token",response.body().getToken());
+                                        Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                                        intent.putExtras(bundle);
+                                        startActivity(intent);
+                                    }
+                                }
+                                @Override
+                                public void onFailure(Call<GoogleLoginResult> call, Throwable t) {
+                                    Toast.makeText(LoginActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<GGreesult> call, Throwable t) {
+
+                    }
+                });
+
+            }
+        }
         callbackManager.onActivityResult(requestCode,resultCode,data);
     }
     @Override
@@ -173,15 +255,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {
                         if(!response.isSuccessful())
                         {
-                            Toast.makeText(LoginActivity.this,"Dang nhap khong thanh cong",Toast.LENGTH_SHORT).show();
-                            return;
+                            if(response.code()==400)
+                            {
+                                Toast.makeText(LoginActivity.this,"Missing email/phone or password",Toast.LENGTH_LONG).show();
+                            }
+                            if(response.code()==404)
+                            {
+                                Toast.makeText(LoginActivity.this,"Wrong email/phone or password",Toast.LENGTH_LONG).show();
+                            }
                         }
-                        Toast.makeText(LoginActivity.this,"Dang nhap thanh cong",Toast.LENGTH_SHORT).show();
-                        Bundle bundle=new Bundle();
-                        bundle.putString("token",response.body().getToken());
-                        Intent intent=new Intent(LoginActivity.this,MainActivity.class);
-                        intent.putExtras(bundle);
-                        startActivity(intent);
+                        else{
+                            Toast.makeText(LoginActivity.this,"Dang nhap thanh cong",Toast.LENGTH_SHORT).show();
+                            Bundle bundle=new Bundle();
+                            bundle.putString("token",response.body().getToken());
+                            Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                        }
                     }
                     @Override
                     public void onFailure(Call<LoginResult> call, Throwable t) {
@@ -194,6 +284,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             {
                 Intent intent=new Intent(LoginActivity.this,RegisterActivity.class);
                 startActivity(intent);
+                break;
+            }
+            case R.id.gglogin:
+            {
+                String serverClientId = getString(R.string.server_client_id);
+                GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                        .requestScopes(new Scope(Scopes.DRIVE_APPFOLDER))
+                        .requestServerAuthCode(serverClientId)
+                        .requestIdToken(serverClientId)
+                        .requestEmail()
+                        .build();
+                mGoogleApiClient = new GoogleApiClient.Builder(this)
+                        .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                        .build();
+                Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+                startActivityForResult(signInIntent, RC_GET_AUTH_CODE);
                 break;
             }
         }

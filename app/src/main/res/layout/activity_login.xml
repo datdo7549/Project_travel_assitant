@@ -44,4 +44,9 @@
         android:id="@+id/loginfb_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/gglogin"
+        android:text="Login GG"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

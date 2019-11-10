@@ -2,8 +2,10 @@ package com.example.loginandregister;
 
 import android.media.session.MediaSession;
 
+import com.example.loginandregister.Model.DataGoogleLogin;
 import com.example.loginandregister.Model.FacebookLoginResult;
 import com.example.loginandregister.Model.Fb_data_login;
+import com.example.loginandregister.Model.GoogleLoginResult;
 import com.example.loginandregister.Model.ListTour;
 import com.example.loginandregister.Model.LoginResult;
 import com.example.loginandregister.Model.RegisterResult;
@@ -34,4 +36,7 @@ public interface JsonPlaceHolderApi {
             @Query("orderBy") String otherBy,
             @Query("isDesc") boolean isDesc,
             @HeaderMap Map<String,String> headers);
+
+    @POST("user/login/by-google")
+    Call<GoogleLoginResult> googleLogin(@Body DataGoogleLogin dataGoogleLogin);
 }
