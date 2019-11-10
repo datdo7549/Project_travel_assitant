@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
@@ -27,19 +28,21 @@
         <EditText
             android:id="@+id/rowPerPage"
             android:hint="RowPerPage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"/>
         <EditText
             android:id="@+id/pageNum"
             android:hint="Page Num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <EditText
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"/>
+        <Spinner
             android:id="@+id/orderBy"
             android:hint="Order by"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-        <EditText
+        <Spinner
             android:id="@+id/isDesc"
             android:hint="Is Desc"
             android:layout_width="wrap_content"
