@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/edittext_cus"
+            android:layout_alignParentTop="true"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+            <TextView
+                android:textStyle="bold"
+                android:textSize="25dp"
+                android:id="@+id/stop_information"
+                android:layout_centerHorizontal="true"
+                android:text="Stop point information"
+                android:layout_marginTop="15sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </TextView>
+
+            <TextView
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_below="@+id/stop_information"
+                android:layout_marginTop="15dp"
+                android:id="@+id/stop_point_name"
+                android:text="Stop point name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                ></TextView>
+            <EditText
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_below="@+id/stop_point_name"
+                android:id="@+id/diem_xuat_phat"
+                android:text="Diem xuat phat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </EditText>
+            <TextView
+                android:layout_marginTop="15dp"
+                android:background="@drawable/edittext_cus"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_below="@+id/diem_xuat_phat"
+                android:id="@+id/service_type"
+                android:text="Service type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </TextView>
+            <EditText
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/service_type"
+                android:id="@+id/restaurant"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </EditText>
+            <TextView
+                android:layout_marginTop="15dp"
+                android:layout_below="@+id/restaurant"
+                android:id="@+id/address"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:text="Address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </TextView>
+            <EditText
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/address"
+                android:id="@+id/addresstext"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:text="Quan 5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </EditText>
+            <TextView
+                android:layout_marginTop="15dp"
+                android:id="@+id/province"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:text="Province"
+                android:layout_below="@+id/addresstext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </TextView>
+            <EditText
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/province"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:id="@+id/provincetext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </EditText>
+            <RelativeLayout
+                android:layout_marginTop="15dp"
+                android:id="@+id/cost_layout"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_below="@id/provincetext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+
+                    android:id="@+id/min_linear"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="Min cost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+                    <EditText
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/min_cost"
+                        android:text="10000"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content">
+
+                    </EditText>
+                </LinearLayout>
+                <LinearLayout
+
+                    android:layout_alignParentRight="true"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+
+                        android:text="Max cost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+                    <EditText
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/max_cost"
+                        android:text="10000"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content">
+
+                    </EditText>
+                </LinearLayout>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_marginTop="15dp"
+                android:layout_below="@+id/cost_layout"
+                android:id="@+id/time_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/arrive_at"
+                    android:text="Arrive at"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+                <LinearLayout
+                    android:layout_below="@+id/arrive_at"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/time"
+                        android:layout_marginLeft="15dp"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content">
+
+                    </EditText>
+                    <EditText
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/date"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content">
+
+                    </EditText>
+                    <ImageButton
+                        android:background="@drawable/date"
+                        android:layout_marginRight="15dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp">
+
+                    </ImageButton>
+                </LinearLayout>
+            </RelativeLayout>
+            <EditText
+                android:layout_marginTop="15dp"
+                android:layout_below="@+id/time_layout"
+                android:id="@+id/leave_at"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:text="Leave at"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                ></EditText>
+            <Button
+                android:id="@+id/ok_btt"
+                android:layout_centerInParent="true"
+                android:layout_below="@+id/leave_at"
+                android:text="OKE"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+</RelativeLayout>

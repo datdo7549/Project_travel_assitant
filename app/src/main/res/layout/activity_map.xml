@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/map"
+        tools:context=".MapActivity"
+        android:name="com.google.android.gms.maps.SupportMapFragment" />
+    <RelativeLayout
+        android:background="@drawable/white_boder"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:elevation="10dp"
+        android:id="@+id/relLayout1">
+        <AutoCompleteTextView
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:textSize="15sp"
+            android:textColor="#000"
+            android:hint="Enter address"
+            android:background="@null"
+            android:id="@+id/input_search"/>
+        <ImageView
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:id="@+id/magnifi"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_magnifi"/>
+    </RelativeLayout>
+    <Button
+        android:id="@+id/pk"
+        android:text="PlacePK"
+        android:layout_below="@+id/gps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <ImageView
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/relLayout1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/gps"
+        android:src="@drawable/gps"/>
+</RelativeLayout>
+
+
+

@@ -2,6 +2,12 @@ package com.example.loginandregister;
 
 import android.media.session.MediaSession;
 
+import androidx.cardview.widget.CardView;
+
+import com.example.loginandregister.Model.Add_Stop_Point_Data;
+import com.example.loginandregister.Model.Add_Stop_Point_Result;
+import com.example.loginandregister.Model.Create_Tour_Data;
+import com.example.loginandregister.Model.Create_Tour_Result;
 import com.example.loginandregister.Model.DataGoogleLogin;
 import com.example.loginandregister.Model.FacebookLoginResult;
 import com.example.loginandregister.Model.Fb_data_login;
@@ -39,4 +45,10 @@ public interface JsonPlaceHolderApi {
 
     @POST("user/login/by-google")
     Call<GoogleLoginResult> googleLogin(@Body DataGoogleLogin dataGoogleLogin);
+
+    @POST("tour/create")
+    Call<Create_Tour_Result> createTour(@HeaderMap Map<String,String> headers, @Body Create_Tour_Data create_tour_data);
+
+    @POST("tour/set-stop-points")
+    Call<Add_Stop_Point_Result> addStopPoint(@HeaderMap Map<String,String> headers, @Body Add_Stop_Point_Data add_stop_point_data);
 }

@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Spinner isDesc;
     private Button get;
     private Button logout;
+    private Button createTour;
     private ListView listView;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     private String token;
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         token=bundle.getString("token");
         get.setOnClickListener(this);
         logout.setOnClickListener(this);
+        createTour.setOnClickListener(this);
 
     }
 
@@ -72,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         get=findViewById(R.id.getlist);
         logout=findViewById(R.id.logout);
+        createTour=findViewById(R.id.create_tour);
         //listView=findViewById(R.id.listview);
         Gson gson=new GsonBuilder().serializeNulls().create();
         Retrofit retrofit=new Retrofit.Builder()
@@ -149,6 +152,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             {
                 LoginManager.getInstance().logOut();
                 Intent intent=new Intent(MainActivity.this,LoginActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.create_tour:
+            {
+                Bundle bundle=new Bundle();
+                bundle.putString("token",token);
+                Intent intent=new Intent(MainActivity.this,CreateActivity.class);
+                intent.putExtras(bundle);
                 startActivity(intent);
                 break;
             }
