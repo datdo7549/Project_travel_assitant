@@ -42,15 +42,17 @@
                     android:layout_height="wrap_content"/>
                 <EditText
                     android:id="@+id/startDate"
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/edit"
+                    style="@android:style/Widget.Spinner"/>
             </LinearLayout>
-            <ImageView
+            <!--<ImageView
                 android:layout_marginTop="18dp"
                 android:layout_toRightOf="@+id/ln1"
                 android:src="@mipmap/ic_launcher"
                 android:layout_width="40dp"
-                android:layout_height="40dp"/>
+                android:layout_height="40dp"/>-->
         </RelativeLayout>
 
         <RelativeLayout
@@ -69,15 +71,17 @@
                     android:layout_height="wrap_content"/>
                 <EditText
                     android:id="@+id/endDate"
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/edit"
+                    style="@android:style/Widget.Spinner"/>
             </LinearLayout>
-            <ImageView
+            <!--<ImageView
                 android:layout_marginTop="18dp"
                 android:layout_toRightOf="@+id/ln2"
                 android:src="@mipmap/ic_launcher"
                 android:layout_width="40dp"
-                android:layout_height="40dp"/>
+                android:layout_height="40dp"/>-->
         </RelativeLayout>
     </RelativeLayout>
 
@@ -189,7 +193,7 @@
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-        <RadioButton
+        <Spinner
             android:id="@+id/isPrivate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

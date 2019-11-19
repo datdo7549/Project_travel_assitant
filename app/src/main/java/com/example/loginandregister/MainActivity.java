@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 int mPage=Integer.parseInt(page.getText().toString());
                 String mByname = byname.getSelectedItem().toString();
                 boolean mIsDesc;
-                if (isDesc.getSelectedItem().toString() == "Descending")
+                if (isDesc.getSelectedItem().toString().equals("Descending"))
                     mIsDesc = true;
                 else
                     mIsDesc = false;
@@ -115,29 +115,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             Toast.makeText(MainActivity.this,"Get khong thanh cong",Toast.LENGTH_SHORT).show();
                             return;
                         }
-                        int total = response.body().getTotal();
-                        if (checkValidRow(m_Row, m_Page, total)) {
-                            arrayList = new ArrayList<>(total);
-                            arrayList = response.body().getTourList();
+                        else {
+                            int total = response.body().getTotal();
+                            if (checkValidRow(m_Row, m_Page, total)) {
+                                arrayList = new ArrayList<>(total);
+                                arrayList = response.body().getTourList();
 
-                            Toast.makeText(MainActivity.this, "Get thanh cong ", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, "Get thanh cong ", Toast.LENGTH_SHORT).show();
 
-                            arrayList = new ArrayList<>(total);
-                            arrayList = response.body().getTourList();
+                                arrayList = new ArrayList<>(total);
+                                arrayList = response.body().getTourList();
 
-                            ListView lv = findViewById(R.id.listTour);
-                            CustomAdapter arrayAdapternew = new CustomAdapter(MainActivity.this, R.layout.custom_layout_tour_listview, arrayList);
+                                ListView lv = findViewById(R.id.listTour);
+                                CustomAdapter arrayAdapternew = new CustomAdapter(MainActivity.this, R.layout.custom_layout_tour_listview, arrayList);
 
 
-                            //Sua cai nay ne, chuyen no thanh List View
+                                //Sua cai nay ne, chuyen no thanh List View
 
-                            arrayAdapternew.notifyDataSetChanged();
-                            lv.setAdapter(arrayAdapternew);
+                                arrayAdapternew.notifyDataSetChanged();
+                                lv.setAdapter(arrayAdapternew);
 
-                            Toast.makeText(MainActivity.this, "Get thanh cong ", Toast.LENGTH_SHORT).show();
-                            ////////////////////////////
-                        } else {
-                            Toast.makeText(MainActivity.this, "Nhap RowPerPage va Page Num khong dung", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, "Get thanh cong ", Toast.LENGTH_SHORT).show();
+                                ////////////////////////////
+                            } else {
+                                Toast.makeText(MainActivity.this, "Nhap RowPerPage va Page Num khong dung", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     }
 
@@ -174,7 +176,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private boolean checkValidRow(int mRow, int mPage, int total) {
-        double temp = total/(mPage-1);
+        double temp;
+        int sub=mPage-1;
+        if(sub==0) {
+            temp = total;
+        }
+        else {
+            temp = total / (mPage - 1);
+        }
         int max_row = (int) Math.round(temp);
         if (mRow <= max_row) {
             return true;

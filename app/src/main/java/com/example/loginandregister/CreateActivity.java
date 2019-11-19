@@ -2,13 +2,17 @@ package com.example.loginandregister;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.loginandregister.Model.Create_Tour_Data;
@@ -18,6 +22,9 @@ import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,9 +33,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Body;
 
 public class CreateActivity extends AppCompatActivity {
-    private EditText name_tour,start,end,adult,childs,min,max,image,isPrivate;
+    private EditText name_tour,start,end,adult,childs,min,max,image;
+    private DatePickerDialog datePickerDialog;
+    private Spinner isPrivate;
     private Button create_button;
     public static final String URL="http://35.197.153.192:3000/";
     private static final String TAG="MAP";
@@ -43,11 +53,49 @@ public class CreateActivity extends AppCompatActivity {
         Bundle bundle=getIntent().getExtras();
         token=bundle.getString("token");
         mapping();
+        addDateEvent();
         if (isServicesOK())
         {
             init();
         }
+    }
 
+    private void addDateEvent() {
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar cal=Calendar.getInstance();
+                int mDay=cal.get(Calendar.DAY_OF_MONTH);
+                int mMonth=cal.get(Calendar.MONTH);
+                int mYear=cal.get(Calendar.YEAR);
+
+                datePickerDialog=new DatePickerDialog(CreateActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
+                        start.setText(dayOfMonth+"/"+(monthOfYear+1)+"/"+year);
+                    };
+                },mYear,mMonth,mDay);
+                datePickerDialog.setTitle(R.string.choose);
+                datePickerDialog.show();
+            }
+        });
+
+        end.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar cal=Calendar.getInstance();
+                int mDay=cal.get(Calendar.DAY_OF_MONTH);
+                int mMonth=cal.get(Calendar.MONTH);
+                int mYear=cal.get(Calendar.YEAR);
+
+                datePickerDialog=new DatePickerDialog(CreateActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
+                        end.setText(dayOfMonth+"/"+(monthOfYear+1)+"/"+year);
+                    };},mYear,mMonth,mDay);
+                datePickerDialog.show();
+            }
+        });
     }
 
     private void mapping() {
@@ -59,6 +107,10 @@ public class CreateActivity extends AppCompatActivity {
         min=findViewById(R.id.minCost);
         max=findViewById(R.id.maxCost);
         create_button=findViewById(R.id.create_button);
+        isPrivate=findViewById(R.id.isPrivate);
+        ArrayAdapter<CharSequence> adapter_byname = ArrayAdapter.createFromResource(CreateActivity.this, R.array.is_private, android.R.layout.simple_spinner_item);
+        adapter_byname.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        isPrivate.setAdapter(adapter_byname);
         Gson gson=new GsonBuilder().serializeNulls().create();
         Retrofit retrofit=new Retrofit.Builder()
                 .baseUrl(URL)
@@ -74,13 +126,33 @@ public class CreateActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String mName=name_tour.getText().toString();
-                long mStart=Long.parseLong(start.getText().toString());
-                long mEnd=Long.parseLong(end.getText().toString());
+                Date sDate,eDate;
+                long mStart=0,mEnd=0;
+                //xu li
+                SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
+                try
+                {
+                    sDate=sdf.parse(start.getText().toString());
+                    eDate=sdf.parse(end.getText().toString());
+                    mStart=sDate.getTime();
+                    mEnd=eDate.getTime();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 int mAdult=Integer.parseInt(adult.getText().toString());
                 int mChild=Integer.parseInt(childs.getText().toString());
                 int mMin=Integer.parseInt(min.getText().toString());
                 int mMax=Integer.parseInt(max.getText().toString());
-                Create_Tour_Data create_tour_data=new Create_Tour_Data(mName,mStart,mEnd,true,mAdult,mChild,mMin,mMax);
+                Boolean mIsPrivate;
+                if (isPrivate.getSelectedItem().toString()=="True")
+                {
+                    mIsPrivate=true;
+                }
+                else
+                {
+                    mIsPrivate=false;
+                }
+                Create_Tour_Data create_tour_data=new Create_Tour_Data(mName,mStart,mEnd,mIsPrivate,mAdult,mChild,mMin,mMax);
                 Map<String,String> map=new HashMap<>();
                 map.put("Authorization",token);
 

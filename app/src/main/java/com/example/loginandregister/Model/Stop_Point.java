@@ -3,7 +3,6 @@ package com.example.loginandregister.Model;
 import com.google.gson.annotations.SerializedName;
 
 public class Stop_Point {
-    private int id;
     private String name;
     private String address;
     private int provinceId;
@@ -18,8 +17,8 @@ public class Stop_Point {
     private int minCost;
     private int maxCost;
 
-    public Stop_Point(int id, String name, String address, int provinceId, double lat, double mlong, long arrivalAt, long leaveAt, int serviceTypeId, int minCost, int maxCost) {
-        this.id = id;
+    public Stop_Point( String name, String address, int provinceId, double lat, double mlong, long arrivalAt, long leaveAt, int serviceTypeId, int minCost, int maxCost) {
+
         this.name = name;
         this.address = address;
         this.provinceId = provinceId;

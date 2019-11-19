@@ -7,7 +7,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -20,11 +22,16 @@ import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.loginandregister.Model.Add_Stop_Point_Data;
@@ -52,7 +59,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -85,7 +95,11 @@ public class MapActivity extends AppCompatActivity implements GoogleApiClient.On
     private int id;
     private ArrayList<Stop_Point> arrayListStopPoint=new ArrayList<>();
     private ArrayList<Stop_Point> temp=new ArrayList<>();
-
+    private String[] arrayProvince={"Hồ Chí Minh","Hà Nội","Đà Nẵng","Bình Dương","Đồng Nai","Khánh Hòa", "Hải Phòng", "Long An", "Quảng Nam", "Bà Rịa Vũng Tàu", "Đắk Lắk","Cần Thơ",
+            "Bình Thuận", "Lâm Đồng", "Thừa Thiên Huế", "Kiên Giang", "Bắc Ninh", "Quảng Ninh", "Thanh Hóa", "Nghệ An", "Hải Dương", "Gia Lai", "Bình Phước", "Hưng Yên", "Bình Định", "Tiền Giang",
+            "Thái Bình", "Bắc Giang", "Hòa Bình", "An Giang", "Vĩnh Phúc", "Tây Ninh", "Thái Nguyên", "Lào Cai","Nam Định","Quảng Ngãi", "Bến Tre", "Đắk Nông", "Cà Mau", "Vĩnh Long",
+            " Ninh Bình", "Phú Thọ", "Ninh Thuận", "Phú Yên", "Hà Nam", "Hà Tĩnh", "Đồng Tháp", "Sóc Trăng", "Kon Tum", "Quảng Bình", "Quảng Trị", "Trà Vinh", "Hậu Giang", "Sơn La", "Bạc Liêu", "Yên Bái",
+            "Tuyên Quang", "Điện Biên", "Lai Châu", "Lạng Sơn", "Hà Giang", "Bắc Kạn", "Cao Bằng"};
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     public static final String URL="http://35.197.153.192:3000/";
     @Override
@@ -95,7 +109,9 @@ public class MapActivity extends AppCompatActivity implements GoogleApiClient.On
         mSearchText=findViewById(R.id.input_search);
         imageView=findViewById(R.id.magnifi);
         gps=findViewById(R.id.gps);
-        pk=findViewById(R.id.pk);
+
+
+
         Bundle bundle=getIntent().getExtras();
         token=bundle.getString("token");
         id=bundle.getInt("ID");
@@ -114,12 +130,6 @@ public class MapActivity extends AppCompatActivity implements GoogleApiClient.On
                 getDeviceLocation();
             }
         });
-        pk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openPlacePicker();
-            }
-        });
         getLocationPermission();
     }
     private void init()
@@ -134,33 +144,26 @@ public class MapActivity extends AppCompatActivity implements GoogleApiClient.On
                 geoLocate(temp);
             }
         });
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            public void onMapClick(LatLng arg0) {
 
+
+                Geocoder geocoder=new Geocoder(MapActivity.this);
+                List<Address> addresses = null;
+                try {
+                    addresses=geocoder.getFromLocation(arg0.latitude,arg0.longitude,1);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                MarkerOptions options=new MarkerOptions()
+                        .position(arg0)
+                        .title(addresses.get(0).getAddressLine(0));
+                mMap.addMarker(options);
+            }
+        });
+      
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==PLACE_PICKER_REQUEST && requestCode==RESULT_OK)
-        {
-            Place place = PlacePicker.getPlace(this, data);
-            String placeName = String.format("Place: %s", place.getName());
-            double latitude = place.getLatLng().latitude;
-            double longitude = place.getLatLng().longitude;
-            LatLng coordinate = new LatLng(latitude, longitude);
-            MarkerOptions markerOptions = new MarkerOptions();
-            markerOptions.position(coordinate);
-            markerOptions.title(placeName); //Here Total Address is address which you want to show on marker
-            mMap.clear();
-            markerOptions.icon(
-                    BitmapDescriptorFactory
-                            .defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
-
-            markerOptions.getPosition();
-            mMap.addMarker(markerOptions);
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(coordinate));
-            mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
-        }
-    }
 
     private void geoLocate(String temp) {
         Log.d(TAG,"geoLocate: geolocating");
@@ -215,6 +218,7 @@ public class MapActivity extends AppCompatActivity implements GoogleApiClient.On
     }
     private void moveCamera(LatLng latLng,float zoom,String title)
     {
+
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,zoom));
         MarkerOptions options=new MarkerOptions()
                 .position(latLng)
@@ -225,6 +229,7 @@ public class MapActivity extends AppCompatActivity implements GoogleApiClient.On
             public boolean onMarkerClick(final Marker marker) {
                 TextView name_country;
                 TextView stop_Point_Infor;
+
                 dialog.setContentView(R.layout.popup);
                 name_country=dialog.findViewById(R.id.name_country);
                 stop_Point_Infor=dialog.findViewById(R.id.stop_point_information);
@@ -234,36 +239,168 @@ public class MapActivity extends AppCompatActivity implements GoogleApiClient.On
                         add_Stop_Point_Dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
                         add_Stop_Point_Dialog.setContentView(R.layout.add_stop_point);
+                        add_Stop_Point_Dialog.show();
                         final EditText diemxuatphat=add_Stop_Point_Dialog.findViewById(R.id.diem_xuat_phat);
-                        final EditText type=add_Stop_Point_Dialog.findViewById(R.id.restaurant);
+                        final Spinner type=add_Stop_Point_Dialog.findViewById(R.id.restaurant);
+                        ArrayAdapter<CharSequence> adapter_byname1 = ArrayAdapter.createFromResource(MapActivity.this, R.array.service_type, android.R.layout.simple_spinner_item);
+                        adapter_byname1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        type.setAdapter(adapter_byname1);
                         final EditText address=add_Stop_Point_Dialog.findViewById(R.id.addresstext);
-                        address.setText(marker.getTitle()+" / "+ marker.getSnippet());
+                        address.setText(marker.getTitle());
+
                         final EditText province=add_Stop_Point_Dialog.findViewById(R.id.provincetext);
-                        //province.setText(ID);
+                        for(int i=0;i<arrayProvince.length;i++)
+                        {
+                            if (marker.getTitle().contains(arrayProvince[i]))
+                            {
+                                province.setText(i+1+"");
+                                break;
+                            }
+                        }
+
                         final EditText mMinCost=add_Stop_Point_Dialog.findViewById(R.id.min_cost);
                         final EditText mMaxCost=add_Stop_Point_Dialog.findViewById(R.id.max_cost);
-                        final EditText mArDate=add_Stop_Point_Dialog.findViewById(R.id.date);
-                        final EditText mLeDate=add_Stop_Point_Dialog.findViewById(R.id.leave_at);
+
+                        // xu li time and date/*
+
+                        final EditText mtimeArrive=add_Stop_Point_Dialog.findViewById(R.id.timeArrial);
+
+                        final EditText mtimeLeave=add_Stop_Point_Dialog.findViewById(R.id.timeLeave);
+
+                        final EditText mDateArrive=add_Stop_Point_Dialog.findViewById(R.id.dateArrial);
+
+                        final EditText mDateLeave=add_Stop_Point_Dialog.findViewById(R.id.dateLeave);
+
+                        final ImageButton btnArrive=add_Stop_Point_Dialog.findViewById(R.id.btndateArrive);
+
+                        final ImageButton btnLeave=add_Stop_Point_Dialog.findViewById(R.id.btndateLeave);
                         final Button ok_button=add_Stop_Point_Dialog.findViewById(R.id.ok_btt);
-                        add_Stop_Point_Dialog.show();
+
+
+                        btnArrive.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                final Calendar cal=Calendar.getInstance();
+                                int mDay=cal.get(Calendar.DAY_OF_MONTH);
+                                int mMonth=cal.get(Calendar.MONTH);
+                                int mYear=cal.get(Calendar.YEAR);
+
+                                DatePickerDialog datePickerDialog=new DatePickerDialog(MapActivity.this, new DatePickerDialog.OnDateSetListener() {
+                                    @Override
+                                    public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
+                                        mDateArrive.setText(dayOfMonth+"/"+(monthOfYear+1)+"/"+year);
+                                    };
+                                },mYear,mMonth,mDay);
+                                datePickerDialog.setTitle(R.string.choose);
+                                datePickerDialog.show();
+                            }
+                        });
+
+                        btnLeave.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                final Calendar cal=Calendar.getInstance();
+                                int mDay=cal.get(Calendar.DAY_OF_MONTH);
+                                int mMonth=cal.get(Calendar.MONTH);
+                                int mYear=cal.get(Calendar.YEAR);
+
+                                DatePickerDialog datePickerDialog=new DatePickerDialog(MapActivity.this, new DatePickerDialog.OnDateSetListener() {
+                                    @Override
+                                    public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
+                                        mDateLeave.setText(dayOfMonth+"/"+(monthOfYear+1)+"/"+year);
+                                    };
+                                },mYear,mMonth,mDay);
+                                datePickerDialog.setTitle(R.string.choose);
+                                datePickerDialog.show();
+                            }
+                        });
+
+                        mtimeArrive.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                final Calendar cal=Calendar.getInstance();
+
+                                int mHour=cal.get(Calendar.HOUR_OF_DAY);
+                                int mMinute=cal.get(Calendar.MINUTE);
+
+                                TimePickerDialog timePickerDialog=new TimePickerDialog(MapActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                                    @Override
+                                    public void onTimeSet(TimePicker timePicker, int hourOfday, int minute) {
+                                        mtimeArrive.setText(hourOfday+":"+minute);
+                                    };
+                                },mHour,mMinute,false);
+                                timePickerDialog.setTitle(R.string.choose);
+                                timePickerDialog.show();
+                            }
+                        });
+
+
+                        mtimeLeave.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                final Calendar cal=Calendar.getInstance();
+                                int mHour=cal.get(Calendar.HOUR_OF_DAY);
+                                int mMinute=cal.get(Calendar.MINUTE);
+
+                                TimePickerDialog timePickerDialog=new TimePickerDialog(MapActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                                    @Override
+                                    public void onTimeSet(TimePicker timePicker, int hourOfday, int minute) {
+                                        mtimeLeave.setText(hourOfday+":"+minute);
+                                    };
+                                },mHour,mMinute,false);
+                                timePickerDialog.setTitle(R.string.chooseTime);
+                                timePickerDialog.show();
+                            }
+                        });
+
                         ok_button.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 String mDiemXuatPhat=diemxuatphat.getText().toString();
                                 String mAddress=address.getText().toString();
-                                int mType=Integer.parseInt(type.getText().toString());
+
+                                int mType;
+                                if (type.getSelectedItem().toString().equals("Restaurant"))
+                                {
+                                    mType=1;
+                                }
+                                else if(type.getSelectedItem().toString().equals("Hotel"))
+                                {
+                                    mType=2;
+                                }
+                                else if (type.getSelectedItem().toString().equals("Rest Station"))
+                                {
+                                    mType=3;
+                                }
+                                else
+                                {
+                                    mType=4;
+                                }
                                 int mProvince=Integer.parseInt(province.getText().toString());
                                 int mMin_Cots=Integer.parseInt(mMinCost.getText().toString());
                                 int mMax_Cost=Integer.parseInt(mMaxCost.getText().toString());
-                                long mAr_Date=Long.parseLong(mArDate.getText().toString());
-                                long mLe_Date=Long.parseLong(mLeDate.getText().toString());
+
+                                Date arriveDate,leaveDate;
+                                long mAr_Date=0;
+                                long mLe_Date=0;
+                                //xu li covert to milisecond
+                                SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy hh:mm");
+                                try
+                                {
+                                    arriveDate=sdf.parse(mDateArrive.getText().toString()+" "+mtimeArrive.getText().toString());
+                                    leaveDate=sdf.parse(mDateLeave.getText().toString()+" "+mtimeLeave.getText().toString());
+                                    mAr_Date=arriveDate.getTime();
+                                    mLe_Date=leaveDate.getTime();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
 
                                 LatLng mLatLng=marker.getPosition();
                                 double mLat=mLatLng.latitude;
                                 double mLong=mLatLng.longitude;
 
 
-                                Stop_Point stop_point=new Stop_Point(1,mDiemXuatPhat,mAddress,1,mLat,mLong,mAr_Date,mLe_Date,mType,mMin_Cots,mMax_Cost);
+                                Stop_Point stop_point=new Stop_Point(mDiemXuatPhat,mAddress,mProvince,mLat,mLong,mAr_Date,mLe_Date,mType,mMin_Cots,mMax_Cost);
                                 arrayListStopPoint.add(stop_point);
                                 temp.add(stop_point);
 
@@ -297,6 +434,10 @@ public class MapActivity extends AppCompatActivity implements GoogleApiClient.On
 
 
                     }
+
+
+
+
                 });
                 name_country.setText(marker.getTitle());
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -305,6 +446,8 @@ public class MapActivity extends AppCompatActivity implements GoogleApiClient.On
             }
         });
     }
+
+
     private void initMap()
     {
         Log.d(TAG,"initMap: initializing map");
@@ -387,18 +530,5 @@ public class MapActivity extends AppCompatActivity implements GoogleApiClient.On
     }
 
 
-    private void openPlacePicker() {
 
-        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
-        try {
-            // for activty
-            startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST);
-            // for fragment
-            //startActivityForResult(builder.build(getActivity()), PLACE_PICKER_REQUEST);
-        } catch (GooglePlayServicesRepairableException e) {
-            e.printStackTrace();
-        } catch (GooglePlayServicesNotAvailableException e) {
-            e.printStackTrace();
-        }
-    }
 }
