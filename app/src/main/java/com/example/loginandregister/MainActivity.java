@@ -1,193 +1,70 @@
 package com.example.loginandregister;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.view.Window;
+import android.view.WindowManager;
 
-import com.example.loginandregister.Adapter.CustomAdapter;
-import com.example.loginandregister.Model.ListTour;
-import com.example.loginandregister.Model.Tour;
-import com.facebook.login.LoginManager;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.viewpager.widget.ViewPager;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import com.google.android.material.tabs.TabItem;
+import com.google.android.material.tabs.TabLayout;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+public class MainActivity extends AppCompatActivity {
 
-import static com.example.loginandregister.LoginActivity.URL;
+    private String myString="Helooooo";
+    TabLayout tabLayout;
+    ViewPager viewPager;
+    PageAdapter pageAdapter;
+    TabItem tabChats;
+    TabItem tabStatus;
+    TabItem tabCalls;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private EditText row;
-    private EditText page;
-    private Spinner byname;
-    private Spinner isDesc;
-    private Button get;
-    private Button logout;
-    private Button createTour;
-    private ListView listView;
-    private JsonPlaceHolderApi jsonPlaceHolderApi;
-    private String token;
-    private ArrayList<Tour> arrayList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Window w = getWindow();
+        w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         setContentView(R.layout.activity_main);
-        mapping();
+
         Bundle bundle=getIntent().getExtras();
-        token=bundle.getString("token");
-        get.setOnClickListener(this);
-        logout.setOnClickListener(this);
-        createTour.setOnClickListener(this);
+        String token=bundle.getString("token");
+        myString=token;
+        tabLayout = findViewById(R.id.tablayout);
+        tabChats = findViewById(R.id.tabChats);
+        tabStatus = findViewById(R.id.tabStatus);
+        tabCalls = findViewById(R.id.action_call);
+        viewPager = findViewById(R.id.viewPager);
+        
+        pageAdapter = new PageAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        viewPager.setAdapter(pageAdapter);
 
-    }
-
-    private void mapping() {
-        row=findViewById(R.id.rowPerPage);
-        page=findViewById(R.id.pageNum);
-
-        byname=findViewById(R.id.orderBy);
-        ArrayAdapter<CharSequence> adapter_byname = ArrayAdapter.createFromResource(this, R.array.order_by, android.R.layout.simple_spinner_item);
-        adapter_byname.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        byname.setAdapter(adapter_byname);
-
-        isDesc=findViewById(R.id.isDesc);
-        ArrayAdapter<CharSequence> adapter_isdesc = ArrayAdapter.createFromResource(this, R.array.is_desc, android.R.layout.simple_spinner_item);
-        adapter_isdesc.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        isDesc.setAdapter(adapter_isdesc);
-
-        get=findViewById(R.id.getlist);
-        logout=findViewById(R.id.logout);
-        createTour=findViewById(R.id.create_tour);
-        //listView=findViewById(R.id.listview);
-        Gson gson=new GsonBuilder().serializeNulls().create();
-        Retrofit retrofit=new Retrofit.Builder()
-                .baseUrl(URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-        jsonPlaceHolderApi=retrofit.create(JsonPlaceHolderApi.class);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId())
-        {
-            case R.id.getlist:
-            {
-                if (!checkEmpty(row, page)) {
-                    Toast.makeText(this, "Row or Page is empty", Toast.LENGTH_SHORT).show();
-                    break;
-                }
-                int mRow=Integer.parseInt(row.getText().toString());
-                int mPage=Integer.parseInt(page.getText().toString());
-                String mByname = byname.getSelectedItem().toString();
-                boolean mIsDesc;
-                if (isDesc.getSelectedItem().toString().equals("Descending"))
-                    mIsDesc = true;
-                else
-                    mIsDesc = false;
-
-                Map<String,String> map=new HashMap<>();
-                map.put("Authorization",token);
-                final int m_Row = mRow, m_Page = mPage;
-                Call<ListTour> call=jsonPlaceHolderApi.getTour(mRow,mPage,mByname,mIsDesc,map);
-                call.enqueue(new Callback<ListTour>() {
-                    @Override
-                    public void onResponse(Call<ListTour> call, Response<ListTour> response) {
-                        if(!response.isSuccessful())
-                        {
-                            Toast.makeText(MainActivity.this,"Get khong thanh cong",Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        else {
-                            int total = response.body().getTotal();
-                            if (checkValidRow(m_Row, m_Page, total)) {
-                                arrayList = new ArrayList<>(total);
-                                arrayList = response.body().getTourList();
-
-                                Toast.makeText(MainActivity.this, "Get thanh cong ", Toast.LENGTH_SHORT).show();
-
-                                arrayList = new ArrayList<>(total);
-                                arrayList = response.body().getTourList();
-
-                                ListView lv = findViewById(R.id.listTour);
-                                CustomAdapter arrayAdapternew = new CustomAdapter(MainActivity.this, R.layout.custom_layout_tour_listview, arrayList);
-
-
-                                //Sua cai nay ne, chuyen no thanh List View
-
-                                arrayAdapternew.notifyDataSetChanged();
-                                lv.setAdapter(arrayAdapternew);
-
-                                Toast.makeText(MainActivity.this, "Get thanh cong ", Toast.LENGTH_SHORT).show();
-                                ////////////////////////////
-                            } else {
-                                Toast.makeText(MainActivity.this, "Nhap RowPerPage va Page Num khong dung", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<ListTour> call, Throwable t) {
-                        Toast.makeText(MainActivity.this,t.getMessage(),Toast.LENGTH_SHORT).show();
-                    }
-                });
-                break;
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
             }
-            case R.id.logout:
-            {
-                LoginManager.getInstance().logOut();
-                Intent intent=new Intent(MainActivity.this,LoginActivity.class);
-                startActivity(intent);
-                break;
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
             }
-            case R.id.create_tour:
-            {
-                Bundle bundle=new Bundle();
-                bundle.putString("token",token);
-                Intent intent=new Intent(MainActivity.this,CreateActivity.class);
-                intent.putExtras(bundle);
-                startActivity(intent);
-                break;
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
             }
-        }
+        });
+
+
     }
 
-    private boolean checkEmpty(EditText row, EditText page) {
-        if (TextUtils.isEmpty(row.getText().toString()) || TextUtils.isEmpty(page.getText().toString()))
-            return false;
-        return true;
-    }
 
-    private boolean checkValidRow(int mRow, int mPage, int total) {
-        double temp;
-        int sub=mPage-1;
-        if(sub==0) {
-            temp = total;
-        }
-        else {
-            temp = total / (mPage - 1);
-        }
-        int max_row = (int) Math.round(temp);
-        if (mRow <= max_row) {
-            return true;
-        }
-        return false;
+    public String getMyData() {
+        return myString;
     }
 }

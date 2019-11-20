@@ -8,65 +8,34 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:orientation="horizontal"
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/create_tour"
-            android:text="Create Tour"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
-        <Button
-            android:id="@+id/logout"
-            android:text="Log out"
-            android:layout_gravity="right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
-    <TextView
-        android:layout_gravity="center"
-        android:textSize="35sp"
-        android:text="GET TOUR LIST"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <LinearLayout
-        android:gravity="center"
-        android:orientation="horizontal"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tablayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/rowPerPage"
-            android:hint="RowPerPage"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:inputType="number"/>
-        <EditText
-            android:id="@+id/pageNum"
-            android:hint="Page Num"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:inputType="number"/>
-        <Spinner
-            android:id="@+id/orderBy"
-            android:hint="Order by"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:tabSelectedTextColor="@android:color/white"
+        app:tabTextColor="@android:color/black">
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabChats"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <Spinner
-            android:id="@+id/isDesc"
-            android:hint="Is Desc"
+            android:layout_height="wrap_content"
+            android:text="Chats" />
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabStatus"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
-    <Button
-        android:layout_gravity="center"
-        android:id="@+id/getlist"
-        android:text="Get List Tour"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"/>
-    <ListView
-        android:id="@+id/listTour"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+            android:layout_height="wrap_content"
+            android:text="Status"/>
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabCalls"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Calls"/>
+    </com.google.android.material.tabs.TabLayout>
 </LinearLayout>

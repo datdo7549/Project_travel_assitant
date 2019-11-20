@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -75,13 +77,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private GoogleApiClient mGoogleApiClient;
     CallbackManager callbackManager;
     LoginButton loginButton;
-    SignInButton googleLogin;
+    Button googleLogin;
     String email,name,first_name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
         callbackManager=CallbackManager.Factory.create();
+        Window w = getWindow();
+        w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         setContentView(R.layout.activity_login);
         mapping();
         keyhash();
@@ -90,9 +94,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         googleLogin.setOnClickListener(this);
         loginButton.setReadPermissions(Arrays.asList("public_profile","email"));
         setLogin_Button();
+        Button fb = (Button) findViewById(R.id.fb);
         
     }
 
+    public void onClickFacebookButton(View view) {
+        if (view == findViewById(R.id.fb)) {
+            loginButton.performClick();
+        }
+    }
     private void setLogin_Button() {
         loginButton.registerCallback(callbackManager, new FacebookCallback<com.facebook.login.LoginResult>() {
             @Override
@@ -179,7 +189,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         jsonPlaceHolderAPI2=retrofit2.create(JsonPlaceHolderAPI2.class);
         jsonPlaceHolderApi=retrofit.create(JsonPlaceHolderApi.class);
         loginButton=(LoginButton) findViewById(R.id.loginfb_button);
-        googleLogin=findViewById(R.id.gglogin);
+        googleLogin=findViewById(R.id.gg);
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -287,7 +297,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 startActivity(intent);
                 break;
             }
-            case R.id.gglogin:
+            case R.id.gg:
             {
                 String serverClientId = getString(R.string.server_client_id);
                 GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
