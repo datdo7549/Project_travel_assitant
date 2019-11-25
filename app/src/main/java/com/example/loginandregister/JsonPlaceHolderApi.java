@@ -15,6 +15,8 @@ import com.example.loginandregister.Model.GoogleLoginResult;
 import com.example.loginandregister.Model.ListTour;
 import com.example.loginandregister.Model.LoginResult;
 import com.example.loginandregister.Model.RegisterResult;
+import com.example.loginandregister.Model.TourInforData;
+import com.example.loginandregister.Model.TourInforResult;
 import com.example.loginandregister.Model.User_login;
 import com.example.loginandregister.Model.User_register;
 
@@ -51,4 +53,7 @@ public interface JsonPlaceHolderApi {
 
     @POST("tour/set-stop-points")
     Call<Add_Stop_Point_Result> addStopPoint(@HeaderMap Map<String,String> headers, @Body Add_Stop_Point_Data add_stop_point_data);
+
+    @GET("tour/info")
+    Call<TourInforResult> getTourInfo(@HeaderMap Map<String,String> headers,@Query("tourId") int id);
 }

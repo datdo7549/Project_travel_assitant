@@ -8,9 +8,11 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -49,7 +51,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
     private Button get;
     private Button logout;
     private Button createTour;
-    private ListView listView;
+    private ListView lv;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     private String token;
     private ArrayList<Tour> arrayList;
@@ -63,6 +65,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
         view=inflater.inflate(R.layout.fragment_chat, container, false);
         token = activity.getMyData();
         mapping();
+
         get.setOnClickListener(this);
         createTour.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,14 +171,28 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                                 arrayList = new ArrayList<>(total);
                                 arrayList = response.body().getTourList();
 
-                                ListView lv = view.findViewById(R.id.listTour);
+                                lv = view.findViewById(R.id.listTour);
                                 CustomAdapter arrayAdapternew = new CustomAdapter(getContext(), R.layout.custom_layout_tour_listview, arrayList);
 
+                                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
+                                        Bundle bundle=new Bundle();
+                                        bundle.putString("tour_id",arrayList.get(position).getId());
+                                        bundle.putString("token",token);
+                                        Intent intent=new Intent(getContext(),Tour_Info.class);
+                                        intent.putExtras(bundle);
+                                        startActivity(intent);
+                                    }
+                                });
 
                                 //Sua cai nay ne, chuyen no thanh List View
 
                                 arrayAdapternew.notifyDataSetChanged();
                                 lv.setAdapter(arrayAdapternew);
+
 
                                 Toast.makeText(getContext(), "Get thanh cong ", Toast.LENGTH_SHORT).show();
                                 ////////////////////////////

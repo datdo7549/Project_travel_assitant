@@ -1,6 +1,7 @@
 package com.example.loginandregister.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.annotation.Nullable;
 
 import com.example.loginandregister.Model.Tour;
 import com.example.loginandregister.R;
+import com.example.loginandregister.Tour_Info;
 import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
@@ -24,7 +26,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class CustomAdapter extends ArrayAdapter<Tour> {
+public class CustomAdapter extends ArrayAdapter<Tour>  {
+
 
     private  Context context;
     private  int resource;
@@ -47,7 +50,7 @@ public class CustomAdapter extends ArrayAdapter<Tour> {
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater layoutInflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View viewRow=convertView;
         if(viewRow==null)
@@ -89,7 +92,7 @@ public class CustomAdapter extends ArrayAdapter<Tour> {
 
         // xu li start vs end Date
         long miliStartDate=Long.parseLong(tours.get(position).getStartDate());
-        Date startD=new Date(miliStartDate);
+        final Date startD=new Date(miliStartDate);
         DateFormat dateFormat=new SimpleDateFormat("dd/MM/yyyy");
         String temp1=dateFormat.format(startD);
         StringBuilder dateBuild=new StringBuilder();
@@ -124,6 +127,10 @@ public class CustomAdapter extends ArrayAdapter<Tour> {
         costBuild.append(minCost).append("-").append(maxCost);
         viewHolder.cost.setText(costBuild.toString());
 
+
         return viewRow;
     }
+
+
+
 }

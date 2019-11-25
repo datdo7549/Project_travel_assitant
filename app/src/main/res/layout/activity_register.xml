@@ -5,8 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="15sp"
-    android:paddingRight="15sp"
     android:fitsSystemWindows="true"
     android:background="@drawable/gradiant_background"
     tools:context=".RegisterActivity">
@@ -30,6 +28,7 @@
 
 
     <EditText
+        android:layout_marginLeft="25dp"
         android:textColor="#fff"
             android:textColorHint="#fff"
             android:layout_marginTop="20dp"
@@ -44,6 +43,7 @@
             android:inputType="textEmailAddress"
             android:background="@drawable/login_background" />
     <EditText
+        android:layout_marginLeft="25dp"
         android:textColor="#fff"
         android:textColorHint="#fff"
             android:layout_marginTop="13dp"
@@ -58,6 +58,7 @@
             android:inputType="textPassword"
             android:background="@drawable/login_background" />
     <EditText
+        android:layout_marginLeft="25dp"
         android:textColor="#fff"
         android:textColorHint="#fff"
             android:layout_marginTop="13dp"
@@ -71,6 +72,7 @@
             android:layout_centerInParent="true"
             android:background="@drawable/login_background" />
     <EditText
+        android:layout_marginLeft="25dp"
         android:textColor="#fff"
         android:textColorHint="#fff"
             android:layout_marginTop="13dp"
@@ -85,6 +87,7 @@
             android:inputType="phone"
             android:background="@drawable/login_background" />
     <EditText
+        android:layout_marginLeft="25dp"
         android:textColor="#fff"
         android:textColorHint="#fff"
             android:layout_marginTop="13dp"
@@ -98,6 +101,7 @@
             android:layout_centerInParent="true"
             android:background="@drawable/login_background" />
     <EditText
+        android:layout_marginLeft="25dp"
         android:textColor="#fff"
         android:textColorHint="#fff"
             android:layout_marginTop="13dp"

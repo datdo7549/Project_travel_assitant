@@ -1,7 +1,10 @@
 package com.example.loginandregister.Model;
 
-public class Tour {
-    private String id;
+import java.util.ArrayList;
+
+public class TourInforResult {
+    private int id;
+    private String hostId;
     private int status;
     private String name;
     private String minCost;
@@ -10,26 +13,18 @@ public class Tour {
     private String endDate;
     private int adults;
     private int childs;
-    private boolean isPrivate;
-    private String avatar;
+    private Boolean isPrivate;
+    private ArrayList<StopPointResult_TourInfo> stopPoints;
+    private ArrayList<comment> comments;
+    private ArrayList<Member> members;
 
 
-    public Tour(String id, int status, String name, String minCost, String maxCost, String startDate, String endDate, int adults, int childs, boolean isPrivate, String avatar) {
-        this.id = id;
-        this.status = status;
-        this.name = name;
-        this.minCost = minCost;
-        this.maxCost = maxCost;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.adults = adults;
-        this.childs = childs;
-        this.isPrivate = isPrivate;
-        this.avatar = avatar;
+    public int getId() {
+        return id;
     }
 
-    public String getId() {
-        return id;
+    public String getHostId() {
+        return hostId;
     }
 
     public int getStatus() {
@@ -64,11 +59,19 @@ public class Tour {
         return childs;
     }
 
-    public boolean isPrivate() {
+    public Boolean getPrivate() {
         return isPrivate;
     }
 
-    public String getAvatar() {
-        return avatar;
+    public ArrayList<StopPointResult_TourInfo> getStopPoints() {
+        return stopPoints;
+    }
+
+    public ArrayList<comment> getComments() {
+        return comments;
+    }
+
+    public ArrayList<Member> getMembers() {
+        return members;
     }
 }

@@ -7,23 +7,28 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-    <application android:hardwareAccelerated="true"
+    <application
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        <activity android:name=".Tour_Info"></activity>
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCk38hqa7wd1d9OUwDBFX59kbcMeZhRTdM"/>
+            android:value="AIzaSyCk38hqa7wd1d9OUwDBFX59kbcMeZhRTdM" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-        <activity android:name=".MapActivity">
 
-        </activity>
+        <activity android:name=".MapActivity"></activity>
         <activity android:name=".CreateActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity">
