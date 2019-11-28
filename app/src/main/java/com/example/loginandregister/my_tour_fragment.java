@@ -84,6 +84,7 @@ public class my_tour_fragment extends Fragment {
                                     int mPageIndex=Integer.parseInt(pageIndex.getText().toString());
                                     int mPageSize=Integer.parseInt(pageSize.getText().toString());
                                     listView.setVisibility(View.VISIBLE);
+                                    option_get_tour_popup.dismiss();
                                     loadMyTour(mPageIndex,mPageSize);
                                 }
                                 else

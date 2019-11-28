@@ -95,7 +95,7 @@ public class CustomAdapter extends ArrayAdapter<Tour>  {
         arrayListImage.add("https://cdn.pixabay.com/photo/2016/04/23/19/03/ho-chi-minh-city-1348092_960_720.jpg");
         Random random;
         random=new Random();
-        final int radius = 5;
+
         final Transformation transformation = new RoundedCornersTransformation(55,5);
         Picasso.get()
                 .load(arrayListImage.get(random.nextInt(4)))

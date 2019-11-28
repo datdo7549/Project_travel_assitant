@@ -15,7 +15,7 @@ public class TourInforResult {
     private int childs;
     private Boolean isPrivate;
     private ArrayList<StopPointResult_TourInfo> stopPoints;
-    private ArrayList<comment> comments;
+    private ArrayList<CommentResult_TourInfo> comments;
     private ArrayList<Member> members;
 
 
@@ -67,7 +67,7 @@ public class TourInforResult {
         return stopPoints;
     }
 
-    public ArrayList<comment> getComments() {
+    public ArrayList<CommentResult_TourInfo> getComments() {
         return comments;
     }
 
