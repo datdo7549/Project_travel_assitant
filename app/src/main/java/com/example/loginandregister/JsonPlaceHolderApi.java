@@ -14,6 +14,7 @@ import com.example.loginandregister.Model.Fb_data_login;
 import com.example.loginandregister.Model.GoogleLoginResult;
 import com.example.loginandregister.Model.ListTour;
 import com.example.loginandregister.Model.LoginResult;
+import com.example.loginandregister.Model.My_Tour_Result;
 import com.example.loginandregister.Model.RegisterResult;
 import com.example.loginandregister.Model.TourInforData;
 import com.example.loginandregister.Model.TourInforResult;
@@ -56,4 +57,8 @@ public interface JsonPlaceHolderApi {
 
     @GET("tour/info")
     Call<TourInforResult> getTourInfo(@HeaderMap Map<String,String> headers,@Query("tourId") int id);
+
+
+    @GET("tour/history-user")
+    Call<My_Tour_Result> getMyTour(@HeaderMap Map<String,String> headers,@Query("pageIndex") int pageIndex,@Query("pageSize") int pageSize);
 }

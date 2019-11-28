@@ -21,15 +21,18 @@ public class MainActivity extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPager viewPager;
     PageAdapter pageAdapter;
-    TabItem tabChats;
-    TabItem tabStatus;
-    TabItem tabCalls;
+    TabItem tabMenu;
+    TabItem tabMyTour;
+    TabItem tabExplore;
+    TabItem tabNotification;
+    TabItem tabSetting;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Window w = getWindow();
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         setContentView(R.layout.activity_main);
 
@@ -37,9 +40,11 @@ public class MainActivity extends AppCompatActivity {
         String token=bundle.getString("token");
         myString=token;
         tabLayout = findViewById(R.id.tablayout);
-        tabChats = findViewById(R.id.tabChats);
-        tabStatus = findViewById(R.id.tabStatus);
-        tabCalls = findViewById(R.id.action_call);
+        tabMenu = findViewById(R.id.tabMenu);
+        tabMyTour = findViewById(R.id.tabMyTour);
+        tabExplore = findViewById(R.id.tabExplore);
+        tabNotification=findViewById(R.id.tabNotification);
+        tabSetting=findViewById(R.id.tabSetting);
         viewPager = findViewById(R.id.viewPager);
         
         pageAdapter = new PageAdapter(getSupportFragmentManager(), tabLayout.getTabCount());

@@ -21,11 +21,15 @@ public class PageAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new ChatFragment();
+                return new List_Tour_Fragment();
             case 1:
-                return new StatusFragment();
+                return new my_tour_fragment();
             case 2:
-                return new CallFragment();
+                return new Explore_Fragment();
+            case 3:
+                return new Notification_Fragment();
+            case 4:
+                return new Setting_Fragment();
             default:
                 return null;
         }

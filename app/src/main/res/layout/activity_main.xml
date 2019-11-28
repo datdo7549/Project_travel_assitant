@@ -23,19 +23,29 @@
         app:tabTextColor="@android:color/black">
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabChats"
+            android:id="@+id/tabMenu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chats" />
+            android:icon="@drawable/menu_icon" />
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabStatus"
+            android:id="@+id/tabMyTour"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Status"/>
+            android:icon="@drawable/my_tour_icon"/>
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabCalls"
+            android:id="@+id/tabExplore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Calls"/>
+            android:icon="@drawable/explore_icon"/>
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabNotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/notification_icon"/>
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabSetting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/setting_icon"/>
     </com.google.android.material.tabs.TabLayout>
 </LinearLayout>
