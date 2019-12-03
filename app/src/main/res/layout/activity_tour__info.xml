@@ -135,11 +135,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <ListView
+                    android:descendantFocusability="blocksDescendants"
                     android:divider="@null"
                     android:dividerHeight="13dp"
                     android:id="@+id/list_stop_point_tour_info1"
                     android:layout_width="match_parent"
-                    android:layout_height="226dp">
+                    android:layout_height="wrap_content">
                 </ListView>
                 <TextView
                     android:textColor="#fff"

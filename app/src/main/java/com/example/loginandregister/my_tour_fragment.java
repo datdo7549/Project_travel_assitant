@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -46,7 +48,7 @@ public class my_tour_fragment extends Fragment {
     private ListView listView;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     private String token;
-    private ArrayList<Tour> arrayList;
+    private ArrayList<Tour> arrayList=new ArrayList<>();
     private CustomAdapter arrayAdapternew;
     private Button getMyListTour;
     private Dialog option_get_tour_popup;
@@ -108,7 +110,7 @@ public class my_tour_fragment extends Fragment {
             return false;
         return true;
     }
-    private void loadMyTour(int a,int b) {
+    private void loadMyTour(final int a, int b) {
         Map<String,String> map=new HashMap<>();
         map.put("Authorization",token);
         Call<My_Tour_Result> call=jsonPlaceHolderApi.getMyTour(map,a,b);
@@ -125,18 +127,52 @@ public class my_tour_fragment extends Fragment {
                     int total = response.body().getTotal();
                     arrayList = new ArrayList<>(total);
                     arrayList = response.body().getTours();
-
+                    final Animation animation= AnimationUtils.loadAnimation(getContext(),R.anim.animation );
                     arrayAdapternew = new CustomAdapter(getContext(), R.layout.custom_layout_tour_listview, arrayList);
-
+                    listView.setClipToOutline(true);
                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Bundle bundle=new Bundle();
-                            bundle.putString("tour_id",arrayList.get(position).getId());
-                            bundle.putString("token",token);
-                            Intent intent=new Intent(getContext(),Tour_Info.class);
-                            intent.putExtras(bundle);
-                            startActivity(intent);
+                            if(arrayList.get(position).getCheck()==1)
+                            {
+                                LinearLayout edit_delete=view.findViewById(R.id.edit_delete);
+                                arrayList.get(position).setCheck(0);
+                                edit_delete.setVisibility(View.INVISIBLE);
+                            }
+                            else {
+                                Bundle bundle = new Bundle();
+                                bundle.putString("tour_id", arrayList.get(position).getId());
+                                bundle.putString("token", token);
+                                Intent intent = new Intent(getContext(), Tour_Info.class);
+                                intent.putExtras(bundle);
+                                startActivity(intent);
+                            }
+                        }
+                    });
+                    listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                        @Override
+                        public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                            final int d=position;
+                            LinearLayout edit_delete=view.findViewById(R.id.edit_delete);
+                            arrayList.get(position).setCheck(1);
+                            edit_delete.startAnimation(animation);
+                            edit_delete.setVisibility(View.VISIBLE);
+                            Button edit=view.findViewById(R.id.edit_tour);
+                            edit.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    String name_temp=arrayList.get(position).getName();
+                                    Bundle bundle=new Bundle();
+                                    Intent intent=new Intent(getContext(),CreateActivity.class);
+                                    bundle.putString("token",token);
+                                    bundle.putInt("id_tour",Integer.parseInt(arrayList.get(position).getId()));
+                                    bundle.putString("name_temp",name_temp);
+                                    bundle.putInt("mode",1);
+                                    intent.putExtras(bundle);
+                                    startActivity(intent);
+                                }
+                            });
+                            return true;
                         }
                     });
                     arrayAdapternew.notifyDataSetChanged();
@@ -163,5 +199,22 @@ public class my_tour_fragment extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         jsonPlaceHolderApi=retrofit.create(JsonPlaceHolderApi.class);
+    }
+
+    @Override
+    public void onResume() {
+        Log.d("DAT","onResume");
+        if (arrayList.size()!=0) {
+            for (int i=0;i<arrayList.size();i++)
+            {
+                arrayList.get(i).setCheck(0);
+            }
+            arrayAdapternew.notifyDataSetChanged();
+        }
+
+
+
+
+        super.onResume();
     }
 }

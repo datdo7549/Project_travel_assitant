@@ -1,211 +1,237 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="30dp"
+    android:paddingTop="40dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:background="@drawable/gradiant_background3"
     tools:context=".CreateActivity">
-    <TextView
-        android:layout_marginTop="30dp"
-        android:text="Tour Name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <EditText
-        android:layout_marginBottom="30dp"
-        android:id="@+id/tour_name"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"/>
-
-    <RelativeLayout
-        android:layout_marginBottom="30dp"
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
 
 
-        <RelativeLayout
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="20dp"
+        <LinearLayout
+            android:id="@+id/line_title"
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/back_create_tour"
+                android:src="@drawable/back_button"
+                android:layout_width="50dp"
+                android:layout_height="50dp"/>
+            <TextView
+                android:id="@+id/title_text"
+                android:layout_marginLeft="30dp"
+                android:layout_gravity="center_vertical"
+                android:textSize="25sp"
+                android:textColor="#fff"
+                android:text="Create tour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginBottom="90dp"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textColor="#fff"
+                android:text="Name tour:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <EditText
+                android:id="@+id/tour_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <RelativeLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_alignParentLeft="true"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textColor="#fff"
+                        android:id="@+id/tvstartdate"
+                        android:text="Start Date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <EditText
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/startDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/edit"
+                        style="@android:style/Widget.Spinner"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_alignParentRight="true"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textColor="#fff"
+                        android:text="End Date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <EditText
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/endDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/edit"
+                        style="@android:style/Widget.Spinner"/>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_alignParentLeft="true"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textColor="#fff"
+                        android:text="Adult"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <EditText
+                        android:layout_marginTop="5dp"
+                        android:inputType="number"
+                        android:id="@+id/adult"
+                        android:layout_width="150dp"
+                        android:layout_height="50dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_alignParentRight="true"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textColor="#fff"
+                        android:text="Children"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <EditText
+                        android:inputType="number"
+                        android:id="@+id/children"
+                        android:layout_width="150dp"
+                        android:layout_height="50dp"/>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_alignParentLeft="true"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textColor="#fff"
+                        android:text="Min Cost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <EditText
+                        android:inputType="number"
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/minCost"
+                        android:layout_width="150dp"
+                        android:layout_height="50dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_alignParentRight="true"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textColor="#fff"
+                        android:text="Max Cost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <EditText
+                        android:inputType="number"
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/maxCost"
+                        android:layout_width="150dp"
+                        android:layout_height="50dp"/>
+                </LinearLayout>
+            </RelativeLayout>
+
             <LinearLayout
-                android:id="@+id/ln1"
-                android:orientation="vertical"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/tvstartdate"
-                    android:text="Start Date"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="#fff"
+                    android:text="Choose tour image:"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
-                <EditText
-                    android:id="@+id/startDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/edit"
-                    style="@android:style/Widget.Spinner"/>
-            </LinearLayout>
-            <!--<ImageView
-                android:layout_marginTop="18dp"
-                android:layout_toRightOf="@+id/ln1"
-                android:src="@mipmap/ic_launcher"
-                android:layout_width="40dp"
-                android:layout_height="40dp"/>-->
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:id="@+id/ln2"
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:text="End Date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <EditText
-                    android:id="@+id/endDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/edit"
-                    style="@android:style/Widget.Spinner"/>
-            </LinearLayout>
-            <!--<ImageView
-                android:layout_marginTop="18dp"
-                android:layout_toRightOf="@+id/ln2"
-                android:src="@mipmap/ic_launcher"
-                android:layout_width="40dp"
-                android:layout_height="40dp"/>-->
-        </RelativeLayout>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_marginBottom="30dp"
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <RelativeLayout
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:id="@+id/ln3"
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:text="Adult"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <EditText
-                    android:id="@+id/adult"
-                    android:layout_width="100dp"
+                <ImageView
+                    android:layout_marginLeft="40dp"
+                    android:src="@drawable/upload_avatar"
+                    android:layout_width="50dp"
                     android:layout_height="50dp"/>
             </LinearLayout>
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+
             <LinearLayout
-                android:id="@+id/ln4"
-                android:orientation="vertical"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:text="Children"
+                    android:textColor="#fff"
+                    android:text="This is your private tour?"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
-                <EditText
-                    android:id="@+id/children"
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"/>
+                <Spinner
+                    android:layout_marginLeft="30dp"
+                    android:id="@+id/isPrivate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
-        </RelativeLayout>
-    </RelativeLayout>
 
-
-    <RelativeLayout
-        android:layout_marginBottom="30dp"
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <RelativeLayout
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
             <LinearLayout
-                android:id="@+id/ln5"
-                android:orientation="vertical"
+                android:id="@+id/linear_status"
+                android:visibility="gone"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:text="Min Cost"
+                    android:textColor="#fff"
+                    android:text="Status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
-                <EditText
-                    android:id="@+id/minCost"
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"/>
-            </LinearLayout>
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:id="@+id/ln6"
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:text="Max Cost"
+                <Spinner
+                    android:id="@+id/status"
+                    android:layout_marginLeft="30dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
-                <EditText
-                    android:id="@+id/maxCost"
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"/>
             </LinearLayout>
-        </RelativeLayout>
-    </RelativeLayout>
+            <Button
+                android:background="@drawable/item_cus_list"
+                android:layout_marginTop="20dp"
+                android:id="@+id/create_button"
+                android:text="CREATE"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"/>
+        </LinearLayout>
 
-
-    <EditText
-        android:layout_marginBottom="30dp"
-        android:hint="Choose tour image"
-        android:id="@+id/tourImage"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"/>
-
-    <LinearLayout
-        android:layout_marginBottom="30dp"
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <Spinner
-            android:id="@+id/isPrivate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:text="This is your private tour"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/create_button"
-        android:text="CREATE"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"/>
-</LinearLayout>
+</RelativeLayout>

@@ -14,6 +14,9 @@ public class Tour {
     private String avatar;
 
 
+    private int check;
+
+
     public Tour(String id, int status, String name, String minCost, String maxCost, String startDate, String endDate, int adults, int childs, boolean isPrivate, String avatar) {
         this.id = id;
         this.status = status;
@@ -70,5 +73,13 @@ public class Tour {
 
     public String getAvatar() {
         return avatar;
+    }
+
+    public int getCheck() {
+        return check;
+    }
+
+    public void setCheck(int check) {
+        this.check = check;
     }
 }

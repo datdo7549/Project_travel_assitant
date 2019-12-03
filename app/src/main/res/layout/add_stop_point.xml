@@ -1,302 +1,290 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
 
-    <ScrollView
-        android:id="@+id/scrollView"
+    <LinearLayout
+        android:background="@drawable/popup_cus"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical">
-
-
-    <RelativeLayout
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="40dp"
-            android:background="@drawable/edittext_cus">
-
-
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
             <TextView
-                android:id="@+id/stop_information"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="15sp"
+                android:id="@+id/title_add_stop_point"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:textSize="22sp"
+                android:textColor="#000"
                 android:text="Stop point information"
-                android:textSize="25dp"
-                android:textStyle="bold">
-
-            </TextView>
-
-            <TextView
-                android:id="@+id/stop_point_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/stop_information"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="15dp"
-                android:text="Stop point name"></TextView>
-
-            <EditText
-                android:id="@+id/diem_xuat_phat"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/stop_point_name"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="15dp"
-                android:text="Diem xuat phat"></EditText>
-
-            <TextView
-                android:id="@+id/service_type"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/diem_xuat_phat"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="15dp"
-                android:background="@drawable/edittext_cus"
-                android:text="Service type">
+                android:layout_height="wrap_content"/>
+            <ImageView
+                android:id="@+id/exit_add_stop_point"
+                android:layout_marginRight="23dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/exit"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+        </RelativeLayout>
 
-            </TextView>
 
-            <Spinner
-
-                android:id="@+id/restaurant"
+        <ScrollView
+            android:layout_centerInParent="true"
+            android:background="@drawable/popup_cus"
+            android:layout_width="match_parent"
+            android:layout_height="400dp">
+            <LinearLayout
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/service_type"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="15dp">
+                android:layout_height="match_parent">
 
-            </Spinner>
-
-            <TextView
-                android:id="@+id/address"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/restaurant"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="15dp"
-                android:text="Address">
-
-            </TextView>
-
-            <EditText
-                android:id="@+id/addresstext"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/address"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="15dp"
-                android:text="Quan 5">
-
-            </EditText>
-
-            <TextView
-                android:id="@+id/province"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/addresstext"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="15dp"
-                android:text="Province"></TextView>
-
-            <EditText
-                android:id="@+id/provincetext"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/province"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="15dp">
-
-            </EditText>
-
-            <RelativeLayout
-                android:id="@+id/cost_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/provincetext"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="15dp">
-
-                <LinearLayout
-
-                    android:id="@+id/min_linear"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
+                <RelativeLayout
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                     <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:textColor="#fff"
+                        android:text="Stop point name:"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <EditText
+                        android:layout_alignParentRight="true"
+                        android:textColor="#000"
+                        android:id="@+id/diem_xuat_phat"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"/>
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:textColor="#fff"
+                        android:text="Service type:"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <Spinner
+                        android:layout_alignParentRight="true"
+                        android:id="@+id/restaurant"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content">
+                    </Spinner>
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:textColor="#fff"
+                        android:text="Adress:"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <EditText
+                        android:textColor="#000"
+                        android:layout_alignParentRight="true"
+                        android:id="@+id/addresstext"
+                        android:layout_width="200dp"
+                        android:layout_height="50dp">
+                    </EditText>
+                    <Button
+                        android:id="@+id/btn_new_add"
+                        android:visibility="gone"
+                        android:text="Choose new address"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="200dp"
+                        android:layout_height="50dp"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:textColor="#fff"
+                        android:text="Province:"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <EditText
+                        android:layout_alignParentRight="true"
+                        android:id="@+id/provincetext"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        >
+                    </EditText>
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:textColor="#fff"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Min cost">
-
                     </TextView>
-
                     <EditText
+                        android:inputType="number"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:textColor="#000"
                         android:id="@+id/min_cost"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="10000">
-
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content">
                     </EditText>
-                </LinearLayout>
+                </RelativeLayout>
 
-                <LinearLayout
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:orientation="vertical">
-
+                <RelativeLayout
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                     <TextView
-
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:textColor="#fff"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Max cost">
-
                     </TextView>
-
                     <EditText
+                        android:inputType="number"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:textColor="#000"
                         android:id="@+id/max_cost"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="10000">
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content">
 
                     </EditText>
-                </LinearLayout>
-            </RelativeLayout>
+                </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/time_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/cost_layout"
-                android:layout_marginTop="15dp">
 
                 <TextView
-                    android:id="@+id/arrive_at"
+                    android:layout_marginTop="20dp"
+                    android:textColor="#fff"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
                     android:text="Arrive at">
-
                 </TextView>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/arrive_at"
-                    android:orientation="horizontal">
-
+                <RelativeLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                     <EditText
+                        android:inputType="time"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
                         android:id="@+id/timeArrial"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="5dp"
-                        android:hint="@string/edit"
-                        >
-
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content">
                     </EditText>
 
                     <EditText
+                        android:inputType="date"
+                        android:layout_toRightOf="@+id/timeArrial"
+                        android:layout_toEndOf="@+id/timeArrial"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginStart="30dp"
                         android:id="@+id/dateArrial"
                         android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp">
-
+                        android:layout_height="wrap_content">
                     </EditText>
-
                     <ImageButton
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:id="@+id/btndateArrive"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_marginRight="15dp"
-                        android:background="@drawable/date"
-                        >
-
+                        android:background="@drawable/date">
                     </ImageButton>
-                </LinearLayout>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/time_layout2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/time_layout"
-                android:layout_marginTop="15dp">
+                </RelativeLayout>
 
                 <TextView
+                    android:layout_marginTop="20dp"
+                    android:textColor="#fff"
                     android:id="@+id/leave_at"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
                     android:text="Leave at">
-
                 </TextView>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
+                <RelativeLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                     <EditText
+                        android:inputType="time"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
                         android:id="@+id/timeLeave"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="5dp"
-                        android:hint="@string/edit">
-
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content">
                     </EditText>
 
                     <EditText
+                        android:inputType="date"
+                        android:layout_toRightOf="@id/timeLeave"
+                        android:layout_toEndOf="@+id/timeLeave"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginStart="30dp"
                         android:id="@+id/dateLeave"
                         android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp">
-
+                        android:layout_height="wrap_content">
                     </EditText>
-
                     <ImageButton
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:id="@+id/btndateLeave"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_marginRight="15dp"
-                        android:background="@drawable/date"
-                        >
-
+                        android:background="@drawable/date">
                     </ImageButton>
-                </LinearLayout>
-            </RelativeLayout>
+                </RelativeLayout>
+                <Button
+                    android:layout_marginTop="20dp"
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp"
+                    android:background="@drawable/item_cus_list"
+                    android:layout_gravity="center"
+                    android:id="@+id/ok_btt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:text="Add to list stop point"
+                    android:layout_marginBottom="30dp"/>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
 
 
-            <Button
-                android:id="@+id/ok_btt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/time_layout2"
-                android:layout_centerInParent="true"
-                android:text="OKE" />
 
-        </RelativeLayout>
-</ScrollView>
 </RelativeLayout>

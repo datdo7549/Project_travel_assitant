@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="220dp"
+    android:background="@drawable/item_cus_list"
     android:descendantFocusability="blocksDescendants">
 
 
@@ -10,7 +11,7 @@
     <ImageView
         android:id="@+id/image_tour"
         android:layout_width="match_parent"
-        android:layout_height="220dp"/>
+        android:layout_height="match_parent"/>
 
     <TextView
         android:textSize="28sp"
@@ -23,6 +24,25 @@
         android:text="Hcm-Hanoi"
         android:textStyle="bold"
         android:textColor="#fff"/>
+    <LinearLayout
+        android:id="@+id/edit_delete"
+        android:layout_alignParentRight="true"
+        android:orientation="vertical"
+        android:layout_width="120dp"
+        android:layout_height="match_parent">
+        <Button
+            android:text="Edit Tour"
+            android:background="@drawable/cus_for_edit"
+            android:id="@+id/edit_tour"
+            android:layout_width="match_parent"
+            android:layout_height="110dp"/>
+        <Button
+            android:text="Delete Tour"
+            android:background="@drawable/cus_for_delete"
+            android:id="@+id/delete_tour"
+            android:layout_width="match_parent"
+            android:layout_height="110dp"/>
+    </LinearLayout>
 
 
 </RelativeLayout>

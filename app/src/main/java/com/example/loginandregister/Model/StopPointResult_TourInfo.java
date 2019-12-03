@@ -15,6 +15,17 @@ public class StopPointResult_TourInfo {
     private int serviceTypeId;
     private String avatar;
 
+    private int check;
+
+
+    public int getCheck() {
+        return check;
+    }
+
+    public void setCheck(int check) {
+        this.check = check;
+    }
+
     public int getId() {
         return id;
     }

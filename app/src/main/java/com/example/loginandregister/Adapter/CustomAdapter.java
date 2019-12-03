@@ -55,6 +55,7 @@ public class CustomAdapter extends ArrayAdapter<Tour>  {
         LinearLayout linearLayout;
         TextView name,date,adult,child,cost;
         ImageButton btnCopy;
+        LinearLayout edit_delete;
     }
 
     @NonNull
@@ -75,6 +76,7 @@ public class CustomAdapter extends ArrayAdapter<Tour>  {
             viewHolder.imageCost=viewRow.findViewById(R.id.imageCost);
             */
             viewHolder.name=viewRow.findViewById(R.id.name);
+            viewHolder.edit_delete=viewRow.findViewById(R.id.edit_delete);
            // viewHolder.linearLayout=viewRow.findViewById(R.id.lnalo);
             /**
             viewHolder.date=viewRow.findViewById(R.id.date);
@@ -96,7 +98,7 @@ public class CustomAdapter extends ArrayAdapter<Tour>  {
         Random random;
         random=new Random();
 
-        final Transformation transformation = new RoundedCornersTransformation(55,5);
+        final Transformation transformation = new RoundedCornersTransformation(45,0);
         Picasso.get()
                 .load(arrayListImage.get(random.nextInt(4)))
                 .transform(transformation)
@@ -113,6 +115,17 @@ public class CustomAdapter extends ArrayAdapter<Tour>  {
         // xu li tiep phan gop chuoi
 
         viewHolder.name.setText(tours.get(position).getName());
+
+        if(tours.get(position).getCheck()==0)
+        {
+            viewHolder.edit_delete.setVisibility(View.INVISIBLE);
+        }
+        else
+        {
+            viewHolder.edit_delete.setVisibility(View.VISIBLE);
+        }
+
+
 
         // xu li start vs end Date
         /*

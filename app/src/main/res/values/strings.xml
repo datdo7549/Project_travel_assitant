@@ -7,6 +7,13 @@
         <item>minCost</item>
         <item>maxCost</item>
     </string-array>
+
+    <string-array name="status">
+        <item>Canceled</item>
+        <item>Open</item>
+        <item>Started</item>
+        <item>Closed</item>
+    </string-array>
     <string-array name="service_type">
         <item>Restaurant</item>
         <item>Hotel</item>

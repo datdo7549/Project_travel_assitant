@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants">
 
 
 
@@ -18,6 +19,27 @@
             android:id="@+id/stop_point_name_list_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        android:id="@+id/edit_delete_stop_point"
+        android:layout_alignParentRight="true"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="97dp">
+        <Button
+            android:text="Edit"
+            android:id="@+id/stop_point_edit"
+            android:background="@drawable/cus_for_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"/>
+        <Button
+            android:text="Delete"
+            android:id="@+id/stop_point_delete"
+            android:background="@drawable/cus_for_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"/>
+    </LinearLayout>
 
 
 </RelativeLayout>

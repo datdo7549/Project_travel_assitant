@@ -12,9 +12,9 @@
         android:layout_height="150dp">
         <TextView
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="6dp"
+            android:layout_marginLeft="10dp"
             android:id="@+id/name_country"
-            android:textColor="#000"
+            android:textColor="#fff"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <RelativeLayout
@@ -25,7 +25,7 @@
             <TextView
                 android:textSize="12sp"
                 android:textStyle="bold"
-                android:textColor="#000"
+                android:textColor="#fff"
                 android:layout_marginLeft="6dp"
                 android:layout_alignParentLeft="true"
                 android:id="@+id/stop_point_information"
@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"/>
             <TextView
                 android:textSize="12sp"
-                android:textColor="#000"
+                android:textColor="#fff"
                 android:textStyle="bold"
                 android:layout_centerInParent="true"
                 android:id="@+id/rating"
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"/>
             <TextView
                 android:textSize="12sp"
-                android:textColor="#000"
+                android:textColor="#fff"
                 android:textStyle="bold"
                 android:layout_marginRight="6dp"
                 android:layout_alignParentRight="true"

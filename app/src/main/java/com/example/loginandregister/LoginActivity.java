@@ -72,6 +72,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText emailPhone;
     private EditText password;
     private Button login;
+    private TextView forgot_pass;
     private TextView register;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     private JsonPlaceHolderAPI2 jsonPlaceHolderAPI2;
@@ -94,6 +95,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         login.setOnClickListener(this);
         register.setOnClickListener(this);
         googleLogin.setOnClickListener(this);
+        forgot_pass.setOnClickListener(this);
         loginButton.setReadPermissions(Arrays.asList("public_profile","email"));
         setLogin_Button();
         Button fb = (Button) findViewById(R.id.fb);
@@ -192,6 +194,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         jsonPlaceHolderApi=retrofit.create(JsonPlaceHolderApi.class);
         loginButton=(LoginButton) findViewById(R.id.loginfb_button);
         googleLogin=findViewById(R.id.gg);
+        forgot_pass=findViewById(R.id.forgot_password);
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -315,6 +318,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 startActivityForResult(signInIntent, RC_GET_AUTH_CODE);
                 break;
             }
+
+            case R.id.forgot_password: {
+                Intent intent=new Intent(LoginActivity.this,ForgotActivity.class);
+                startActivity(intent);
+                break;
+            }
         }
     }
 
@@ -343,6 +352,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             e.printStackTrace();
         }
     }
+
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -367,4 +378,5 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             });
         }
     }
+
 }

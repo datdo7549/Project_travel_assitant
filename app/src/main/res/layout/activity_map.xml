@@ -47,6 +47,15 @@
         android:layout_height="40dp"
         android:id="@+id/gps"
         android:src="@drawable/gps"/>
+    <ImageView
+        android:id="@+id/list_stop_point_selected"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/list_stop_point"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
 </RelativeLayout>
 
 
