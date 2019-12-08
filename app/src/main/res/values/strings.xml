@@ -45,4 +45,7 @@
     <string name="edit">Ấn vào để sửa</string>
     <string name="choose">Chọn ngày tháng</string>
     <string name="chooseTime">Chọn giờ</string>
+    <string name="project_id">Travel Assistant</string>
+    <string name="FCM_PREF">com.ygaps.travelapp.fcm_pref</string>
+    <string name="FCM_TOKEN">com.ygaps.travelapp.fcm_token</string>
 </resources>
