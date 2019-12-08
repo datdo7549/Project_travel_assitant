@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"/>
 
     <RelativeLayout
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="100dp"
         android:layout_marginBottom="20dp"
         android:layout_centerInParent="true"
         android:id="@+id/rela1"
@@ -73,7 +73,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:paddingTop="40dp"
+        android:paddingTop="30dp"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
         android:layout_below="@id/rela1"

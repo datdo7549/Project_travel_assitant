@@ -9,7 +9,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
   <RelativeLayout
-      android:layout_marginTop="40dp"
+      android:layout_marginTop="30dp"
       android:paddingRight="15dp"
       android:paddingLeft="15dp"
       android:id="@+id/rl2"
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"/>
   </RelativeLayout>
   <SearchView
-      android:layout_marginTop="28dp"
+      android:layout_marginTop="20dp"
       android:layout_marginRight="20dp"
       android:layout_marginLeft="20dp"
       android:layout_below="@+id/rl2"
@@ -53,6 +53,7 @@
       android:visibility="gone"
       android:layout_marginLeft="15dp"
       android:layout_marginRight="15dp"
+      android:layout_marginTop="170dp"
       android:descendantFocusability="blocksDescendants"
       android:layout_alignParentBottom="true"
       android:focusableInTouchMode="true"
@@ -60,5 +61,5 @@
       android:layout_width="match_parent"
       android:divider="@null"
       android:dividerHeight="13dp"
-      android:layout_height="500dp"/>
+      android:layout_height="match_parent"/>
 </RelativeLayout>
