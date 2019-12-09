@@ -11,8 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.ygaps.travelapp.R;
 import com.ygaps.travelapp.Model.Member;
+import com.ygaps.travelapp.R;
 
 import java.util.ArrayList;
 

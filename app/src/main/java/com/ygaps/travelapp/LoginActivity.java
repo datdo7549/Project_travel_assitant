@@ -1,5 +1,8 @@
 package com.ygaps.travelapp;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -15,9 +18,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
+import com.ygaps.travelapp.Model.DataGoogleLogin;
+import com.ygaps.travelapp.Model.FacebookLoginResult;
+import com.ygaps.travelapp.Model.Fb_data_login;
+import com.ygaps.travelapp.Model.GGreesult;
+import com.ygaps.travelapp.Model.GgData;
+import com.ygaps.travelapp.Model.GoogleLoginResult;
+import com.ygaps.travelapp.Model.LoginResult;
+import com.ygaps.travelapp.Model.User_login;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -35,14 +43,6 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Scope;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.ygaps.travelapp.Model.DataGoogleLogin;
-import com.ygaps.travelapp.Model.FacebookLoginResult;
-import com.ygaps.travelapp.Model.Fb_data_login;
-import com.ygaps.travelapp.Model.GGreesult;
-import com.ygaps.travelapp.Model.GgData;
-import com.ygaps.travelapp.Model.GoogleLoginResult;
-import com.ygaps.travelapp.Model.LoginResult;
-import com.ygaps.travelapp.Model.User_login;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -81,7 +81,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         callbackManager=CallbackManager.Factory.create();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setContentView(com.ygaps.travelapp.R.layout.activity_login);
+        setContentView(R.layout.activity_login);
         mapping();
         keyhash();
         login.setOnClickListener(this);
@@ -90,12 +90,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         forgot_pass.setOnClickListener(this);
         loginButton.setReadPermissions(Arrays.asList("public_profile","email"));
         setLogin_Button();
-        Button fb = (Button) findViewById(com.ygaps.travelapp.R.id.fb);
-
+        Button fb = (Button) findViewById(R.id.fb);
+        
     }
 
     public void onClickFacebookButton(View view) {
-        if (view == findViewById(com.ygaps.travelapp.R.id.fb)) {
+        if (view == findViewById(R.id.fb)) {
             loginButton.performClick();
         }
     }
@@ -145,7 +145,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 progressDialog.dismiss();
                                 Bundle bundle=new Bundle();
                                 bundle.putString("token",response.body().getToken());
-                                Intent intent=new Intent(LoginActivity.this, MainActivity.class);
+                                Intent intent=new Intent(LoginActivity.this,MainActivity.class);
                                 intent.putExtras(bundle);
                                 startActivity(intent);
                             }
@@ -169,10 +169,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void mapping() {
-        emailPhone=findViewById(com.ygaps.travelapp.R.id.edit_emailPhone);
-        password=findViewById(com.ygaps.travelapp.R.id.edit_password);
-        login=findViewById(com.ygaps.travelapp.R.id.login_button);
-        register=findViewById(com.ygaps.travelapp.R.id.register);
+        emailPhone=findViewById(R.id.edit_emailPhone);
+        password=findViewById(R.id.edit_password);
+        login=findViewById(R.id.login_button);
+        register=findViewById(R.id.register);
         Gson gson=new GsonBuilder().serializeNulls().create();
         Retrofit retrofit=new Retrofit.Builder()
                 .baseUrl(URL)
@@ -184,9 +184,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 .build();
         jsonPlaceHolderAPI2=retrofit2.create(JsonPlaceHolderAPI2.class);
         jsonPlaceHolderApi=retrofit.create(JsonPlaceHolderApi.class);
-        loginButton=(LoginButton) findViewById(com.ygaps.travelapp.R.id.loginfb_button);
-        googleLogin=findViewById(com.ygaps.travelapp.R.id.gg);
-        forgot_pass=findViewById(com.ygaps.travelapp.R.id.forgot_password);
+        loginButton=(LoginButton) findViewById(R.id.loginfb_button);
+        googleLogin=findViewById(R.id.gg);
+        forgot_pass=findViewById(R.id.forgot_password);
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -225,7 +225,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                         Toast.makeText(LoginActivity.this,"Dang nhap google thanh cong",Toast.LENGTH_LONG).show();
                                         Bundle bundle=new Bundle();
                                         bundle.putString("token",response.body().getToken());
-                                        Intent intent=new Intent(LoginActivity.this, MainActivity.class);
+                                        Intent intent=new Intent(LoginActivity.this,MainActivity.class);
                                         intent.putExtras(bundle);
                                         startActivity(intent);
                                     }
@@ -252,7 +252,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId())
         {
-            case com.ygaps.travelapp.R.id.login_button:
+            case R.id.login_button:
             {
                 String mEmailPhone=emailPhone.getText().toString();
                 String mPassword=password.getText().toString();
@@ -276,7 +276,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Toast.makeText(LoginActivity.this,"Dang nhap thanh cong",Toast.LENGTH_SHORT).show();
                             Bundle bundle=new Bundle();
                             bundle.putString("token",response.body().getToken());
-                            Intent intent=new Intent(LoginActivity.this, MainActivity.class);
+                            Intent intent=new Intent(LoginActivity.this,MainActivity.class);
                             intent.putExtras(bundle);
                             startActivity(intent);
                         }
@@ -288,15 +288,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 });
                 break;
             }
-            case com.ygaps.travelapp.R.id.register:
+            case R.id.register:
             {
-                Intent intent=new Intent(LoginActivity.this, RegisterActivity.class);
+                Intent intent=new Intent(LoginActivity.this,RegisterActivity.class);
                 startActivity(intent);
                 break;
             }
-            case com.ygaps.travelapp.R.id.gg:
+            case R.id.gg:
             {
-                String serverClientId = getString(com.ygaps.travelapp.R.string.server_client_id);
+                String serverClientId = getString(R.string.server_client_id);
                 GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                         .requestScopes(new Scope(Scopes.DRIVE_APPFOLDER))
                         .requestServerAuthCode(serverClientId)
@@ -311,8 +311,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             }
 
-            case com.ygaps.travelapp.R.id.forgot_password: {
-                Intent intent=new Intent(LoginActivity.this, ForgotActivity.class);
+            case R.id.forgot_password: {
+                Intent intent=new Intent(LoginActivity.this,ForgotActivity.class);
                 startActivity(intent);
                 break;
             }
@@ -360,7 +360,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 public void onResponse(Call<FacebookLoginResult> call, Response<FacebookLoginResult> response) {
                         Bundle bundle=new Bundle();
                         bundle.putString("token",response.body().getToken());
-                        Intent intent=new Intent(LoginActivity.this, MainActivity.class);
+                        Intent intent=new Intent(LoginActivity.this,MainActivity.class);
                         intent.putExtras(bundle);
                         startActivity(intent);
                 }

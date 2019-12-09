@@ -1,8 +1,8 @@
 package com.ygaps.travelapp;
 
-import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
 
 import com.ygaps.travelapp.Model.Forgot_Frag_2;
 
@@ -16,7 +16,7 @@ public class ForgotActivity extends AppCompatActivity implements Forgot_Frag_1.D
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(com.ygaps.travelapp.R.layout.activity_forgot);
+        setContentView(R.layout.activity_forgot);
         initFrag();
         show_forgot_frag_1();
     }
@@ -46,20 +46,20 @@ public class ForgotActivity extends AppCompatActivity implements Forgot_Frag_1.D
         });
 
         getSupportFragmentManager().beginTransaction()
-                .add(com.ygaps.travelapp.R.id.id_main,forgot_frag_1, Forgot_Frag_1.class.getName())
-                .add(com.ygaps.travelapp.R.id.id_main,forgot_frag_2, Forgot_Frag_2.class.getName())
+                .add(R.id.id_main,forgot_frag_1,Forgot_Frag_1.class.getName())
+                .add(R.id.id_main,forgot_frag_2,Forgot_Frag_2.class.getName())
                 .commit();
     }
 
 
     @Override
     public void passData(String data) {
-        Forgot_Frag_2 fragmentB = new Forgot_Frag_2();
+        Forgot_Frag_2 fragmentB = new Forgot_Frag_2 ();
         Bundle args = new Bundle();
         args.putString("data_receive", data);
         fragmentB .setArguments(args);
         getSupportFragmentManager().beginTransaction()
-                .add(com.ygaps.travelapp.R.id.id_main, fragmentB )
+                .add(R.id.id_main, fragmentB )
                 .commit();
     }
 }

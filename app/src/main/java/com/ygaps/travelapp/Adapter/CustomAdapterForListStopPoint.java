@@ -11,10 +11,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.ygaps.travelapp.Model.Stop_Point;
+import com.ygaps.travelapp.R;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
-import com.ygaps.travelapp.R;
-import com.ygaps.travelapp.Model.Stop_Point;
 
 import java.util.ArrayList;
 

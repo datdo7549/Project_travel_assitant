@@ -38,6 +38,7 @@
             android:background="#fff"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
+            android:inputType="number"
             android:layout_height="50dp"/>
         <TextView
             android:layout_marginTop="10dp"
@@ -52,6 +53,7 @@
             android:background="#fff"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
+            android:inputType="textPassword"
             android:layout_height="50dp"/>
         <Button
             android:background="@android:color/holo_blue_bright"

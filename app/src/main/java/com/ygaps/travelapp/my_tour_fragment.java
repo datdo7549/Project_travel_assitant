@@ -9,6 +9,9 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -23,11 +26,11 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.ygaps.travelapp.Adapter.CustomAdapter;
 import com.ygaps.travelapp.Model.My_Tour_Result;
 import com.ygaps.travelapp.Model.Tour;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,34 +56,51 @@ public class my_tour_fragment extends Fragment {
     private Button getMyListTour;
     private Dialog option_get_tour_popup;
     private Button getMyTourPopUp;
+
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_my_tour, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.get_my_tour) {
+            GetMyTour();
+        }
+        return true;
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final MainActivity activity = (MainActivity) getActivity();
         token = activity.getMyData();
-        view=inflater.inflate(com.ygaps.travelapp.R.layout.fragment_my_tour, container, false);
+        setHasOptionsMenu(true);
+        view=inflater.inflate(R.layout.fragment_my_tour, container, false);
 
         mapping();
-        getMyListTour.setOnClickListener(new View.OnClickListener() {
+
+
+        /*getMyListTour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 guide.setVisibility(View.GONE);
                 Button normal;
-                option_get_tour_popup.setContentView(com.ygaps.travelapp.R.layout.get_my_tour_pop_up);
+                option_get_tour_popup.setContentView(R.layout.get_my_tour_pop_up);
                 option_get_tour_popup.show();
-                normal=option_get_tour_popup.findViewById(com.ygaps.travelapp.R.id.getMyTour_Normal);
-                getMyTourPopUp=option_get_tour_popup.findViewById(com.ygaps.travelapp.R.id.get_my_tour_in_popup);
+                normal=option_get_tour_popup.findViewById(R.id.getMyTour_Normal);
+                getMyTourPopUp=option_get_tour_popup.findViewById(R.id.get_my_tour_in_popup);
                 normal.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        LinearLayout ln_normal=option_get_tour_popup.findViewById(com.ygaps.travelapp.R.id.ln_normal);
+                        LinearLayout ln_normal=option_get_tour_popup.findViewById(R.id.ln_normal);
                         ln_normal.setVisibility(View.VISIBLE);
                         getMyTourPopUp.setVisibility(View.VISIBLE);
                         getMyTourPopUp.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                EditText pageIndex=option_get_tour_popup.findViewById(com.ygaps.travelapp.R.id.pageIndex);
-                                EditText pageSize=option_get_tour_popup.findViewById(com.ygaps.travelapp.R.id.pageSize);
+                                EditText pageIndex=option_get_tour_popup.findViewById(R.id.pageIndex);
+                                EditText pageSize=option_get_tour_popup.findViewById(R.id.pageSize);
                                 if (checkEmpty(pageIndex,pageSize))
                                 {
                                     int mPageIndex=Integer.parseInt(pageIndex.getText().toString());
@@ -102,7 +122,7 @@ public class my_tour_fragment extends Fragment {
 
 
             }
-        });
+        });*/
         return view;
     }
     private boolean checkEmpty(EditText row, EditText page) {
@@ -127,15 +147,15 @@ public class my_tour_fragment extends Fragment {
                     int total = response.body().getTotal();
                     arrayList = new ArrayList<>(total);
                     arrayList = response.body().getTours();
-                    final Animation animation= AnimationUtils.loadAnimation(getContext(), com.ygaps.travelapp.R.anim.animation );
-                    arrayAdapternew = new CustomAdapter(getContext(), com.ygaps.travelapp.R.layout.custom_layout_tour_listview, arrayList);
+                    final Animation animation= AnimationUtils.loadAnimation(getContext(),R.anim.animation );
+                    arrayAdapternew = new CustomAdapter(getContext(), R.layout.custom_layout_tour_listview, arrayList);
                     listView.setClipToOutline(true);
                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             if(arrayList.get(position).getCheck()==1)
                             {
-                                LinearLayout edit_delete=view.findViewById(com.ygaps.travelapp.R.id.edit_delete);
+                                LinearLayout edit_delete=view.findViewById(R.id.edit_delete);
                                 arrayList.get(position).setCheck(0);
                                 edit_delete.setVisibility(View.INVISIBLE);
                             }
@@ -153,17 +173,17 @@ public class my_tour_fragment extends Fragment {
                         @Override
                         public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
                             final int d=position;
-                            LinearLayout edit_delete=view.findViewById(com.ygaps.travelapp.R.id.edit_delete);
+                            LinearLayout edit_delete=view.findViewById(R.id.edit_delete);
                             arrayList.get(position).setCheck(1);
                             edit_delete.startAnimation(animation);
                             edit_delete.setVisibility(View.VISIBLE);
-                            Button edit=view.findViewById(com.ygaps.travelapp.R.id.edit_tour);
+                            Button edit=view.findViewById(R.id.edit_tour);
                             edit.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                     String name_temp=arrayList.get(position).getName();
                                     Bundle bundle=new Bundle();
-                                    Intent intent=new Intent(getContext(), CreateActivity.class);
+                                    Intent intent=new Intent(getContext(),CreateActivity.class);
                                     bundle.putString("token",token);
                                     bundle.putInt("id_tour",Integer.parseInt(arrayList.get(position).getId()));
                                     bundle.putString("name_temp",name_temp);
@@ -188,11 +208,11 @@ public class my_tour_fragment extends Fragment {
     }
 
     private void mapping() {
-        listView=view.findViewById(com.ygaps.travelapp.R.id.myListTour);
+        listView=view.findViewById(R.id.myListTour);
         option_get_tour_popup=new Dialog(getContext(),android.R.style.Theme_Black_NoTitleBar_Fullscreen);
         option_get_tour_popup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        guide=view.findViewById(com.ygaps.travelapp.R.id.guide);
-        getMyListTour=view.findViewById(com.ygaps.travelapp.R.id.getMyListTour);
+        guide=view.findViewById(R.id.guide);
+        //getMyListTour=view.findViewById(R.id.getMyListTour);
         Gson gson=new GsonBuilder().serializeNulls().create();
         Retrofit retrofit=new Retrofit.Builder()
                 .baseUrl(URL)
@@ -211,10 +231,46 @@ public class my_tour_fragment extends Fragment {
             }
             arrayAdapternew.notifyDataSetChanged();
         }
-
-
-
-
         super.onResume();
     }
+
+    public void GetMyTour()
+    {
+        guide.setVisibility(View.GONE);
+        Button normal;
+        option_get_tour_popup.setContentView(R.layout.get_my_tour_pop_up);
+        option_get_tour_popup.show();
+        normal=option_get_tour_popup.findViewById(R.id.getMyTour_Normal);
+        getMyTourPopUp=option_get_tour_popup.findViewById(R.id.get_my_tour_in_popup);
+        normal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LinearLayout ln_normal=option_get_tour_popup.findViewById(R.id.ln_normal);
+                ln_normal.setVisibility(View.VISIBLE);
+                getMyTourPopUp.setVisibility(View.VISIBLE);
+                getMyTourPopUp.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        EditText pageIndex=option_get_tour_popup.findViewById(R.id.pageIndex);
+                        EditText pageSize=option_get_tour_popup.findViewById(R.id.pageSize);
+                        if (checkEmpty(pageIndex,pageSize))
+                        {
+                            int mPageIndex=Integer.parseInt(pageIndex.getText().toString());
+                            int mPageSize=Integer.parseInt(pageSize.getText().toString());
+                            listView.setVisibility(View.VISIBLE);
+                            option_get_tour_popup.dismiss();
+                            loadMyTour(mPageIndex,mPageSize);
+                        }
+                        else
+                        {
+                            Toast.makeText(getContext(),"Vui lòng điền đủ thông tin",Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
+
+            }
+        });
+    }
+
 }

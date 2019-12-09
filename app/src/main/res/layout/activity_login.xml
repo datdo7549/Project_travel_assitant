@@ -73,7 +73,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:paddingTop="30dp"
+        android:paddingTop="20dp"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
         android:layout_below="@id/rela1"
@@ -87,7 +87,7 @@
                 android:textSize="18sp"
                 android:textColor="#ffff"
                 android:id="@+id/forgot_password"
-                android:text="Password"
+                android:text="Forgot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <ImageView

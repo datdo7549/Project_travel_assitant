@@ -2,8 +2,5 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto">
 
-  <item
-    android:id="@+id/action_status"
-    android:title="Post status"
-    app:showAsAction="ifRoom" />
+  <item android:id="@+id/get_my_tour" android:title="Get my tour" />
 </menu>

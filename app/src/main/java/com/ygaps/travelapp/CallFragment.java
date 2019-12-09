@@ -16,7 +16,7 @@ public class CallFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view=inflater.inflate(com.ygaps.travelapp.R.layout.fragment_call, container, false);
+        View view=inflater.inflate(R.layout.fragment_call, container, false);
         return view;
     }
 

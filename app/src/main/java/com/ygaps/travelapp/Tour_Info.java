@@ -1,5 +1,8 @@
 package com.ygaps.travelapp;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
@@ -28,12 +31,6 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.squareup.picasso.Picasso;
 import com.ygaps.travelapp.Adapter.CustomAdapterForTourInfo_Comment;
 import com.ygaps.travelapp.Adapter.CustomAdapterForTourInfo_Member;
 import com.ygaps.travelapp.Adapter.CustomAdapterForTourInfo_StopPoint;
@@ -44,6 +41,9 @@ import com.ygaps.travelapp.Model.Member;
 import com.ygaps.travelapp.Model.StopPointResult_TourInfo;
 import com.ygaps.travelapp.Model.Stop_Point;
 import com.ygaps.travelapp.Model.TourInforResult;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -96,7 +96,7 @@ public class Tour_Info extends AppCompatActivity {
         Window w = getWindow();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        setContentView(com.ygaps.travelapp.R.layout.activity_tour__info);
+        setContentView(R.layout.activity_tour__info);
         mapping();
 
         upload_image_tour_info.setOnClickListener(new View.OnClickListener() {
@@ -107,7 +107,7 @@ public class Tour_Info extends AppCompatActivity {
                 startActivityForResult(intent,2);
             }
         });
-        imagee_tour_info=findViewById(com.ygaps.travelapp.R.id.image_tour_info);
+        imagee_tour_info=findViewById(R.id.image_tour_info);
         Picasso.get()
                 .load("https://cdn.pixabay.com/photo/2016/03/04/19/36/beach-1236581_960_720.jpg")
                 .fit()
@@ -182,7 +182,7 @@ public class Tour_Info extends AppCompatActivity {
 
                     //Xu li Stop Point
                     if (stopPointResult_tourInfo.size()!=0) {
-                        customAdapterForTourInfoStopPoint = new CustomAdapterForTourInfo_StopPoint(Tour_Info.this, com.ygaps.travelapp.R.layout.list_stop_point_tour_info, stopPointResult_tourInfo);
+                        customAdapterForTourInfoStopPoint = new CustomAdapterForTourInfo_StopPoint(Tour_Info.this, R.layout.list_stop_point_tour_info, stopPointResult_tourInfo);
                         listView_stop_point.setAdapter(customAdapterForTourInfoStopPoint);
 
                         listView_stop_point.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -190,20 +190,20 @@ public class Tour_Info extends AppCompatActivity {
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                 if(stopPointResult_tourInfo.get(position).getCheck()==1)
                                 {
-                                    LinearLayout edit_delete_stop_point=view.findViewById(com.ygaps.travelapp.R.id.edit_delete_stop_point);
+                                    LinearLayout edit_delete_stop_point=view.findViewById(R.id.edit_delete_stop_point);
                                     stopPointResult_tourInfo.get(position).setCheck(0);
                                     edit_delete_stop_point.setVisibility(View.INVISIBLE);
                                 }
                                 else {
                                     //stop_point_info.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                                     stop_point_info.getWindow().addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
-                                    stop_point_info.setContentView(com.ygaps.travelapp.R.layout.stop_point_info_popup);
-                                    ImageView image_stop_point=stop_point_info.findViewById(com.ygaps.travelapp.R.id.image_stop_point_info);
-                                    TextView name_stop_point=stop_point_info.findViewById(com.ygaps.travelapp.R.id.name_stop_point_info);
-                                    TextView date_stop_point=stop_point_info.findViewById(com.ygaps.travelapp.R.id.date_stop_point_info);
-                                    TextView cost_stop_point=stop_point_info.findViewById(com.ygaps.travelapp.R.id.cost_stop_point_info);
-                                    TextView type_service=stop_point_info.findViewById(com.ygaps.travelapp.R.id.type_service_stop_point);
-                                    ImageView exit_stop_point_info_popup=stop_point_info.findViewById(com.ygaps.travelapp.R.id.exit_stop_point_info_popup);
+                                    stop_point_info.setContentView(R.layout.stop_point_info_popup);
+                                    ImageView image_stop_point=stop_point_info.findViewById(R.id.image_stop_point_info);
+                                    TextView name_stop_point=stop_point_info.findViewById(R.id.name_stop_point_info);
+                                    TextView date_stop_point=stop_point_info.findViewById(R.id.date_stop_point_info);
+                                    TextView cost_stop_point=stop_point_info.findViewById(R.id.cost_stop_point_info);
+                                    TextView type_service=stop_point_info.findViewById(R.id.type_service_stop_point);
+                                    ImageView exit_stop_point_info_popup=stop_point_info.findViewById(R.id.exit_stop_point_info_popup);
                                     exit_stop_point_info_popup.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
@@ -255,10 +255,10 @@ public class Tour_Info extends AppCompatActivity {
                             @Override
                             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, final long id) {
                                 final int d=position;
-                                LinearLayout edit_delete_stop_point=view.findViewById(com.ygaps.travelapp.R.id.edit_delete_stop_point);
-                                Button stop_point_edit=view.findViewById(com.ygaps.travelapp.R.id.stop_point_edit);
-                                Button stop_point_delete=view.findViewById(com.ygaps.travelapp.R.id.stop_point_delete);
-                                final Animation animation= AnimationUtils.loadAnimation(Tour_Info.this, com.ygaps.travelapp.R.anim.animation );
+                                LinearLayout edit_delete_stop_point=view.findViewById(R.id.edit_delete_stop_point);
+                                Button stop_point_edit=view.findViewById(R.id.stop_point_edit);
+                                Button stop_point_delete=view.findViewById(R.id.stop_point_delete);
+                                final Animation animation= AnimationUtils.loadAnimation(Tour_Info.this,R.anim.animation );
                                 stopPointResult_tourInfo.get(position).setCheck(1);
                                 edit_delete_stop_point.startAnimation(animation);
                                 edit_delete_stop_point.setVisibility(View.VISIBLE);
@@ -270,46 +270,46 @@ public class Tour_Info extends AppCompatActivity {
                                         bundle1.putInt("id_stop_point",stopPointResult_tourInfo.get(position).getId());
                                         bundle.putInt("type",1);
                                         update_stop_point.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                                        update_stop_point.setContentView(com.ygaps.travelapp.R.layout.add_stop_point);
-                                        TextView title=update_stop_point.findViewById(com.ygaps.travelapp.R.id.title_add_stop_point);
+                                        update_stop_point.setContentView(R.layout.add_stop_point);
+                                        TextView title=update_stop_point.findViewById(R.id.title_add_stop_point);
                                         title.setText("Update Stop Point");
-                                        final EditText newName=update_stop_point.findViewById(com.ygaps.travelapp.R.id.diem_xuat_phat);
-                                        final Spinner type = update_stop_point.findViewById(com.ygaps.travelapp.R.id.restaurant);
-                                        ArrayAdapter<CharSequence> adapter_byname1 = ArrayAdapter.createFromResource(Tour_Info.this, com.ygaps.travelapp.R.array.service_type, android.R.layout.simple_spinner_item);
+                                        final EditText newName=update_stop_point.findViewById(R.id.diem_xuat_phat);
+                                        final Spinner type = update_stop_point.findViewById(R.id.restaurant);
+                                        ArrayAdapter<CharSequence> adapter_byname1 = ArrayAdapter.createFromResource(Tour_Info.this, R.array.service_type, android.R.layout.simple_spinner_item);
                                         adapter_byname1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                         type.setAdapter(adapter_byname1);
-                                        Button btn_newAddress=update_stop_point.findViewById(com.ygaps.travelapp.R.id.btn_new_add);
+                                        Button btn_newAddress=update_stop_point.findViewById(R.id.btn_new_add);
                                         btn_newAddress.setVisibility(View.VISIBLE);
                                         btn_newAddress.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
                                                 Bundle bundle2=new Bundle();
                                                 bundle2.putInt("type",1);
-                                                Intent intent=new Intent(Tour_Info.this, MapActivity.class);
+                                                Intent intent=new Intent(Tour_Info.this,MapActivity.class);
                                                 intent.putExtras(bundle2);
                                                 startActivity(intent);
                                             }
                                         });
-                                        final EditText newAddress=update_stop_point.findViewById(com.ygaps.travelapp.R.id.addresstext);
+                                        final EditText newAddress=update_stop_point.findViewById(R.id.addresstext);
                                         newAddress.setVisibility(View.INVISIBLE);
-                                        final EditText newProvince=update_stop_point.findViewById(com.ygaps.travelapp.R.id.provincetext);
-                                        final EditText newMin=update_stop_point.findViewById(com.ygaps.travelapp.R.id.min_cost);
-                                        final EditText newMax=update_stop_point.findViewById(com.ygaps.travelapp.R.id.max_cost);
+                                        final EditText newProvince=update_stop_point.findViewById(R.id.provincetext);
+                                        final EditText newMin=update_stop_point.findViewById(R.id.min_cost);
+                                        final EditText newMax=update_stop_point.findViewById(R.id.max_cost);
 
 
 
-                                        final EditText mtimeArrive=update_stop_point.findViewById(com.ygaps.travelapp.R.id.timeArrial);
+                                        final EditText mtimeArrive=update_stop_point.findViewById(R.id.timeArrial);
 
-                                        final EditText mtimeLeave=update_stop_point.findViewById(com.ygaps.travelapp.R.id.timeLeave);
+                                        final EditText mtimeLeave=update_stop_point.findViewById(R.id.timeLeave);
 
-                                        final EditText mDateArrive=update_stop_point.findViewById(com.ygaps.travelapp.R.id.dateArrial);
+                                        final EditText mDateArrive=update_stop_point.findViewById(R.id.dateArrial);
 
-                                        final EditText mDateLeave=update_stop_point.findViewById(com.ygaps.travelapp.R.id.dateLeave);
+                                        final EditText mDateLeave=update_stop_point.findViewById(R.id.dateLeave);
 
-                                        final ImageButton btnArrive=update_stop_point.findViewById(com.ygaps.travelapp.R.id.btndateArrive);
+                                        final ImageButton btnArrive=update_stop_point.findViewById(R.id.btndateArrive);
 
-                                        final ImageButton btnLeave=update_stop_point.findViewById(com.ygaps.travelapp.R.id.btndateLeave);
-                                        final Button ok_button=update_stop_point.findViewById(com.ygaps.travelapp.R.id.ok_btt);
+                                        final ImageButton btnLeave=update_stop_point.findViewById(R.id.btndateLeave);
+                                        final Button ok_button=update_stop_point.findViewById(R.id.ok_btt);
                                         ok_button.setText("Update");
 
 
@@ -327,7 +327,7 @@ public class Tour_Info extends AppCompatActivity {
                                                         mDateArrive.setText(dayOfMonth+"/"+(monthOfYear+1)+"/"+year);
                                                     };
                                                 },mYear,mMonth,mDay);
-                                                datePickerDialog.setTitle(com.ygaps.travelapp.R.string.choose);
+                                                datePickerDialog.setTitle(R.string.choose);
                                                 datePickerDialog.show();
                                             }
                                         });
@@ -346,7 +346,7 @@ public class Tour_Info extends AppCompatActivity {
                                                         mDateLeave.setText(dayOfMonth+"/"+(monthOfYear+1)+"/"+year);
                                                     };
                                                 },mYear,mMonth,mDay);
-                                                datePickerDialog.setTitle(com.ygaps.travelapp.R.string.choose);
+                                                datePickerDialog.setTitle(R.string.choose);
                                                 datePickerDialog.show();
                                             }
                                         });
@@ -365,7 +365,7 @@ public class Tour_Info extends AppCompatActivity {
                                                         mtimeArrive.setText(hourOfday+":"+minute);
                                                     };
                                                 },mHour,mMinute,false);
-                                                timePickerDialog.setTitle(com.ygaps.travelapp.R.string.choose);
+                                                timePickerDialog.setTitle(R.string.choose);
                                                 timePickerDialog.show();
                                             }
                                         });
@@ -384,7 +384,7 @@ public class Tour_Info extends AppCompatActivity {
                                                         mtimeLeave.setText(hourOfday+":"+minute);
                                                     };
                                                 },mHour,mMinute,false);
-                                                timePickerDialog.setTitle(com.ygaps.travelapp.R.string.chooseTime);
+                                                timePickerDialog.setTitle(R.string.chooseTime);
                                                 timePickerDialog.show();
                                             }
                                         });
@@ -468,32 +468,32 @@ public class Tour_Info extends AppCompatActivity {
                     else
                     {
                         listView_stop_point.setVisibility(View.GONE);
-                        TextView stop_point_placeholder=findViewById(com.ygaps.travelapp.R.id.stop_point_placeholder);
+                        TextView stop_point_placeholder=findViewById(R.id.stop_point_placeholder);
                         stop_point_placeholder.setVisibility(View.VISIBLE);
                     }
 
                     //Xu ly commnt
                     if (arrayComment.size()!=0) {
-                        customAdapterForTourInfo_comment = new CustomAdapterForTourInfo_Comment(Tour_Info.this, com.ygaps.travelapp.R.layout.list_comment_tour_info, arrayComment);
+                        customAdapterForTourInfo_comment = new CustomAdapterForTourInfo_Comment(Tour_Info.this, R.layout.list_comment_tour_info, arrayComment);
                         listView_comment.setAdapter(customAdapterForTourInfo_comment);
                     }
                     else
                     {
                         listView_comment.setVisibility(View.GONE);
-                        TextView comment_placeholder=findViewById(com.ygaps.travelapp.R.id.comment_placeholder);
+                        TextView comment_placeholder=findViewById(R.id.comment_placeholder);
                         comment_placeholder.setVisibility(View.VISIBLE);
                     }
 
                     //Xu ly member
                     if (arrayMember.size()!=0) {
-                        customAdapterForTourInfo_member = new CustomAdapterForTourInfo_Member(Tour_Info.this, com.ygaps.travelapp.R.layout.list_member_tour_info, arrayMember);
+                        customAdapterForTourInfo_member = new CustomAdapterForTourInfo_Member(Tour_Info.this, R.layout.list_member_tour_info, arrayMember);
                         listView_member.setClipToOutline(true);
                         listView_member.setAdapter(customAdapterForTourInfo_member);
                     }
                     else
                     {
                         listView_member.setVisibility(View.GONE);
-                        TextView membeer_placeholder=findViewById(com.ygaps.travelapp.R.id.member_placeholder);
+                        TextView membeer_placeholder=findViewById(R.id.member_placeholder);
                         membeer_placeholder.setVisibility(View.VISIBLE);
                     }
 
@@ -508,15 +508,15 @@ public class Tour_Info extends AppCompatActivity {
     }
 
     private void mapping() {
-        name_tour_info=findViewById(com.ygaps.travelapp.R.id.name_tour_info);
-        date_tour_info=findViewById(com.ygaps.travelapp.R.id.date_tour_info);
-        cost_tour_info=findViewById(com.ygaps.travelapp.R.id.cost_tour_info);
-        adult_tour_info=findViewById(com.ygaps.travelapp.R.id.adult_tour_info);
-        baby_tour_info=findViewById(com.ygaps.travelapp.R.id.baby_tour_info);
-        upload_image_tour_info=findViewById(com.ygaps.travelapp.R.id.upload_image_tour_info);
-        listView_stop_point=findViewById(com.ygaps.travelapp.R.id.list_stop_point_tour_info1);
-        listView_comment=findViewById(com.ygaps.travelapp.R.id.list_comment_tour_info);
-        listView_member=findViewById(com.ygaps.travelapp.R.id.list_member_tour_info);
+        name_tour_info=findViewById(R.id.name_tour_info);
+        date_tour_info=findViewById(R.id.date_tour_info);
+        cost_tour_info=findViewById(R.id.cost_tour_info);
+        adult_tour_info=findViewById(R.id.adult_tour_info);
+        baby_tour_info=findViewById(R.id.baby_tour_info);
+        upload_image_tour_info=findViewById(R.id.upload_image_tour_info);
+        listView_stop_point=findViewById(R.id.list_stop_point_tour_info1);
+        listView_comment=findViewById(R.id.list_comment_tour_info);
+        listView_member=findViewById(R.id.list_member_tour_info);
         stop_point_info=new Dialog(this,android.R.style.Theme_Black_NoTitleBar_Fullscreen);
         update_stop_point=new Dialog(this,android.R.style.Theme_Black_NoTitleBar_Fullscreen);
     }
@@ -536,12 +536,12 @@ public class Tour_Info extends AppCompatActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        EditText address_temp=update_stop_point.findViewById(com.ygaps.travelapp.R.id.addresstext);
-        Button btn_add_address=update_stop_point.findViewById(com.ygaps.travelapp.R.id.btn_new_add);
+        EditText address_temp=update_stop_point.findViewById(R.id.addresstext);
+        Button btn_add_address=update_stop_point.findViewById(R.id.btn_new_add);
         btn_add_address.setVisibility(View.GONE);
         address_temp.setVisibility(View.VISIBLE);
 
-        EditText province_temp=update_stop_point.findViewById(com.ygaps.travelapp.R.id.provincetext);
+        EditText province_temp=update_stop_point.findViewById(R.id.provincetext);
         Bundle bundle=intent.getExtras();
         mNewLat=bundle.getDouble("mNewLat");
         mNewLong=bundle.getDouble("mNewLong");

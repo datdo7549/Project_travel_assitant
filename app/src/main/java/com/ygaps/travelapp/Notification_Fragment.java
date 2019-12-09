@@ -9,13 +9,14 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 
+
 public class Notification_Fragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(com.ygaps.travelapp.R.layout.fragment_notification, container, false);
+        return inflater.inflate(R.layout.fragment_notification, container, false);
     }
 
 

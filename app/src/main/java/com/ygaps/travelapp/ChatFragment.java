@@ -17,11 +17,11 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.ygaps.travelapp.Adapter.CustomAdapter;
 import com.ygaps.travelapp.Model.ListTour;
 import com.ygaps.travelapp.Model.Tour;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,7 +59,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
 
         final MainActivity activity = (MainActivity) getActivity();
-        view=inflater.inflate(com.ygaps.travelapp.R.layout.fragment_chat, container, false);
+        view=inflater.inflate(R.layout.fragment_chat, container, false);
         token = activity.getMyData();
         mapping();
 
@@ -69,7 +69,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
             public void onClick(View v) {
                 Bundle bundle=new Bundle();
                 bundle.putString("token",token);
-                Intent intent=new Intent(getContext(), CreateActivity.class);
+                Intent intent=new Intent(getContext(),CreateActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -81,22 +81,22 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
 
 
     private void mapping() {
-        row=view.findViewById(com.ygaps.travelapp.R.id.rowPerPage);
-        page=view.findViewById(com.ygaps.travelapp.R.id.pageNum);
+        row=view.findViewById(R.id.rowPerPage);
+        page=view.findViewById(R.id.pageNum);
 
-        byname=view.findViewById(com.ygaps.travelapp.R.id.orderBy);
-        ArrayAdapter<CharSequence> adapter_byname = ArrayAdapter.createFromResource(getContext(), com.ygaps.travelapp.R.array.order_by, android.R.layout.simple_spinner_item);
+        byname=view.findViewById(R.id.orderBy);
+        ArrayAdapter<CharSequence> adapter_byname = ArrayAdapter.createFromResource(getContext(), R.array.order_by, android.R.layout.simple_spinner_item);
         adapter_byname.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         byname.setAdapter(adapter_byname);
 
-        isDesc=view.findViewById(com.ygaps.travelapp.R.id.isDesc);
-        ArrayAdapter<CharSequence> adapter_isdesc = ArrayAdapter.createFromResource(getContext(), com.ygaps.travelapp.R.array.is_desc, android.R.layout.simple_spinner_item);
+        isDesc=view.findViewById(R.id.isDesc);
+        ArrayAdapter<CharSequence> adapter_isdesc = ArrayAdapter.createFromResource(getContext(), R.array.is_desc, android.R.layout.simple_spinner_item);
         adapter_isdesc.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         isDesc.setAdapter(adapter_isdesc);
 
-        get=view.findViewById(com.ygaps.travelapp.R.id.getlist);
-        logout=view.findViewById(com.ygaps.travelapp.R.id.logout);
-        createTour=view.findViewById(com.ygaps.travelapp.R.id.create_tour);
+        get=view.findViewById(R.id.getlist);
+        logout=view.findViewById(R.id.logout);
+        createTour=view.findViewById(R.id.create_tour);
         Gson gson=new GsonBuilder().serializeNulls().create();
         Retrofit retrofit=new Retrofit.Builder()
                 .baseUrl(URL)
@@ -130,7 +130,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId())
         {
-            case com.ygaps.travelapp.R.id.getlist:
+            case R.id.getlist:
             {
                 if (!checkEmpty(row, page)) {
                     Toast.makeText(getContext(), "Row or Page is empty", Toast.LENGTH_SHORT).show();
@@ -168,8 +168,8 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                                 arrayList = new ArrayList<>(total);
                                 arrayList = response.body().getTourList();
 
-                                lv = view.findViewById(com.ygaps.travelapp.R.id.listTour);
-                                CustomAdapter arrayAdapternew = new CustomAdapter(getContext(), com.ygaps.travelapp.R.layout.custom_layout_tour_listview, arrayList);
+                                lv = view.findViewById(R.id.listTour);
+                                CustomAdapter arrayAdapternew = new CustomAdapter(getContext(), R.layout.custom_layout_tour_listview, arrayList);
 
                                 lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                     @Override
@@ -179,7 +179,7 @@ public class ChatFragment extends Fragment implements View.OnClickListener {
                                         Bundle bundle=new Bundle();
                                         bundle.putString("tour_id",arrayList.get(position).getId());
                                         bundle.putString("token",token);
-                                        Intent intent=new Intent(getContext(), Tour_Info.class);
+                                        Intent intent=new Intent(getContext(),Tour_Info.class);
                                         intent.putExtras(bundle);
                                         startActivity(intent);
                                     }

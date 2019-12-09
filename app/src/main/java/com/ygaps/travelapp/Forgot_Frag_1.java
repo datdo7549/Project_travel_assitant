@@ -14,10 +14,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.ygaps.travelapp.Model.RequestOTP_Data;
 import com.ygaps.travelapp.Model.RequestOTP_Result;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -61,13 +61,13 @@ public class Forgot_Frag_1 extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootView=inflater.inflate(com.ygaps.travelapp.R.layout.forgot_frag_1,container,false);
+        rootView=inflater.inflate(R.layout.forgot_frag_1,container,false);
         mapping();
         send_requets_OTP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 progressDialog.setTitle("Processing");
-                progressDialog.setMessage("Sendding...");
+                progressDialog.setMessage("Sending...");
                 progressDialog.show();
                 final RequestOTP_Data requestOTP_data=new RequestOTP_Data("email",email_request.getText().toString());
                 Call<RequestOTP_Result> call=jsonPlaceHolderApi.requestOTP(requestOTP_data);
@@ -76,7 +76,7 @@ public class Forgot_Frag_1 extends Fragment {
                     public void onResponse(Call<RequestOTP_Result> call, Response<RequestOTP_Result> response) {
                         if (!response.isSuccessful())
                         {
-                            Toast.makeText(getContext(),"Ko thanh cong",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(),"Sending unsuccessfully",Toast.LENGTH_SHORT).show();
                         }
                         else {
                             progressDialog.dismiss();
@@ -97,14 +97,14 @@ public class Forgot_Frag_1 extends Fragment {
     }
 
     private void mapping() {
-        send_requets_OTP=rootView.findViewById(com.ygaps.travelapp.R.id.send_request_OTP);
+        send_requets_OTP=rootView.findViewById(R.id.send_request_OTP);
         Gson gson=new GsonBuilder().serializeNulls().create();
         Retrofit retrofit=new Retrofit.Builder()
                 .baseUrl(URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         jsonPlaceHolderApi=retrofit.create(JsonPlaceHolderApi.class);
-        email_request=rootView.findViewById(com.ygaps.travelapp.R.id.request_data);
+        email_request=rootView.findViewById(R.id.request_data);
         progressDialog=new ProgressDialog(getContext());
     }
 

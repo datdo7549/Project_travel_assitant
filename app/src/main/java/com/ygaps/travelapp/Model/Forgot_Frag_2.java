@@ -13,12 +13,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.ygaps.travelapp.R;
 import com.ygaps.travelapp.Forgot_Frag_1;
 import com.ygaps.travelapp.JsonPlaceHolderApi;
 import com.ygaps.travelapp.LoginActivity;
+import com.ygaps.travelapp.R;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 

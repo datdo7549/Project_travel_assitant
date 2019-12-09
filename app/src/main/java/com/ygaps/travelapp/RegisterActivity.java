@@ -1,5 +1,7 @@
 package com.ygaps.travelapp;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,14 +14,12 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 import com.ygaps.travelapp.Model.Message;
 import com.ygaps.travelapp.Model.RegisterResult;
 import com.ygaps.travelapp.Model.User_register;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -59,8 +59,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(com.ygaps.travelapp.R.layout.activity_main);
-        setContentView(com.ygaps.travelapp.R.layout.activity_register);
+        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_register);
         mapping();
         register.setOnClickListener(this);
         back.setOnClickListener(this);
@@ -68,19 +68,19 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void mapping() {
-        password = (EditText) findViewById(com.ygaps.travelapp.R.id.password);
-        fullname = (EditText) findViewById(com.ygaps.travelapp.R.id.fullName);
-        email = (EditText) findViewById(com.ygaps.travelapp.R.id.email);
-        phone = (EditText) findViewById(com.ygaps.travelapp.R.id.phone);
-        address = (EditText) findViewById(com.ygaps.travelapp.R.id.address);
-        dob = (EditText) findViewById(com.ygaps.travelapp.R.id.dob);
-        gender = (RadioGroup) findViewById(com.ygaps.travelapp.R.id.gender);
-        genderMale = (RadioButton) findViewById(com.ygaps.travelapp.R.id.radioButton_male);
-        genderFemale = (RadioButton) findViewById(com.ygaps.travelapp.R.id.radioButton_female);
+        password = (EditText) findViewById(R.id.password);
+        fullname = (EditText) findViewById(R.id.fullName);
+        email = (EditText) findViewById(R.id.email);
+        phone = (EditText) findViewById(R.id.phone);
+        address = (EditText) findViewById(R.id.address);
+        dob = (EditText) findViewById(R.id.dob);
+        gender = (RadioGroup) findViewById(R.id.gender);
+        genderMale = (RadioButton) findViewById(R.id.radioButton_male);
+        genderFemale = (RadioButton) findViewById(R.id.radioButton_female);
 
-        back_button = (ImageView) findViewById(com.ygaps.travelapp.R.id.bttBack);
-        register = (Button) findViewById(com.ygaps.travelapp.R.id.register_button);
-        back = (Button) findViewById(com.ygaps.travelapp.R.id.back);
+        back_button = (ImageView) findViewById(R.id.bttBack);
+        register = (Button) findViewById(R.id.register_button);
+        back = (Button) findViewById(R.id.back);
         Gson gson=new GsonBuilder().serializeNulls().create();
         Retrofit retrofit=new Retrofit.Builder()
                 .baseUrl(URL)
@@ -93,7 +93,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId())
         {
-            case com.ygaps.travelapp.R.id.register_button:
+            case R.id.register_button:
             {
                 String mPassword=password.getText().toString();
                 String mFullname=fullname.getText().toString();
@@ -114,17 +114,17 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 }
                 break;
             }
-            case com.ygaps.travelapp.R.id.back:
+            case R.id.back:
             {
                 Bundle bundle=new Bundle();
                 bundle.putString("email",email.getText().toString());
                 bundle.putString("password",password.getText().toString());
-                Intent intent=new Intent(RegisterActivity.this, LoginActivity.class);
+                Intent intent=new Intent(RegisterActivity.this,LoginActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;
             }
-            case com.ygaps.travelapp.R.id.bttBack:
+            case R.id.bttBack:
             {
                 onBackPressed();
                 break;

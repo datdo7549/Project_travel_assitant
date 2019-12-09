@@ -10,8 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.ygaps.travelapp.R;
 import com.ygaps.travelapp.Model.CommentResult_TourInfo;
+import com.ygaps.travelapp.R;
 
 import java.util.ArrayList;
 

@@ -8,6 +8,18 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:paddingTop="35dp"
+        android:paddingRight="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:minHeight="?attr/actionBarSize"
+        android:background="#061161"
+        android:theme="@style/ToolbarTheme"
+        app:titleTextAppearance="@style/Toolbar.TitleText"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        />
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
@@ -48,4 +60,5 @@
             android:layout_height="wrap_content"
             android:icon="@drawable/setting_icon"/>
     </com.google.android.material.tabs.TabLayout>
+
 </LinearLayout>
