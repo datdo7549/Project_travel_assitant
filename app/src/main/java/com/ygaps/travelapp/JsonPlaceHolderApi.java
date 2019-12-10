@@ -8,12 +8,16 @@ import com.ygaps.travelapp.Model.DataGoogleLogin;
 import com.ygaps.travelapp.Model.FacebookLoginResult;
 import com.ygaps.travelapp.Model.Fb_data_login;
 import com.ygaps.travelapp.Model.GoogleLoginResult;
+import com.ygaps.travelapp.Model.InviteMemberData;
+import com.ygaps.travelapp.Model.InviteMember_Result;
 import com.ygaps.travelapp.Model.ListTour;
 import com.ygaps.travelapp.Model.LoginResult;
 import com.ygaps.travelapp.Model.My_Tour_Result;
 import com.ygaps.travelapp.Model.RegisterResult;
 import com.ygaps.travelapp.Model.RequestOTP_Data;
 import com.ygaps.travelapp.Model.RequestOTP_Result;
+import com.ygaps.travelapp.Model.SendTokenFirebaseToServer_Result;
+import com.ygaps.travelapp.Model.SendTokenFirebaseToSever_Data;
 import com.ygaps.travelapp.Model.TourInforResult;
 import com.ygaps.travelapp.Model.UpdateUserInfoData;
 import com.ygaps.travelapp.Model.User_Info_Result;
@@ -77,4 +81,10 @@ public interface JsonPlaceHolderApi {
 
     @POST("user/edit-info")
     Call<VerifyOTP_Result> updateUserInfo(@HeaderMap Map<String,String> headers, @Body UpdateUserInfoData updateUserInfoData);
+
+    @POST("user/notification/put-token")
+    Call<SendTokenFirebaseToServer_Result> sendTokenToServer(@HeaderMap Map<String,String> headers, @Body SendTokenFirebaseToSever_Data sendTokenFirebaseToSever_data);
+
+    @POST("tour/add/member")
+    Call<InviteMember_Result> inviteMember(@HeaderMap Map<String,String> headers, @Body InviteMemberData inviteMemberData);
 }

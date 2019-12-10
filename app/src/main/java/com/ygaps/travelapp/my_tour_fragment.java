@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,7 +28,11 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.ygaps.travelapp.Adapter.CustomAdapter;
+import com.ygaps.travelapp.Model.InviteMemberData;
+import com.ygaps.travelapp.Model.InviteMember_Result;
 import com.ygaps.travelapp.Model.My_Tour_Result;
+import com.ygaps.travelapp.Model.SendTokenFirebaseToServer_Result;
+import com.ygaps.travelapp.Model.SendTokenFirebaseToSever_Data;
 import com.ygaps.travelapp.Model.Tour;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -42,7 +47,6 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.ygaps.travelapp.LoginActivity.URL;
 
 
 public class my_tour_fragment extends Fragment {
@@ -56,7 +60,7 @@ public class my_tour_fragment extends Fragment {
     private Button getMyListTour;
     private Dialog option_get_tour_popup;
     private Button getMyTourPopUp;
-
+    public static final String URL="http://35.197.153.192:3000/";
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -131,12 +135,12 @@ public class my_tour_fragment extends Fragment {
         return true;
     }
     private void loadMyTour(final int a, int b) {
-        Map<String,String> map=new HashMap<>();
+        final Map<String,String> map=new HashMap<>();
         map.put("Authorization",token);
         Call<My_Tour_Result> call=jsonPlaceHolderApi.getMyTour(map,a,b);
         call.enqueue(new Callback<My_Tour_Result>() {
             @Override
-            public void onResponse(Call<My_Tour_Result> call, Response<My_Tour_Result> response) {
+            public void onResponse(final Call<My_Tour_Result> call, Response<My_Tour_Result> response) {
                 if(!response.isSuccessful())
                 {
                     Toast.makeText(getContext(),"Get khong thanh cong",Toast.LENGTH_SHORT).show();
@@ -178,6 +182,7 @@ public class my_tour_fragment extends Fragment {
                             edit_delete.startAnimation(animation);
                             edit_delete.setVisibility(View.VISIBLE);
                             Button edit=view.findViewById(R.id.edit_tour);
+                            Button delete=view.findViewById(R.id.delete_tour);
                             edit.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -192,6 +197,34 @@ public class my_tour_fragment extends Fragment {
                                     startActivity(intent);
                                 }
                             });
+                            delete.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+
+
+
+                                    InviteMemberData inviteData=new InviteMemberData(arrayList.get(position).getId(),"650",true);
+                                    Call<InviteMember_Result> call_1=jsonPlaceHolderApi.inviteMember(map,inviteData);
+                                    call_1.enqueue(new Callback<InviteMember_Result>() {
+                                        @Override
+                                        public void onResponse(Call<InviteMember_Result> call_1, Response<InviteMember_Result> response1) {
+                                            if (!response1.isSuccessful())
+                                            {
+                                                Toast.makeText(getContext(),"Moi member khong thanh cong: "+response1.code()+" "+response1.toString()+arrayList.get(position).getId(),Toast.LENGTH_SHORT).show();
+                                            }
+                                            else
+                                            {
+                                                Toast.makeText(getContext(),"Moi member thanh cong: "+response1.body().getMessage(),Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                        @Override
+                                        public void onFailure(Call<InviteMember_Result> call_1, Throwable t) {
+                                            Toast.makeText(getContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                            });
+
                             return true;
                         }
                     });
@@ -272,5 +305,4 @@ public class my_tour_fragment extends Fragment {
             }
         });
     }
-
 }
