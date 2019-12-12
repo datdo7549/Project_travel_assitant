@@ -59,6 +59,7 @@ public class List_Tour_Fragment extends Fragment  {
     private CustomAdapter arrayAdapternew;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     private String token;
+    private String user_id;
     private ArrayList<Tour> arrayList;
     private View view;
     private Dialog get_tour_pop_up;
@@ -71,6 +72,8 @@ public class List_Tour_Fragment extends Fragment  {
         setHasOptionsMenu(true);
         view=inflater.inflate(R.layout.fragment_list_tour, container, false);
         token = activity.getMyData();
+        user_id=activity.getUser_id();
+        Toast.makeText(getContext(),"Alooo: "+user_id,Toast.LENGTH_SHORT).show();
         mapping();
 
         alo1239();
@@ -256,9 +259,11 @@ public class List_Tour_Fragment extends Fragment  {
                                             Bundle bundle=new Bundle();
                                             bundle.putString("tour_id",arrayList.get(position).getId());
                                             bundle.putString("token",token);
+                                            bundle.putString("user_id_string",user_id);
                                             Intent intent=new Intent(getContext(),Tour_Info.class);
                                             intent.putExtras(bundle);
                                             startActivity(intent);
+
                                         }
                                     });
                                     arrayAdapternew.notifyDataSetChanged();
@@ -312,6 +317,7 @@ public class List_Tour_Fragment extends Fragment  {
                             Bundle bundle=new Bundle();
                             bundle.putString("tour_id",arrayList.get(position).getId());
                             bundle.putString("token",token);
+                            bundle.putString("user_id_string",user_id);
                             Intent intent=new Intent(getContext(),Tour_Info.class);
                             intent.putExtras(bundle);
                             startActivity(intent);

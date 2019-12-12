@@ -28,8 +28,10 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.ygaps.travelapp.Adapter.CustomAdapter;
+import com.ygaps.travelapp.Model.InviteData;
 import com.ygaps.travelapp.Model.InviteMemberData;
 import com.ygaps.travelapp.Model.InviteMember_Result;
+import com.ygaps.travelapp.Model.InviteResult;
 import com.ygaps.travelapp.Model.My_Tour_Result;
 import com.ygaps.travelapp.Model.SendTokenFirebaseToServer_Result;
 import com.ygaps.travelapp.Model.SendTokenFirebaseToSever_Data;
@@ -203,22 +205,25 @@ public class my_tour_fragment extends Fragment {
 
 
 
-                                    InviteMemberData inviteData=new InviteMemberData(arrayList.get(position).getId(),"650",true);
-                                    Call<InviteMember_Result> call_1=jsonPlaceHolderApi.inviteMember(map,inviteData);
-                                    call_1.enqueue(new Callback<InviteMember_Result>() {
+                                    Map<String, String> map = new HashMap<>();
+                                    map.put("Authorization", token);
+
+                                    InviteData inviteData=new InviteData(arrayList.get(position).getId(),"650",false);
+                                    Call<InviteResult> call=jsonPlaceHolderApi.inviteMember(map,inviteData);
+                                    call.enqueue(new Callback<InviteResult>() {
                                         @Override
-                                        public void onResponse(Call<InviteMember_Result> call_1, Response<InviteMember_Result> response1) {
-                                            if (!response1.isSuccessful())
+                                        public void onResponse(Call<InviteResult> call, Response<InviteResult> response) {
+                                            if (!response.isSuccessful())
                                             {
-                                                Toast.makeText(getContext(),"Moi member khong thanh cong: "+response1.code()+" "+response1.toString()+arrayList.get(position).getId(),Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getContext(),"Moi khong thanh cong",Toast.LENGTH_SHORT).show();
                                             }
-                                            else
-                                            {
-                                                Toast.makeText(getContext(),"Moi member thanh cong: "+response1.body().getMessage(),Toast.LENGTH_SHORT).show();
+                                            else {
+                                                Toast.makeText(getContext(),"Moi thanh cong: "+response.body().getMessage(),Toast.LENGTH_SHORT).show();
                                             }
                                         }
+
                                         @Override
-                                        public void onFailure(Call<InviteMember_Result> call_1, Throwable t) {
+                                        public void onFailure(Call<InviteResult> call, Throwable t) {
                                             Toast.makeText(getContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
                                         }
                                     });

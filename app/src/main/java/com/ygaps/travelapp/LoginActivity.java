@@ -145,6 +145,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 progressDialog.dismiss();
                                 Bundle bundle=new Bundle();
                                 bundle.putString("token",response.body().getToken());
+                                bundle.putInt("user_id",response.body().getUserId());
                                 Intent intent=new Intent(LoginActivity.this,MainActivity.class);
                                 intent.putExtras(bundle);
                                 startActivity(intent);
@@ -276,6 +277,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Toast.makeText(LoginActivity.this,"Dang nhap thanh cong",Toast.LENGTH_SHORT).show();
                             Bundle bundle=new Bundle();
                             bundle.putString("token",response.body().getToken());
+                            bundle.putInt("user_id",response.body().getUserId());
                             Intent intent=new Intent(LoginActivity.this,MainActivity.class);
                             intent.putExtras(bundle);
                             startActivity(intent);
@@ -360,6 +362,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 public void onResponse(Call<FacebookLoginResult> call, Response<FacebookLoginResult> response) {
                         Bundle bundle=new Bundle();
                         bundle.putString("token",response.body().getToken());
+                        bundle.putInt("user_id",response.body().getUserId());
                         Intent intent=new Intent(LoginActivity.this,MainActivity.class);
                         intent.putExtras(bundle);
                         startActivity(intent);

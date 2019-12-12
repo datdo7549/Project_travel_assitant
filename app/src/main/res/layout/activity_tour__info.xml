@@ -135,6 +135,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <ListView
+                    android:nestedScrollingEnabled="true"
                     android:descendantFocusability="blocksDescendants"
                     android:divider="@null"
                     android:dividerHeight="13dp"
@@ -153,26 +154,40 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_centerInParent="true"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="30dp"
                 android:id="@+id/ln_main_3"
                 android:orientation="vertical"
                 android:layout_marginLeft="15dp"
                 android:layout_below="@+id/ln_main_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-                <TextView
-                    android:layout_marginBottom="10dp"
-                    android:textColor="#fff"
-                    android:textSize="28dp"
-                    android:text="Danh sách các bình luận"
+                <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="#fff"
+                        android:textSize="28dp"
+                        android:text="Danh sách các bình luận"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:id="@+id/add_comment_of_user"
+                        android:layout_marginLeft="20dp"
+                        android:src="@drawable/add"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"/>
+                </LinearLayout>
+
                 <ListView
-                    android:divider="@null"
+                    android:nestedScrollingEnabled="true"
+                    android:focusable="true"
                     android:dividerHeight="13dp"
                     android:id="@+id/list_comment_tour_info"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="213dp">
                 </ListView>
                 <TextView
                     android:textColor="#fff"
@@ -185,7 +200,7 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_centerInParent="true"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="30dp"
                 android:id="@+id/ln_main_4"
                 android:orientation="vertical"
                 android:layout_marginLeft="15dp"
@@ -200,6 +215,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <ListView
+                    android:nestedScrollingEnabled="true"
                     android:divider="@null"
                     android:dividerHeight="13dp"
                     android:id="@+id/list_member_tour_info"
@@ -212,6 +228,51 @@
                     android:id="@+id/member_placeholder"
                     android:layout_gravity="center"
                     android:text="Hiện tại tour không có thành viên nào "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_centerInParent="true"
+                android:layout_marginTop="30dp"
+                android:id="@+id/ln_main_5"
+                android:orientation="vertical"
+                android:layout_marginLeft="15dp"
+                android:layout_below="@+id/ln_main_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textColor="#fff"
+                        android:textSize="28dp"
+                        android:text="Rating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:layout_gravity="center_vertical"
+                        android:id="@+id/add_rating"
+                        android:layout_marginLeft="20dp"
+                        android:src="@drawable/add"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"/>
+                </LinearLayout>
+
+                <ListView
+                    android:divider="@null"
+                    android:dividerHeight="13dp"
+                    android:id="@+id/list_rating_tour_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </ListView>
+                <TextView
+                    android:textColor="#fff"
+                    android:visibility="gone"
+                    android:id="@+id/rating_placeholder"
+                    android:layout_gravity="center"
+                    android:text="Hiện tại tour không có rating nào "
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>

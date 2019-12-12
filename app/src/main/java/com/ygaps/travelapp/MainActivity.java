@@ -34,6 +34,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
 
     private String myString="Helooooo";
+    private String user_id="";
     Toolbar toolbar;
     TabLayout tabLayout;
     ViewPager viewPager;
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         jsonPlaceHolderApi=retrofit.create(JsonPlaceHolderApi.class);
         Bundle bundle=getIntent().getExtras();
         String token=bundle.getString("token");
+        int user_id_temp=bundle.getInt("user_id");
 
 
 
@@ -84,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
         actionBar = getSupportActionBar();
         actionBar.setTitle("All tour");
         myString=token;
+        user_id=user_id_temp+"";
+        Toast.makeText(getApplicationContext(),"User id la: "+user_id+" dung khong",Toast.LENGTH_SHORT).show();
         tabLayout = findViewById(R.id.tablayout);
         tabMenu = findViewById(R.id.tabMenu);
         tabMyTour = findViewById(R.id.tabMyTour);
@@ -131,9 +135,11 @@ public class MainActivity extends AppCompatActivity {
         return myString;
     }
 
+    public String getUser_id() {
+        return user_id;
+    }
 
-
-    public void sendTokenToServer(String token_user,String token_firebase)
+    public void sendTokenToServer(String token_user, String token_firebase)
     {
         String device_id= Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
         Map<String, String> map = new HashMap<>();
