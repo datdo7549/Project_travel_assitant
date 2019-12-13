@@ -37,13 +37,13 @@
             android:saveEnabled="true"
             android:numStars="5"/>
         <EditText
-            android:hint="Nhập đánh giá"
+            android:hint="Enter review"
             android:background="#fff"
             android:id="@+id/review_edit_rating"
             android:layout_width="match_parent"
             android:layout_height="200dp"/>
         <Button
-            android:text="Send rating"
+            android:text="Send"
             android:layout_gravity="center"
             android:id="@+id/send_rating"
             android:layout_width="wrap_content"

@@ -76,7 +76,7 @@ public class Forgot_Frag_1 extends Fragment {
                     public void onResponse(Call<RequestOTP_Result> call, Response<RequestOTP_Result> response) {
                         if (!response.isSuccessful())
                         {
-                            Toast.makeText(getContext(),"Sending unsuccessfully",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(),"Sending failed",Toast.LENGTH_SHORT).show();
                         }
                         else {
                             progressDialog.dismiss();

@@ -207,7 +207,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     public void onResponse(Call<GGreesult> call, Response<GGreesult> response) {
                         if(!response.isSuccessful())
                         {
-                            Toast.makeText(LoginActivity.this,"Dang nhap google khong thanh cong",Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this,"Login by Google failed",Toast.LENGTH_LONG).show();
                         }
                         else
                         {
@@ -219,11 +219,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 public void onResponse(Call<GoogleLoginResult> call, Response<GoogleLoginResult> response) {
                                     if(!response.isSuccessful())
                                     {
-                                        Toast.makeText(LoginActivity.this,"Dang nhap google khong thanh cong",Toast.LENGTH_LONG).show();
+                                        Toast.makeText(LoginActivity.this,"Login by Google failed",Toast.LENGTH_LONG).show();
                                     }
                                     else
                                     {
-                                        Toast.makeText(LoginActivity.this,"Dang nhap google thanh cong",Toast.LENGTH_LONG).show();
+                                        Toast.makeText(LoginActivity.this,"Login by Google successfully",Toast.LENGTH_LONG).show();
                                         Bundle bundle=new Bundle();
                                         bundle.putString("token",response.body().getToken());
                                         Intent intent=new Intent(LoginActivity.this,MainActivity.class);
@@ -274,7 +274,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             }
                         }
                         else{
-                            Toast.makeText(LoginActivity.this,"Dang nhap thanh cong",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this,"Login successfully",Toast.LENGTH_SHORT).show();
                             Bundle bundle=new Bundle();
                             bundle.putString("token",response.body().getToken());
                             bundle.putInt("user_id",response.body().getUserId());

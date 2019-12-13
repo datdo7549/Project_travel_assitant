@@ -117,7 +117,7 @@ public class my_tour_fragment extends Fragment {
                                 }
                                 else
                                 {
-                                    Toast.makeText(getContext(),"Vui lòng điền đủ thông tin",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(),"Input full info please",Toast.LENGTH_SHORT).show();
                                 }
 
                             }
@@ -145,7 +145,7 @@ public class my_tour_fragment extends Fragment {
             public void onResponse(final Call<My_Tour_Result> call, Response<My_Tour_Result> response) {
                 if(!response.isSuccessful())
                 {
-                    Toast.makeText(getContext(),"Get khong thanh cong",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),"Get failed",Toast.LENGTH_SHORT).show();
 
                 }
                 else
@@ -215,10 +215,10 @@ public class my_tour_fragment extends Fragment {
                                         public void onResponse(Call<InviteResult> call, Response<InviteResult> response) {
                                             if (!response.isSuccessful())
                                             {
-                                                Toast.makeText(getContext(),"Moi khong thanh cong",Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getContext(),"Invite failed",Toast.LENGTH_SHORT).show();
                                             }
                                             else {
-                                                Toast.makeText(getContext(),"Moi thanh cong: "+response.body().getMessage(),Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getContext(),"Invite successfully: "+response.body().getMessage(),Toast.LENGTH_SHORT).show();
                                             }
                                         }
 

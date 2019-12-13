@@ -17,7 +17,7 @@
                 android:textColor="#000"
                 android:textSize="25sp"
                 android:layout_gravity="center"
-                android:text="Nhập comment"
+                android:text="Comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <ImageView
@@ -33,11 +33,12 @@
             android:id="@+id/comment_edit_text"
             android:layout_width="match_parent"
             android:layout_height="200dp"/>
+
         <Button
             android:id="@+id/send_comment_btn"
-            android:layout_gravity="center"
-            android:text="Send comment"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Send" />
     </LinearLayout>
 </RelativeLayout>

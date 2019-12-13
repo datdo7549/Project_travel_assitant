@@ -178,9 +178,9 @@ public class Setting_Fragment extends Fragment {
                             @Override
                             public void onResponse(Call<VerifyOTP_Result> call, Response<VerifyOTP_Result> response) {
                                 if (!response.isSuccessful()) {
-                                    Toast.makeText(getContext(), "Cap nhat thong tin khong thanh cong", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), "Update user information failed", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    Toast.makeText(getContext(), "Cap nhat thong tin thanh cong", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), "Update user information successfully", Toast.LENGTH_SHORT).show();
                                 }
                             }
 
@@ -234,12 +234,12 @@ public class Setting_Fragment extends Fragment {
                                     }
                                     else
                                     {
-                                        Toast.makeText(getContext(),"Loi",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getContext(),"Error",Toast.LENGTH_SHORT).show();
                                     }
                                 }
                                 else
                                 {
-                                    Toast.makeText(getContext(),"Cap nhap mat khau thanh cong",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(),"Update password  successfully",Toast.LENGTH_SHORT).show();
 
                                 }
                             }

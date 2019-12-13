@@ -87,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setTitle("All tour");
         myString=token;
         user_id=user_id_temp+"";
-        Toast.makeText(getApplicationContext(),"User id la: "+user_id+" dung khong",Toast.LENGTH_SHORT).show();
         tabLayout = findViewById(R.id.tablayout);
         tabMenu = findViewById(R.id.tabMenu);
         tabMyTour = findViewById(R.id.tabMyTour);
@@ -153,11 +152,11 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<SendTokenFirebaseToServer_Result> call, Response<SendTokenFirebaseToServer_Result> response) {
                 if (!response.isSuccessful())
                 {
-                    Toast.makeText(getApplicationContext(),"Gui token len server khong thanh cong",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Send token failed",Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
-                    Toast.makeText(getApplicationContext(),"Gui token len server thanh cong",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Send token successfully",Toast.LENGTH_SHORT).show();
                 }
             }
             @Override

@@ -212,9 +212,9 @@ public class CreateActivity extends AppCompatActivity {
                                 @Override
                                 public void onResponse(Call<Create_Tour_Result> call, Response<Create_Tour_Result> response) {
                                     if (!response.isSuccessful()) {
-                                        Toast.makeText(CreateActivity.this, "Ko thanh cong", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(CreateActivity.this, "Failed", Toast.LENGTH_SHORT).show();
                                     } else {
-                                        Toast.makeText(CreateActivity.this, "Thanh cong", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(CreateActivity.this, "Successfully", Toast.LENGTH_SHORT).show();
                                     }
                                 }
 
@@ -233,12 +233,10 @@ public class CreateActivity extends AppCompatActivity {
                                 @Override
                                 public void onResponse(Call<Create_Tour_Result> call, Response<Create_Tour_Result> response) {
                                     if (!response.isSuccessful()) {
-                                        Toast.makeText(CreateActivity.this, "Khong thanh cong", Toast.LENGTH_SHORT).show();
-                                        Log.d("CREATE_TOUR", "Ko Thanh Cong");
+                                        Toast.makeText(CreateActivity.this, "Failed", Toast.LENGTH_SHORT).show();
                                     } else {
-                                        Toast.makeText(CreateActivity.this, "Thanh cong", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(CreateActivity.this, "Successfully", Toast.LENGTH_SHORT).show();
                                         ID = response.body().getId();
-                                        Log.d("CREATE_TOUR", "Thanh Cong" + ID);
                                         Bundle bundle = new Bundle();
                                         bundle.putString("token", token);
                                         bundle.putInt("ID", ID);
@@ -256,25 +254,22 @@ public class CreateActivity extends AppCompatActivity {
                         }
 
                     } else {
-                        Toast.makeText(CreateActivity.this, "Vui lòng nhập đầy đủ thông tin về tour", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CreateActivity.this, "Please fill all information", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(getApplicationContext(), "Googleplay service khong hoat dong, vui long thu lai", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "GooglePlay service does not worked, please try again later", Toast.LENGTH_SHORT).show();
                 }
 
             }
         });
     }
     private boolean isServicesOK() {
-        Log.d(TAG, "isServicesOK: checking google services version");
         int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(CreateActivity.this);
         if (available == ConnectionResult.SUCCESS) {
             //everything is fine and the user can make map requests
-            Log.d(TAG, "isServicesOK: Google Play Service is working");
             return true;
         } else if (GoogleApiAvailability.getInstance().isUserResolvableError(available)) {
             //an error occured but we can resolve it
-            Log.d(TAG, "isServiceOK: an error occured but we can fix it");
             Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(CreateActivity.this, available, ERROR_DIALOG_REQUEST);
             dialog.show();
         } else {

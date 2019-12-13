@@ -16,7 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.ygaps.travelapp.Temp"></activity>
+        <!--<activity android:name="com.ygaps.travelapp.Temp"></activity>-->
         <activity android:name="com.ygaps.travelapp.ForgotActivity" />
         <activity android:name="com.ygaps.travelapp.Tour_Info" android:launchMode="singleTask" />
 

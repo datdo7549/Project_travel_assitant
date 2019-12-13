@@ -42,7 +42,7 @@
     <string name="facebook_login_protocol_scheme">fb2492860950832329</string>
     <string name="server_client_id">827444390877-bsuer8sr7nu42ed3pehntbn33s3ob5rh.apps.googleusercontent.com</string>
     <string name="google_maps_API_key">AIzaSyCk38hqa7wd1d9OUwDBFX59kbcMeZhRTdM</string>
-    <string name="edit">Ấn vào để sửa</string>
-    <string name="choose">Chọn ngày tháng</string>
-    <string name="chooseTime">Chọn giờ</string>
+    <string name="edit">Press to edit</string>
+    <string name="choose">Choose date</string>
+    <string name="chooseTime">Choose time</string>
 </resources>

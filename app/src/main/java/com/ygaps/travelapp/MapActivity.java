@@ -443,18 +443,19 @@ public class MapActivity extends AppCompatActivity {
                 list_stop_point_selected_dialog.show();
                 CustomAdapterForListStopPoint customAdapterForListStopPoint;
                 ListView listView_stop_point=list_stop_point_selected_dialog.findViewById(R.id.list_stop_point_list_view);
+                ImageView exit= list_stop_point_selected_dialog.findViewById(R.id.exit_list_stop_point_review);
+                exit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        list_stop_point_selected_dialog.dismiss();
+                    }
+                });
                 if (arrayListStopPoint.size()!=0)
                 {
                     customAdapterForListStopPoint=new CustomAdapterForListStopPoint(list_stop_point_selected_dialog.getContext(),R.layout.list_stop_point_tour_info,arrayListStopPoint);
                     listView_stop_point.setAdapter(customAdapterForListStopPoint);
                     Button add_sp=list_stop_point_selected_dialog.findViewById(R.id.add_list_stop_point_to_tour);
-                    ImageView exit=list_stop_point_selected_dialog.findViewById(R.id.exit_list_stop_point_review);
-                    exit.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            list_stop_point_selected_dialog.dismiss();
-                        }
-                    });
+
                     add_sp.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

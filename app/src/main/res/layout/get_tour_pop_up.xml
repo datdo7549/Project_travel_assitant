@@ -9,70 +9,77 @@
         android:background="@drawable/item_cus_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-       <LinearLayout
+       <RelativeLayout
            android:layout_marginTop="10dp"
            android:layout_marginLeft="20dp"
-           android:layout_marginRight="20dp"
            android:orientation="horizontal"
            android:layout_width="match_parent"
            android:layout_height="wrap_content">
            <TextView
+               android:layout_alignParentLeft="true"
+               android:layout_centerVertical="true"
                android:textColor="#fff"
                android:textSize="20sp"
-               android:text="Nhập số dòng:"
+               android:text="Enter row:"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"/>
            <EditText
+               android:layout_alignParentRight="true"
+               android:layout_marginRight="80dp"
                android:id="@+id/rowPerPage"
                android:inputType="number"
-               android:layout_marginLeft="20dp"
-               android:hint="vd:123"
+               android:hint="exp: 123"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"/>
-       </LinearLayout>
+       </RelativeLayout>
 
-       <LinearLayout
+       <RelativeLayout
             android:layout_marginTop="5dp"
             android:layout_marginLeft="20dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
                 android:textColor="#fff"
                 android:textSize="20sp"
-                android:text="Nhập số trang:"
+                android:text="Enter page:"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <EditText
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="80dp"
                 android:id="@+id/pageNum"
                 android:inputType="number"
-                android:layout_marginLeft="20dp"
-                android:hint="vd:123"
+                android:hint="exp: 123"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
-        </LinearLayout>
+        </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_marginTop="5dp"
             android:layout_marginLeft="20dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
                 android:textColor="#fff"
                 android:textSize="20sp"
-                android:text="Sắp xếp theo:"
+                android:text="Sort:"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <Spinner
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="80dp"
                 android:id="@+id/orderBy"
                 android:inputType="number"
-                android:layout_marginLeft="32dp"
-                android:hint="vd:123"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
-        </LinearLayout>
-        <LinearLayout
+        </RelativeLayout>
+        <RelativeLayout
             android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
             android:layout_marginBottom="20dp"
@@ -80,19 +87,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
                 android:textColor="#fff"
                 android:textSize="20sp"
-                android:text="Tăng/giảm:"
+                android:text="Asc/ Desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <Spinner
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="80dp"
                 android:id="@+id/isDesc"
                 android:inputType="number"
-                android:layout_marginLeft="47dp"
-                android:hint="vd:123"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
-        </LinearLayout>
+        </RelativeLayout>
         <Button
             android:layout_gravity="center"
             android:id="@+id/button_get_tour"

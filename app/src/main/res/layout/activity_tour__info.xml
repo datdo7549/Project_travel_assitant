@@ -131,7 +131,7 @@
                     android:layout_marginBottom="10dp"
                     android:textColor="#fff"
                     android:textSize="28dp"
-                    android:text="Danh sách các điểm dừng"
+                    android:text="Stoppoint(s)"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <ListView
@@ -148,7 +148,7 @@
                     android:visibility="gone"
                     android:id="@+id/stop_point_placeholder"
                     android:layout_gravity="center"
-                    android:text="Hiện tại tour không có điểm dừng nào "
+                    android:text="There is no stoppoint currently"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
@@ -170,7 +170,7 @@
                         android:layout_marginBottom="10dp"
                         android:textColor="#fff"
                         android:textSize="28dp"
-                        android:text="Danh sách các bình luận"
+                        android:text="Comment(s)"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                     <ImageView
@@ -194,7 +194,7 @@
                     android:visibility="gone"
                     android:id="@+id/comment_placeholder"
                     android:layout_gravity="center"
-                    android:text="Hiện tại tour không có bình luận nào "
+                    android:text="There is no comment currently"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
@@ -211,7 +211,7 @@
                     android:layout_marginBottom="10dp"
                     android:textColor="#fff"
                     android:textSize="28dp"
-                    android:text="Danh sách các thành viên"
+                    android:text="Member(s)"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <ListView
@@ -227,7 +227,7 @@
                     android:visibility="gone"
                     android:id="@+id/member_placeholder"
                     android:layout_gravity="center"
-                    android:text="Hiện tại tour không có thành viên nào "
+                    android:text="There is no member currently"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
@@ -272,14 +272,10 @@
                     android:visibility="gone"
                     android:id="@+id/rating_placeholder"
                     android:layout_gravity="center"
-                    android:text="Hiện tại tour không có rating nào "
+                    android:text="There is no rating currently"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
-
-
         </RelativeLayout>
-
-
     </ScrollView>
 </RelativeLayout>
