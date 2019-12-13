@@ -39,6 +39,7 @@ import com.ygaps.travelapp.Model.Add_Stop_Point_Data;
 import com.ygaps.travelapp.Model.Add_Stop_Point_Result;
 import com.ygaps.travelapp.Model.CommentResult_TourInfo;
 import com.ygaps.travelapp.Model.Member;
+import com.ygaps.travelapp.Model.RemoveStopPointResult;
 import com.ygaps.travelapp.Model.SendCommentData;
 import com.ygaps.travelapp.Model.SendCommentResult;
 import com.ygaps.travelapp.Model.SendRatingData;
@@ -473,7 +474,28 @@ public class Tour_Info extends AppCompatActivity {
                                 stop_point_delete.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        Toast.makeText(getApplicationContext(), "Delete", Toast.LENGTH_SHORT).show();
+                                        Map<String, String> map = new HashMap<>();
+                                        map.put("Authorization", token);
+                                        Call<RemoveStopPointResult> call_3=jsonPlaceHolderApi.removeStopPoint(map,stopPointResult_tourInfo.get(position).getId()+"");
+                                        call_3.enqueue(new Callback<RemoveStopPointResult>() {
+                                            @Override
+                                            public void onResponse(Call<RemoveStopPointResult> call, Response<RemoveStopPointResult> response) {
+                                                if (!response.isSuccessful())
+                                                {
+                                                    Toast.makeText(getApplicationContext(),"Xoa diem dung khong thanh cong",Toast.LENGTH_SHORT).show();
+                                                }
+                                                else{
+                                                    Toast.makeText(getApplicationContext(),"Xoa diem dung thanh cong",Toast.LENGTH_SHORT).show();
+                                                    finish();
+                                                    startActivity(getIntent());
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onFailure(Call<RemoveStopPointResult> call, Throwable t) {
+                                                Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
                                     }
                                 });
                                 return true;
@@ -523,6 +545,13 @@ public class Tour_Info extends AppCompatActivity {
                 send_comment_popup.setContentView(R.layout.send_comment_popup);
                 final EditText comment = send_comment_popup.findViewById(R.id.comment_edit_text);
                 Button send_comment = send_comment_popup.findViewById(R.id.send_comment_btn);
+                ImageView exit=send_comment_popup.findViewById(R.id.exit_comment);
+                exit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        send_comment_popup.dismiss();
+                    }
+                });
                 send_comment.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -539,6 +568,8 @@ public class Tour_Info extends AppCompatActivity {
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Gui comment thanh cong", Toast.LENGTH_SHORT).show();
                                     send_comment_popup.dismiss();
+                                    finish();
+                                    startActivity(getIntent());
                                 }
                             }
 
@@ -550,8 +581,6 @@ public class Tour_Info extends AppCompatActivity {
                     }
                 });
                 send_comment_popup.show();
-
-
             }
         });
 
@@ -561,6 +590,13 @@ public class Tour_Info extends AppCompatActivity {
                 send_rating_popup.setContentView(R.layout.add_rating_popup);
                 final EditText rating_text=send_rating_popup.findViewById(R.id.review_edit_rating);
                 Button send_rating=send_rating_popup.findViewById(R.id.send_rating);
+                ImageView exit=send_rating_popup.findViewById(R.id.exit_rating);
+                exit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        send_rating_popup.dismiss();
+                    }
+                });
                 final RatingBar ratingBar=send_rating_popup.findViewById(R.id.rating_point);
                 send_rating_popup.show();
                 send_rating.setOnClickListener(new View.OnClickListener() {
@@ -582,6 +618,8 @@ public class Tour_Info extends AppCompatActivity {
                                 else {
                                     Toast.makeText(getApplicationContext(),"Gui danh gia thanh cong",Toast.LENGTH_SHORT).show();
                                     send_rating_popup.dismiss();
+                                    finish();
+                                    startActivity(getIntent());
                                 }
                             }
 

@@ -25,6 +25,8 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.ygaps.travelapp.Model.UpdatePasswordData;
+import com.ygaps.travelapp.Model.UpdatePasswordResult;
 import com.ygaps.travelapp.Model.UpdateUserInfoData;
 import com.ygaps.travelapp.Model.User_Info_Result;
 import com.ygaps.travelapp.Model.VerifyOTP_Result;
@@ -55,9 +57,11 @@ public class Setting_Fragment extends Fragment {
     private ImageView imageView;
     private TextView nameUser, emailUser, phoneUser, addressUser, dobUser, genderUser, emailVer, phoneVer;
     private String token;
+    private int user_id;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     private View view;
     private Dialog upadte_user_info_dialog;
+    private Dialog upadte_user_password_dialog;
     private String temp_date;
     private Date date;
 
@@ -68,6 +72,7 @@ public class Setting_Fragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_setting, container, false);
         final MainActivity activity = (MainActivity) getActivity();
         token = activity.getMyData();
+        user_id=Integer.parseInt(activity.getUser_id());
         mapping();
         getUserInfo();
 
@@ -101,8 +106,6 @@ public class Setting_Fragment extends Fragment {
                 startActivity(intent);
 
 
-
-
                 break;
             }
             case R.id.update_info: {
@@ -117,13 +120,17 @@ public class Setting_Fragment extends Fragment {
                 final RadioButton genderFemale = upadte_user_info_dialog.findViewById(R.id.radioButton_female_update);
                 ImageButton dob = upadte_user_info_dialog.findViewById(R.id.dob_update);
                 Button btn_upadte = upadte_user_info_dialog.findViewById(R.id.btn_update_info);
-
+                ImageView exit = upadte_user_info_dialog.findViewById(R.id.exit_update_info);
+                exit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        upadte_user_info_dialog.dismiss();
+                    }
+                });
 
                 dob.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
-
                         final Calendar cal = Calendar.getInstance();
                         int mDay = cal.get(Calendar.DAY_OF_MONTH);
                         int mMonth = cal.get(Calendar.MONTH);
@@ -132,7 +139,7 @@ public class Setting_Fragment extends Fragment {
                         DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
-                                temp_date=(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                                temp_date = (dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                             }
 
 
@@ -165,24 +172,22 @@ public class Setting_Fragment extends Fragment {
 
                         Map<String, String> map = new HashMap<>();
                         map.put("Authorization", token);
-                        UpdateUserInfoData updateUserInfoData = new UpdateUserInfoData(mFullName,mEmail,mPhone,mGender,date);
-                        Call<VerifyOTP_Result> call=jsonPlaceHolderApi.updateUserInfo(map,updateUserInfoData);
+                        UpdateUserInfoData updateUserInfoData = new UpdateUserInfoData(mFullName, mEmail, mPhone, mGender, date);
+                        Call<VerifyOTP_Result> call = jsonPlaceHolderApi.updateUserInfo(map, updateUserInfoData);
                         call.enqueue(new Callback<VerifyOTP_Result>() {
                             @Override
                             public void onResponse(Call<VerifyOTP_Result> call, Response<VerifyOTP_Result> response) {
-                                if (!response.isSuccessful())
-                                {
-                                    Toast.makeText(getContext(),"ko thanh cong",Toast.LENGTH_SHORT).show();
-                                }
-                                else
-                                {
-                                    Toast.makeText(getContext()," thanh cong"+mFullName+" "+mEmail+date.toString(),Toast.LENGTH_SHORT).show();
+                                if (!response.isSuccessful()) {
+                                    Toast.makeText(getContext(), "Cap nhat thong tin khong thanh cong", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(getContext(), "Cap nhat thong tin thanh cong", Toast.LENGTH_SHORT).show();
                                 }
                             }
 
                             @Override
                             public void onFailure(Call<VerifyOTP_Result> call, Throwable t) {
 
+                                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -190,11 +195,62 @@ public class Setting_Fragment extends Fragment {
                 upadte_user_info_dialog.show();
 
 
-
                 break;
             }
             case R.id.update_password: {
-                Toast.makeText(getContext(), "Update password", Toast.LENGTH_SHORT).show();
+                upadte_user_password_dialog.setContentView(R.layout.update_password_popup);
+                Button update_password=upadte_user_password_dialog.findViewById(R.id.btn_update_password);
+                ImageView exit=upadte_user_password_dialog.findViewById(R.id.exit_update_password);
+                final EditText curr_password=upadte_user_password_dialog.findViewById(R.id.current_password);
+                final EditText new_password=upadte_user_password_dialog.findViewById(R.id.new_password);
+                exit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        upadte_user_password_dialog.dismiss();
+                    }
+                });
+                update_password.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Map<String, String> map = new HashMap<>();
+                        map.put("Authorization", token);
+                        String cur_pass=curr_password.getText().toString();
+                        String new_pass=new_password.getText().toString();
+                        UpdatePasswordData updatePasswordData=new UpdatePasswordData(user_id,cur_pass,new_pass);
+
+                        Call<UpdatePasswordResult> call=jsonPlaceHolderApi.updatePassword(map,updatePasswordData);
+                        call.enqueue(new Callback<UpdatePasswordResult>() {
+                            @Override
+                            public void onResponse(Call<UpdatePasswordResult> call, Response<UpdatePasswordResult> response) {
+                                if (!response.isSuccessful())
+                                {
+                                    if (response.code()==400)
+                                    {
+                                        Toast.makeText(getContext(),"Current password is wrong",Toast.LENGTH_SHORT).show();
+                                    }
+                                    else if (response.code()==404)
+                                    {
+                                        Toast.makeText(getContext(),"EMAIL/PHONE doesn't exist",Toast.LENGTH_SHORT).show();
+                                    }
+                                    else
+                                    {
+                                        Toast.makeText(getContext(),"Loi",Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                                else
+                                {
+                                    Toast.makeText(getContext(),"Cap nhap mat khau thanh cong",Toast.LENGTH_SHORT).show();
+
+                                }
+                            }
+                            @Override
+                            public void onFailure(Call<UpdatePasswordResult> call, Throwable t) {
+                                Toast.makeText(getContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+                upadte_user_password_dialog.show();
                 break;
             }
         }
@@ -219,7 +275,7 @@ public class Setting_Fragment extends Fragment {
 
 
                     addressUser.setText((user_info_result.getAddress() == null) ? "Chưa cập nhật" : user_info_result.getAddress());
-                    dobUser.setText((user_info_result.getDob() == null) ? "Chưa cập nhật" : user_info_result.getDob().substring(0,10));
+                    dobUser.setText((user_info_result.getDob() == null) ? "Chưa cập nhật" : user_info_result.getDob().substring(0, 10));
 
                     if (user_info_result.getGender() == 0) {
                         genderUser.setText("Male");
@@ -267,6 +323,10 @@ public class Setting_Fragment extends Fragment {
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
         upadte_user_info_dialog = new Dialog(getContext(), android.R.style.Theme_Black_NoTitleBar_Fullscreen);
         upadte_user_info_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        upadte_user_password_dialog = new Dialog(getContext(), android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+        upadte_user_password_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
     }
 
 

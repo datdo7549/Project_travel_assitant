@@ -16,6 +16,7 @@ import com.ygaps.travelapp.Model.ListTour;
 import com.ygaps.travelapp.Model.LoginResult;
 import com.ygaps.travelapp.Model.My_Tour_Result;
 import com.ygaps.travelapp.Model.RegisterResult;
+import com.ygaps.travelapp.Model.RemoveStopPointResult;
 import com.ygaps.travelapp.Model.RequestOTP_Data;
 import com.ygaps.travelapp.Model.RequestOTP_Result;
 import com.ygaps.travelapp.Model.SendCommentData;
@@ -25,6 +26,8 @@ import com.ygaps.travelapp.Model.SendRatingResult;
 import com.ygaps.travelapp.Model.SendTokenFirebaseToServer_Result;
 import com.ygaps.travelapp.Model.SendTokenFirebaseToSever_Data;
 import com.ygaps.travelapp.Model.TourInforResult;
+import com.ygaps.travelapp.Model.UpdatePasswordData;
+import com.ygaps.travelapp.Model.UpdatePasswordResult;
 import com.ygaps.travelapp.Model.UpdateUserInfoData;
 import com.ygaps.travelapp.Model.User_Info_Result;
 import com.ygaps.travelapp.Model.User_login;
@@ -99,5 +102,11 @@ public interface JsonPlaceHolderApi {
 
     @POST("tour/add/review")
     Call<SendRatingResult> sendRating(@HeaderMap Map<String,String> headers, @Body SendRatingData sendRatingData);
+
+    @GET("tour/remove-stop-point")
+    Call<RemoveStopPointResult> removeStopPoint(@HeaderMap Map<String,String> headers,@Query("stopPointId") String stopPointId);
+
+    @POST("user/update-password")
+    Call<UpdatePasswordResult> updatePassword(@HeaderMap Map<String,String> headers, @Body UpdatePasswordData updatePasswordData);
 
 }
