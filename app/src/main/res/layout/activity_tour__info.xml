@@ -119,19 +119,19 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_centerInParent="true"
                 android:id="@+id/ln_main_2"
                 android:orientation="vertical"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
                 android:layout_below="@+id/ln_main_1"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
                     android:layout_marginBottom="10dp"
                     android:textColor="#fff"
                     android:textSize="28dp"
-                    android:text="Stoppoint(s)"
+                    android:text="Stoppoint"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <ListView
@@ -153,13 +153,13 @@
                     android:layout_height="wrap_content"/>
             </LinearLayout>
             <LinearLayout
-                android:layout_centerInParent="true"
                 android:layout_marginTop="30dp"
                 android:id="@+id/ln_main_3"
                 android:orientation="vertical"
                 android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:layout_below="@+id/ln_main_2"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <LinearLayout
                     android:orientation="horizontal"
@@ -170,7 +170,7 @@
                         android:layout_marginBottom="10dp"
                         android:textColor="#fff"
                         android:textSize="28dp"
-                        android:text="Comment(s)"
+                        android:text="Comment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                     <ImageView
@@ -204,35 +204,24 @@
                 android:id="@+id/ln_main_4"
                 android:orientation="vertical"
                 android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:layout_below="@+id/ln_main_3"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <LinearLayout
-                    android:layout_gravity="center_vertical"
-                    android:orientation="horizontal"
+                <TextView
+                    android:layout_marginBottom="10dp"
+                    android:textColor="#fff"
+                    android:textSize="28dp"
+                    android:text="Member"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_marginBottom="10dp"
-                        android:textColor="#fff"
-                        android:textSize="28dp"
-                        android:text="Member(s)"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <ImageView
-                        android:id="@+id/add_member"
-                        android:src="@drawable/add"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"/>
-                </LinearLayout>
-
+                    android:layout_height="wrap_content"/>
                 <ListView
                     android:nestedScrollingEnabled="true"
                     android:divider="@null"
                     android:dividerHeight="13dp"
                     android:id="@+id/list_member_tour_info"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="213dp">
                 </ListView>
                 <TextView
                     android:textColor="#fff"
@@ -244,13 +233,13 @@
                     android:layout_height="wrap_content"/>
             </LinearLayout>
             <LinearLayout
-                android:layout_centerInParent="true"
                 android:layout_marginTop="30dp"
                 android:id="@+id/ln_main_5"
                 android:orientation="vertical"
                 android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:layout_below="@+id/ln_main_4"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <LinearLayout
                     android:layout_gravity="center_vertical"
@@ -277,7 +266,7 @@
                     android:dividerHeight="13dp"
                     android:id="@+id/list_rating_tour_info"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="213dp">
                 </ListView>
                 <TextView
                     android:textColor="#fff"
