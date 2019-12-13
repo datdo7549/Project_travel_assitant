@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         tabNotification=findViewById(R.id.tabNotification);
         tabSetting=findViewById(R.id.tabSetting);
         viewPager = findViewById(R.id.viewPager);
-
+        Toast.makeText(getApplicationContext(),"User id ne: "+user_id,Toast.LENGTH_SHORT).show();
         pageAdapter = new PageAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(pageAdapter);
 
@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    Toast.makeText(getApplicationContext(),"Send token successfully",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Send token successfully" +user_id,Toast.LENGTH_SHORT).show();
                 }
             }
             @Override

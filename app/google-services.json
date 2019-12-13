@@ -1,43 +1,42 @@
 {
   "project_info": {
-    "project_number": "157227933870",
-    "firebase_url": "https://fir-appcomp.firebaseio.com",
-    "project_id": "fir-appcomp",
-    "storage_bucket": "fir-appcomp.appspot.com"
+    "project_number": "1088938865563",
+    "firebase_url": "https://dulich-47e62.firebaseio.com",
+    "project_id": "dulich-47e62",
+    "storage_bucket": "dulich-47e62.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:157227933870:android:a72ea8fe24ad7adc258d3f",
+        "mobilesdk_app_id": "1:1088938865563:android:e2309b99ca9f3c4c3da73e",
         "android_client_info": {
-          "package_name": "com.example.firebaseappcomp"
+          "package_name": "abc.com"
         }
       },
       "oauth_client": [
         {
-          "client_id": "157227933870-bahcgcnfb9q2lh5nh08g1m16mh4objof.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.firebaseappcomp",
-            "certificate_hash": "4cfa576343266866983e754fc0f1667fac8057df"
-          }
-        },
-        {
-          "client_id": "157227933870-k7l2nblhpgi1oh359k403hk7blafalf8.apps.googleusercontent.com",
+          "client_id": "1088938865563-ik75ed5sia9lqbunl61np82tqia5s7lo.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDUXlbZPwniY0T0F1Zzydu0toV2U7T9KIY"
+          "current_key": "AIzaSyBsQfVdiBPOBxVuzbxo1vZb9hUgBtqHs-Q"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "157227933870-k7l2nblhpgi1oh359k403hk7blafalf8.apps.googleusercontent.com",
+              "client_id": "1088938865563-ik75ed5sia9lqbunl61np82tqia5s7lo.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1088938865563-jajhhorr75fi23nflon12ok1ds6g1juj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.dulich-mobile"
+              }
             }
           ]
         }
@@ -45,36 +44,107 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:157227933870:android:d53f22b46abbcfaf258d3f",
+        "mobilesdk_app_id": "1:1088938865563:android:22f8ce527dee0a72",
         "android_client_info": {
-          "package_name": "com.example.notificationtest"
+          "package_name": "com.dulich_mobile"
         }
       },
       "oauth_client": [
         {
-          "client_id": "157227933870-g7q0o2vm7mqbbf6lp4t8gu2jhulmpatm.apps.googleusercontent.com",
+          "client_id": "1088938865563-me4jhij3logah9fh84dhoe70jjstej21.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.notificationtest",
-            "certificate_hash": "79594e509b38561cb4273f3cfca7c36659e29e5a"
+            "package_name": "com.dulich_mobile",
+            "certificate_hash": "88c8358773e2a972a75f482a950b80eba5f82132"
           }
         },
         {
-          "client_id": "157227933870-k7l2nblhpgi1oh359k403hk7blafalf8.apps.googleusercontent.com",
+          "client_id": "1088938865563-siqj1lbi7o6qnj8ljg5i53rkgi05pbde.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dulich_mobile",
+            "certificate_hash": "ae42f60036b5b3216fe205524260e4a6561597ae"
+          }
+        },
+        {
+          "client_id": "1088938865563-vc3nr8pntlbnacqb8uqa1l8j8v16baaf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dulich_mobile",
+            "certificate_hash": "60528d7823cca40aa19f0683a4cede4edf1b616f"
+          }
+        },
+        {
+          "client_id": "1088938865563-oavug0i2bjcb4b0qcr4civ1trelmcc1i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dulich_mobile",
+            "certificate_hash": "96b7b6d037d879a4054ad576a9741a8ae43a125a"
+          }
+        },
+        {
+          "client_id": "1088938865563-fou10hk00342at93u8tbggqo9dq9sfcm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dulich_mobile",
+            "certificate_hash": "2a9211a29d157c3366c7d68d819a7e251260a371"
+          }
+        },
+        {
+          "client_id": "1088938865563-fer0veim8gkceouqmnl5aip2clm856jh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dulich_mobile",
+            "certificate_hash": "669c7341bf434f4fc3fdff000a00c4890bf38be2"
+          }
+        },
+        {
+          "client_id": "1088938865563-8t87s448k6178hmb5fi9bl9ahem4i3gp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dulich_mobile",
+            "certificate_hash": "2ce80cc57bad32466a94cbb162432cbfd83ac300"
+          }
+        },
+        {
+          "client_id": "1088938865563-6nm0f5boabervkkqs2221our5k7rsmec.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dulich_mobile",
+            "certificate_hash": "1fdf8e031b3b6b8591921e31bc01fbe30f4ed8d5"
+          }
+        },
+        {
+          "client_id": "1088938865563-u9braho4e3p7ed20nfso1vnm4pf6idgk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dulich_mobile",
+            "certificate_hash": "b7afe627c1febe323cf432f1ebff70ba720e11d4"
+          }
+        },
+        {
+          "client_id": "1088938865563-ik75ed5sia9lqbunl61np82tqia5s7lo.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDUXlbZPwniY0T0F1Zzydu0toV2U7T9KIY"
+          "current_key": "AIzaSyBsQfVdiBPOBxVuzbxo1vZb9hUgBtqHs-Q"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "157227933870-k7l2nblhpgi1oh359k403hk7blafalf8.apps.googleusercontent.com",
+              "client_id": "1088938865563-ik75ed5sia9lqbunl61np82tqia5s7lo.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1088938865563-jajhhorr75fi23nflon12ok1ds6g1juj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.dulich-mobile"
+              }
             }
           ]
         }
@@ -82,36 +152,71 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:157227933870:android:a48f047fcc60a023258d3f",
+        "mobilesdk_app_id": "1:1088938865563:android:d9c55fcdc7b4b8f83da73e",
+        "android_client_info": {
+          "package_name": "com.example.travelist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1088938865563-ik75ed5sia9lqbunl61np82tqia5s7lo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsQfVdiBPOBxVuzbxo1vZb9hUgBtqHs-Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1088938865563-ik75ed5sia9lqbunl61np82tqia5s7lo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1088938865563-jajhhorr75fi23nflon12ok1ds6g1juj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.dulich-mobile"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1088938865563:android:3bbbea31200551103da73e",
         "android_client_info": {
           "package_name": "com.ygaps.travelapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "157227933870-jpf589go7kkk7hh4duuh2epihjrn5g5d.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.ygaps.travelapp",
-            "certificate_hash": "79594e509b38561cb4273f3cfca7c36659e29e5a"
-          }
-        },
-        {
-          "client_id": "157227933870-k7l2nblhpgi1oh359k403hk7blafalf8.apps.googleusercontent.com",
+          "client_id": "1088938865563-ik75ed5sia9lqbunl61np82tqia5s7lo.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDUXlbZPwniY0T0F1Zzydu0toV2U7T9KIY"
+          "current_key": "AIzaSyBsQfVdiBPOBxVuzbxo1vZb9hUgBtqHs-Q"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "157227933870-k7l2nblhpgi1oh359k403hk7blafalf8.apps.googleusercontent.com",
+              "client_id": "1088938865563-ik75ed5sia9lqbunl61np82tqia5s7lo.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1088938865563-jajhhorr75fi23nflon12ok1ds6g1juj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.dulich-mobile"
+              }
             }
           ]
         }

@@ -38,6 +38,10 @@ import com.ygaps.travelapp.Adapter.CustomAdapterForTourInfo_StopPoint;
 import com.ygaps.travelapp.Model.Add_Stop_Point_Data;
 import com.ygaps.travelapp.Model.Add_Stop_Point_Result;
 import com.ygaps.travelapp.Model.CommentResult_TourInfo;
+import com.ygaps.travelapp.Model.InviteData;
+import com.ygaps.travelapp.Model.InviteMemberData;
+import com.ygaps.travelapp.Model.InviteMember_Result;
+import com.ygaps.travelapp.Model.InviteResult;
 import com.ygaps.travelapp.Model.Member;
 import com.ygaps.travelapp.Model.RemoveStopPointResult;
 import com.ygaps.travelapp.Model.SendCommentData;
@@ -98,6 +102,7 @@ public class Tour_Info extends AppCompatActivity {
     private Dialog send_rating_popup;
     private ImageView add_comment_of_user;
     private ImageView add_rating;
+    private ImageView add_member;
 
     private double mNewLat;
     private double mNewLong;
@@ -633,6 +638,32 @@ public class Tour_Info extends AppCompatActivity {
 
             }
         });
+        add_member.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Map<String, String> map = new HashMap<>();
+                map.put("Authorization", token);
+                InviteData inviteMemberData=new InviteData(id_tour,"641",false);
+                Call<InviteResult> call_4=jsonPlaceHolderApi.inviteMember(map,inviteMemberData);
+                call_4.enqueue(new Callback<InviteResult>() {
+                    @Override
+                    public void onResponse(Call<InviteResult> call, Response<InviteResult> response) {
+                        if (!response.isSuccessful())
+                        {
+                            Toast.makeText(getApplicationContext(),"Moi khong thanh cong",Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(),"Moi thanh cong",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<InviteResult> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+        });
     }
 
     private void mapping() {
@@ -654,6 +685,8 @@ public class Tour_Info extends AppCompatActivity {
 
         send_rating_popup = new Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
         Objects.requireNonNull(send_rating_popup.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        add_member=findViewById(R.id.add_member);
     }
 
     @Override
