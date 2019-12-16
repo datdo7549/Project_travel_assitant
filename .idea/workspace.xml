@@ -9,27 +9,13 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="CREATE_TOUR" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="debug" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="08288325-faf0-483e-a395-7d358dc22ef8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_transition_transition_1_0_0_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_stats_17_0_0_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_material_material_1_0_0_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_auto_value_auto_value_annotations_1_6_5_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_common_19_2_0_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_iid_20_0_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_iid_interop_17_0_0_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_measurement_connector_18_0_0_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_messaging_20_0_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__jp_co_cyberagent_android_gpuimage_gpuimage_library_1_4_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__jp_wasabeef_picasso_transformations_2_2_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/JsonPlaceHolderApi.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/InviteMemberData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/InviteMember_Result.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/MyFireBaseService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Temp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_temp.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -80,6 +66,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_test_ext_junit_1_1_1_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_test_ext_junit_1_1_1_aar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_test_monitor_1_2_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_test_monitor_1_2_0_aar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_test_runner_1_1_1_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_test_runner_1_1_1_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_transition_transition_1_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_transition_transition_1_0_0_aar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_vectordrawable_vectordrawable_1_0_1_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_vectordrawable_vectordrawable_1_0_1_aar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_vectordrawable_vectordrawable_animated_1_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_vectordrawable_vectordrawable_animated_1_0_0_aar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_versionedparcelable_versionedparcelable_1_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_versionedparcelable_versionedparcelable_1_0_0_aar.xml" afterDir="false" />
@@ -101,74 +88,22 @@
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_maps_17_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_maps_17_0_0_aar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_places_17_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_places_17_0_0_aar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_places_placereport_17_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_places_placereport_17_0_0_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_stats_17_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_stats_17_0_0_aar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_tasks_17_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_tasks_17_0_0_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_material_material_1_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_material_material_1_0_0_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_common_19_2_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_common_19_2_0_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_iid_20_0_1_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_iid_20_0_1_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_iid_interop_17_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_iid_interop_17_0_0_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_measurement_connector_18_0_0_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_measurement_connector_18_0_0_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_messaging_20_0_1_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_messaging_20_0_1_aar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_picasso_picasso_2_71828_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_picasso_picasso_2_71828_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__jp_co_cyberagent_android_gpuimage_gpuimage_library_1_4_1_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__jp_co_cyberagent_android_gpuimage_gpuimage_library_1_4_1_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__jp_wasabeef_picasso_transformations_2_2_1_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__jp_wasabeef_picasso_transformations_2_2_1_aar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/com/example/loginandregister/BuildConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/example/loginandregister/ExampleInstrumentedTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/travelapp/travelapp/ExampleInstrumentedTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LoginAndRegister.iml" beforeDir="false" afterPath="$PROJECT_DIR$/LoginAndRegister.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Adapter/CustomAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Adapter/CustomAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Adapter/CustomAdapterForListStopPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Adapter/CustomAdapterForListStopPoint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Adapter/CustomAdapterForTourInfo_Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Adapter/CustomAdapterForTourInfo_Comment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Adapter/CustomAdapterForTourInfo_Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Adapter/CustomAdapterForTourInfo_Member.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Adapter/CustomAdapterForTourInfo_StopPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Adapter/CustomAdapterForTourInfo_StopPoint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/CallFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/CallFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/ChatFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/ChatFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/CreateActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/CreateActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Explore_Fragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Explore_Fragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/ForgotActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/ForgotActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Forgot_Frag_1.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Forgot_Frag_1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/JsonPlaceHolderAPI2.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/JsonPlaceHolderAPI2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/JsonPlaceHolderApi.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/List_Tour_Fragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/List_Tour_Fragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/LoginActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/MapActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/MapActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Model/Add_Stop_Point_Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/Add_Stop_Point_Data.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Model/Add_Stop_Point_Result.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/Add_Stop_Point_Result.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Model/CommentResult_TourInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/CommentResult_TourInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Model/Create_Tour_Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/Create_Tour_Data.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Model/Create_Tour_Result.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/Create_Tour_Result.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Model/DataGoogleLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/DataGoogleLogin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Model/ErroREsponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/ErroREsponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Model/FacebookLoginResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/FacebookLoginResult.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Model/Fb_data_login.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/Fb_data_login.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Model/Forgot_Frag_2.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/Forgot_Frag_2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Model/GGreesult.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/GGreesult.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Model/GgData.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/GgData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Model/GoogleLoginResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/GoogleLoginResult.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Model/ListTour.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/ListTour.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Model/LoginResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/LoginResult.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Model/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/Member.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Model/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/Message.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Model/My_Tour_Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/My_Tour_Data.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Model/My_Tour_Result.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/My_Tour_Result.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Model/RegisterResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/RegisterResult.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Model/RequestOTP_Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/RequestOTP_Data.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Model/RequestOTP_Result.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/RequestOTP_Result.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Model/StopPointResult_TourInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/StopPointResult_TourInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Model/Stop_Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/Stop_Point.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Model/Tour.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/Tour.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Model/TourInforData.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/TourInforData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Model/TourInforResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/TourInforResult.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Model/User_login.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/User_login.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Model/User_register.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/User_register.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Model/VerifyOTP_Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/VerifyOTP_Data.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Model/VerifyOTP_Result.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/VerifyOTP_Result.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Model/comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/comment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/MyViewMode.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/MyViewMode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Notification_Fragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Notification_Fragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/PageAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/PageAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/RegisterActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/RegisterActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Setting_Fragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Setting_Fragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/StatusFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/StatusFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Temp.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Temp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/Tour_Info.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Tour_Info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/loginandregister/my_tour_fragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/my_tour_fragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/test/java/com/example/loginandregister/ExampleUnitTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/java/com/travelapp/travelapp/ExampleUnitTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/MyFireBaseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/MyFireBaseService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/build/classes/" />
@@ -183,6 +118,7 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="192.168.51.104:5555" />
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
@@ -226,7 +162,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/JsonPlaceHolderApi.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
+            <state>
               <caret line="75" column="15" selection-start-line="75" selection-start-column="15" selection-end-line="75" selection-end-column="15" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -235,27 +171,61 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="75" column="34" selection-start-line="75" selection-start-column="34" selection-end-line="75" selection-end-column="34" />
+            <state relative-caret-position="867">
+              <caret line="80" selection-start-line="80" selection-end-line="80" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/MyFireBaseService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="149">
+              <caret line="107" column="54" lean-forward="true" selection-start-line="107" selection-start-column="54" selection-end-line="107" selection-end-column="54" />
               <folding>
-                <element signature="e#2663#2692#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/InviteMember_Result.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Tour_Info.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="30" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="30" />
-              <folding>
-                <element signature="e#135#136#0" expanded="true" />
-                <element signature="e#165#166#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="32">
+              <caret line="668" column="20" selection-start-line="668" selection-start-column="17" selection-end-line="668" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_temp.xml">
+          <provider editor-type-id="android-designer2" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1003">
+              <caret line="59" column="39" selection-start-line="59" selection-start-column="39" selection-end-line="59" selection-end-column="39" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Temp.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1407">
+              <caret line="105" column="49" selection-start-line="105" selection-start-column="49" selection-end-line="105" selection-end-column="49" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+          <provider editor-type-id="android-manifest" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="243">
+              <caret line="58" column="70" lean-forward="true" selection-start-line="58" selection-start-column="70" selection-end-line="58" selection-end-column="70" />
             </state>
           </provider>
         </entry>
@@ -266,8 +236,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="layoutResourceFile_vertical" />
-        <option value="resourceFile" />
         <option value="Class" />
+        <option value="resourceFile" />
       </list>
     </option>
   </component>
@@ -283,6 +253,8 @@
       <find>TOKEN</find>
       <find>TOEKN</find>
       <find>com.travelapp.travelapp</find>
+      <find>add_mem</find>
+      <find>map</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -326,20 +298,24 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/RequestOTP_Data.java" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/java/MyFireBaseService.java" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/MyFireBaseService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/FirebaseInstanceIdService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/InviteMemberData.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/InviteMember_Result.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/JsonPlaceHolderApi.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_temp.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Temp.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/border_radius_green_button.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/border_radius_red_button.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/MyFireBaseService.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="952" />
-    <option name="width" value="977" />
+    <option name="x" value="950" />
+    <option name="width" value="980" />
     <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -349,57 +325,13 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="LoginAndRegister" type="b2602c69:ProjectViewProjectNode" />
               <item name="cq2017_32_28_doan" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-            </path>
-            <path>
-              <item name="LoginAndRegister" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cq2017_32_28_doan" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-            </path>
-            <path>
-              <item name="LoginAndRegister" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cq2017_32_28_doan" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LoginAndRegister" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cq2017_32_28_doan" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LoginAndRegister" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cq2017_32_28_doan" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LoginAndRegister" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cq2017_32_28_doan" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LoginAndRegister" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cq2017_32_28_doan" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="ygaps" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -416,7 +348,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -427,6 +358,11 @@
             <path>
               <item name="LoginAndRegister" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="manifests" type="f94875db:AndroidManifestsGroupNode" />
+            </path>
+            <path>
+              <item name="LoginAndRegister" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
             </path>
             <path>
@@ -441,14 +377,6 @@
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
               <item name="com" type="cbb59c9e:AndroidPsiDirectoryNode" />
               <item name="ygaps" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LoginAndRegister" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="com" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="ygaps" type="462c0819:PsiDirectoryNode" />
-              <item name="travelapp" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="LoginAndRegister" type="1abcf292:AndroidViewProjectNode" />
@@ -457,18 +385,6 @@
               <item name="com" type="cbb59c9e:AndroidPsiDirectoryNode" />
               <item name="ygaps" type="462c0819:PsiDirectoryNode" />
               <item name="travelapp" type="462c0819:PsiDirectoryNode" />
-              <item name="Model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LoginAndRegister" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-            </path>
-            <path>
-              <item name="LoginAndRegister" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="values" type="ddeffd01:AndroidResFolderTypeNode" />
             </path>
           </expand>
           <select />
@@ -481,26 +397,27 @@
     <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2019-11-14T06:54:20.698Z" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
-    <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/java" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/drawable" />
     <property name="project.structure.last.edited" value="Dependencies" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.smartKeys" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.ygaps.travelapp" />
     </key>
     <key name="android.template.packageName">
+      <recent name="com.ygaps.travelapp" />
       <recent name="com.example.loginandregister" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Documents\hoc tap\Mobile apps\project\project\cq2017_32_28_doan\app\src\main\res\drawable" />
       <recent name="D:\Documents\hoc tap\Mobile apps\cq2017_32_28_doan\app\src\main\java\com\ygaps" />
       <recent name="D:\Documents\hoc tap\Mobile apps\cq2017_32_28_doan\app\src\main\java\com\travelapp\travelapp" />
       <recent name="D:\Documents\hoc tap\Mobile apps\cq2017_32_28_doan\app\src\main\java\com\ygaps\travelapp" />
       <recent name="C:\Users\Gia\Desktop\cq2017_32_28_doan\app\src\main\res\drawable" />
-      <recent name="C:\Users\Gia\Desktop\cq2017_32_28_doan\app\src\main\res\layout" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -540,6 +457,8 @@
       <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
       <option name="USE_LAST_SELECTED_DEVICE" value="false" />
       <option name="PREFERRED_AVD" value="" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
       <option name="DEBUGGER_TYPE" value="Java" />
       <Java />
       <Profilers>
@@ -591,12 +510,20 @@
     </task>
     <servers />
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.16107382" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.17114094" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Build Variants" order="3" side_tool="true" />
       <window_info id="Image Layers" order="4" />
@@ -605,12 +532,12 @@
       <window_info id="Capture Tool" order="7" />
       <window_info id="Favorites" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="0" weight="0.32900432" />
-      <window_info anchor="bottom" id="Logcat" order="1" weight="0.3434453" />
-      <window_info anchor="bottom" id="TODO" order="2" />
-      <window_info anchor="bottom" id="Android Profiler" order="3" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Logcat" order="1" visible="true" weight="0.34343433" />
+      <window_info anchor="bottom" id="TODO" order="2" weight="0.32756132" />
+      <window_info anchor="bottom" id="Android Profiler" order="3" />
       <window_info anchor="bottom" id="Terminal" order="4" />
       <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.50053304" side_tool="true" weight="0.32719395" />
-      <window_info active="true" anchor="bottom" id="Build" order="6" sideWeight="0.49946696" visible="true" weight="0.3131313" />
+      <window_info anchor="bottom" id="Build" order="6" sideWeight="0.49946696" weight="0.3088023" />
       <window_info anchor="bottom" id="Run" order="7" weight="0.32900432" />
       <window_info anchor="bottom" id="Debug" order="8" />
       <window_info anchor="bottom" id="Find" order="9" weight="0.32756132" />
@@ -619,24 +546,11 @@
       <window_info anchor="right" id="Theme Preview" order="2" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info anchor="right" id="Gradle" order="4" weight="0.3295302" />
-      <window_info anchor="right" id="Preview" order="5" weight="0.2468017" />
+      <window_info anchor="right" id="Preview" order="5" weight="0.24630873" />
       <window_info anchor="right" id="Assistant" order="6" weight="0.32995737" />
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/travelapp/travelapp/ChatFragment.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/travelapp/travelapp/Explore_Fragment.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/travelapp/travelapp/Forgot_Frag_1.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/travelapp/travelapp/List_Tour_Fragment.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/travelapp/travelapp/JsonPlaceHolderApi.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/travelapp/Model/TourInforResult.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/travelapp/Adapter/CustomAdapterForTourInfo_Comment.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/travelapp/Model/ErroREsponse.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/travelapp/Explore_Fragment.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/travelapp/Model/User_login.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/travelapp/Model/Create_Tour_Result.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/travelapp/MyViewMode.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/travelapp/Model/comment.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/travelapp/ForgotActivity.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/travelapp/Model/RequestOTP_Data.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/TourInforResult.java">
@@ -681,47 +595,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="53" column="44" selection-start-line="53" selection-start-column="44" selection-end-line="53" selection-end-column="44" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-manifest" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/google-services.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="49" column="58" selection-start-line="49" selection-start-column="58" selection-end-line="49" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/FirebaseInstanceIdService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="51" selection-start-line="6" selection-start-column="51" selection-end-line="6" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/MyFireBaseService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="48" selection-start-line="48" selection-end-line="48" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1464#1492#0" expanded="true" />
-            <element signature="e#1620#1649#0" expanded="true" />
-            <element signature="e#1853#1872#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/FirebaseInstanceIdService.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/LoginActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3128">
@@ -747,20 +621,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="42" column="13" selection-start-line="42" selection-start-column="13" selection-end-line="42" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/MyViewMode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Notification_Fragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -806,24 +666,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/Member.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/InviteMemberData.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="85" selection-start-line="7" selection-start-column="85" selection-end-line="7" selection-end-column="85" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Explore_Fragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="18" column="35" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="35" />
         </state>
       </provider>
     </entry>
@@ -833,17 +679,6 @@
           <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/InviteMember_Result.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="30" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="30" />
-          <folding>
-            <element signature="e#135#136#0" expanded="true" />
-            <element signature="e#165#166#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -869,9 +704,92 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/InviteMember_Result.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="30" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="30" />
+          <folding>
+            <element signature="e#135#136#0" expanded="true" />
+            <element signature="e#165#166#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/UpdateUserInfoData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/Member.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Model/TourInforData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/google-services.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="35" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build/generated/res/google-services/debug/values/values.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="44" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/button_cus2.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/button_cus.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/MyViewMode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/border_radius_green_button.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="28" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/border_radius_red_button.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="35" selection-start-line="6" selection-start-column="35" selection-end-line="6" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/JsonPlaceHolderApi.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
+        <state>
           <caret line="75" column="15" selection-start-line="75" selection-start-column="15" selection-end-line="75" selection-end-column="15" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -881,11 +799,75 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="75" column="34" selection-start-line="75" selection-start-column="34" selection-end-line="75" selection-end-column="34" />
+        <state relative-caret-position="867">
+          <caret line="80" selection-start-line="80" selection-end-line="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_temp.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1003">
+          <caret line="59" column="39" selection-start-line="59" selection-start-column="39" selection-end-line="59" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-29/android.jar!/android/os/Handler.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
           <folding>
-            <element signature="e#2663#2692#0" expanded="true" />
+            <element signature="e#599#600#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/baseline_message_black_18dp.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Temp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1407">
+          <caret line="105" column="49" selection-start-line="105" selection-start-column="49" selection-end-line="105" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Notification_Fragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="18" column="23" lean-forward="true" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Explore_Fragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="18" column="50" selection-start-line="18" selection-start-column="50" selection-end-line="18" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/Tour_Info.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="32">
+          <caret line="668" column="20" selection-start-line="668" selection-start-column="17" selection-end-line="668" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ygaps/travelapp/MyFireBaseService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="107" column="54" lean-forward="true" selection-start-line="107" selection-start-column="54" selection-end-line="107" selection-end-column="54" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="58" column="70" lean-forward="true" selection-start-line="58" selection-start-column="70" selection-end-line="58" selection-end-column="70" />
         </state>
       </provider>
     </entry>

@@ -69,8 +69,6 @@ public class MainActivity extends AppCompatActivity {
         int user_id_temp=bundle.getInt("user_id");
 
 
-
-
         SharedPreferences sharedPreferences = getSharedPreferences("com.ygaps.travel", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("token_user",token);
@@ -79,8 +77,6 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         Log.d("DLTK", token);
-
-
 
 
         actionBar = getSupportActionBar();
@@ -138,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
         return user_id;
     }
 
-    public void sendTokenToServer(String token_user, String token_firebase)
+    public void sendTokenToServer(String token_user, String token_firebase) // token user and token_device
     {
         String device_id= Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
         Map<String, String> map = new HashMap<>();

@@ -8,17 +8,20 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:networkSecurityConfig="@xml/network_security_config"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!--<activity android:name="com.ygaps.travelapp.Temp"></activity>-->
-        <activity android:name="com.ygaps.travelapp.ForgotActivity" />
-        <activity android:name="com.ygaps.travelapp.Tour_Info" android:launchMode="singleTask" />
+        <activity android:name=".Temp"></activity>
+        <!-- <activity android:name="com.ygaps.travelapp.Temp"></activity> -->
+        <activity android:name=".ForgotActivity" />
+        <activity
+            android:name=".Tour_Info"
+            android:launchMode="singleTask" />
 
         <uses-library
             android:name="org.apache.http.legacy"
@@ -31,17 +34,17 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name="com.ygaps.travelapp.MapActivity" ></activity>
-        <activity android:name="com.ygaps.travelapp.CreateActivity" />
-        <activity android:name="com.ygaps.travelapp.RegisterActivity" />
-        <activity android:name="com.ygaps.travelapp.LoginActivity">
+        <activity android:name=".MapActivity" />
+        <activity android:name=".CreateActivity" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.ygaps.travelapp.MainActivity" />
+        <activity android:name=".MainActivity" />
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
@@ -50,9 +53,14 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/baseline_message_black_18dp"/>
+
         <service android:name=".MyFireBaseService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
     </application>
