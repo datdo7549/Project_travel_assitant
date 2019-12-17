@@ -10,15 +10,14 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:paddingTop="35dp"
+        android:paddingTop="10dp"
         android:paddingRight="20dp"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="70dp"
         android:minHeight="?attr/actionBarSize"
-        android:background="#061161"
+        android:background="@color/orange"
         android:theme="@style/ToolbarTheme"
         app:titleTextAppearance="@style/Toolbar.TitleText"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         />
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
@@ -30,7 +29,7 @@
         android:id="@+id/tablayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="@color/orange"
         app:tabSelectedTextColor="@android:color/white"
         app:tabTextColor="@android:color/black">
 
@@ -38,27 +37,27 @@
             android:id="@+id/tabMenu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/menu_icon" />
+            android:icon="@drawable/menu_icon_black" />
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabMyTour"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/my_tour_icon"/>
+            android:icon="@drawable/my_tour_icon_black"/>
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabExplore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/explore_icon"/>
+            android:icon="@drawable/travel_icon_black"/>
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabNotification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/notification_icon"/>
+            android:icon="@drawable/notification_icon_black"/>
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabSetting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/setting_icon"/>
+            android:icon="@drawable/setting_icon_black"/>
     </com.google.android.material.tabs.TabLayout>
 
 </LinearLayout>

@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -30,7 +32,8 @@ import static com.ygaps.travelapp.LoginActivity.URL;
 public class Forgot_Frag_1 extends Fragment {
     private View rootView;
     private EditText email_request;
-    private Button send_requets_OTP;
+    private TextView send_requets_OTP;
+    private ImageView back;
     private OnClickButtonListener onClickButtonListener;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     private ProgressDialog progressDialog;
@@ -40,7 +43,7 @@ public class Forgot_Frag_1 extends Fragment {
     DataPassListener mCallback;
 
     public interface DataPassListener{
-        public void passData(String data);
+        public void passData(String data,String email);
     }
 
     @Override
@@ -81,7 +84,7 @@ public class Forgot_Frag_1 extends Fragment {
                         else {
                             progressDialog.dismiss();
                             int userID=response.body().getUserId();
-                            mCallback.passData(userID+"");
+                            mCallback.passData(userID+"",email_request.getText().toString());
                             onClickButtonListener.clickButton();
 
                         }
@@ -91,6 +94,12 @@ public class Forgot_Frag_1 extends Fragment {
                     public void onFailure(Call<RequestOTP_Result> call, Throwable t) {
                     }
                 });
+            }
+        });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickButtonListener.backHome();
             }
         });
         return rootView;
@@ -106,10 +115,12 @@ public class Forgot_Frag_1 extends Fragment {
         jsonPlaceHolderApi=retrofit.create(JsonPlaceHolderApi.class);
         email_request=rootView.findViewById(R.id.request_data);
         progressDialog=new ProgressDialog(getContext());
+        back=rootView.findViewById(R.id.back_homepage3);
     }
 
     public interface OnClickButtonListener
     {
         void clickButton();
+        void backHome();
     }
 }

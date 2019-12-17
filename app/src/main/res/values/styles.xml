@@ -26,14 +26,12 @@
 
     <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:textColorPrimary">#fff</item>
-        <item name="android:actionMenuTextColor">#FFC107</item>
         <!-- actionMenuTextColor: Màu chữ Menu  -->
     </style>
-
     <style name="Toolbar.TitleText"
         parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
-        <item name="android:textSize">30sp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@android:color/holo_orange_light</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:fontFamily">@font/corbelbold</item>
+        <item name="android:textColor">#ffffff</item>
     </style>
 </resources>

@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ygaps.travelapp.Model.Message;
@@ -50,7 +51,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private RadioButton genderMale;
     private RadioButton genderFemale;
 
-    private Button register;
+    private TextView register;
     private Button back;
     private ImageView back_button;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
@@ -63,7 +64,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_register);
         mapping();
         register.setOnClickListener(this);
-        back.setOnClickListener(this);
         back_button.setOnClickListener(this);
     }
 
@@ -78,9 +78,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         genderMale = (RadioButton) findViewById(R.id.radioButton_male);
         genderFemale = (RadioButton) findViewById(R.id.radioButton_female);
 
-        back_button = (ImageView) findViewById(R.id.bttBack);
-        register = (Button) findViewById(R.id.register_button);
-        back = (Button) findViewById(R.id.back);
+        back_button = (ImageView) findViewById(R.id.back_homepage2);
+        register =  findViewById(R.id.register_text_view);
         Gson gson=new GsonBuilder().serializeNulls().create();
         Retrofit retrofit=new Retrofit.Builder()
                 .baseUrl(URL)
@@ -93,7 +92,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId())
         {
-            case R.id.register_button:
+            case R.id.register_text_view:
             {
                 String mPassword=password.getText().toString();
                 String mFullname=fullname.getText().toString();
@@ -114,19 +113,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 }
                 break;
             }
-            case R.id.back:
+            case R.id.back_homepage2:
             {
-                Bundle bundle=new Bundle();
-                bundle.putString("email",email.getText().toString());
-                bundle.putString("password",password.getText().toString());
-                Intent intent=new Intent(RegisterActivity.this,LoginActivity.class);
-                intent.putExtras(bundle);
+                Intent intent=new Intent(this,Homepage.class);
                 startActivity(intent);
-                break;
-            }
-            case R.id.bttBack:
-            {
-                onBackPressed();
                 break;
             }
         }
@@ -173,9 +163,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 }
                 else {
                     progressDialog.dismiss();
-                    back.setVisibility(View.VISIBLE);
-                    register.setVisibility(View.GONE);
                     Toast.makeText(RegisterActivity.this, "Complete", Toast.LENGTH_SHORT).show();
+                    Bundle bundle=new Bundle();
+                    bundle.putString("email",email.getText().toString());
+                    bundle.putString("password",password.getText().toString());
+                    Intent intent=new Intent(RegisterActivity.this,LoginActivity.class);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
                 }
             }
 

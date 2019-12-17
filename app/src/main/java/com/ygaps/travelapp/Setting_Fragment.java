@@ -54,8 +54,8 @@ import static com.ygaps.travelapp.LoginActivity.URL;
 public class Setting_Fragment extends Fragment {
 
     private Button log_out;
-    private ImageView imageView;
-    private TextView nameUser, emailUser, phoneUser, addressUser, dobUser, genderUser, emailVer, phoneVer;
+    private ImageView cover_image, profile_image;
+    private TextView nameUser, emailUser, phoneUser, addressUser, dobUser;
     private String token;
     private int user_id;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
@@ -64,6 +64,7 @@ public class Setting_Fragment extends Fragment {
     private Dialog upadte_user_password_dialog;
     private String temp_date;
     private Date date;
+    private ImageView update_info_image;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -72,7 +73,9 @@ public class Setting_Fragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_setting, container, false);
         final MainActivity activity = (MainActivity) getActivity();
         token = activity.getMyData();
-        user_id=Integer.parseInt(activity.getUser_id());
+        user_id = Integer.parseInt(activity.getUser_id());
+
+
         mapping();
         getUserInfo();
 
@@ -85,33 +88,17 @@ public class Setting_Fragment extends Fragment {
             }
         });*/
         Picasso.get()
-                .load("https://images.unsplash.com/photo-1564859227770-c3ffd1fb1deb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80")
+                .load("https://images.unsplash.com/photo-1519501025264-65ba15a82390?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80")
+                .fit()
+                .into(cover_image);
+        Picasso.get()
+                .load("https://images.unsplash.com/photo-1572631382901-cf1a0a6087cb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=629&q=80")
                 .transform(new CropCircleTransformation())
-                .into(imageView);
-
-        return view;
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_setting, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.log_out: {
-                LoginManager.getInstance().logOut();
-                Intent intent = new Intent(getContext(), LoginActivity.class);
-                startActivity(intent);
-
-
-                break;
-            }
-            case R.id.update_info: {
+                .into(profile_image);
+        update_info_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 upadte_user_info_dialog.setContentView(R.layout.upate_user_info_popup);
-
-
                 final EditText fullName = upadte_user_info_dialog.findViewById(R.id.full_name_update);
                 final EditText email = upadte_user_info_dialog.findViewById(R.id.email_update);
                 final EditText phone = upadte_user_info_dialog.findViewById(R.id.phone_upđate);
@@ -152,7 +139,6 @@ public class Setting_Fragment extends Fragment {
                 btn_upadte.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
                         final String mFullName = fullName.getText().toString();
                         final String mEmail = email.getText().toString();
                         final String mPhone = phone.getText().toString();
@@ -194,15 +180,33 @@ public class Setting_Fragment extends Fragment {
                 });
                 upadte_user_info_dialog.show();
 
+            }
+        });
+        return view;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_setting, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.log_out: {
+                LoginManager.getInstance().logOut();
+                Intent intent = new Intent(getContext(), LoginActivity.class);
+                startActivity(intent);
+
 
                 break;
             }
             case R.id.update_password: {
                 upadte_user_password_dialog.setContentView(R.layout.update_password_popup);
-                Button update_password=upadte_user_password_dialog.findViewById(R.id.btn_update_password);
-                ImageView exit=upadte_user_password_dialog.findViewById(R.id.exit_update_password);
-                final EditText curr_password=upadte_user_password_dialog.findViewById(R.id.current_password);
-                final EditText new_password=upadte_user_password_dialog.findViewById(R.id.new_password);
+                Button update_password = upadte_user_password_dialog.findViewById(R.id.btn_update_password);
+                ImageView exit = upadte_user_password_dialog.findViewById(R.id.exit_update_password);
+                final EditText curr_password = upadte_user_password_dialog.findViewById(R.id.current_password);
+                final EditText new_password = upadte_user_password_dialog.findViewById(R.id.new_password);
                 exit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -214,38 +218,31 @@ public class Setting_Fragment extends Fragment {
                     public void onClick(View v) {
                         Map<String, String> map = new HashMap<>();
                         map.put("Authorization", token);
-                        String cur_pass=curr_password.getText().toString();
-                        String new_pass=new_password.getText().toString();
-                        UpdatePasswordData updatePasswordData=new UpdatePasswordData(user_id,cur_pass,new_pass);
+                        String cur_pass = curr_password.getText().toString();
+                        String new_pass = new_password.getText().toString();
+                        UpdatePasswordData updatePasswordData = new UpdatePasswordData(user_id, cur_pass, new_pass);
 
-                        Call<UpdatePasswordResult> call=jsonPlaceHolderApi.updatePassword(map,updatePasswordData);
+                        Call<UpdatePasswordResult> call = jsonPlaceHolderApi.updatePassword(map, updatePasswordData);
                         call.enqueue(new Callback<UpdatePasswordResult>() {
                             @Override
                             public void onResponse(Call<UpdatePasswordResult> call, Response<UpdatePasswordResult> response) {
-                                if (!response.isSuccessful())
-                                {
-                                    if (response.code()==400)
-                                    {
-                                        Toast.makeText(getContext(),"Current password is wrong",Toast.LENGTH_SHORT).show();
+                                if (!response.isSuccessful()) {
+                                    if (response.code() == 400) {
+                                        Toast.makeText(getContext(), "Current password is wrong", Toast.LENGTH_SHORT).show();
+                                    } else if (response.code() == 404) {
+                                        Toast.makeText(getContext(), "EMAIL/PHONE doesn't exist", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
                                     }
-                                    else if (response.code()==404)
-                                    {
-                                        Toast.makeText(getContext(),"EMAIL/PHONE doesn't exist",Toast.LENGTH_SHORT).show();
-                                    }
-                                    else
-                                    {
-                                        Toast.makeText(getContext(),"Error",Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                                else
-                                {
-                                    Toast.makeText(getContext(),"Update password  successfully",Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(getContext(), "Update password  successfully", Toast.LENGTH_SHORT).show();
 
                                 }
                             }
+
                             @Override
                             public void onFailure(Call<UpdatePasswordResult> call, Throwable t) {
-                                Toast.makeText(getContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -277,13 +274,8 @@ public class Setting_Fragment extends Fragment {
                     addressUser.setText((user_info_result.getAddress() == null) ? "Chưa cập nhật" : user_info_result.getAddress());
                     dobUser.setText((user_info_result.getDob() == null) ? "Chưa cập nhật" : user_info_result.getDob().substring(0, 10));
 
-                    if (user_info_result.getGender() == 0) {
-                        genderUser.setText("Male");
-                    } else {
-                        genderUser.setText("Female");
-                    }
 
-                    /*if (user_info_result.getEmail_verified() == true) {
+                   /* if (user_info_result.getEmail_verified() == true) {
                         emailVer.setText("Yes");
                     } else {
                         emailVer.setText("No");
@@ -306,15 +298,15 @@ public class Setting_Fragment extends Fragment {
 
     private void mapping() {
         //log_out=view.findViewById(R.id.btn_log_out);
-        imageView = view.findViewById(R.id.avatar_user);
+        cover_image = view.findViewById(R.id.cover_image);
+        profile_image = view.findViewById(R.id.profile_image);
         nameUser = view.findViewById(R.id.name_user);
         emailUser = view.findViewById(R.id.email_user);
         phoneUser = view.findViewById(R.id.phone_user);
         addressUser = view.findViewById(R.id.address_user);
         dobUser = view.findViewById(R.id.dob_user);
-        genderUser = view.findViewById(R.id.gender_user);
-        emailVer = view.findViewById(R.id.email_verified);
-        phoneVer = view.findViewById(R.id.phone_verified);
+
+
         Gson gson = new GsonBuilder().serializeNulls().create();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
@@ -326,7 +318,7 @@ public class Setting_Fragment extends Fragment {
 
         upadte_user_password_dialog = new Dialog(getContext(), android.R.style.Theme_Black_NoTitleBar_Fullscreen);
         upadte_user_password_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
+        update_info_image = view.findViewById(R.id.update_info_image);
     }
 
 

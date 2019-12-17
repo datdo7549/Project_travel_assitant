@@ -2,173 +2,265 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradienr_background2"
+    android:background="@drawable/gradiant_background"
     android:id="@+id/fm1234"
     tools:context=".Setting_Fragment">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <LinearLayout
-            android:layout_marginTop="50dp"
-            android:id="@+id/ln_avatar"
-            android:layout_centerHorizontal="true"
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:layout_centerInParent="true"
-                android:id="@+id/avatar_user"
-                android:layout_width="150dp"
-                android:layout_height="150dp"/>
-            <TextView
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center"
-                android:textColor="#fff"
-                android:textSize="25sp"
-                android:id="@+id/name_user"
-                android:text="Do Thanh Dat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:layout_gravity="center"
-                android:textColor="#fff"
-                android:textSize="13sp"
-                android:id="@+id/email_user"
-                android:text="datdo7549@gmail.com"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
-
-        <ScrollView
-            android:layout_below="@+id/ln_avatar"
+        <RelativeLayout
+            android:id="@+id/relative_image"
             android:layout_width="match_parent"
-            android:layout_height="300dp">
-            <LinearLayout
-                android:layout_marginTop="20dp"
-                android:paddingLeft="30dp"
-                android:orientation="vertical"
+            android:layout_height="200dp">
+            <ImageView
+                android:id="@+id/cover_image"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="200dp"/>
+            <ImageView
+                android:id="@+id/profile_image"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_alignParentBottom="true"
+                android:layout_width="80dp"
+                android:layout_height="80dp"/>
+            <LinearLayout
+                android:id="@+id/linear_name"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/profile_image"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/name_user"
+                    android:text="Do Thanh Dat"
+                    android:textColor="#ffffff"
+                    android:fontFamily="@font/corbelbold"
+                    android:textSize="20sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
                 <LinearLayout
+                    android:layout_marginTop="13dp"
                     android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                     <ImageView
-                        android:src="@drawable/phone"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"/>
+                        android:src="@drawable/location"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"/>
                     <TextView
-                        android:layout_marginLeft="20dp"
-                        android:textColor="#fff"
-                        android:textSize="15sp"
-                        android:layout_gravity="center_vertical"
-                        android:id="@+id/phone_user"
-                        android:text="0795949794"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_marginTop="15dp"
-                    android:orientation="horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <ImageView
-                        android:src="@drawable/address_user"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"/>
-                    <TextView
-                        android:layout_marginLeft="20dp"
-                        android:layout_gravity="center_vertical"
-                        android:textColor="#fff"
-                        android:textSize="15sp"
-                        android:text="District 5, Ho Chi Minh city"
-                        android:id="@+id/address_user"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_marginTop="15dp"
-                    android:orientation="horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <ImageView
-                        android:src="@drawable/dob_user"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"/>
-                    <TextView
-                        android:layout_marginLeft="20dp"
-                        android:layout_gravity="center_vertical"
-                        android:textColor="#fff"
-                        android:textSize="15sp"
-                        android:text="03/06/1999"
-                        android:id="@+id/dob_user"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_marginTop="15dp"
-                    android:orientation="horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <ImageView
-                        android:src="@drawable/gender"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"/>
-                    <TextView
-                        android:layout_marginLeft="20dp"
-                        android:layout_gravity="center_vertical"
-                        android:textColor="#fff"
-                        android:textSize="15sp"
-                        android:text="Male"
-                        android:id="@+id/gender_user"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_marginTop="15dp"
-                    android:orientation="horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:textColor="#fff"
-                        android:textSize="15sp"
-                        android:text="Email verified:"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <TextView
-                        android:layout_marginLeft="20dp"
-                        android:id="@+id/email_verified"
-                        android:textColor="#fff"
-                        android:textSize="15sp"
-                        android:text="Yes"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_marginTop="15dp"
-                    android:orientation="horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:textColor="#fff"
-                        android:textSize="15sp"
-                        android:text="Phone verified:"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <TextView
-                        android:layout_marginLeft="20dp"
-                        android:id="@+id/phone_verified"
-                        android:textColor="#fff"
-                        android:textSize="15sp"
-                        android:text="Yes"
+                        android:layout_marginLeft="5dp"
+                        android:fontFamily="@font/ebrima"
+                        android:textSize="14sp"
+                        android:textColor="#ffffff"
+                        android:text="Distric 5, HCM city"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
             </LinearLayout>
+        </RelativeLayout>
+
+        <ScrollView
+            android:id="@+id/ln_main_info"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/relative_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_marginLeft="10dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:src="@drawable/user_icon_orange"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"/>
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="5dp"
+                        android:text="About me"
+                        android:textSize="23dp"
+                        android:fontFamily="@font/corbelbold"
+                        android:textColor="@color/orange"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="40dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:src="@drawable/email_orange"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"/>
+                    <TextView
+                        android:id="@+id/email_user"
+                        android:layout_marginLeft="10dp"
+                        android:text="datdo7549@gmail.com"
+                        android:fontFamily="@font/ebrima"
+                        android:textColor="#ffffff"
+                        android:textSize="13sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="40dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:src="@drawable/call_orange"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"/>
+                    <TextView
+                        android:id="@+id/phone_user"
+                        android:layout_marginLeft="10dp"
+                        android:text="0795949794"
+                        android:fontFamily="@font/ebrima"
+                        android:textColor="#ffffff"
+                        android:textSize="13sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="40dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:src="@drawable/location_orange"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"/>
+                    <TextView
+                        android:id="@+id/address_user"
+                        android:layout_marginLeft="10dp"
+                        android:text="District 5, HCM city"
+                        android:fontFamily="@font/ebrima"
+                        android:textColor="#ffffff"
+                        android:textSize="13sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="40dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:src="@drawable/date_orange"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"/>
+                    <TextView
+                        android:id="@+id/dob_user"
+                        android:layout_marginLeft="10dp"
+                        android:text="03/06/1999"
+                        android:fontFamily="@font/ebrima"
+                        android:textColor="#ffffff"
+                        android:textSize="13sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="40dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:src="@drawable/email_orange"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"/>
+                    <TextView
+                        android:layout_marginLeft="10dp"
+                        android:text="Not verification"
+                        android:fontFamily="@font/ebrima"
+                        android:textColor="#ffffff"
+                        android:textSize="13sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="40dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:src="@drawable/call_orange"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"/>
+                    <TextView
+                        android:layout_marginLeft="10dp"
+                        android:text="Not verification"
+                        android:fontFamily="@font/ebrima"
+                        android:textColor="#ffffff"
+                        android:textSize="13sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:src="@drawable/info_app"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"/>
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="5dp"
+                        android:text="About this app"
+                        android:textSize="23dp"
+                        android:fontFamily="@font/corbelbold"
+                        android:textColor="@color/orange"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="40dp"
+                    android:text="Final project of Software Development for\nMobile Devices\n\nInstructors: Truong Phuoc Loc"
+                    android:fontFamily="@font/ebrima"
+                    android:textColor="#ffffff"
+                    android:textSize="13sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
         </ScrollView>
 
+        <ImageView
+            android:id="@+id/update_info_image"
+            android:layout_above="@id/ln_main_info"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="35dp"
+            android:layout_marginBottom="-30dp"
+            android:src="@drawable/edit_user_info"
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
     </RelativeLayout>
+
+
+
 
 
 </FrameLayout>

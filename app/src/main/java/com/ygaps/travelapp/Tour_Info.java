@@ -6,11 +6,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -38,6 +42,10 @@ import com.ygaps.travelapp.Adapter.CustomAdapterForTourInfo_StopPoint;
 import com.ygaps.travelapp.Model.Add_Stop_Point_Data;
 import com.ygaps.travelapp.Model.Add_Stop_Point_Result;
 import com.ygaps.travelapp.Model.CommentResult_TourInfo;
+import com.ygaps.travelapp.Model.InviteData;
+import com.ygaps.travelapp.Model.InviteMemberData;
+import com.ygaps.travelapp.Model.InviteMember_Result;
+import com.ygaps.travelapp.Model.InviteResult;
 import com.ygaps.travelapp.Model.Member;
 import com.ygaps.travelapp.Model.RemoveStopPointResult;
 import com.ygaps.travelapp.Model.SendCommentData;
@@ -98,6 +106,7 @@ public class Tour_Info extends AppCompatActivity {
     private Dialog send_rating_popup;
     private ImageView add_comment_of_user;
     private ImageView add_rating;
+    private ImageView add_member;
 
     private double mNewLat;
     private double mNewLong;
@@ -149,7 +158,7 @@ public class Tour_Info extends AppCompatActivity {
             @Override
             public void onResponse(Call<TourInforResult> call, Response<TourInforResult> response) {
                 if (!response.isSuccessful()) {
-                    Toast.makeText(Tour_Info.this, "Failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Tour_Info.this, "That bai", Toast.LENGTH_SHORT).show();
                 } else {
                     //Lay duoc danh sach Stop Point cua cai tour do:
                     final ArrayList<StopPointResult_TourInfo> stopPointResult_tourInfo = response.body().getStopPoints();
@@ -172,7 +181,7 @@ public class Tour_Info extends AppCompatActivity {
                     Date endD = new Date(miliEndDate);
                     DateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy");
                     String temp2 = dateFormat1.format(endD);
-                    dateBuild.append(temp1).append(" - ").append(temp2);
+                    dateBuild.append(temp1).append(" -> ").append(temp2);
                     date_tour_info.setText(dateBuild);
 
                     //Xu ly cost
@@ -187,7 +196,7 @@ public class Tour_Info extends AppCompatActivity {
                     StringBuilder costBuild = new StringBuilder();
                     final String minCost = dcf.format(min);
                     final String maxCost = dcf.format(max);
-                    costBuild.append(minCost).append(" - ").append(maxCost).append(" $");
+                    costBuild.append(minCost).append("$ -> ").append(maxCost).append("$");
                     cost_tour_info.setText(costBuild);
                     //Xu ly adult, child
                     adult_tour_info.setText(response.body().getAdults() + "");
@@ -239,7 +248,7 @@ public class Tour_Info extends AppCompatActivity {
                                     Date endD = new Date(miliEndDate);
                                     DateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy");
                                     String temp2 = dateFormat1.format(endD);
-                                    dateBuild.append(temp1).append(" - ").append(temp2);
+                                    dateBuild.append(temp1).append(" -> ").append(temp2);
                                     date_stop_point.setText(dateBuild);
 
                                     //Xu ly cost
@@ -254,7 +263,7 @@ public class Tour_Info extends AppCompatActivity {
                                     StringBuilder costBuild = new StringBuilder();
                                     String minCost = dcf.format(min);
                                     String maxCost = dcf.format(max);
-                                    costBuild.append(minCost).append(" - ").append(maxCost).append(" $");
+                                    costBuild.append(minCost).append("$ -> ").append(maxCost).append("$");
                                     cost_stop_point.setText(costBuild);
 
                                     type_service.setText(stopPointResult_tourInfo.get(position).getServiceTypeId() + "");
@@ -284,7 +293,7 @@ public class Tour_Info extends AppCompatActivity {
                                         update_stop_point.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                                         update_stop_point.setContentView(R.layout.add_stop_point);
                                         TextView title = update_stop_point.findViewById(R.id.title_add_stop_point);
-                                        title.setText("Update Stop point");
+                                        title.setText("Update Stop Point");
                                         final EditText newName = update_stop_point.findViewById(R.id.diem_xuat_phat);
                                         final Spinner type = update_stop_point.findViewById(R.id.restaurant);
                                         ArrayAdapter<CharSequence> adapter_byname1 = ArrayAdapter.createFromResource(Tour_Info.this, R.array.service_type, android.R.layout.simple_spinner_item);
@@ -454,9 +463,9 @@ public class Tour_Info extends AppCompatActivity {
                                                     @Override
                                                     public void onResponse(Call<Add_Stop_Point_Result> call, Response<Add_Stop_Point_Result> response) {
                                                         if (!response.isSuccessful()) {
-                                                            Toast.makeText(Tour_Info.this, "Failed" + response.code() + response.body(), Toast.LENGTH_SHORT).show();
+                                                            Toast.makeText(Tour_Info.this, "Ko Thanh cong" + response.code() + response.body(), Toast.LENGTH_SHORT).show();
                                                         } else {
-                                                            Toast.makeText(Tour_Info.this, "Successfully" + mMin_Cots + " " + mMax_Cost, Toast.LENGTH_SHORT).show();
+                                                            Toast.makeText(Tour_Info.this, "Thanh cong" + mMin_Cots + " " + mMax_Cost, Toast.LENGTH_SHORT).show();
                                                         }
                                                     }
 
@@ -482,10 +491,10 @@ public class Tour_Info extends AppCompatActivity {
                                             public void onResponse(Call<RemoveStopPointResult> call, Response<RemoveStopPointResult> response) {
                                                 if (!response.isSuccessful())
                                                 {
-                                                    Toast.makeText(getApplicationContext(),"Remove stop point failed",Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(getApplicationContext(),"Xoa diem dung khong thanh cong",Toast.LENGTH_SHORT).show();
                                                 }
                                                 else{
-                                                    Toast.makeText(getApplicationContext(),"Remove stop point successfully",Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(getApplicationContext(),"Xoa diem dung thanh cong",Toast.LENGTH_SHORT).show();
                                                     finish();
                                                     startActivity(getIntent());
                                                 }
@@ -613,10 +622,10 @@ public class Tour_Info extends AppCompatActivity {
                             public void onResponse(Call<SendRatingResult> call, Response<SendRatingResult> response) {
                                 if (!response.isSuccessful())
                                 {
-                                    Toast.makeText(getApplicationContext(),"Send rating failed",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(),"Gui danh gia khong thanh cong",Toast.LENGTH_SHORT).show();
                                 }
                                 else {
-                                    Toast.makeText(getApplicationContext(),"Send rating successfully",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(),"Gui danh gia thanh cong",Toast.LENGTH_SHORT).show();
                                     send_rating_popup.dismiss();
                                     finish();
                                     startActivity(getIntent());
@@ -633,7 +642,55 @@ public class Tour_Info extends AppCompatActivity {
 
             }
         });
+        add_member.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Map<String, String> map = new HashMap<>();
+                map.put("Authorization", token);
+                InviteData inviteMemberData=new InviteData(id_tour,"641",true);
+                Call<InviteResult> call_4=jsonPlaceHolderApi.inviteMember(map,inviteMemberData);
+                call_4.enqueue(new Callback<InviteResult>() {
+                    @Override
+                    public void onResponse(Call<InviteResult> call, Response<InviteResult> response) {
+                        if (!response.isSuccessful())
+                        {
+                            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast toast = Toast.makeText(getApplicationContext(), "k thanh", Toast.LENGTH_SHORT);
+                                    toast.show();
+                                }
+                            });
+
+                        }
+                        else {
+                            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast toast = Toast.makeText(getApplicationContext(), "thanh cong", Toast.LENGTH_SHORT);
+                                    toast.show();
+                                }
+                            });
+
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<InviteResult> call, final Throwable t) {
+                        new Handler(Looper.getMainLooper()).post(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast toast = Toast.makeText(getApplicationContext(), "Something", Toast.LENGTH_SHORT);
+                                toast.show();
+                            }
+                        });
+
+                    }
+                });
+
+            }
+        });
     }
+
 
     private void mapping() {
         name_tour_info = findViewById(R.id.name_tour_info);
@@ -654,6 +711,8 @@ public class Tour_Info extends AppCompatActivity {
 
         send_rating_popup = new Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
         Objects.requireNonNull(send_rating_popup.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        add_member=findViewById(R.id.add_member);
     }
 
     @Override

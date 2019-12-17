@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,6 +21,7 @@ import com.ygaps.travelapp.LoginActivity;
 import com.ygaps.travelapp.R;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.ygaps.travelapp.RegisterActivity;
 
 import java.io.IOException;
 
@@ -32,17 +35,18 @@ import static com.ygaps.travelapp.LoginActivity.URL;
 
 public class Forgot_Frag_2 extends Fragment {
     final static String DATA_RECEIVE = "data_receive";
-    private EditText OTP_receive;
+    private EditText n1,n2,n3,n4,n5,n6;
     private EditText newPassword;
-    private Button send_new_pass;
-    private Button back_to;
+    private TextView send_new_pass;
+    private ImageView back;
     private View viewRoot;
     private String userID;
-    private Forgot_Frag_1.OnClickButtonListener onClickButtonListener;
+    private String emailorphone;
+    private OnClickButtonListener_2 onClickButtonListener_2;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
 
-    public void setOnClickButtonListener(Forgot_Frag_1.OnClickButtonListener onClickButtonListener) {
-        this.onClickButtonListener = onClickButtonListener;
+    public void setOnClickButtonListener(OnClickButtonListener_2 onClickButtonListener_2) {
+        this.onClickButtonListener_2 = onClickButtonListener_2;
     }
 
     @Nullable
@@ -53,7 +57,8 @@ public class Forgot_Frag_2 extends Fragment {
         send_new_pass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                VerifyOTP_Data verifyOTP_data=new VerifyOTP_Data(Integer.parseInt(userID),newPassword.getText().toString(),OTP_receive.getText().toString());
+                String OTP_receive=n1.getText().toString()+n2.getText().toString()+n3.getText().toString()+n4.getText().toString()+n5.getText().toString()+n6.getText().toString();
+                VerifyOTP_Data verifyOTP_data=new VerifyOTP_Data(Integer.parseInt(userID),newPassword.getText().toString(),OTP_receive);
                 Call<VerifyOTP_Result> call=jsonPlaceHolderApi.verifyOTP(verifyOTP_data);
                 call.enqueue(new Callback<VerifyOTP_Result>() {
                     @Override
@@ -70,15 +75,12 @@ public class Forgot_Frag_2 extends Fragment {
                         else
                         {
                             Toast.makeText(getContext(),"Thanh cong",Toast.LENGTH_SHORT).show();
-                            send_new_pass.setVisibility(View.GONE);
-                            back_to.setVisibility(View.VISIBLE);
-                            back_to.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    Intent intent=new Intent(getContext(), LoginActivity.class);
-                                    startActivity(intent);
-                                }
-                            });
+                            Bundle bundle=new Bundle();
+                            bundle.putString("email",emailorphone);
+                            bundle.putString("password",newPassword.getText().toString());
+                            Intent intent=new Intent(getContext(),LoginActivity.class);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
                         }
                     }
 
@@ -89,11 +91,22 @@ public class Forgot_Frag_2 extends Fragment {
                 });
             }
         });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickButtonListener_2.backHome();
+            }
+        });
         return viewRoot;
     }
 
     private void mapping() {
-        OTP_receive=viewRoot.findViewById(R.id.OTP);
+        n1=viewRoot.findViewById(R.id.num1);
+        n2=viewRoot.findViewById(R.id.num2);
+        n3=viewRoot.findViewById(R.id.num3);
+        n4=viewRoot.findViewById(R.id.num4);
+        n5=viewRoot.findViewById(R.id.num5);
+        n6=viewRoot.findViewById(R.id.num6);
         newPassword=viewRoot.findViewById(R.id.new_password);
         send_new_pass=viewRoot.findViewById(R.id.send_request);
         Gson gson=new GsonBuilder().serializeNulls().create();
@@ -102,7 +115,7 @@ public class Forgot_Frag_2 extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         jsonPlaceHolderApi=retrofit.create(JsonPlaceHolderApi.class);
-        back_to=viewRoot.findViewById(R.id.back_to_login_2);
+        back=viewRoot.findViewById(R.id.back_homepage4);
     }
 
     @Override
@@ -111,6 +124,12 @@ public class Forgot_Frag_2 extends Fragment {
         Bundle args = getArguments();
         if (args != null) {
             userID=args.getString(DATA_RECEIVE);
+            emailorphone=args.getString("email_or_phone");
         }
+    }
+
+    public interface OnClickButtonListener_2
+    {
+        void backHome();
     }
 }

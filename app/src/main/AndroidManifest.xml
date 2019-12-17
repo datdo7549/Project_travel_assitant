@@ -16,8 +16,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Temp"></activity>
-        <!-- <activity android:name="com.ygaps.travelapp.Temp"></activity> -->
+        <activity android:name=".Homepage">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Temp" /> <!-- <activity android:name="com.ygaps.travelapp.Temp"></activity> -->
         <activity android:name=".ForgotActivity" />
         <activity
             android:name=".Tour_Info"
@@ -37,13 +43,7 @@
         <activity android:name=".MapActivity" />
         <activity android:name=".CreateActivity" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".LoginActivity"></activity>
         <activity android:name=".MainActivity" />
         <activity
             android:name="com.facebook.FacebookActivity"
@@ -53,10 +53,9 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
-
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/baseline_message_black_18dp"/>
+            android:resource="@drawable/baseline_message_black_18dp" />
 
         <service android:name=".MyFireBaseService">
             <intent-filter>

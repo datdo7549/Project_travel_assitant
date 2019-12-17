@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,9 +64,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private static final int RC_GET_AUTH_CODE = 9003;
     private EditText emailPhone;
     private EditText password;
-    private Button login;
+    private TextView login;
     private TextView forgot_pass;
-    private TextView register;
+    private ImageView back;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     private JsonPlaceHolderAPI2 jsonPlaceHolderAPI2;
     private ProgressDialog progressDialog;
@@ -85,9 +86,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mapping();
         keyhash();
         login.setOnClickListener(this);
-        register.setOnClickListener(this);
         googleLogin.setOnClickListener(this);
         forgot_pass.setOnClickListener(this);
+        back.setOnClickListener(this);
         loginButton.setReadPermissions(Arrays.asList("public_profile","email"));
         setLogin_Button();
         Button fb = (Button) findViewById(R.id.fb);
@@ -172,8 +173,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void mapping() {
         emailPhone=findViewById(R.id.edit_emailPhone);
         password=findViewById(R.id.edit_password);
-        login=findViewById(R.id.login_button);
-        register=findViewById(R.id.register);
+        login=findViewById(R.id.login_text_view);
         Gson gson=new GsonBuilder().serializeNulls().create();
         Retrofit retrofit=new Retrofit.Builder()
                 .baseUrl(URL)
@@ -188,6 +188,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         loginButton=(LoginButton) findViewById(R.id.loginfb_button);
         googleLogin=findViewById(R.id.gg);
         forgot_pass=findViewById(R.id.forgot_password);
+        back=findViewById(R.id.back_homepage);
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -195,7 +196,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (requestCode == RC_GET_AUTH_CODE) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             Log.d("ALO", "onActivityResult:GET_AUTH_CODE:success:" + result.getStatus().isSuccess());
-
             if (result.isSuccess()) {
                 // [START get_auth_code]
                 GoogleSignInAccount acct = result.getSignInAccount();
@@ -253,7 +253,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId())
         {
-            case R.id.login_button:
+            case R.id.login_text_view:
             {
                 String mEmailPhone=emailPhone.getText().toString();
                 String mPassword=password.getText().toString();
@@ -290,12 +290,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 });
                 break;
             }
-            case R.id.register:
-            {
-                Intent intent=new Intent(LoginActivity.this,RegisterActivity.class);
-                startActivity(intent);
-                break;
-            }
             case R.id.gg:
             {
                 String serverClientId = getString(R.string.server_client_id);
@@ -317,6 +311,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Intent intent=new Intent(LoginActivity.this,ForgotActivity.class);
                 startActivity(intent);
                 break;
+            }
+            case R.id.back_homepage:
+            {
+                Intent intent=new Intent(this,Homepage.class);
+                startActivity(intent);
             }
         }
     }

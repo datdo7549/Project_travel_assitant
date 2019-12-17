@@ -69,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
         int user_id_temp=bundle.getInt("user_id");
 
 
+
+
         SharedPreferences sharedPreferences = getSharedPreferences("com.ygaps.travel", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("token_user",token);
@@ -77,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         Log.d("DLTK", token);
+
+
 
 
         actionBar = getSupportActionBar();
@@ -93,21 +97,31 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(),"User id ne: "+user_id,Toast.LENGTH_SHORT).show();
         pageAdapter = new PageAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(pageAdapter);
-
+        tabLayout.getTabAt(0).setIcon(R.drawable.menu_icon_white);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 if (tab.getPosition() == 0) {
+                    resetIcon();
                     actionBar.setTitle("All tour");
+                    tabLayout.getTabAt(0).setIcon(R.drawable.menu_icon_white);
                 } else if (tab.getPosition() == 1) {
+                    resetIcon();
                     actionBar.setTitle("My tour");
+                    tabLayout.getTabAt(1).setIcon(R.drawable.my_tour_icon_white);
                 } else if (tab.getPosition() == 2)  {
+                    resetIcon();
                     actionBar.setTitle("Explore");
+                    tabLayout.getTabAt(2).setIcon(R.drawable.travel_icon_white);
                 } else if (tab.getPosition() == 3){
+                    resetIcon();
                     actionBar.setTitle("Notification");
+                    tabLayout.getTabAt(3).setIcon(R.drawable.notification_icon_white);
                 }else {
+                    resetIcon();
                     actionBar.setTitle("Setting");
+                    tabLayout.getTabAt(4).setIcon(R.drawable.setting_icon_white);
                 }
                 viewPager.setCurrentItem(tab.getPosition());
             }
@@ -134,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
         return user_id;
     }
 
-    public void sendTokenToServer(String token_user, String token_firebase) // token user and token_device
+    public void sendTokenToServer(String token_user, String token_firebase)
     {
         String device_id= Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
         Map<String, String> map = new HashMap<>();
@@ -160,5 +174,13 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    public void resetIcon()
+    {
+        tabLayout.getTabAt(0).setIcon(R.drawable.menu_icon_black);
+        tabLayout.getTabAt(1).setIcon(R.drawable.my_tour_icon_black);
+        tabLayout.getTabAt(2).setIcon(R.drawable.travel_icon_black);
+        tabLayout.getTabAt(3).setIcon(R.drawable.notification_icon_black);
+        tabLayout.getTabAt(4).setIcon(R.drawable.setting_icon_black);
     }
 }

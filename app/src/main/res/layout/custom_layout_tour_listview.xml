@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="220dp"
-    android:background="@drawable/item_cus_list"
     android:descendantFocusability="blocksDescendants">
 
 
@@ -12,18 +11,41 @@
         android:id="@+id/image_tour"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-
-    <TextView
-        android:textSize="28sp"
-        android:layout_marginTop="28dp"
-        android:layout_marginLeft="15dp"
-        android:id="@+id/name"
+    <LinearLayout
+        android:layout_marginTop="70dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:text="Hcm-Hanoi"
-        android:textStyle="bold"
-        android:textColor="#fff"/>
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/date_of_tour"
+            android:textColor="#ffffff"
+            android:text="Thu, 16 Dec"
+            android:textSize="23sp"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_below="@id/date_of_tour"
+            android:fontFamily="@font/corbelbold"
+            android:textSize="28sp"
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:text="Hcm-Hanoi"
+            android:textStyle="bold"
+            android:textColor="#ffffff"/>
+        <TextView
+            android:id="@+id/detail"
+            android:textColor="#ffffff"
+            android:textSize="12sp"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/edit_delete"
         android:layout_alignParentRight="true"

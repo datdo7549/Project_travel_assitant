@@ -2,7 +2,10 @@ package com.ygaps.travelapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.ygaps.travelapp.Model.Forgot_Frag_2;
 
@@ -16,6 +19,7 @@ public class ForgotActivity extends AppCompatActivity implements Forgot_Frag_1.D
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_forgot);
         initFrag();
         show_forgot_frag_1();
@@ -36,12 +40,17 @@ public class ForgotActivity extends AppCompatActivity implements Forgot_Frag_1.D
             public void clickButton() {
                 show_forgot_frag_2();
             }
+            @Override
+            public void backHome(){
+                Intent intent=new Intent(getApplicationContext(),LoginActivity.class);
+                startActivity(intent);
+            }
         });
         forgot_frag_2=new Forgot_Frag_2();
-        forgot_frag_2.setOnClickButtonListener(new Forgot_Frag_1.OnClickButtonListener() {
+        forgot_frag_2.setOnClickButtonListener(new Forgot_Frag_2.OnClickButtonListener_2() {
             @Override
-            public void clickButton() {
-
+            public void backHome() {
+                Toast.makeText(getApplicationContext(),"Alooo",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -53,10 +62,11 @@ public class ForgotActivity extends AppCompatActivity implements Forgot_Frag_1.D
 
 
     @Override
-    public void passData(String data) {
+    public void passData(String data,String EmailOrPhone) {
         Forgot_Frag_2 fragmentB = new Forgot_Frag_2 ();
         Bundle args = new Bundle();
         args.putString("data_receive", data);
+        args.putString("email_or_phone", EmailOrPhone);
         fragmentB .setArguments(args);
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.id_main, fragmentB )

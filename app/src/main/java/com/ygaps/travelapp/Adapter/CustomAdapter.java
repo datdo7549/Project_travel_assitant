@@ -18,8 +18,14 @@ import com.ygaps.travelapp.R;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
+import java.text.DateFormat;
+import java.text.DateFormatSymbols;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
@@ -43,7 +49,7 @@ public class CustomAdapter extends ArrayAdapter<Tour>  {
     {
         ImageView imageTour,imageName,imageDate,imageAdult,imageChild,imageCost;
         LinearLayout linearLayout;
-        TextView name,date,adult,child,cost;
+        TextView name,date,adult,child,cost,detail;
         ImageButton btnCopy;
         LinearLayout edit_delete;
     }
@@ -58,6 +64,8 @@ public class CustomAdapter extends ArrayAdapter<Tour>  {
         {
             viewRow= layoutInflater.inflate(resource,parent,false);
             viewHolder.imageTour=viewRow.findViewById(R.id.image_tour);
+            viewHolder.date=viewRow.findViewById(R.id.date_of_tour);
+            viewHolder.detail=viewRow.findViewById(R.id.detail);
              /*
             viewHolder.imageName=viewRow.findViewById(R.id.imageName);
             viewHolder.imageDate=viewRow.findViewById(R.id.imageDate);
@@ -81,17 +89,16 @@ public class CustomAdapter extends ArrayAdapter<Tour>  {
             viewHolder = (ViewHolder) viewRow.getTag();
         }
         ArrayList<String> arrayListImage=new ArrayList<>();
-        arrayListImage.add("https://cdn.pixabay.com/photo/2017/04/04/23/36/ben-thanh-market-2203445_960_720.jpg");
-        arrayListImage.add("https://cdn.pixabay.com/photo/2016/07/24/14/02/saigon-1538520_960_720.jpg");
-        arrayListImage.add("https://images.unsplash.com/photo-1543355890-20bc0a26fda1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80");
-        arrayListImage.add("https://cdn.pixabay.com/photo/2016/04/23/19/03/ho-chi-minh-city-1348092_960_720.jpg");
+        arrayListImage.add("https://images.unsplash.com/photo-1573913301579-8ef529408c15?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80");
+        arrayListImage.add("https://images.unsplash.com/photo-1506800075271-265b16abe1e7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80");
+        arrayListImage.add("https://images.unsplash.com/photo-1557770402-145d15ef1596?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80");
+        arrayListImage.add("https://images.unsplash.com/photo-1570192659049-c4b377b85dae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80");
+        arrayListImage.add("https://images.unsplash.com/photo-1488267580696-6fa71c9f7515?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80");
+        arrayListImage.add("https://images.unsplash.com/photo-1515136011719-8766a8597ae1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=794&q=80");
         Random random;
         random=new Random();
-
-        final Transformation transformation = new RoundedCornersTransformation(45,0);
         Picasso.get()
-                .load(arrayListImage.get(random.nextInt(4)))
-                .transform(transformation)
+                .load(arrayListImage.get(random.nextInt(6)))
                 .fit()
                 .into(viewHolder.imageTour);
 
@@ -118,20 +125,30 @@ public class CustomAdapter extends ArrayAdapter<Tour>  {
 
 
         // xu li start vs end Date
-        /*
+
         long miliStartDate=Long.parseLong(tours.get(position).getStartDate());
         final Date startD=new Date(miliStartDate);
         DateFormat dateFormat=new SimpleDateFormat("dd/MM/yyyy");
+
         String temp1=dateFormat.format(startD);
-        StringBuilder dateBuild=new StringBuilder();
+        int day=Integer.parseInt(temp1.substring(0,2));
+        int month=Integer.parseInt(temp1.substring(3,5));
+        int year=Integer.parseInt(temp1.substring(6,10));
 
-        long miliEndDate=Long.parseLong(tours.get(position).getEndDate());
-        Date endD=new Date(miliEndDate);
-        DateFormat dateFormat1=new SimpleDateFormat("dd/MM/yyyy");
-        String temp2=dateFormat1.format(endD);
-        dateBuild.append(temp1).append("-").append(temp2);
-        viewHolder.date.setText(dateBuild.toString());
+        String dateString = String.format("%d-%d-%d", year, month, day);
+        Date date = null;
+        try {
+            date = new SimpleDateFormat("yyyy-M-d").parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
+        String dayOfWeek = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(date);
+        String monthOfYear=new SimpleDateFormat("MMM", Locale.ENGLISH).format(date);
+        viewHolder.date.setText(dayOfWeek+", "+day+" "+monthOfYear);
+
+        viewHolder.detail.setText("Hà Nội tháng 5. Sen đã bắt đầu rời đầm về phố. Hồng liên,\nbạch liên, sen Hồ Tây, quỳ ở các đầm đua nhau bừng nở,\ntỏa hương thơm ngát...");
+        /*
         // set adult and child
         StringBuilder adultsBuild=new StringBuilder();
         adultsBuild.append((String.valueOf(tours.get(position).getAdults()))).append(" adults");
