@@ -81,6 +81,7 @@
             android:layout_weight="1">
             <Button
                 android:text="Sign up"
+                android:textColor="#ffffff"
                 android:id="@+id/button_sign_up_screen"
                 android:textAllCaps="false"
                 android:fontFamily="@font/corbelbold"
@@ -95,6 +96,7 @@
             android:layout_weight="1">
             <Button
                 android:id="@+id/button_login_screen"
+                android:textColor="#ffffff"
                 android:text="Login now"
                 android:textAllCaps="false"
                 android:fontFamily="@font/corbelbold"

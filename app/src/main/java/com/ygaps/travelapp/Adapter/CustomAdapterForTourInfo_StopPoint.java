@@ -18,6 +18,7 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
@@ -53,11 +54,17 @@ public class CustomAdapterForTourInfo_StopPoint extends ArrayAdapter<StopPointRe
         else {
             viewHolder=(ViewHolder)convertView.getTag();
         }
-
-        final Transformation transformation = new RoundedCornersTransformation(45,5);
+        ArrayList<String> arrayListImage=new ArrayList<>();
+        arrayListImage.add("https://images.unsplash.com/photo-1573913301579-8ef529408c15?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80");
+        arrayListImage.add("https://images.unsplash.com/photo-1506800075271-265b16abe1e7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80");
+        arrayListImage.add("https://images.unsplash.com/photo-1557770402-145d15ef1596?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80");
+        arrayListImage.add("https://images.unsplash.com/photo-1570192659049-c4b377b85dae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80");
+        arrayListImage.add("https://images.unsplash.com/photo-1488267580696-6fa71c9f7515?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80");
+        arrayListImage.add("https://images.unsplash.com/photo-1515136011719-8766a8597ae1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=794&q=80");
+        Random random;
+        random=new Random();
         Picasso.get()
-                .load("https://cdn.pixabay.com/photo/2017/04/04/23/36/ben-thanh-market-2203445_960_720.jpg")
-                .transform(transformation)
+                .load(arrayListImage.get(random.nextInt(6)))
                 .fit()
                 .into(viewHolder.img);
         viewHolder.tv.setText(arrayList.get(position).getName());

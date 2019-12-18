@@ -9,44 +9,46 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.ygaps.travelapp.Model.CommentResult_TourInfo;
 import com.ygaps.travelapp.R;
 
 import java.util.ArrayList;
 
-public class CustomAdapterForTourInfo_Comment extends ArrayAdapter<CommentResult_TourInfo> {
-    private Context context;
-    private int resource;
+public class CustomAdapterForTourInfo_Comment extends RecyclerView.Adapter<CustomAdapterForTourInfo_Comment.HorizontalViewHolder> {
     private ArrayList<CommentResult_TourInfo> arrayList;
-    public CustomAdapterForTourInfo_Comment(@NonNull Context context, int resource, @NonNull ArrayList<CommentResult_TourInfo> objects) {
-        super(context, resource, objects);
-        this.context=context;
-        this.resource=resource;
-        this.arrayList=objects;
+
+    public CustomAdapterForTourInfo_Comment(ArrayList<CommentResult_TourInfo> arrayList) {
+        this.arrayList = arrayList;
     }
 
-    public class ViewHolder{
-        private TextView tv_name;
-        private TextView tv_comment;
-    }
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        ViewHolder viewHolder;
-        if (convertView==null)
-        {
-            convertView= LayoutInflater.from(context).inflate(R.layout.list_comment_tour_info,parent,false);
-            viewHolder=new ViewHolder();
-            viewHolder.tv_name=convertView.findViewById(R.id.name_user_comment);
-            viewHolder.tv_comment=convertView.findViewById(R.id.comment_list_item);
-            convertView.setTag(viewHolder);
+    public HorizontalViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater inflater=LayoutInflater.from(parent.getContext());
+        View view=inflater.inflate(R.layout.list_comment_tour_info,parent,false);
+        return new HorizontalViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull HorizontalViewHolder holder, int position) {
+            holder.name_user_comment.setText(arrayList.get(position).getName());
+            holder.comment_string.setText(arrayList.get(position).getComment());
+    }
+
+    @Override
+    public int getItemCount() {
+        return arrayList.size();
+    }
+
+    public class HorizontalViewHolder extends RecyclerView.ViewHolder{
+        TextView name_user_comment;
+        TextView comment_string;
+        public HorizontalViewHolder(@NonNull View itemView) {
+            super(itemView);
+            name_user_comment=itemView.findViewById(R.id.name_user_comment);
+            comment_string=itemView.findViewById(R.id.comment_list_item);
         }
-        else {
-            viewHolder=(ViewHolder)convertView.getTag();
-        }
-        viewHolder.tv_name.setText(arrayList.get(position).getName());
-        viewHolder.tv_comment.setText(arrayList.get(position).getComment());
-        return convertView;
     }
 }

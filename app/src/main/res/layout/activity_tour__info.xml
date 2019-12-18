@@ -4,290 +4,272 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradienr_background2"
+    android:background="#000000"
     tools:context=".Tour_Info">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <RelativeLayout
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/image_tour_info"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="230dp"/>
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/cover_tour_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="230dp"/>
+                <ImageView
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/is_private_image"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"/>
+                <ImageView
+                    android:id="@+id/back_to_main"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/back_icon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"/>
+            </RelativeLayout>
             <ImageView
-                android:id="@+id/upload_image_tour_info"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/upload_avatar"
-                android:layout_width="50dp"
-                android:layout_height="50dp"/>
+                android:id="@+id/add_rating"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="-20dp"
+                android:layout_gravity="right"
+                android:src="@drawable/rating_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
             <LinearLayout
-                android:id="@+id/ln_main_1"
-                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
                 android:orientation="vertical"
-                android:layout_below="@+id/image_tour_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/name_tour_info"
+                    android:textSize="30sp"
+                    android:text="Hà Nội"
+                    android:fontFamily="@font/corbelbold"
+                    android:textColor="@color/orange"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="50dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:src="@drawable/time"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"/>
+                    <TextView
+                        android:id="@+id/date_tour_info"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:text="7 days"
+                        android:textColor="#ffffff"
+                        android:fontFamily="@font/ebrima"
+                        android:textSize="14sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:layout_marginLeft="20dp"
+                        android:src="@drawable/persion"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"/>
+                    <TextView
+                        android:id="@+id/adult_tour_info"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:text="2 adult, 1 child"
+                        android:textColor="#ffffff"
+                        android:fontFamily="@font/ebrima"
+                        android:textSize="14sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="50dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:src="@drawable/cost"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"/>
+                    <TextView
+                        android:id="@+id/cost_tour_info"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:text="~449$"
+                        android:textColor="#ffffff"
+                        android:fontFamily="@font/ebrima"
+                        android:textSize="14sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:layout_marginLeft="20dp"
+                        android:src="@drawable/status"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"/>
+                    <TextView
+                        android:id="@+id/status"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:text="Open"
+                        android:textColor="#ffffff"
+                        android:fontFamily="@font/ebrima"
+                        android:textSize="14sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@drawable/stop_point_icon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"/>
                 <TextView
-                    android:textColor="#fff"
-                    android:id="@+id/name_tour_info"
-                    android:textSize="35dp"
-                    android:layout_below="@+id/image_tour_info"
-                    android:layout_marginTop="6dp"
-                    android:text="TEXT"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="20sp"
+                    android:text="Stop Point(s)"
+                    android:fontFamily="@font/corbelbold"
+                    android:textColor="#ffffff"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
-                <LinearLayout
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <ImageView
-                        android:src="@drawable/calendar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <TextView
-                        android:layout_marginLeft="10dp"
-                        android:textColor="#fff"
-                        android:text="03/06/1999-07/08/1999"
-                        android:id="@+id/date_tour_info"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <ImageView
-                        android:src="@drawable/money"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <TextView
-                        android:layout_marginLeft="10dp"
-                        android:textColor="#fff"
-                        android:text="1000-5000"
-                        android:id="@+id/cost_tour_info"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
-                <RelativeLayout
-                    android:layout_marginTop="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <LinearLayout
-                        android:id="@+id/ln1_adult"
-                        android:layout_alignParentLeft="true"
-                        android:orientation="horizontal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                        <ImageView
-                            android:src="@drawable/adult"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
-                        <TextView
-                            android:textColor="#fff"
-                            android:layout_marginLeft="10dp"
-                            android:text="1"
-                            android:id="@+id/adult_tour_info"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_marginLeft="40dp"
-                        android:layout_toRightOf="@+id/ln1_adult"
-                        android:orientation="horizontal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                        <ImageView
-                            android:src="@drawable/baby"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
-                        <TextView
-                            android:textColor="#fff"
-                            android:layout_marginLeft="10dp"
-                            android:text="1"
-                            android:id="@+id/baby_tour_info"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
-                    </LinearLayout>
-                </RelativeLayout>
             </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ln_main_2"
-                android:orientation="vertical"
-                android:layout_marginLeft="15dp"
+            <ListView
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="15dp"
-                android:layout_below="@+id/ln_main_1"
+                android:nestedScrollingEnabled="true"
+                android:descendantFocusability="blocksDescendants"
+                android:divider="@null"
+                android:dividerHeight="13dp"
+                android:id="@+id/list_stop_point_tour_info1"
+                android:layout_width="match_parent"
+                android:layout_height="313dp">
+            </ListView>
+            <TextView
+                android:visibility="gone"
+                android:layout_marginTop="20dp"
+                android:id="@+id/stop_point_placehoder"
+                android:layout_gravity="center"
+                android:text="Hiện tại tour không có điểm dừng nào!"
+                android:textColor="#ffffff"
+                android:textSize="13sp"
+                android:fontFamily="@font/corbelbold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <RelativeLayout
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/comment_icon"
+                    android:src="@drawable/comment"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"/>
                 <TextView
-                    android:layout_marginBottom="10dp"
-                    android:textColor="#fff"
-                    android:textSize="28dp"
-                    android:text="Stoppoint"
+                    android:layout_toRightOf="@id/comment_icon"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="20sp"
+                    android:text="Comment(s)"
+                    android:fontFamily="@font/corbelbold"
+                    android:textColor="#ffffff"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
-                <ListView
-                    android:nestedScrollingEnabled="true"
-                    android:descendantFocusability="blocksDescendants"
-                    android:divider="@null"
-                    android:dividerHeight="13dp"
-                    android:id="@+id/list_stop_point_tour_info1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                </ListView>
-                <TextView
-                    android:textColor="#fff"
-                    android:visibility="gone"
-                    android:id="@+id/stop_point_placeholder"
-                    android:layout_gravity="center"
-                    android:text="There is no stoppoint currently"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_marginTop="30dp"
-                android:id="@+id/ln_main_3"
-                android:orientation="vertical"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_below="@+id/ln_main_2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginBottom="10dp"
-                        android:textColor="#fff"
-                        android:textSize="28dp"
-                        android:text="Comment"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <ImageView
-                        android:id="@+id/add_comment_of_user"
-                        android:layout_marginLeft="20dp"
-                        android:src="@drawable/add"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"/>
-                </LinearLayout>
+                <ImageView
+                    android:id="@+id/add_comment_of_user"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/plus"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"/>
+            </RelativeLayout>
 
-                <ListView
-                    android:nestedScrollingEnabled="true"
-                    android:focusable="true"
-                    android:dividerHeight="13dp"
-                    android:id="@+id/list_comment_tour_info"
-                    android:layout_width="match_parent"
-                    android:layout_height="213dp">
-                </ListView>
-                <TextView
-                    android:textColor="#fff"
-                    android:visibility="gone"
-                    android:id="@+id/comment_placeholder"
-                    android:layout_gravity="center"
-                    android:text="There is no comment currently"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_centerInParent="true"
-                android:layout_marginTop="30dp"
-                android:id="@+id/ln_main_4"
-                android:orientation="vertical"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_below="@+id/ln_main_3"
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="20dp"
+                android:id="@+id/list_comment_tour_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_marginBottom="10dp"
-                        android:textColor="#fff"
-                        android:textSize="28dp"
-                        android:text="Member"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <ImageView
-                        android:src="@drawable/add"
-                        android:id="@+id/add_member"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"/>
-                </LinearLayout>
 
-                <ListView
-                    android:nestedScrollingEnabled="true"
-                    android:divider="@null"
-                    android:dividerHeight="13dp"
-                    android:id="@+id/list_member_tour_info"
-                    android:layout_width="match_parent"
-                    android:layout_height="213dp">
-                </ListView>
-                <TextView
-                    android:textColor="#fff"
-                    android:visibility="gone"
-                    android:id="@+id/member_placeholder"
-                    android:layout_gravity="center"
-                    android:text="There is no member currently"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_marginTop="30dp"
-                android:id="@+id/ln_main_5"
-                android:orientation="vertical"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_below="@+id/ln_main_4"
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <TextView
+                android:visibility="gone"
+                android:layout_marginTop="20dp"
+                android:id="@+id/comment_placehoder"
+                android:layout_gravity="center"
+                android:text="Hiện tại tour không có comment nào!"
+                android:textColor="#ffffff"
+                android:textSize="13sp"
+                android:fontFamily="@font/corbelbold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <RelativeLayout
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <LinearLayout
-                    android:layout_gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:textColor="#fff"
-                        android:textSize="28dp"
-                        android:text="Rating"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <ImageView
-                        android:layout_gravity="center_vertical"
-                        android:id="@+id/add_rating"
-                        android:layout_marginLeft="20dp"
-                        android:src="@drawable/add"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"/>
-                </LinearLayout>
-
-                <ListView
-                    android:divider="@null"
-                    android:dividerHeight="13dp"
-                    android:id="@+id/list_rating_tour_info"
-                    android:layout_width="match_parent"
-                    android:layout_height="213dp">
-                </ListView>
+                <ImageView
+                    android:id="@+id/member_icon"
+                    android:src="@drawable/member"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"/>
                 <TextView
-                    android:textColor="#fff"
-                    android:visibility="gone"
-                    android:id="@+id/rating_placeholder"
-                    android:layout_gravity="center"
-                    android:text="There is no rating currently"
+                    android:layout_toRightOf="@id/member_icon"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="20sp"
+                    android:text="Member(s)"
+                    android:fontFamily="@font/corbelbold"
+                    android:textColor="#ffffff"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
-            </LinearLayout>
-        </RelativeLayout>
+                <ImageView
+                    android:id="@+id/add_member"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/plus"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"/>
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginBottom="20dp"
+                android:id="@+id/list_member_tour_info"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </androidx.recyclerview.widget.RecyclerView>
+            <TextView
+                android:layout_marginBottom="20dp"
+                android:visibility="gone"
+                android:layout_marginTop="20dp"
+                android:id="@+id/member_placeholder"
+                android:layout_gravity="center"
+                android:text="Hiện tại tour không có thành viên nào!"
+                android:textColor="#ffffff"
+                android:textSize="13sp"
+                android:fontFamily="@font/corbelbold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
     </ScrollView>
+
+
+
 </RelativeLayout>

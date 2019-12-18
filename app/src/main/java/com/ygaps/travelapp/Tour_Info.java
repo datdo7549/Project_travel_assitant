@@ -2,6 +2,8 @@ package com.ygaps.travelapp;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -36,6 +38,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.squareup.picasso.Transformation;
 import com.ygaps.travelapp.Adapter.CustomAdapterForTourInfo_Comment;
 import com.ygaps.travelapp.Adapter.CustomAdapterForTourInfo_Member;
 import com.ygaps.travelapp.Adapter.CustomAdapterForTourInfo_StopPoint;
@@ -72,6 +75,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
+import jp.wasabeef.picasso.transformations.MaskTransformation;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -82,20 +86,21 @@ import static com.ygaps.travelapp.LoginActivity.URL;
 import static com.ygaps.travelapp.MapActivity.arrayProvince;
 
 public class Tour_Info extends AppCompatActivity {
-    private ImageView upload_image_tour_info;
     private TextView name_tour_info;
     private TextView date_tour_info;
     private TextView cost_tour_info;
     private TextView adult_tour_info;
-    private TextView baby_tour_info;
+    private TextView status;
+    private ImageView isPrivate;
+    private ImageView back;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     private String id_tour;
     private String token;
     private String user_id;
-    private ImageView imagee_tour_info;
+    private ImageView cover_tour_imagee;
     private ListView listView_stop_point;
-    private ListView listView_comment;
-    private ListView listView_member;
+    private RecyclerView listView_comment;
+    private RecyclerView listView_member;
     private CustomAdapterForTourInfo_StopPoint customAdapterForTourInfoStopPoint;
     private CustomAdapterForTourInfo_Comment customAdapterForTourInfo_comment;
     private CustomAdapterForTourInfo_Member customAdapterForTourInfo_member;
@@ -122,24 +127,28 @@ public class Tour_Info extends AppCompatActivity {
         mapping();
 
 
-        upload_image_tour_info.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType("image/*");
-                startActivityForResult(intent, 2);
-            }
-        });
-        imagee_tour_info = findViewById(R.id.image_tour_info);
+
+        cover_tour_imagee = findViewById(R.id.cover_tour_image);
+        final Transformation transformation = new MaskTransformation(getApplicationContext(), R.drawable.rounded_convers_transformation);
+
         Picasso.get()
-                .load("https://cdn.pixabay.com/photo/2016/03/04/19/36/beach-1236581_960_720.jpg")
+                .load("https://images.unsplash.com/photo-1494851125693-26b0ada2b614?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80")
+                .transform(transformation)
                 .fit()
-                .into(imagee_tour_info);
+                .into(cover_tour_imagee);
+
+
         final Bundle bundle = getIntent().getExtras();
         id_tour = bundle.getString("tour_id");
         token = bundle.getString("token");
         user_id = bundle.getString("user_id_string");
 
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         Log.d("id", id_tour);
 
@@ -150,7 +159,7 @@ public class Tour_Info extends AppCompatActivity {
                 .build();
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 
-        Map<String, String> map = new HashMap<>();
+        final Map<String, String> map = new HashMap<>();
         map.put("Authorization", token);
 
         Call<TourInforResult> call = jsonPlaceHolderApi.getTourInfo(map, Integer.parseInt(id_tour));
@@ -163,6 +172,13 @@ public class Tour_Info extends AppCompatActivity {
                     //Lay duoc danh sach Stop Point cua cai tour do:
                     final ArrayList<StopPointResult_TourInfo> stopPointResult_tourInfo = response.body().getStopPoints();
 
+
+
+
+
+
+
+
                     //Lay duoc danh sach Comment cua cai tour do:
                     ArrayList<CommentResult_TourInfo> arrayComment = response.body().getComments();
 
@@ -170,19 +186,53 @@ public class Tour_Info extends AppCompatActivity {
                     ArrayList<Member> arrayMember = response.body().getMembers();
                     name_tour_info.setText(response.body().getName());
 
+                   Boolean is_Private=response.body().getPrivate();
+                   if (is_Private)
+                   {
+                       isPrivate.setBackgroundResource(R.drawable.lock);
+                   }
+                   else {
+                       isPrivate.setBackgroundResource(R.drawable.open);
+                   }
+
+                   switch (response.body().getStatus())
+                   {
+                       case -1:
+                       {
+                           status.setText("Canceled");
+                           break;
+                       }
+                       case 0:
+                       {
+                           status.setText("Open");
+                           break;
+                       }
+                       case 1:
+                       {
+                           status.setText("Started");
+                           break;
+                       }
+                       case 2:
+                       {
+                           status.setText("Closed");
+                           break;
+                       }
+                       default:
+                           break;
+                   }
                     long miliStartDate = Long.parseLong(response.body().getStartDate());
                     final Date startD = new Date(miliStartDate);
                     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                     String temp1 = dateFormat.format(startD);
-                    StringBuilder dateBuild = new StringBuilder();
+                    int start=Integer.parseInt(temp1.substring(0,2));
 
                     //Xu ly date
                     long miliEndDate = Long.parseLong(response.body().getEndDate());
                     Date endD = new Date(miliEndDate);
                     DateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy");
                     String temp2 = dateFormat1.format(endD);
-                    dateBuild.append(temp1).append(" -> ").append(temp2);
-                    date_tour_info.setText(dateBuild);
+                    int end=Integer.parseInt(temp2.substring(0,2));
+                    date_tour_info.setText((end-start)+"");
 
                     //Xu ly cost
                     DecimalFormat dcf = new DecimalFormat("#,###");
@@ -199,8 +249,7 @@ public class Tour_Info extends AppCompatActivity {
                     costBuild.append(minCost).append("$ -> ").append(maxCost).append("$");
                     cost_tour_info.setText(costBuild);
                     //Xu ly adult, child
-                    adult_tour_info.setText(response.body().getAdults() + "");
-                    baby_tour_info.setText(response.body().getChilds() + "");
+                    adult_tour_info.setText(response.body().getAdults() + " adult, "+response.body().getChilds()+" child");
 
 
                     //Xu li Stop Point
@@ -510,29 +559,28 @@ public class Tour_Info extends AppCompatActivity {
                                 return true;
                             }
                         });
-
-
-                    } else {
+                    }
+                    else {
                         listView_stop_point.setVisibility(View.GONE);
-                        TextView stop_point_placeholder = findViewById(R.id.stop_point_placeholder);
+                        TextView stop_point_placeholder=findViewById(R.id.stop_point_placehoder);
                         stop_point_placeholder.setVisibility(View.VISIBLE);
                     }
 
                     //Xu ly commnt
                     if (arrayComment.size() != 0) {
-                        customAdapterForTourInfo_comment = new CustomAdapterForTourInfo_Comment(Tour_Info.this, R.layout.list_comment_tour_info, arrayComment);
-                        listView_comment.setAdapter(customAdapterForTourInfo_comment);
-                    } else {
-                        listView_comment.setVisibility(View.GONE);
-                        TextView comment_placeholder = findViewById(R.id.comment_placeholder);
+                        listView_comment.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
+                        listView_comment.setAdapter(new CustomAdapterForTourInfo_Comment(arrayComment));
+                    }else
+                    {
+                        TextView comment_placeholder=findViewById(R.id.comment_placehoder);
                         comment_placeholder.setVisibility(View.VISIBLE);
+                        listView_comment.setVisibility(View.GONE);
                     }
 
                     //Xu ly member
                     if (arrayMember.size() != 0) {
-                        customAdapterForTourInfo_member = new CustomAdapterForTourInfo_Member(Tour_Info.this, R.layout.list_member_tour_info, arrayMember);
-                        listView_member.setClipToOutline(true);
-                        listView_member.setAdapter(customAdapterForTourInfo_member);
+                        listView_member.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
+                        listView_member.setAdapter(new CustomAdapterForTourInfo_Member(arrayMember));
                     } else {
                         listView_member.setVisibility(View.GONE);
                         TextView membeer_placeholder = findViewById(R.id.member_placeholder);
@@ -697,8 +745,6 @@ public class Tour_Info extends AppCompatActivity {
         date_tour_info = findViewById(R.id.date_tour_info);
         cost_tour_info = findViewById(R.id.cost_tour_info);
         adult_tour_info = findViewById(R.id.adult_tour_info);
-        baby_tour_info = findViewById(R.id.baby_tour_info);
-        upload_image_tour_info = findViewById(R.id.upload_image_tour_info);
         listView_stop_point = findViewById(R.id.list_stop_point_tour_info1);
         listView_comment = findViewById(R.id.list_comment_tour_info);
         listView_member = findViewById(R.id.list_member_tour_info);
@@ -713,6 +759,9 @@ public class Tour_Info extends AppCompatActivity {
         Objects.requireNonNull(send_rating_popup.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         add_member=findViewById(R.id.add_member);
+        status=findViewById(R.id.status);
+        isPrivate=findViewById(R.id.is_private_image);
+        back=findViewById(R.id.back_to_main);
     }
 
     @Override
@@ -748,5 +797,8 @@ public class Tour_Info extends AppCompatActivity {
         }
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

@@ -186,8 +186,8 @@ public class CreateActivity extends AppCompatActivity {
                         int mChild = Integer.parseInt(childs.getText().toString());
                         int mMin = Integer.parseInt(min.getText().toString());
                         int mMax = Integer.parseInt(max.getText().toString());
-                        Boolean mIsPrivate;
-                        if (isPrivate.getSelectedItem().toString() == "True") {
+                        final Boolean mIsPrivate;
+                        if (isPrivate.getSelectedItem().toString().equals("True")) {
                             mIsPrivate = true;
                         } else {
                             mIsPrivate = false;
@@ -214,7 +214,8 @@ public class CreateActivity extends AppCompatActivity {
                                     if (!response.isSuccessful()) {
                                         Toast.makeText(CreateActivity.this, "Failed", Toast.LENGTH_SHORT).show();
                                     } else {
-                                        Toast.makeText(CreateActivity.this, "Successfully", Toast.LENGTH_SHORT).show();
+
+                                        Toast.makeText(CreateActivity.this, "Successfully"+mIsPrivate, Toast.LENGTH_SHORT).show();
                                     }
                                 }
 
@@ -235,7 +236,7 @@ public class CreateActivity extends AppCompatActivity {
                                     if (!response.isSuccessful()) {
                                         Toast.makeText(CreateActivity.this, "Failed", Toast.LENGTH_SHORT).show();
                                     } else {
-                                        Toast.makeText(CreateActivity.this, "Successfully", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(CreateActivity.this, "Successfully"+mIsPrivate, Toast.LENGTH_SHORT).show();
                                         ID = response.body().getId();
                                         Bundle bundle = new Bundle();
                                         bundle.putString("token", token);

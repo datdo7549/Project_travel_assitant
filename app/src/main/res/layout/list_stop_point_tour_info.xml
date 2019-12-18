@@ -9,7 +9,7 @@
     <ImageView
             android:id="@+id/image_stop_point_tour_info"
             android:layout_width="match_parent"
-            android:layout_height="100dp"/>
+            android:layout_height="150dp"/>
     <TextView
             android:textSize="20sp"
             android:textColor="#fff"
@@ -26,19 +26,19 @@
         android:layout_alignParentRight="true"
         android:orientation="vertical"
         android:layout_width="wrap_content"
-        android:layout_height="97dp">
+        android:layout_height="150dp">
         <Button
             android:text="Edit"
             android:id="@+id/stop_point_edit"
             android:background="@drawable/cus_for_edit"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"/>
+            android:layout_height="75dp"/>
         <Button
             android:text="Delete"
             android:id="@+id/stop_point_delete"
             android:background="@drawable/cus_for_delete"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"/>
+            android:layout_height="75dp"/>
     </LinearLayout>
 
 

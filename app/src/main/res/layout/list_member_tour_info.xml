@@ -1,20 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:background="@drawable/item_cus_list"
+
     android:layout_height="match_parent">
-                <TextView
-                    android:layout_toRightOf="@id/avatar_member_tour_info"
-                    android:textSize="20sp"
-                    android:textColor="#000"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:text="Dat"
-                    android:id="@+id/name_member_list_item"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <ImageView
-                    android:id="@+id/avatar_member_tour_info"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"/>
+
+    <RelativeLayout
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal"
+        android:background="@drawable/comment_custom"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
+            android:id="@+id/avatar_member"
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
+        <TextView
+            android:layout_toRightOf="@+id/avatar_member"
+            android:layout_centerVertical="true"
+            android:fontFamily="@font/corbelbold"
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:text="Alo"
+            android:id="@+id/name_of_member"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
 </RelativeLayout>
