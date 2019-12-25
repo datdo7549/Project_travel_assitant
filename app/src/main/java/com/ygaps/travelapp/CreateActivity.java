@@ -17,6 +17,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,14 +43,12 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CreateActivity extends AppCompatActivity {
-    private ImageView imageViewBack;
+    private ImageView back;
     private TextView title;
     private EditText name_tour, start, end, adult, childs, min, max, image;
     private DatePickerDialog datePickerDialog;
-    private Spinner isPrivate;
-    private Spinner status;
     private LinearLayout linear_status;
-    private Button create_button;
+    private TextView create_text_view;
     public static final String URL = "http://35.197.153.192:3000/";
     private static final String TAG = "MAP";
     private static final int ERROR_DIALOG_REQUEST = 9001;
@@ -58,7 +58,15 @@ public class CreateActivity extends AppCompatActivity {
     private int id_tour;
     private int mode = 0;
     private static final int ERROR_DIALOG_REQUEST1 = 9001;
+    private RadioGroup isPrivate_Radio;
+    private RadioButton yes;
+    private RadioButton no;
 
+    private RadioGroup status_radio;
+    private RadioButton canceled;
+    private RadioButton started;
+    private RadioButton open;
+    private RadioButton closed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,10 +84,10 @@ public class CreateActivity extends AppCompatActivity {
             name_tour.setText(bundle.getString("name_temp"));
             title.setText("Update Tour");
             linear_status.setVisibility(View.VISIBLE);
-            create_button.setText("Update");
+            create_text_view.setText("Update");
 
         }
-        imageViewBack.setOnClickListener(new View.OnClickListener() {
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
@@ -140,30 +148,44 @@ public class CreateActivity extends AppCompatActivity {
         childs = findViewById(R.id.children);
         min = findViewById(R.id.minCost);
         max = findViewById(R.id.maxCost);
-        create_button = findViewById(R.id.create_button);
-        isPrivate = findViewById(R.id.isPrivate);
-        status = findViewById(R.id.status);
+        create_text_view = findViewById(R.id.create_text_view);
+
+
+        isPrivate_Radio=findViewById(R.id.is_private_radio);
+        yes=findViewById(R.id.radioButton_yes);
+        no=findViewById(R.id.radioButton_no);
+
+        status_radio=findViewById(R.id.status_radio);
+        canceled=findViewById(R.id.radioButton_canceled);
+        started=findViewById(R.id.radioButton_started);
+        open=findViewById(R.id.radioButton_open);
+        closed=findViewById(R.id.radioButton_closed);
+
+
+
+
+
+
         ArrayAdapter<CharSequence> adapter_byname = ArrayAdapter.createFromResource(CreateActivity.this, R.array.is_private, android.R.layout.simple_spinner_item);
         adapter_byname.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         ArrayAdapter<CharSequence> adapter_status = ArrayAdapter.createFromResource(CreateActivity.this, R.array.status, android.R.layout.simple_spinner_item);
         adapter_status.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        isPrivate.setAdapter(adapter_byname);
-        status.setAdapter(adapter_status);
+
         Gson gson = new GsonBuilder().serializeNulls().create();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-        imageViewBack = findViewById(R.id.back_create_tour);
+        back=findViewById(R.id.back_homepage5);
         linear_status = findViewById(R.id.linear_status);
         title = findViewById(R.id.title_text);
     }
 
     private void init() {
-        create_button.setOnClickListener(new View.OnClickListener() {
+        create_text_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (isServicesOK()) {
@@ -187,23 +209,36 @@ public class CreateActivity extends AppCompatActivity {
                         int mMin = Integer.parseInt(min.getText().toString());
                         int mMax = Integer.parseInt(max.getText().toString());
                         final Boolean mIsPrivate;
-                        if (isPrivate.getSelectedItem().toString().equals("True")) {
+
+                        if (yes.isChecked())
+                        {
                             mIsPrivate = true;
-                        } else {
+                        }
+                        else
+                        {
                             mIsPrivate = false;
                         }
                         if (mode == 1) {
 
                             int mStatus;
-                            if (status.getSelectedItem().toString().equals("Canceled")) {
+
+                            if (canceled.isChecked())
+                            {
                                 mStatus = -1;
-                            } else if (status.getSelectedItem().toString().equals("Open")) {
+                            }
+                            else if (open.isChecked())
+                            {
                                 mStatus = 0;
-                            } else if (status.getSelectedItem().toString().equals("Started")) {
+                            }
+                            else if (started.isChecked())
+                            {
                                 mStatus = 1;
-                            } else {
+                            }
+                            else {
                                 mStatus = 2;
                             }
+
+
                             Create_Tour_Data upadte_tour_data = new Create_Tour_Data(id_tour, mName, mStart, mEnd, mIsPrivate, mAdult, mChild, mMin, mMax, mStatus);
                             Map<String, String> map = new HashMap<>();
                             map.put("Authorization", token);

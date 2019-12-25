@@ -332,7 +332,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void keyhash()
     {
         try{
-            PackageInfo info=getPackageManager().getPackageInfo("com.example.loginandregister", PackageManager.GET_SIGNATURES);
+            PackageInfo info=getPackageManager().getPackageInfo("com.ygaps.travelapp", PackageManager.GET_SIGNATURES);
             for(Signature signature:info.signatures)
             {
                 MessageDigest md=MessageDigest.getInstance("SHA");
@@ -345,8 +345,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             e.printStackTrace();
         }
     }
-
-
     @Override
     protected void onStart() {
         super.onStart();

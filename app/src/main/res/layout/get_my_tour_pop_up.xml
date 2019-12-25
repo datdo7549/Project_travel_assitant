@@ -5,100 +5,86 @@
 
 
     <LinearLayout
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_centerInParent="true"
         android:orientation="vertical"
         android:background="@drawable/item_cus_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
         <TextView
-            android:layout_marginTop="10dp"
-            android:textSize="20sp"
-            android:textColor="#fff"
+
+            android:fontFamily="@font/corbelbold"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="25sp"
+            android:textColor="@color/green"
             android:layout_gravity="center"
-            android:text="Get list tour:"
+            android:text="Get list tour"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <LinearLayout
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="20dp"
-            android:layout_gravity="center"
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <Button
-                android:id="@+id/getMyTour_Normal"
-                android:text="Normal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <Button
-                android:id="@+id/getMyTour_Status"
-                android:text="By status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <Button
-                android:id="@+id/getMyStopPoint"
-                android:text="Get My Stop point"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
-
-
-
-
-        <LinearLayout
-            android:visibility="gone"
             android:layout_gravity="center"
             android:orientation="vertical"
             android:id="@+id/ln_normal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_marginBottom="20dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:layout_alignParentLeft="true"
+                    android:fontFamily="@font/corbelbold"
                     android:textColor="#fff"
                     android:text="Enter page num:"
-                    android:textSize="20sp"
+                    android:textSize="15sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <EditText
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/username_edit_custom"
                     android:id="@+id/pageIndex"
                     android:inputType="number"
-                    android:layout_marginLeft="20dp"
-                    android:hint="exp: 123"
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"/>
-            </LinearLayout>
+            </RelativeLayout>
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_marginBottom="20dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:layout_alignParentLeft="true"
+                    android:fontFamily="@font/corbelbold"
                     android:textColor="#fff"
                     android:text="Enter RowPerPage"
-                    android:textSize="20sp"
+                    android:textSize="15sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <EditText
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/username_edit_custom"
                     android:id="@+id/pageSize"
                     android:inputType="number"
-                    android:layout_marginLeft="20dp"
-                    android:hint="exp: 123"
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"/>
-            </LinearLayout>
+            </RelativeLayout>
 
         </LinearLayout>
 
         <Button
-            android:visibility="gone"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/button_cus"
             android:layout_gravity="center"
             android:id="@+id/get_my_tour_in_popup"
             android:text="Get"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_width="100dp"
+            android:layout_height="50dp"/>
 
 
 

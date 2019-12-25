@@ -7,6 +7,8 @@ import com.ygaps.travelapp.Model.Create_Tour_Result;
 import com.ygaps.travelapp.Model.DataGoogleLogin;
 import com.ygaps.travelapp.Model.FacebookLoginResult;
 import com.ygaps.travelapp.Model.Fb_data_login;
+import com.ygaps.travelapp.Model.GetCoordinate_Data;
+import com.ygaps.travelapp.Model.GetCoordinate_Result;
 import com.ygaps.travelapp.Model.GoogleLoginResult;
 import com.ygaps.travelapp.Model.InviteData;
 import com.ygaps.travelapp.Model.InviteMemberData;
@@ -108,5 +110,8 @@ public interface JsonPlaceHolderApi {
 
     @POST("user/update-password")
     Call<UpdatePasswordResult> updatePassword(@HeaderMap Map<String,String> headers, @Body UpdatePasswordData updatePasswordData);
+
+    @POST("tour/current-users-coordinate")
+    Call<GetCoordinate_Result> getCoordinate(@HeaderMap Map<String,String> headers, @Body GetCoordinate_Data getCoordinateData );
 
 }

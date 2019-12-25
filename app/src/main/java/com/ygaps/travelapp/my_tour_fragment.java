@@ -278,34 +278,24 @@ public class my_tour_fragment extends Fragment {
         Button normal;
         option_get_tour_popup.setContentView(R.layout.get_my_tour_pop_up);
         option_get_tour_popup.show();
-        normal=option_get_tour_popup.findViewById(R.id.getMyTour_Normal);
         getMyTourPopUp=option_get_tour_popup.findViewById(R.id.get_my_tour_in_popup);
-        normal.setOnClickListener(new View.OnClickListener() {
+        getMyTourPopUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LinearLayout ln_normal=option_get_tour_popup.findViewById(R.id.ln_normal);
-                ln_normal.setVisibility(View.VISIBLE);
-                getMyTourPopUp.setVisibility(View.VISIBLE);
-                getMyTourPopUp.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        EditText pageIndex=option_get_tour_popup.findViewById(R.id.pageIndex);
-                        EditText pageSize=option_get_tour_popup.findViewById(R.id.pageSize);
-                        if (checkEmpty(pageIndex,pageSize))
-                        {
-                            int mPageIndex=Integer.parseInt(pageIndex.getText().toString());
-                            int mPageSize=Integer.parseInt(pageSize.getText().toString());
-                            listView.setVisibility(View.VISIBLE);
-                            option_get_tour_popup.dismiss();
-                            loadMyTour(mPageIndex,mPageSize);
-                        }
-                        else
-                        {
-                            Toast.makeText(getContext(),"Vui lòng điền đủ thông tin",Toast.LENGTH_SHORT).show();
-                        }
-
-                    }
-                });
+                EditText pageIndex=option_get_tour_popup.findViewById(R.id.pageIndex);
+                EditText pageSize=option_get_tour_popup.findViewById(R.id.pageSize);
+                if (checkEmpty(pageIndex,pageSize))
+                {
+                    int mPageIndex=Integer.parseInt(pageIndex.getText().toString());
+                    int mPageSize=Integer.parseInt(pageSize.getText().toString());
+                    listView.setVisibility(View.VISIBLE);
+                    option_get_tour_popup.dismiss();
+                    loadMyTour(mPageIndex,mPageSize);
+                }
+                else
+                {
+                    Toast.makeText(getContext(),"Vui lòng điền đủ thông tin",Toast.LENGTH_SHORT).show();
+                }
 
             }
         });

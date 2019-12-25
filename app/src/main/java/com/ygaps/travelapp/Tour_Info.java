@@ -45,6 +45,8 @@ import com.ygaps.travelapp.Adapter.CustomAdapterForTourInfo_StopPoint;
 import com.ygaps.travelapp.Model.Add_Stop_Point_Data;
 import com.ygaps.travelapp.Model.Add_Stop_Point_Result;
 import com.ygaps.travelapp.Model.CommentResult_TourInfo;
+import com.ygaps.travelapp.Model.GetCoordinate_Data;
+import com.ygaps.travelapp.Model.GetCoordinate_Result;
 import com.ygaps.travelapp.Model.InviteData;
 import com.ygaps.travelapp.Model.InviteMemberData;
 import com.ygaps.travelapp.Model.InviteMember_Result;
@@ -171,10 +173,6 @@ public class Tour_Info extends AppCompatActivity {
                 } else {
                     //Lay duoc danh sach Stop Point cua cai tour do:
                     final ArrayList<StopPointResult_TourInfo> stopPointResult_tourInfo = response.body().getStopPoints();
-
-
-
-
 
 
 
@@ -699,13 +697,13 @@ public class Tour_Info extends AppCompatActivity {
                 Call<InviteResult> call_4=jsonPlaceHolderApi.inviteMember(map,inviteMemberData);
                 call_4.enqueue(new Callback<InviteResult>() {
                     @Override
-                    public void onResponse(Call<InviteResult> call, Response<InviteResult> response) {
+                    public void onResponse(Call<InviteResult> call, final Response<InviteResult> response) {
                         if (!response.isSuccessful())
                         {
                             new Handler(Looper.getMainLooper()).post(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Toast toast = Toast.makeText(getApplicationContext(), "k thanh", Toast.LENGTH_SHORT);
+                                    Toast toast = Toast.makeText(getApplicationContext(), "k thanh"+response.code(), Toast.LENGTH_SHORT);
                                     toast.show();
                                 }
                             });
@@ -735,6 +733,37 @@ public class Tour_Info extends AppCompatActivity {
                     }
                 });
 
+            }
+        });
+
+
+        isPrivate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Map<String, String> map = new HashMap<>();
+                map.put("Authorization", token);
+
+
+                GetCoordinate_Data getCoordinate_data=new GetCoordinate_Data(user_id,id_tour,200,200);
+                Call<GetCoordinate_Result> call_11=jsonPlaceHolderApi.getCoordinate(map,getCoordinate_data);
+                call_11.enqueue(new Callback<GetCoordinate_Result>() {
+                    @Override
+                    public void onResponse(Call<GetCoordinate_Result> call, Response<GetCoordinate_Result> response) {
+                        if (!response.isSuccessful())
+                        {
+                            Toast.makeText(getApplicationContext(),"Khong thanh cong",Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            Toast.makeText(getApplicationContext(),"Thanh cong"+response.body().getArrayList().get(0).get("user"),Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<GetCoordinate_Result> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }
