@@ -23,6 +23,7 @@ import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -125,8 +126,17 @@ public class CustomAdapter extends ArrayAdapter<Tour>  {
 
 
         // xu li start vs end Date
+        long miliStartDate=0;
+        if(tours.get(position).getStartDate() == null)
+        {
+            Calendar cal=Calendar.getInstance();
+            miliStartDate=cal.getTimeInMillis();
 
-        long miliStartDate=Long.parseLong(tours.get(position).getStartDate());
+        }
+        else
+        {
+            miliStartDate=Long.parseLong(tours.get(position).getStartDate());
+        }
         final Date startD=new Date(miliStartDate);
         DateFormat dateFormat=new SimpleDateFormat("dd/MM/yyyy");
 

@@ -43,12 +43,19 @@ public class MyFireBaseService extends FirebaseMessagingService {
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     private String title ="";
     private String body="";
+    private String id_tour;
+    private String token_user;
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
 
         Map data=remoteMessage.getData();
         RemoteMessage.Notification notification = remoteMessage.getNotification();
+
+
+
+        SharedPreferences sharedPreferences=getSharedPreferences("com.ygaps.travel",MODE_PRIVATE);
+        token_user=sharedPreferences.getString("token_user","");
 
         if (data.isEmpty()) { // message type is notification.
             Log.d("data","isNull");
@@ -59,6 +66,7 @@ public class MyFireBaseService extends FirebaseMessagingService {
 
             temp.append(data.get("hostName")).append(" invites you to Tour: ").append(data.get("name"));
 
+            id_tour=data.get("id").toString();
             body= temp.toString();
 
             showNotification("Invite to join a Tour",body);
@@ -75,7 +83,8 @@ public class MyFireBaseService extends FirebaseMessagingService {
         Bundle guiThongbao=new Bundle();
         guiThongbao.putInt("NOTIFICATION_ID",notificationID);
         guiThongbao.putString("MESSAGE_BODY",messaggeBody);
-
+        guiThongbao.putString("token_user",token_user);
+        guiThongbao.putString("id_tour",id_tour);
         intent.putExtras(guiThongbao);
 
         return intent;

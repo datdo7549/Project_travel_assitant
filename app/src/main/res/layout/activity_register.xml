@@ -24,9 +24,9 @@
             android:layout_gravity="center"
             android:src="@drawable/map_logo"
             android:layout_width="280dp"
-            android:layout_height="250dp"/>
+            android:layout_height="230dp"/>
         <TextView
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="-15dp"
             android:layout_marginLeft="20dp"
             android:layout_gravity="left"
             android:text="Join us!"
@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content"/>
             <EditText
                 android:id="@+id/email"
-                android:textSize="12sp"
+                android:textSize="17sp"
                 android:textColor="#ffffff"
                 android:textColorHint="#ffffff"
                 android:hint="Email or phone number"
@@ -78,7 +78,7 @@
                 android:layout_height="wrap_content"/>
             <EditText
                 android:id="@+id/fullName"
-                android:textSize="12sp"
+                android:textSize="17sp"
                 android:textColor="#ffffff"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/username_edit_custom"
@@ -94,7 +94,7 @@
                 android:layout_height="wrap_content"/>
             <EditText
                 android:id="@+id/password"
-                android:textSize="12sp"
+                android:textSize="17sp"
                 android:textColor="#ffffff"
                 android:inputType="textPassword"
                 android:layout_marginTop="20dp"
@@ -111,7 +111,7 @@
                 android:layout_height="wrap_content"/>
             <EditText
                 android:id="@+id/phone"
-                android:textSize="12sp"
+                android:textSize="17sp"
                 android:textColor="#ffffff"
                 android:inputType="phone"
                 android:layout_marginTop="20dp"
@@ -128,7 +128,7 @@
                 android:layout_height="wrap_content"/>
             <EditText
                 android:id="@+id/address"
-                android:textSize="12sp"
+                android:textSize="17sp"
                 android:textColor="#ffffff"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/username_edit_custom"
@@ -144,7 +144,7 @@
                 android:layout_height="wrap_content"/>
             <EditText
                 android:id="@+id/dob"
-                android:textSize="12sp"
+                android:textSize="17sp"
                 android:textColor="#ffffff"
                 android:inputType="date"
                 android:layout_marginTop="20dp"
@@ -162,6 +162,7 @@
                     android:textColor="#fff"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="17sp"
                     android:text="Male"
                     android:id="@+id/radioButton_male" />
                 <RadioButton
@@ -169,6 +170,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="17sp"
                     android:text="Female"
                     android:id="@+id/radioButton_female" />
             </RadioGroup>
@@ -176,7 +178,7 @@
     </ScrollView>
     <LinearLayout
         android:id="@+id/linear_bot2"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="30dp"
         android:layout_centerHorizontal="true"
         android:orientation="vertical"
         android:layout_alignParentBottom="true"
@@ -203,7 +205,7 @@
             android:id="@+id/register_text_view"
             android:layout_marginTop="30dp"
             android:layout_gravity="center"
-            android:text="Let me in"
+            android:text="Register"
             android:fontFamily="@font/corbelbold"
             android:textColor="#ffffff"
             android:textSize="20sp"

@@ -42,6 +42,7 @@ import com.squareup.picasso.Transformation;
 import com.ygaps.travelapp.Adapter.CustomAdapterForTourInfo_Comment;
 import com.ygaps.travelapp.Adapter.CustomAdapterForTourInfo_Member;
 import com.ygaps.travelapp.Adapter.CustomAdapterForTourInfo_StopPoint;
+import com.ygaps.travelapp.Adapter.CustomAdapterUserSearch;
 import com.ygaps.travelapp.Model.Add_Stop_Point_Data;
 import com.ygaps.travelapp.Model.Add_Stop_Point_Result;
 import com.ygaps.travelapp.Model.CommentResult_TourInfo;
@@ -53,6 +54,7 @@ import com.ygaps.travelapp.Model.InviteMember_Result;
 import com.ygaps.travelapp.Model.InviteResult;
 import com.ygaps.travelapp.Model.Member;
 import com.ygaps.travelapp.Model.RemoveStopPointResult;
+import com.ygaps.travelapp.Model.SearchUserByKeyword_Result;
 import com.ygaps.travelapp.Model.SendCommentData;
 import com.ygaps.travelapp.Model.SendCommentResult;
 import com.ygaps.travelapp.Model.SendRatingData;
@@ -63,6 +65,7 @@ import com.ygaps.travelapp.Model.TourInforResult;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.squareup.picasso.Picasso;
+import com.ygaps.travelapp.Model.User;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -73,6 +76,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
@@ -106,11 +110,15 @@ public class Tour_Info extends AppCompatActivity {
     private CustomAdapterForTourInfo_StopPoint customAdapterForTourInfoStopPoint;
     private CustomAdapterForTourInfo_Comment customAdapterForTourInfo_comment;
     private CustomAdapterForTourInfo_Member customAdapterForTourInfo_member;
+    private CustomAdapterUserSearch customAdapterUserSearch;
+    private ListView listView_user_search;
     private ArrayList<String> arrayList = new ArrayList<>();
+
     private Dialog stop_point_info;
     private Dialog update_stop_point;
     private Dialog send_comment_popup;
     private Dialog send_rating_popup;
+    private Dialog search_user;
     private ImageView add_comment_of_user;
     private ImageView add_rating;
     private ImageView add_member;
@@ -118,7 +126,7 @@ public class Tour_Info extends AppCompatActivity {
     private double mNewLat;
     private double mNewLong;
     private String mNewAddress;
-
+    private Boolean ISPV;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,7 +135,6 @@ public class Tour_Info extends AppCompatActivity {
         w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         setContentView(R.layout.activity_tour__info);
         mapping();
-
 
 
         cover_tour_imagee = findViewById(R.id.cover_tour_image);
@@ -175,8 +182,6 @@ public class Tour_Info extends AppCompatActivity {
                     final ArrayList<StopPointResult_TourInfo> stopPointResult_tourInfo = response.body().getStopPoints();
 
 
-
-
                     //Lay duoc danh sach Comment cua cai tour do:
                     ArrayList<CommentResult_TourInfo> arrayComment = response.body().getComments();
 
@@ -184,53 +189,47 @@ public class Tour_Info extends AppCompatActivity {
                     ArrayList<Member> arrayMember = response.body().getMembers();
                     name_tour_info.setText(response.body().getName());
 
-                   Boolean is_Private=response.body().getPrivate();
-                   if (is_Private)
-                   {
-                       isPrivate.setBackgroundResource(R.drawable.lock);
-                   }
-                   else {
-                       isPrivate.setBackgroundResource(R.drawable.open);
-                   }
+                    Boolean is_Private = response.body().getPrivate();
+                    ISPV=is_Private;
+                    if (is_Private) {
+                        isPrivate.setBackgroundResource(R.drawable.lock);
+                    } else {
+                        isPrivate.setBackgroundResource(R.drawable.open);
+                    }
 
-                   switch (response.body().getStatus())
-                   {
-                       case -1:
-                       {
-                           status.setText("Canceled");
-                           break;
-                       }
-                       case 0:
-                       {
-                           status.setText("Open");
-                           break;
-                       }
-                       case 1:
-                       {
-                           status.setText("Started");
-                           break;
-                       }
-                       case 2:
-                       {
-                           status.setText("Closed");
-                           break;
-                       }
-                       default:
-                           break;
-                   }
+                    switch (response.body().getStatus()) {
+                        case -1: {
+                            status.setText("Canceled");
+                            break;
+                        }
+                        case 0: {
+                            status.setText("Open");
+                            break;
+                        }
+                        case 1: {
+                            status.setText("Started");
+                            break;
+                        }
+                        case 2: {
+                            status.setText("Closed");
+                            break;
+                        }
+                        default:
+                            break;
+                    }
                     long miliStartDate = Long.parseLong(response.body().getStartDate());
                     final Date startD = new Date(miliStartDate);
                     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                     String temp1 = dateFormat.format(startD);
-                    int start=Integer.parseInt(temp1.substring(0,2));
+                    int start = Integer.parseInt(temp1.substring(0, 2));
 
                     //Xu ly date
                     long miliEndDate = Long.parseLong(response.body().getEndDate());
                     Date endD = new Date(miliEndDate);
                     DateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy");
                     String temp2 = dateFormat1.format(endD);
-                    int end=Integer.parseInt(temp2.substring(0,2));
-                    date_tour_info.setText((end-start)+"");
+                    int end = Integer.parseInt(temp2.substring(0, 2));
+                    date_tour_info.setText((end - start) + "");
 
                     //Xu ly cost
                     DecimalFormat dcf = new DecimalFormat("#,###");
@@ -247,7 +246,7 @@ public class Tour_Info extends AppCompatActivity {
                     costBuild.append(minCost).append("$ -> ").append(maxCost).append("$");
                     cost_tour_info.setText(costBuild);
                     //Xu ly adult, child
-                    adult_tour_info.setText(response.body().getAdults() + " adult, "+response.body().getChilds()+" child");
+                    adult_tour_info.setText(response.body().getAdults() + " adult, " + response.body().getChilds() + " child");
 
 
                     //Xu li Stop Point
@@ -532,16 +531,14 @@ public class Tour_Info extends AppCompatActivity {
                                     public void onClick(View v) {
                                         Map<String, String> map = new HashMap<>();
                                         map.put("Authorization", token);
-                                        Call<RemoveStopPointResult> call_3=jsonPlaceHolderApi.removeStopPoint(map,stopPointResult_tourInfo.get(position).getId()+"");
+                                        Call<RemoveStopPointResult> call_3 = jsonPlaceHolderApi.removeStopPoint(map, stopPointResult_tourInfo.get(position).getId() + "");
                                         call_3.enqueue(new Callback<RemoveStopPointResult>() {
                                             @Override
                                             public void onResponse(Call<RemoveStopPointResult> call, Response<RemoveStopPointResult> response) {
-                                                if (!response.isSuccessful())
-                                                {
-                                                    Toast.makeText(getApplicationContext(),"Xoa diem dung khong thanh cong",Toast.LENGTH_SHORT).show();
-                                                }
-                                                else{
-                                                    Toast.makeText(getApplicationContext(),"Xoa diem dung thanh cong",Toast.LENGTH_SHORT).show();
+                                                if (!response.isSuccessful()) {
+                                                    Toast.makeText(getApplicationContext(), "Xoa diem dung khong thanh cong", Toast.LENGTH_SHORT).show();
+                                                } else {
+                                                    Toast.makeText(getApplicationContext(), "Xoa diem dung thanh cong", Toast.LENGTH_SHORT).show();
                                                     finish();
                                                     startActivity(getIntent());
                                                 }
@@ -549,7 +546,7 @@ public class Tour_Info extends AppCompatActivity {
 
                                             @Override
                                             public void onFailure(Call<RemoveStopPointResult> call, Throwable t) {
-                                                Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
                                             }
                                         });
                                     }
@@ -557,27 +554,25 @@ public class Tour_Info extends AppCompatActivity {
                                 return true;
                             }
                         });
-                    }
-                    else {
+                    } else {
                         listView_stop_point.setVisibility(View.GONE);
-                        TextView stop_point_placeholder=findViewById(R.id.stop_point_placehoder);
+                        TextView stop_point_placeholder = findViewById(R.id.stop_point_placehoder);
                         stop_point_placeholder.setVisibility(View.VISIBLE);
                     }
 
                     //Xu ly commnt
                     if (arrayComment.size() != 0) {
-                        listView_comment.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
+                        listView_comment.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
                         listView_comment.setAdapter(new CustomAdapterForTourInfo_Comment(arrayComment));
-                    }else
-                    {
-                        TextView comment_placeholder=findViewById(R.id.comment_placehoder);
+                    } else {
+                        TextView comment_placeholder = findViewById(R.id.comment_placehoder);
                         comment_placeholder.setVisibility(View.VISIBLE);
                         listView_comment.setVisibility(View.GONE);
                     }
 
                     //Xu ly member
                     if (arrayMember.size() != 0) {
-                        listView_member.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false));
+                        listView_member.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
                         listView_member.setAdapter(new CustomAdapterForTourInfo_Member(arrayMember));
                     } else {
                         listView_member.setVisibility(View.GONE);
@@ -600,7 +595,7 @@ public class Tour_Info extends AppCompatActivity {
                 send_comment_popup.setContentView(R.layout.send_comment_popup);
                 final EditText comment = send_comment_popup.findViewById(R.id.comment_edit_text);
                 Button send_comment = send_comment_popup.findViewById(R.id.send_comment_btn);
-                ImageView exit=send_comment_popup.findViewById(R.id.exit_comment);
+                ImageView exit = send_comment_popup.findViewById(R.id.exit_comment);
                 exit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -643,35 +638,33 @@ public class Tour_Info extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 send_rating_popup.setContentView(R.layout.add_rating_popup);
-                final EditText rating_text=send_rating_popup.findViewById(R.id.review_edit_rating);
-                Button send_rating=send_rating_popup.findViewById(R.id.send_rating);
-                ImageView exit=send_rating_popup.findViewById(R.id.exit_rating);
+                final EditText rating_text = send_rating_popup.findViewById(R.id.review_edit_rating);
+                Button send_rating = send_rating_popup.findViewById(R.id.send_rating);
+                ImageView exit = send_rating_popup.findViewById(R.id.exit_rating);
                 exit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         send_rating_popup.dismiss();
                     }
                 });
-                final RatingBar ratingBar=send_rating_popup.findViewById(R.id.rating_point);
+                final RatingBar ratingBar = send_rating_popup.findViewById(R.id.rating_point);
                 send_rating_popup.show();
                 send_rating.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String review_string=rating_text.getText().toString();
-                        int point=(int) ratingBar.getRating();
+                        String review_string = rating_text.getText().toString();
+                        int point = (int) ratingBar.getRating();
                         Map<String, String> map = new HashMap<>();
                         map.put("Authorization", token);
-                        SendRatingData sendRatingData=new SendRatingData(Integer.parseInt(id_tour),point,review_string);
-                        Call<SendRatingResult> call1=jsonPlaceHolderApi.sendRating(map,sendRatingData);
+                        SendRatingData sendRatingData = new SendRatingData(Integer.parseInt(id_tour), point, review_string);
+                        Call<SendRatingResult> call1 = jsonPlaceHolderApi.sendRating(map, sendRatingData);
                         call1.enqueue(new Callback<SendRatingResult>() {
                             @Override
                             public void onResponse(Call<SendRatingResult> call, Response<SendRatingResult> response) {
-                                if (!response.isSuccessful())
-                                {
-                                    Toast.makeText(getApplicationContext(),"Gui danh gia khong thanh cong",Toast.LENGTH_SHORT).show();
-                                }
-                                else {
-                                    Toast.makeText(getApplicationContext(),"Gui danh gia thanh cong",Toast.LENGTH_SHORT).show();
+                                if (!response.isSuccessful()) {
+                                    Toast.makeText(getApplicationContext(), "Gui danh gia khong thanh cong", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Gui danh gia thanh cong", Toast.LENGTH_SHORT).show();
                                     send_rating_popup.dismiss();
                                     finish();
                                     startActivity(getIntent());
@@ -680,7 +673,7 @@ public class Tour_Info extends AppCompatActivity {
 
                             @Override
                             public void onFailure(Call<SendRatingResult> call, Throwable t) {
-                                Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -691,47 +684,98 @@ public class Tour_Info extends AppCompatActivity {
         add_member.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Map<String, String> map = new HashMap<>();
-                map.put("Authorization", token);
-                InviteData inviteMemberData=new InviteData(id_tour,"641",true);
-                Call<InviteResult> call_4=jsonPlaceHolderApi.inviteMember(map,inviteMemberData);
-                call_4.enqueue(new Callback<InviteResult>() {
+
+
+                search_user.setContentView(R.layout.search_user_popup);
+
+
+                final EditText edit_search = search_user.findViewById(R.id.search_user_edit_text);
+                ImageView search = search_user.findViewById(R.id.search_user_button);
+                final ListView listView = search_user.findViewById(R.id.list_view_search_user);
+                ImageView exit=search_user.findViewById(R.id.exit_search_user);
+                exit.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onResponse(Call<InviteResult> call, final Response<InviteResult> response) {
-                        if (!response.isSuccessful())
-                        {
-                            new Handler(Looper.getMainLooper()).post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast toast = Toast.makeText(getApplicationContext(), "k thanh"+response.code(), Toast.LENGTH_SHORT);
-                                    toast.show();
-                                }
-                            });
-
-                        }
-                        else {
-                            new Handler(Looper.getMainLooper()).post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast toast = Toast.makeText(getApplicationContext(), "thanh cong", Toast.LENGTH_SHORT);
-                                    toast.show();
-                                }
-                            });
-
-                        }
-                    }
-                    @Override
-                    public void onFailure(Call<InviteResult> call, final Throwable t) {
-                        new Handler(Looper.getMainLooper()).post(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast toast = Toast.makeText(getApplicationContext(), "Something", Toast.LENGTH_SHORT);
-                                toast.show();
-                            }
-                        });
-
+                    public void onClick(View v) {
+                        search_user.dismiss();
                     }
                 });
+                search.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Call<SearchUserByKeyword_Result> call_5 = jsonPlaceHolderApi.search_user(edit_search.getText().toString(), 1, "20");
+                        call_5.enqueue(new Callback<SearchUserByKeyword_Result>() {
+                            @Override
+                            public void onResponse(Call<SearchUserByKeyword_Result> call, Response<SearchUserByKeyword_Result> response) {
+                                if (!response.isSuccessful()) {
+                                    Toast.makeText(getApplicationContext(), "Khong thanh cong", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Thanh cong", Toast.LENGTH_SHORT).show();
+                                    final ArrayList<User> arrayList_user = response.body().getUsers();
+                                    if (arrayList_user.size() != 0) {
+                                        customAdapterUserSearch = new CustomAdapterUserSearch(Tour_Info.this, R.layout.custom_item_for_search_user_result, arrayList_user);
+                                        listView.setAdapter(customAdapterUserSearch);
+                                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                            @Override
+                                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                                Map<String, String> map = new HashMap<>();
+                                                map.put("Authorization", token);
+                                                InviteData inviteMemberData = new InviteData(id_tour, arrayList_user.get(position).getId()+"", true);
+                                                Call<InviteResult> call_4 = jsonPlaceHolderApi.inviteMember(map, inviteMemberData);
+                                                call_4.enqueue(new Callback<InviteResult>() {
+                                                    @Override
+                                                    public void onResponse(Call<InviteResult> call, final Response<InviteResult> response) {
+                                                        if (!response.isSuccessful()) {
+                                                            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                                                @Override
+                                                                public void run() {
+                                                                    Toast toast = Toast.makeText(getApplicationContext(), "k thanh" + response.code(), Toast.LENGTH_SHORT);
+                                                                    toast.show();
+                                                                }
+                                                            });
+
+                                                        } else {
+                                                            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                                                @Override
+                                                                public void run() {
+                                                                    Toast toast = Toast.makeText(getApplicationContext(), "thanh cong", Toast.LENGTH_SHORT);
+                                                                    toast.show();
+                                                                }
+                                                            });
+
+                                                        }
+                                                    }
+
+                                                    @Override
+                                                    public void onFailure(Call<InviteResult> call, final Throwable t) {
+                                                        new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                                            @Override
+                                                            public void run() {
+                                                                Toast toast = Toast.makeText(getApplicationContext(), "Something", Toast.LENGTH_SHORT);
+                                                                toast.show();
+                                                            }
+                                                        });
+
+                                                    }
+                                                });
+                                            }
+                                        });
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "Chuoi rong", Toast.LENGTH_SHORT).show();
+                                    }
+
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<SearchUserByKeyword_Result> call, Throwable t) {
+
+                            }
+                        });
+                    }
+                });
+
+                search_user.show();
+
 
             }
         });
@@ -744,24 +788,21 @@ public class Tour_Info extends AppCompatActivity {
                 map.put("Authorization", token);
 
 
-                GetCoordinate_Data getCoordinate_data=new GetCoordinate_Data(user_id,id_tour,200,200);
-                Call<GetCoordinate_Result> call_11=jsonPlaceHolderApi.getCoordinate(map,getCoordinate_data);
+                GetCoordinate_Data getCoordinate_data = new GetCoordinate_Data(user_id, id_tour, 200, 200);
+                Call<GetCoordinate_Result> call_11 = jsonPlaceHolderApi.getCoordinate(map, getCoordinate_data);
                 call_11.enqueue(new Callback<GetCoordinate_Result>() {
                     @Override
                     public void onResponse(Call<GetCoordinate_Result> call, Response<GetCoordinate_Result> response) {
-                        if (!response.isSuccessful())
-                        {
-                            Toast.makeText(getApplicationContext(),"Khong thanh cong",Toast.LENGTH_SHORT).show();
-                        }
-                        else
-                        {
-                            Toast.makeText(getApplicationContext(),"Thanh cong"+response.body().getArrayList().get(0).get("user"),Toast.LENGTH_SHORT).show();
+                        if (!response.isSuccessful()) {
+                            Toast.makeText(getApplicationContext(), "Khong thanh cong", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Thanh cong" + response.body().getArrayList().get(0).get("user"), Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<GetCoordinate_Result> call, Throwable t) {
-                        Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -780,17 +821,23 @@ public class Tour_Info extends AppCompatActivity {
         stop_point_info = new Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
         update_stop_point = new Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
         add_comment_of_user = findViewById(R.id.add_comment_of_user);
-        add_rating=findViewById(R.id.add_rating);
+        add_rating = findViewById(R.id.add_rating);
         send_comment_popup = new Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
         Objects.requireNonNull(send_comment_popup.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         send_rating_popup = new Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
         Objects.requireNonNull(send_rating_popup.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        add_member=findViewById(R.id.add_member);
-        status=findViewById(R.id.status);
-        isPrivate=findViewById(R.id.is_private_image);
-        back=findViewById(R.id.back_to_main);
+
+        search_user = new Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+        Objects.requireNonNull(search_user.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+
+        add_member = findViewById(R.id.add_member);
+        status = findViewById(R.id.status);
+        isPrivate = findViewById(R.id.is_private_image);
+        back = findViewById(R.id.back_to_main);
+
     }
 
     @Override

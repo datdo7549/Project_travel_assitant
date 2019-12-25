@@ -46,6 +46,16 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
+
+    <ImageView
+        android:layout_below="@+id/back_homepage3"
+        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:src="@drawable/mailbox"
+        />
+
     <EditText
         android:id="@+id/request_data"
         android:layout_above="@+id/send_request_OTP"

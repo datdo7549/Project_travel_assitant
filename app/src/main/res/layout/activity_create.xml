@@ -60,7 +60,7 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/username_edit_custom"
                 android:textColor="#ffffff"
-                android:textSize="12sp" />
+                android:textSize="17sp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -86,7 +86,8 @@
                         android:layout_marginTop="10dp"
                         android:background="@drawable/username_edit_custom"
                         android:textColor="#ffffff"
-                        android:textSize="12sp" />
+                        android:inputType="number"
+                        android:textSize="17sp" />
                 </LinearLayout>
 
 
@@ -111,7 +112,8 @@
                         android:layout_marginTop="10dp"
                         android:background="@drawable/username_edit_custom"
                         android:textColor="#ffffff"
-                        android:textSize="12sp" />
+                        android:inputType="number"
+                        android:textSize="17sp" />
                 </LinearLayout>
             </RelativeLayout>
 
@@ -135,9 +137,10 @@
                         android:id="@+id/minCost"
                         android:layout_alignParentLeft="true"
                         android:textColor="#ffffff"
-                        android:textSize="12sp"
+                        android:textSize="17sp"
                         android:background="@drawable/username_edit_custom"
                         android:layout_width="100dp"
+                        android:inputType="number"
                         android:layout_height="match_parent"/>
                     <TextView
                         android:layout_centerInParent="true"
@@ -153,9 +156,10 @@
                         android:id="@+id/maxCost"
                         android:layout_alignParentRight="true"
                         android:textColor="#ffffff"
-                        android:textSize="12sp"
+                        android:textSize="17sp"
                         android:background="@drawable/username_edit_custom"
                         android:layout_width="100dp"
+                        android:inputType="number"
                         android:layout_height="match_parent"/>
                 </RelativeLayout>
             </LinearLayout>
@@ -181,7 +185,7 @@
                         android:id="@+id/startDate"
                         android:layout_alignParentLeft="true"
                         android:textColor="#ffffff"
-                        android:textSize="12sp"
+                        android:textSize="17sp"
                         android:background="@drawable/username_edit_custom"
                         android:layout_width="100dp"
                         android:layout_height="match_parent"/>
@@ -199,7 +203,7 @@
                         android:id="@+id/endDate"
                         android:layout_alignParentRight="true"
                         android:textColor="#ffffff"
-                        android:textSize="12sp"
+                        android:textSize="17sp"
                         android:background="@drawable/username_edit_custom"
                         android:layout_width="100dp"
                         android:layout_height="match_parent"/>
@@ -212,7 +216,7 @@
                 android:textColor="@color/green"
                 android:fontFamily="@font/corbelbold"
                 android:textSize="15sp"
-                android:text="Do you want set it as private tour?"
+                android:text="Pirvate or Public?"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
@@ -227,14 +231,16 @@
                     android:textColor="#fff"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="yes"
+                    android:text="Private"
+                    android:textSize="17sp"
                     android:id="@+id/radioButton_yes" />
                 <RadioButton
                     android:textColor="#fff"
                     android:layout_marginLeft="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="no"
+                    android:text="Public"
+                    android:textSize="17sp"
                     android:id="@+id/radioButton_no" />
             </RadioGroup>
 
@@ -300,8 +306,8 @@
         android:layout_alignParentBottom="true"
         android:textColor="#ffffff"
         android:fontFamily="@font/corbelbold"
-        android:text="Create my tour"
-        android:textSize="20sp"
+        android:text="Create"
+        android:textSize="23sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

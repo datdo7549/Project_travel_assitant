@@ -21,6 +21,7 @@ import com.ygaps.travelapp.Model.RegisterResult;
 import com.ygaps.travelapp.Model.RemoveStopPointResult;
 import com.ygaps.travelapp.Model.RequestOTP_Data;
 import com.ygaps.travelapp.Model.RequestOTP_Result;
+import com.ygaps.travelapp.Model.SearchUserByKeyword_Result;
 import com.ygaps.travelapp.Model.SendCommentData;
 import com.ygaps.travelapp.Model.SendCommentResult;
 import com.ygaps.travelapp.Model.SendRatingData;
@@ -31,6 +32,7 @@ import com.ygaps.travelapp.Model.TourInforResult;
 import com.ygaps.travelapp.Model.UpdatePasswordData;
 import com.ygaps.travelapp.Model.UpdatePasswordResult;
 import com.ygaps.travelapp.Model.UpdateUserInfoData;
+import com.ygaps.travelapp.Model.UserResponde_Data;
 import com.ygaps.travelapp.Model.User_Info_Result;
 import com.ygaps.travelapp.Model.User_login;
 import com.ygaps.travelapp.Model.User_register;
@@ -114,4 +116,10 @@ public interface JsonPlaceHolderApi {
     @POST("tour/current-users-coordinate")
     Call<GetCoordinate_Result> getCoordinate(@HeaderMap Map<String,String> headers, @Body GetCoordinate_Data getCoordinateData );
 
+
+    @GET("user/search")
+    Call<SearchUserByKeyword_Result> search_user(@Query("searchKey") String searchKey,@Query("pageIndex") int pageIndex,@Query("pageSize") String pageSize);
+
+    @POST("tour/response/invitation")
+    Call<InviteMember_Result> responde_user(@HeaderMap Map<String,String> headers,@Body UserResponde_Data userResponde_data);
 }
