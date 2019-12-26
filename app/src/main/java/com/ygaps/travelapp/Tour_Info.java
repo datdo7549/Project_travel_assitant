@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -16,7 +15,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -41,24 +39,29 @@ import android.widget.Toast;
 import com.squareup.picasso.Transformation;
 import com.ygaps.travelapp.Adapter.CustomAdapterForTourInfo_Comment;
 import com.ygaps.travelapp.Adapter.CustomAdapterForTourInfo_Member;
+import com.ygaps.travelapp.Adapter.CustomAdapterForTourInfo_Rating;
 import com.ygaps.travelapp.Adapter.CustomAdapterForTourInfo_StopPoint;
 import com.ygaps.travelapp.Adapter.CustomAdapterUserSearch;
 import com.ygaps.travelapp.Model.Add_Stop_Point_Data;
 import com.ygaps.travelapp.Model.Add_Stop_Point_Result;
 import com.ygaps.travelapp.Model.CommentResult_TourInfo;
-import com.ygaps.travelapp.Model.GetCoordinate_Data;
-import com.ygaps.travelapp.Model.GetCoordinate_Result;
+import com.ygaps.travelapp.Model.CoordList;
+import com.ygaps.travelapp.Model.CoordinateSet;
+import com.ygaps.travelapp.Model.Feedback;
+import com.ygaps.travelapp.Model.GetSugestStopPoint_Result;
+import com.ygaps.travelapp.Model.GetSuggestStoppoint_Data;
 import com.ygaps.travelapp.Model.InviteData;
-import com.ygaps.travelapp.Model.InviteMemberData;
 import com.ygaps.travelapp.Model.InviteMember_Result;
 import com.ygaps.travelapp.Model.InviteResult;
 import com.ygaps.travelapp.Model.Member;
+import com.ygaps.travelapp.Model.Rating_result;
 import com.ygaps.travelapp.Model.RemoveStopPointResult;
 import com.ygaps.travelapp.Model.SearchUserByKeyword_Result;
 import com.ygaps.travelapp.Model.SendCommentData;
 import com.ygaps.travelapp.Model.SendCommentResult;
 import com.ygaps.travelapp.Model.SendRatingData;
 import com.ygaps.travelapp.Model.SendRatingResult;
+import com.ygaps.travelapp.Model.SendReportComment_Data;
 import com.ygaps.travelapp.Model.StopPointResult_TourInfo;
 import com.ygaps.travelapp.Model.Stop_Point;
 import com.ygaps.travelapp.Model.TourInforResult;
@@ -66,6 +69,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.squareup.picasso.Picasso;
 import com.ygaps.travelapp.Model.User;
+import com.ygaps.travelapp.Model.onClickRecycleView;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -76,7 +80,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
@@ -90,6 +93,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.ygaps.travelapp.LoginActivity.URL;
 import static com.ygaps.travelapp.MapActivity.arrayProvince;
+import com.ygaps.travelapp.Model.onCLickRecycleView_Rating;
 
 public class Tour_Info extends AppCompatActivity {
     private TextView name_tour_info;
@@ -107,6 +111,7 @@ public class Tour_Info extends AppCompatActivity {
     private ListView listView_stop_point;
     private RecyclerView listView_comment;
     private RecyclerView listView_member;
+    private RecyclerView listview_rating;
     private CustomAdapterForTourInfo_StopPoint customAdapterForTourInfoStopPoint;
     private CustomAdapterForTourInfo_Comment customAdapterForTourInfo_comment;
     private CustomAdapterForTourInfo_Member customAdapterForTourInfo_member;
@@ -127,6 +132,16 @@ public class Tour_Info extends AppCompatActivity {
     private double mNewLong;
     private String mNewAddress;
     private Boolean ISPV;
+
+    private ArrayList<CommentResult_TourInfo> arrayComment=new ArrayList<>();
+    private ArrayList<Feedback> arrayList_feedback=new ArrayList<>();
+    private onClickRecycleView onClickRecycleView;
+    private onCLickRecycleView_Rating onCLickRecycleView_rating;
+
+
+    private ArrayList<CoordList> coordLists=new ArrayList<>();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -135,6 +150,67 @@ public class Tour_Info extends AppCompatActivity {
         w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         setContentView(R.layout.activity_tour__info);
         mapping();
+
+
+
+       /* LatLong2 lat1=new LatLong2(48.033090,69.814943);
+        LatLong2 lat2=new LatLong2(2.739697,43.903915);
+        LatLong2 lat3=new LatLong2(2.739697,43.903915);
+        LatLong2 lat4=new LatLong2(-6.658560,143.575005);
+        LatLong2 lat5=new LatLong2(-6.658560,143.575005);
+        LatLong2 lat6=new LatLong2(49.555488,143.322819);
+        LatLong2 lat7=new LatLong2(49.555488,143.322819);
+        LatLong2 lat8=new LatLong2(48.033090,69.814943);*/
+
+
+
+        CoordinateSet coordinateSet_1=new CoordinateSet(48.033090,69.814943);
+        CoordinateSet coordinateSet_2=new CoordinateSet(2.739697,43.903915);
+        CoordinateSet coordinateSet_3=new CoordinateSet(2.739697,43.903915);
+        CoordinateSet coordinateSet_4=new CoordinateSet(-6.658560,143.575005);
+        CoordinateSet coordinateSet_5=new CoordinateSet(-6.658560,143.575005);
+        CoordinateSet coordinateSet_6=new CoordinateSet(49.555488,143.322819);
+        CoordinateSet coordinateSet_7=new CoordinateSet(49.555488,143.322819);
+        CoordinateSet coordinateSet_8=new CoordinateSet(48.033090,69.814943);
+
+
+        ArrayList<CoordinateSet> cs1=new ArrayList<>();
+        cs1.add(coordinateSet_1);
+        cs1.add(coordinateSet_2);
+
+        ArrayList<CoordinateSet> cs2=new ArrayList<>();
+        cs2.add(coordinateSet_3);
+        cs2.add(coordinateSet_4);
+
+        ArrayList<CoordinateSet> cs3=new ArrayList<>();
+        cs3.add(coordinateSet_5);
+        cs3.add(coordinateSet_6);
+
+        ArrayList<CoordinateSet> cs4=new ArrayList<>();
+        cs4.add(coordinateSet_7);
+        cs4.add(coordinateSet_8);
+
+
+        CoordList cl1=new CoordList(cs1);
+        CoordList cl2=new CoordList(cs2);
+        CoordList cl3=new CoordList(cs3);
+        CoordList cl4=new CoordList(cs4);
+
+
+        coordLists.add(cl1);
+        coordLists.add(cl2);
+        coordLists.add(cl3);
+        coordLists.add(cl4);
+
+
+
+
+
+
+
+
+
+
 
 
         cover_tour_imagee = findViewById(R.id.cover_tour_image);
@@ -152,6 +228,62 @@ public class Tour_Info extends AppCompatActivity {
         token = bundle.getString("token");
         user_id = bundle.getString("user_id_string");
 
+
+        Toast.makeText(getApplicationContext(),"ID TOUR: "+id_tour,Toast.LENGTH_SHORT).show();
+
+        onClickRecycleView=new onClickRecycleView() {
+            @Override
+            public void setClick(int pos) {
+                Map<String, String> map = new HashMap<>();
+                map.put("Authorization", token);
+                SendReportComment_Data sendReportComment_data=new SendReportComment_Data(arrayComment.get(pos).getId());
+
+                Call<InviteMember_Result> call=jsonPlaceHolderApi.report_comment(map,sendReportComment_data);
+                call.enqueue(new Callback<InviteMember_Result>() {
+                    @Override
+                    public void onResponse(Call<InviteMember_Result> call, Response<InviteMember_Result> response) {
+                        if (!response.isSuccessful())
+                        {
+                            Toast.makeText(getApplicationContext(),"Report Fail",Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(getApplicationContext(),"Report Successfully",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<InviteMember_Result> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        };
+
+        onCLickRecycleView_rating=new onCLickRecycleView_Rating() {
+            @Override
+            public void rating(int pos) {
+                Map<String, String> map = new HashMap<>();
+                map.put("Authorization", token);
+                SendReportComment_Data sendReportComment_data=new SendReportComment_Data(arrayList_feedback.get(pos).getId());
+
+                Call<InviteMember_Result> call=jsonPlaceHolderApi.report_comment(map,sendReportComment_data);
+                call.enqueue(new Callback<InviteMember_Result>() {
+                    @Override
+                    public void onResponse(Call<InviteMember_Result> call, Response<InviteMember_Result> response) {
+                        if (!response.isSuccessful())
+                        {
+                            Toast.makeText(getApplicationContext(),"Report Fail",Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(getApplicationContext(),"Report Successfully",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<InviteMember_Result> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        };
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -183,7 +315,7 @@ public class Tour_Info extends AppCompatActivity {
 
 
                     //Lay duoc danh sach Comment cua cai tour do:
-                    ArrayList<CommentResult_TourInfo> arrayComment = response.body().getComments();
+                     arrayComment = response.body().getComments();
 
                     //Lay duoc danh sach Member cua cai tour do:
                     ArrayList<Member> arrayMember = response.body().getMembers();
@@ -563,7 +695,9 @@ public class Tour_Info extends AppCompatActivity {
                     //Xu ly commnt
                     if (arrayComment.size() != 0) {
                         listView_comment.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
-                        listView_comment.setAdapter(new CustomAdapterForTourInfo_Comment(arrayComment));
+                        listView_comment.setAdapter(new CustomAdapterForTourInfo_Comment(arrayComment,onClickRecycleView));
+
+
                     } else {
                         TextView comment_placeholder = findViewById(R.id.comment_placehoder);
                         comment_placeholder.setVisibility(View.VISIBLE);
@@ -579,6 +713,31 @@ public class Tour_Info extends AppCompatActivity {
                         TextView membeer_placeholder = findViewById(R.id.member_placeholder);
                         membeer_placeholder.setVisibility(View.VISIBLE);
                     }
+
+
+
+                    //Xu ly Rating
+
+                    Call<Rating_result> call1_2=jsonPlaceHolderApi.get_rating_list(map,Integer.parseInt(id_tour),1,"100");
+                    call1_2.enqueue(new Callback<Rating_result>() {
+                        @Override
+                        public void onResponse(Call<Rating_result> call, Response<Rating_result> response) {
+                            if (!response.isSuccessful())
+                            {
+                                Toast.makeText(getApplicationContext(),"Khong thanh cong",Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                arrayList_feedback=response.body().getReviewList();
+                                listview_rating.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+                                listview_rating.setAdapter(new CustomAdapterForTourInfo_Rating(arrayList_feedback,onCLickRecycleView_rating));
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Rating_result> call, Throwable t) {
+
+                        }
+                    });
 
                 }
             }
@@ -787,24 +946,27 @@ public class Tour_Info extends AppCompatActivity {
                 Map<String, String> map = new HashMap<>();
                 map.put("Authorization", token);
 
+                final GetSuggestStoppoint_Data getSuggestStoppoint_data=new GetSuggestStoppoint_Data(false,coordLists);
+                Call<GetSugestStopPoint_Result> call1_44=jsonPlaceHolderApi.get_suggets_stop_point(map,getSuggestStoppoint_data);
 
-                GetCoordinate_Data getCoordinate_data = new GetCoordinate_Data(user_id, id_tour, 200, 200);
-                Call<GetCoordinate_Result> call_11 = jsonPlaceHolderApi.getCoordinate(map, getCoordinate_data);
-                call_11.enqueue(new Callback<GetCoordinate_Result>() {
+                call1_44.enqueue(new Callback<GetSugestStopPoint_Result>() {
                     @Override
-                    public void onResponse(Call<GetCoordinate_Result> call, Response<GetCoordinate_Result> response) {
-                        if (!response.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), "Khong thanh cong", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Thanh cong" + response.body().getArrayList().get(0).get("user"), Toast.LENGTH_SHORT).show();
+                    public void onResponse(Call<GetSugestStopPoint_Result> call, Response<GetSugestStopPoint_Result> response) {
+                        if (!response.isSuccessful())
+                        {
+                            Toast.makeText(getApplicationContext(),"Ko thanh cong"+response.code(),Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(),"thanh cong"+response.body().getStopPoints().get(1).getName(),Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<GetCoordinate_Result> call, Throwable t) {
-                        Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                    public void onFailure(Call<GetSugestStopPoint_Result> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
                     }
                 });
+
             }
         });
     }
@@ -818,6 +980,7 @@ public class Tour_Info extends AppCompatActivity {
         listView_stop_point = findViewById(R.id.list_stop_point_tour_info1);
         listView_comment = findViewById(R.id.list_comment_tour_info);
         listView_member = findViewById(R.id.list_member_tour_info);
+        listview_rating=findViewById(R.id.list_rating_tour_info);
         stop_point_info = new Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
         update_stop_point = new Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
         add_comment_of_user = findViewById(R.id.add_comment_of_user);

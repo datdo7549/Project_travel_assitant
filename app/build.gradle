@@ -52,4 +52,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:20.0.1'
 
     implementation 'com.mikhaellopez:circularimageview:3.2.0'
+
+
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.10.1'
+
 }

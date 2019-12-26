@@ -267,6 +267,49 @@
                 android:fontFamily="@font/corbelbold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
+
+
+            <RelativeLayout
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/rating_icon"
+                    android:src="@drawable/rating_icon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"/>
+                <TextView
+                    android:layout_toRightOf="@id/rating_icon"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="20sp"
+                    android:text="Rating(s)"
+                    android:fontFamily="@font/corbelbold"
+                    android:textColor="#ffffff"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginBottom="20dp"
+                android:id="@+id/list_rating_tour_info"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </androidx.recyclerview.widget.RecyclerView>
+            <TextView
+                android:layout_marginBottom="20dp"
+                android:visibility="gone"
+                android:layout_marginTop="20dp"
+                android:id="@+id/rating_placeholder"
+                android:layout_gravity="center"
+                android:text="Hiện tại tour không có rating nào!"
+                android:textColor="#ffffff"
+                android:textSize="13sp"
+                android:fontFamily="@font/corbelbold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
     </ScrollView>
 

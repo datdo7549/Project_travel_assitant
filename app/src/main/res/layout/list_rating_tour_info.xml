@@ -23,7 +23,7 @@
                 android:textSize="20sp"
                 android:textColor="#ffffff"
                 android:text="Dat Do"
-                android:id="@+id/name_user_comment"
+                android:id="@+id/name_user_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <TextView
@@ -31,12 +31,12 @@
                 android:textSize="15sp"
                 android:textColor="#ffffff"
                 android:text="Alo"
-                android:id="@+id/comment_list_item"
+                android:id="@+id/feedback_list_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
         <ImageView
-            android:id="@+id/send_report_comment"
+            android:id="@+id/send_report_rating"
             android:layout_marginTop="30dp"
             android:layout_marginRight="30dp"
             android:layout_alignParentRight="true"

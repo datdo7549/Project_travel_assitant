@@ -9,6 +9,8 @@ import com.ygaps.travelapp.Model.FacebookLoginResult;
 import com.ygaps.travelapp.Model.Fb_data_login;
 import com.ygaps.travelapp.Model.GetCoordinate_Data;
 import com.ygaps.travelapp.Model.GetCoordinate_Result;
+import com.ygaps.travelapp.Model.GetSugestStopPoint_Result;
+import com.ygaps.travelapp.Model.GetSuggestStoppoint_Data;
 import com.ygaps.travelapp.Model.GoogleLoginResult;
 import com.ygaps.travelapp.Model.InviteData;
 import com.ygaps.travelapp.Model.InviteMemberData;
@@ -17,6 +19,7 @@ import com.ygaps.travelapp.Model.InviteResult;
 import com.ygaps.travelapp.Model.ListTour;
 import com.ygaps.travelapp.Model.LoginResult;
 import com.ygaps.travelapp.Model.My_Tour_Result;
+import com.ygaps.travelapp.Model.Rating_result;
 import com.ygaps.travelapp.Model.RegisterResult;
 import com.ygaps.travelapp.Model.RemoveStopPointResult;
 import com.ygaps.travelapp.Model.RequestOTP_Data;
@@ -26,6 +29,7 @@ import com.ygaps.travelapp.Model.SendCommentData;
 import com.ygaps.travelapp.Model.SendCommentResult;
 import com.ygaps.travelapp.Model.SendRatingData;
 import com.ygaps.travelapp.Model.SendRatingResult;
+import com.ygaps.travelapp.Model.SendReportComment_Data;
 import com.ygaps.travelapp.Model.SendTokenFirebaseToServer_Result;
 import com.ygaps.travelapp.Model.SendTokenFirebaseToSever_Data;
 import com.ygaps.travelapp.Model.TourInforResult;
@@ -122,4 +126,13 @@ public interface JsonPlaceHolderApi {
 
     @POST("tour/response/invitation")
     Call<InviteMember_Result> responde_user(@HeaderMap Map<String,String> headers,@Body UserResponde_Data userResponde_data);
+
+    @POST("tour/report/review")
+    Call<InviteMember_Result> report_comment(@HeaderMap Map<String,String> headers,@Body SendReportComment_Data sendReportComment_data);
+
+    @GET("tour/get/review-list")
+    Call<Rating_result> get_rating_list(@HeaderMap Map<String,String> headers,@Query("tourId") int tourId,@Query("pageIndex") int pageIndex,@Query("pageSize") String pageSize);
+
+    @POST("tour/suggested-destination-list")
+    Call<GetSugestStopPoint_Result> get_suggets_stop_point(@HeaderMap Map<String,String> headers,@Body GetSuggestStoppoint_Data getSuggestStoppoint_data);
 }
