@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="220dp"
+    android:descendantFocusability="blocksDescendants">
+
+
+
+
+    <ImageView
+        android:id="@+id/image_suggest_stop_point"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <LinearLayout
+        android:layout_marginTop="70dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:fontFamily="@font/ebrima"
+            android:textSize="28sp"
+            android:id="@+id/name_suggest_stop_point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:text="Hcm-Hanoi"
+            android:textStyle="bold"
+            android:textColor="#ffffff"/>
+        <TextView
+            android:fontFamily="@font/ebrima"
+            android:textSize="15sp"
+            android:id="@+id/address_suggest_stop_point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:text="Hcm-Hanoi"
+            android:textStyle="bold"
+            android:textColor="#ffffff"/>
+        <TextView
+            android:id="@+id/type_service_suggest_stop_point"
+            android:textColor="#ffffff"
+            android:textSize="12sp"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</RelativeLayout>

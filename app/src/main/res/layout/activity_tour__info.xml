@@ -131,17 +131,18 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
-                android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <ImageView
+                    android:id="@+id/stop_point_icon"
                     android:src="@drawable/stop_point_icon"
                     android:layout_width="30dp"
                     android:layout_height="30dp"/>
                 <TextView
+                    android:layout_toRightOf="@+id/stop_point_icon"
                     android:layout_marginLeft="10dp"
                     android:textSize="20sp"
                     android:text="Stop Point(s)"
@@ -149,7 +150,14 @@
                     android:textColor="#ffffff"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
-            </LinearLayout>
+                <ImageView
+                    android:id="@+id/add_stop_point_of_user"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/plus"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"/>
+            </RelativeLayout>
             <ListView
                 android:layout_marginTop="10dp"
                 android:nestedScrollingEnabled="true"

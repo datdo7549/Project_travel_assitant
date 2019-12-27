@@ -93,6 +93,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.ygaps.travelapp.LoginActivity.URL;
 import static com.ygaps.travelapp.MapActivity.arrayProvince;
+
 import com.ygaps.travelapp.Model.onCLickRecycleView_Rating;
 
 public class Tour_Info extends AppCompatActivity {
@@ -127,19 +128,20 @@ public class Tour_Info extends AppCompatActivity {
     private ImageView add_comment_of_user;
     private ImageView add_rating;
     private ImageView add_member;
+    private ImageView add_stop_point;
 
     private double mNewLat;
     private double mNewLong;
     private String mNewAddress;
     private Boolean ISPV;
 
-    private ArrayList<CommentResult_TourInfo> arrayComment=new ArrayList<>();
-    private ArrayList<Feedback> arrayList_feedback=new ArrayList<>();
+    private ArrayList<CommentResult_TourInfo> arrayComment = new ArrayList<>();
+    private ArrayList<Feedback> arrayList_feedback = new ArrayList<>();
     private onClickRecycleView onClickRecycleView;
     private onCLickRecycleView_Rating onCLickRecycleView_rating;
 
 
-    private ArrayList<CoordList> coordLists=new ArrayList<>();
+    private ArrayList<CoordList> coordLists = new ArrayList<>();
 
 
     @Override
@@ -163,54 +165,43 @@ public class Tour_Info extends AppCompatActivity {
         LatLong2 lat8=new LatLong2(48.033090,69.814943);*/
 
 
+        CoordinateSet coordinateSet_1 = new CoordinateSet(48.033090, 69.814943);
+        CoordinateSet coordinateSet_2 = new CoordinateSet(2.739697, 43.903915);
+        CoordinateSet coordinateSet_3 = new CoordinateSet(2.739697, 43.903915);
+        CoordinateSet coordinateSet_4 = new CoordinateSet(-6.658560, 143.575005);
+        CoordinateSet coordinateSet_5 = new CoordinateSet(-6.658560, 143.575005);
+        CoordinateSet coordinateSet_6 = new CoordinateSet(49.555488, 143.322819);
+        CoordinateSet coordinateSet_7 = new CoordinateSet(49.555488, 143.322819);
+        CoordinateSet coordinateSet_8 = new CoordinateSet(48.033090, 69.814943);
 
-        CoordinateSet coordinateSet_1=new CoordinateSet(48.033090,69.814943);
-        CoordinateSet coordinateSet_2=new CoordinateSet(2.739697,43.903915);
-        CoordinateSet coordinateSet_3=new CoordinateSet(2.739697,43.903915);
-        CoordinateSet coordinateSet_4=new CoordinateSet(-6.658560,143.575005);
-        CoordinateSet coordinateSet_5=new CoordinateSet(-6.658560,143.575005);
-        CoordinateSet coordinateSet_6=new CoordinateSet(49.555488,143.322819);
-        CoordinateSet coordinateSet_7=new CoordinateSet(49.555488,143.322819);
-        CoordinateSet coordinateSet_8=new CoordinateSet(48.033090,69.814943);
 
-
-        ArrayList<CoordinateSet> cs1=new ArrayList<>();
+        ArrayList<CoordinateSet> cs1 = new ArrayList<>();
         cs1.add(coordinateSet_1);
         cs1.add(coordinateSet_2);
 
-        ArrayList<CoordinateSet> cs2=new ArrayList<>();
+        ArrayList<CoordinateSet> cs2 = new ArrayList<>();
         cs2.add(coordinateSet_3);
         cs2.add(coordinateSet_4);
 
-        ArrayList<CoordinateSet> cs3=new ArrayList<>();
+        ArrayList<CoordinateSet> cs3 = new ArrayList<>();
         cs3.add(coordinateSet_5);
         cs3.add(coordinateSet_6);
 
-        ArrayList<CoordinateSet> cs4=new ArrayList<>();
+        ArrayList<CoordinateSet> cs4 = new ArrayList<>();
         cs4.add(coordinateSet_7);
         cs4.add(coordinateSet_8);
 
 
-        CoordList cl1=new CoordList(cs1);
-        CoordList cl2=new CoordList(cs2);
-        CoordList cl3=new CoordList(cs3);
-        CoordList cl4=new CoordList(cs4);
+        CoordList cl1 = new CoordList(cs1);
+        CoordList cl2 = new CoordList(cs2);
+        CoordList cl3 = new CoordList(cs3);
+        CoordList cl4 = new CoordList(cs4);
 
 
         coordLists.add(cl1);
         coordLists.add(cl2);
         coordLists.add(cl3);
         coordLists.add(cl4);
-
-
-
-
-
-
-
-
-
-
 
 
         cover_tour_imagee = findViewById(R.id.cover_tour_image);
@@ -229,57 +220,55 @@ public class Tour_Info extends AppCompatActivity {
         user_id = bundle.getString("user_id_string");
 
 
-        Toast.makeText(getApplicationContext(),"ID TOUR: "+id_tour,Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "ID TOUR: " + id_tour, Toast.LENGTH_SHORT).show();
 
-        onClickRecycleView=new onClickRecycleView() {
+        onClickRecycleView = new onClickRecycleView() {
             @Override
             public void setClick(int pos) {
                 Map<String, String> map = new HashMap<>();
                 map.put("Authorization", token);
-                SendReportComment_Data sendReportComment_data=new SendReportComment_Data(arrayComment.get(pos).getId());
+                SendReportComment_Data sendReportComment_data = new SendReportComment_Data(arrayComment.get(pos).getId());
 
-                Call<InviteMember_Result> call=jsonPlaceHolderApi.report_comment(map,sendReportComment_data);
+                Call<InviteMember_Result> call = jsonPlaceHolderApi.report_comment(map, sendReportComment_data);
                 call.enqueue(new Callback<InviteMember_Result>() {
                     @Override
                     public void onResponse(Call<InviteMember_Result> call, Response<InviteMember_Result> response) {
-                        if (!response.isSuccessful())
-                        {
-                            Toast.makeText(getApplicationContext(),"Report Fail",Toast.LENGTH_SHORT).show();
-                        }else {
-                            Toast.makeText(getApplicationContext(),"Report Successfully",Toast.LENGTH_SHORT).show();
+                        if (!response.isSuccessful()) {
+                            Toast.makeText(getApplicationContext(), "Report Fail", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Report Successfully", Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<InviteMember_Result> call, Throwable t) {
-                        Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
         };
 
-        onCLickRecycleView_rating=new onCLickRecycleView_Rating() {
+        onCLickRecycleView_rating = new onCLickRecycleView_Rating() {
             @Override
             public void rating(int pos) {
                 Map<String, String> map = new HashMap<>();
                 map.put("Authorization", token);
-                SendReportComment_Data sendReportComment_data=new SendReportComment_Data(arrayList_feedback.get(pos).getId());
+                SendReportComment_Data sendReportComment_data = new SendReportComment_Data(arrayList_feedback.get(pos).getId());
 
-                Call<InviteMember_Result> call=jsonPlaceHolderApi.report_comment(map,sendReportComment_data);
+                Call<InviteMember_Result> call = jsonPlaceHolderApi.report_comment(map, sendReportComment_data);
                 call.enqueue(new Callback<InviteMember_Result>() {
                     @Override
                     public void onResponse(Call<InviteMember_Result> call, Response<InviteMember_Result> response) {
-                        if (!response.isSuccessful())
-                        {
-                            Toast.makeText(getApplicationContext(),"Report Fail",Toast.LENGTH_SHORT).show();
-                        }else {
-                            Toast.makeText(getApplicationContext(),"Report Successfully",Toast.LENGTH_SHORT).show();
+                        if (!response.isSuccessful()) {
+                            Toast.makeText(getApplicationContext(), "Report Fail", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Report Successfully", Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<InviteMember_Result> call, Throwable t) {
-                        Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -315,14 +304,14 @@ public class Tour_Info extends AppCompatActivity {
 
 
                     //Lay duoc danh sach Comment cua cai tour do:
-                     arrayComment = response.body().getComments();
+                    arrayComment = response.body().getComments();
 
                     //Lay duoc danh sach Member cua cai tour do:
                     ArrayList<Member> arrayMember = response.body().getMembers();
                     name_tour_info.setText(response.body().getName());
 
                     Boolean is_Private = response.body().getPrivate();
-                    ISPV=is_Private;
+                    ISPV = is_Private;
                     if (is_Private) {
                         isPrivate.setBackgroundResource(R.drawable.lock);
                     } else {
@@ -695,7 +684,7 @@ public class Tour_Info extends AppCompatActivity {
                     //Xu ly commnt
                     if (arrayComment.size() != 0) {
                         listView_comment.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
-                        listView_comment.setAdapter(new CustomAdapterForTourInfo_Comment(arrayComment,onClickRecycleView));
+                        listView_comment.setAdapter(new CustomAdapterForTourInfo_Comment(arrayComment, onClickRecycleView));
 
 
                     } else {
@@ -715,21 +704,18 @@ public class Tour_Info extends AppCompatActivity {
                     }
 
 
-
                     //Xu ly Rating
 
-                    Call<Rating_result> call1_2=jsonPlaceHolderApi.get_rating_list(map,Integer.parseInt(id_tour),1,"100");
+                    Call<Rating_result> call1_2 = jsonPlaceHolderApi.get_rating_list(map, Integer.parseInt(id_tour), 1, "100");
                     call1_2.enqueue(new Callback<Rating_result>() {
                         @Override
                         public void onResponse(Call<Rating_result> call, Response<Rating_result> response) {
-                            if (!response.isSuccessful())
-                            {
-                                Toast.makeText(getApplicationContext(),"Khong thanh cong",Toast.LENGTH_SHORT).show();
-                            }
-                            else {
-                                arrayList_feedback=response.body().getReviewList();
+                            if (!response.isSuccessful()) {
+                                Toast.makeText(getApplicationContext(), "Khong thanh cong", Toast.LENGTH_SHORT).show();
+                            } else {
+                                arrayList_feedback = response.body().getReviewList();
                                 listview_rating.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
-                                listview_rating.setAdapter(new CustomAdapterForTourInfo_Rating(arrayList_feedback,onCLickRecycleView_rating));
+                                listview_rating.setAdapter(new CustomAdapterForTourInfo_Rating(arrayList_feedback, onCLickRecycleView_rating));
                             }
                         }
 
@@ -851,7 +837,7 @@ public class Tour_Info extends AppCompatActivity {
                 final EditText edit_search = search_user.findViewById(R.id.search_user_edit_text);
                 ImageView search = search_user.findViewById(R.id.search_user_button);
                 final ListView listView = search_user.findViewById(R.id.list_view_search_user);
-                ImageView exit=search_user.findViewById(R.id.exit_search_user);
+                ImageView exit = search_user.findViewById(R.id.exit_search_user);
                 exit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -878,7 +864,7 @@ public class Tour_Info extends AppCompatActivity {
                                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                                 Map<String, String> map = new HashMap<>();
                                                 map.put("Authorization", token);
-                                                InviteData inviteMemberData = new InviteData(id_tour, arrayList_user.get(position).getId()+"", true);
+                                                InviteData inviteMemberData = new InviteData(id_tour, arrayList_user.get(position).getId() + "", true);
                                                 Call<InviteResult> call_4 = jsonPlaceHolderApi.inviteMember(map, inviteMemberData);
                                                 call_4.enqueue(new Callback<InviteResult>() {
                                                     @Override
@@ -940,7 +926,20 @@ public class Tour_Info extends AppCompatActivity {
         });
 
 
-        isPrivate.setOnClickListener(new View.OnClickListener() {
+        add_stop_point.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"Click",Toast.LENGTH_SHORT).show();
+                Bundle bundle = new Bundle();
+                bundle.putString("token", token);
+                bundle.putInt("ID", Integer.parseInt(id_tour));
+                Intent intent = new Intent(Tour_Info.this, MapActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+       /* isPrivate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Map<String, String> map = new HashMap<>();
@@ -968,7 +967,7 @@ public class Tour_Info extends AppCompatActivity {
                 });
 
             }
-        });
+        });*/
     }
 
 
@@ -980,7 +979,7 @@ public class Tour_Info extends AppCompatActivity {
         listView_stop_point = findViewById(R.id.list_stop_point_tour_info1);
         listView_comment = findViewById(R.id.list_comment_tour_info);
         listView_member = findViewById(R.id.list_member_tour_info);
-        listview_rating=findViewById(R.id.list_rating_tour_info);
+        listview_rating = findViewById(R.id.list_rating_tour_info);
         stop_point_info = new Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
         update_stop_point = new Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
         add_comment_of_user = findViewById(R.id.add_comment_of_user);
@@ -997,6 +996,7 @@ public class Tour_Info extends AppCompatActivity {
 
 
         add_member = findViewById(R.id.add_member);
+        add_stop_point=findViewById(R.id.add_stop_point_of_user);
         status = findViewById(R.id.status);
         isPrivate = findViewById(R.id.is_private_image);
         back = findViewById(R.id.back_to_main);

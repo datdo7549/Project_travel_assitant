@@ -45,8 +45,13 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.ygaps.travelapp.Adapter.CustomAdapterForListStopPoint;
+import com.ygaps.travelapp.Adapter.CustomAdapter_Suggest_Stop_Point;
 import com.ygaps.travelapp.Model.Add_Stop_Point_Data;
 import com.ygaps.travelapp.Model.Add_Stop_Point_Result;
+import com.ygaps.travelapp.Model.CoordList;
+import com.ygaps.travelapp.Model.CoordinateSet;
+import com.ygaps.travelapp.Model.GetSugestStopPoint_Result;
+import com.ygaps.travelapp.Model.GetSuggestStoppoint_Data;
 import com.ygaps.travelapp.Model.Stop_Point;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -111,6 +116,7 @@ public class MapActivity extends AppCompatActivity {
     private int TYPE;
 
     private LocationManager mLocationManager;
+    private ArrayList<CoordList> coordLists=new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -153,8 +159,78 @@ public class MapActivity extends AppCompatActivity {
                 }
             }
         });
+        find_suggest_stop_point();
     }
 
+    private void find_suggest_stop_point()
+    {
+        CoordinateSet coordinateSet_1=new CoordinateSet(48.033090,69.814943);
+        CoordinateSet coordinateSet_2=new CoordinateSet(2.739697,43.903915);
+        CoordinateSet coordinateSet_3=new CoordinateSet(2.739697,43.903915);
+        CoordinateSet coordinateSet_4=new CoordinateSet(-6.658560,143.575005);
+        CoordinateSet coordinateSet_5=new CoordinateSet(-6.658560,143.575005);
+        CoordinateSet coordinateSet_6=new CoordinateSet(49.555488,143.322819);
+        CoordinateSet coordinateSet_7=new CoordinateSet(49.555488,143.322819);
+        CoordinateSet coordinateSet_8=new CoordinateSet(48.033090,69.814943);
+
+
+        ArrayList<CoordinateSet> cs1=new ArrayList<>();
+        cs1.add(coordinateSet_1);
+        cs1.add(coordinateSet_2);
+
+        ArrayList<CoordinateSet> cs2=new ArrayList<>();
+        cs2.add(coordinateSet_3);
+        cs2.add(coordinateSet_4);
+
+        ArrayList<CoordinateSet> cs3=new ArrayList<>();
+        cs3.add(coordinateSet_5);
+        cs3.add(coordinateSet_6);
+
+        ArrayList<CoordinateSet> cs4=new ArrayList<>();
+        cs4.add(coordinateSet_7);
+        cs4.add(coordinateSet_8);
+
+
+        CoordList cl1=new CoordList(cs1);
+        CoordList cl2=new CoordList(cs2);
+        CoordList cl3=new CoordList(cs3);
+        CoordList cl4=new CoordList(cs4);
+
+
+        coordLists.add(cl1);
+        coordLists.add(cl2);
+        coordLists.add(cl3);
+        coordLists.add(cl4);
+        Map<String, String> map = new HashMap<>();
+        map.put("Authorization", token);
+
+
+        final GetSuggestStoppoint_Data getSuggestStoppoint_data=new GetSuggestStoppoint_Data(false,coordLists);
+        Call<GetSugestStopPoint_Result> call1_44=jsonPlaceHolderApi.get_suggets_stop_point(map,getSuggestStoppoint_data);
+
+        call1_44.enqueue(new Callback<GetSugestStopPoint_Result>() {
+            @Override
+            public void onResponse(Call<GetSugestStopPoint_Result> call, Response<GetSugestStopPoint_Result> response) {
+                if (!response.isSuccessful())
+                {
+                    Toast.makeText(getApplicationContext(),"Ko thanh cong"+response.code(),Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    for (int i=0;i<20;i++)
+                    {
+                        MarkerOptions options = new MarkerOptions()
+                                .position(new LatLng(Double.parseDouble(response.body().getStopPoints().get(i).getLat()),Double.parseDouble(response.body().getStopPoints().get(i).getmLong())))
+                                .title(response.body().getStopPoints().get(i).getAddress());
+                        mMap.addMarker(options);
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<GetSugestStopPoint_Result> call, Throwable t) {
+                Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
     private void someWork() {
         mMap.getUiSettings().setMyLocationButtonEnabled(false);
 
@@ -170,7 +246,7 @@ public class MapActivity extends AppCompatActivity {
 
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             public void onMapClick(LatLng arg0) {
-                mMap.clear();
+
                 Geocoder geocoder=new Geocoder(MapActivity.this);
                 List<Address> addresses = null;
                 try {
@@ -218,7 +294,6 @@ public class MapActivity extends AppCompatActivity {
                             add_Stop_Point_Dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                             add_Stop_Point_Dialog.setContentView(R.layout.add_stop_point);
                             add_Stop_Point_Dialog.show();
-                            mMap.clear();
                             dialog.dismiss();
                             final EditText diemxuatphat = add_Stop_Point_Dialog.findViewById(R.id.diem_xuat_phat);
                             ImageView exit_add_stop_point = add_Stop_Point_Dialog.findViewById(R.id.exit_add_stop_point);
