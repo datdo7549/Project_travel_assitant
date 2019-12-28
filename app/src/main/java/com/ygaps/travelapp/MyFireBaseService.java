@@ -57,6 +57,13 @@ public class MyFireBaseService extends FirebaseMessagingService {
         SharedPreferences sharedPreferences=getSharedPreferences("com.ygaps.travel",MODE_PRIVATE);
         token_user=sharedPreferences.getString("token_user","");
 
+
+
+
+
+
+
+
         if (data.isEmpty()) { // message type is notification.
             Log.d("data","isNull");
             showNotification("Invite to join a Tour",remoteMessage.getNotification().getBody());
@@ -71,6 +78,21 @@ public class MyFireBaseService extends FirebaseMessagingService {
 
             showNotification("Invite to join a Tour",body);
 
+
+            SharedPreferences sharedPreferences_2 = getSharedPreferences("com.ygaps.noti", Context.MODE_PRIVATE);
+            int pos=sharedPreferences_2.getInt("POSITION",0);
+
+
+            SharedPreferences sharedPreferences_1 = getSharedPreferences("com.ygaps.noti", Context.MODE_PRIVATE);
+
+            SharedPreferences.Editor editor = sharedPreferences_1.edit();
+            editor.putString("ID_TOUR"+pos,id_tour);
+
+            String msg="";
+            msg=temp.toString();
+            editor.putString("MESSAGE"+pos,msg);
+            editor.putInt("POSITION",pos+1);
+            editor.apply();
         }
 
     }

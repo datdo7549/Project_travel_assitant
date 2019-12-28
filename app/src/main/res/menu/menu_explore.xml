@@ -2,9 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto">
 
-  <item
-    android:id="@+id/action_call"
-    android:title="Make call"
-    app:showAsAction="ifRoom" />
+
+  <item android:title="Searchmytour" app:actionViewClass="android.widget.SearchView" app:showAsAction="always" android:icon="@drawable/search" android:id="@+id/search_suggets_stop_point"/>
 
 </menu>

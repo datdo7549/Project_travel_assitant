@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
+        Log.d("TKUS",token);
         SharedPreferences sharedPreferences = getSharedPreferences("com.ygaps.travel", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("token_user",token);

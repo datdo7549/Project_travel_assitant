@@ -18,6 +18,7 @@ public class Stop_Point {
     private int minCost;
     private int maxCost;
 
+    private int serviceId;
 
 
     public Stop_Point(String name, String address, int provinceId, double lat, double mlong, long arrivalAt, long leaveAt, int serviceTypeId, int minCost, int maxCost) {

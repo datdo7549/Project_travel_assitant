@@ -31,6 +31,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -98,7 +99,7 @@ public class MapActivity extends AppCompatActivity {
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationProviderClient;
 
-    private  ProgressDialog progressDialog;
+    private ProgressDialog progressDialog;
     Dialog dialog;
     Dialog add_Stop_Point_Dialog;
     Dialog list_stop_point_selected_dialog;
@@ -116,7 +117,7 @@ public class MapActivity extends AppCompatActivity {
     private int TYPE;
 
     private LocationManager mLocationManager;
-    private ArrayList<CoordList> coordLists=new ArrayList<>();
+    private ArrayList<CoordList> coordLists = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -129,20 +130,20 @@ public class MapActivity extends AppCompatActivity {
         mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         mapping();
 
-        Bundle bundle=getIntent().getExtras();
-        TYPE=bundle.getInt("type",0);
-        Gson gson=new GsonBuilder().serializeNulls().create();
-        Retrofit retrofit=new Retrofit.Builder()
+        Bundle bundle = getIntent().getExtras();
+        TYPE = bundle.getInt("type", 0);
+        Gson gson = new GsonBuilder().serializeNulls().create();
+        Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
-        jsonPlaceHolderApi=retrofit.create(JsonPlaceHolderApi.class);
-        add_Stop_Point_Dialog=new Dialog(this,android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+        jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+        add_Stop_Point_Dialog = new Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
 
 
-        token=bundle.getString("token");
-        id=bundle.getInt("ID");
-        dialog=new Dialog(this,android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+        token = bundle.getString("token");
+        id = bundle.getInt("ID");
+        dialog = new Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
 
 
         getLocationPermission();
@@ -162,39 +163,38 @@ public class MapActivity extends AppCompatActivity {
         find_suggest_stop_point();
     }
 
-    private void find_suggest_stop_point()
-    {
-        CoordinateSet coordinateSet_1=new CoordinateSet(48.033090,69.814943);
-        CoordinateSet coordinateSet_2=new CoordinateSet(2.739697,43.903915);
-        CoordinateSet coordinateSet_3=new CoordinateSet(2.739697,43.903915);
-        CoordinateSet coordinateSet_4=new CoordinateSet(-6.658560,143.575005);
-        CoordinateSet coordinateSet_5=new CoordinateSet(-6.658560,143.575005);
-        CoordinateSet coordinateSet_6=new CoordinateSet(49.555488,143.322819);
-        CoordinateSet coordinateSet_7=new CoordinateSet(49.555488,143.322819);
-        CoordinateSet coordinateSet_8=new CoordinateSet(48.033090,69.814943);
+    private void find_suggest_stop_point() {
+        CoordinateSet coordinateSet_1 = new CoordinateSet(48.033090, 69.814943);
+        CoordinateSet coordinateSet_2 = new CoordinateSet(2.739697, 43.903915);
+        CoordinateSet coordinateSet_3 = new CoordinateSet(2.739697, 43.903915);
+        CoordinateSet coordinateSet_4 = new CoordinateSet(-6.658560, 143.575005);
+        CoordinateSet coordinateSet_5 = new CoordinateSet(-6.658560, 143.575005);
+        CoordinateSet coordinateSet_6 = new CoordinateSet(49.555488, 143.322819);
+        CoordinateSet coordinateSet_7 = new CoordinateSet(49.555488, 143.322819);
+        CoordinateSet coordinateSet_8 = new CoordinateSet(48.033090, 69.814943);
 
 
-        ArrayList<CoordinateSet> cs1=new ArrayList<>();
+        ArrayList<CoordinateSet> cs1 = new ArrayList<>();
         cs1.add(coordinateSet_1);
         cs1.add(coordinateSet_2);
 
-        ArrayList<CoordinateSet> cs2=new ArrayList<>();
+        ArrayList<CoordinateSet> cs2 = new ArrayList<>();
         cs2.add(coordinateSet_3);
         cs2.add(coordinateSet_4);
 
-        ArrayList<CoordinateSet> cs3=new ArrayList<>();
+        ArrayList<CoordinateSet> cs3 = new ArrayList<>();
         cs3.add(coordinateSet_5);
         cs3.add(coordinateSet_6);
 
-        ArrayList<CoordinateSet> cs4=new ArrayList<>();
+        ArrayList<CoordinateSet> cs4 = new ArrayList<>();
         cs4.add(coordinateSet_7);
         cs4.add(coordinateSet_8);
 
 
-        CoordList cl1=new CoordList(cs1);
-        CoordList cl2=new CoordList(cs2);
-        CoordList cl3=new CoordList(cs3);
-        CoordList cl4=new CoordList(cs4);
+        CoordList cl1 = new CoordList(cs1);
+        CoordList cl2 = new CoordList(cs2);
+        CoordList cl3 = new CoordList(cs3);
+        CoordList cl4 = new CoordList(cs4);
 
 
         coordLists.add(cl1);
@@ -205,32 +205,31 @@ public class MapActivity extends AppCompatActivity {
         map.put("Authorization", token);
 
 
-        final GetSuggestStoppoint_Data getSuggestStoppoint_data=new GetSuggestStoppoint_Data(false,coordLists);
-        Call<GetSugestStopPoint_Result> call1_44=jsonPlaceHolderApi.get_suggets_stop_point(map,getSuggestStoppoint_data);
+        final GetSuggestStoppoint_Data getSuggestStoppoint_data = new GetSuggestStoppoint_Data(false, coordLists);
+        Call<GetSugestStopPoint_Result> call1_44 = jsonPlaceHolderApi.get_suggets_stop_point(map, getSuggestStoppoint_data);
 
         call1_44.enqueue(new Callback<GetSugestStopPoint_Result>() {
             @Override
             public void onResponse(Call<GetSugestStopPoint_Result> call, Response<GetSugestStopPoint_Result> response) {
-                if (!response.isSuccessful())
-                {
-                    Toast.makeText(getApplicationContext(),"Ko thanh cong"+response.code(),Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    for (int i=0;i<20;i++)
-                    {
+                if (!response.isSuccessful()) {
+                    Toast.makeText(getApplicationContext(), "Ko thanh cong" + response.code(), Toast.LENGTH_SHORT).show();
+                } else {
+                    for (int i = 0; i < 20; i++) {
                         MarkerOptions options = new MarkerOptions()
-                                .position(new LatLng(Double.parseDouble(response.body().getStopPoints().get(i).getLat()),Double.parseDouble(response.body().getStopPoints().get(i).getmLong())))
-                                .title(response.body().getStopPoints().get(i).getAddress());
+                                .position(new LatLng(Double.parseDouble(response.body().getStopPoints().get(i).getLat()), Double.parseDouble(response.body().getStopPoints().get(i).getmLong())))
+                                .title(response.body().getStopPoints().get(i).getName()+"+"+ response.body().getStopPoints().get(i).getAddress());
                         mMap.addMarker(options);
                     }
                 }
             }
+
             @Override
             public void onFailure(Call<GetSugestStopPoint_Result> call, Throwable t) {
-                Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
+
     private void someWork() {
         mMap.getUiSettings().setMyLocationButtonEnabled(false);
 
@@ -239,7 +238,7 @@ public class MapActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mSearchText.setFocusable(true);
                 hideSoftKeyBoard();
-                String temp=mSearchText.getText().toString();
+                String temp = mSearchText.getText().toString();
                 geoLocate(temp);
             }
         });
@@ -247,14 +246,14 @@ public class MapActivity extends AppCompatActivity {
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             public void onMapClick(LatLng arg0) {
 
-                Geocoder geocoder=new Geocoder(MapActivity.this);
+                Geocoder geocoder = new Geocoder(MapActivity.this);
                 List<Address> addresses = null;
                 try {
-                    addresses=geocoder.getFromLocation(arg0.latitude,arg0.longitude,1);
+                    addresses = geocoder.getFromLocation(arg0.latitude, arg0.longitude, 1);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                MarkerOptions options=new MarkerOptions()
+                MarkerOptions options = new MarkerOptions()
                         .position(arg0)
                         .title(addresses.get(0).getAddressLine(0));
                 mMap.addMarker(options);
@@ -262,27 +261,23 @@ public class MapActivity extends AppCompatActivity {
         });
 
 
-
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(final Marker marker) {
-                if (TYPE==1)
-                {
+                if (TYPE == 1) {
                     LatLng mLatLng = marker.getPosition();
                     double mNewLat = mLatLng.latitude;
                     double mNewLong = mLatLng.longitude;
-                    String mNewAddress=marker.getTitle();
-                    Bundle bundle1=new Bundle();
-                    bundle1.putDouble("mNewLat",mNewLat);
-                    bundle1.putDouble("mNewLong",mNewLong);
-                    bundle1.putString("mNewAddress",mNewAddress);
-                    Intent intent=new Intent(MapActivity.this,Tour_Info.class);
+                    String mNewAddress = marker.getTitle();
+                    Bundle bundle1 = new Bundle();
+                    bundle1.putDouble("mNewLat", mNewLat);
+                    bundle1.putDouble("mNewLong", mNewLong);
+                    bundle1.putString("mNewAddress", mNewAddress);
+                    Intent intent = new Intent(MapActivity.this, Tour_Info.class);
                     intent.putExtras(bundle1);
                     startActivity(intent);
                     return true;
-                }
-                else
-                {
+                } else {
                     TextView name_country;
                     TextView stop_Point_Infor;
                     dialog.setContentView(R.layout.popup);
@@ -296,6 +291,11 @@ public class MapActivity extends AppCompatActivity {
                             add_Stop_Point_Dialog.show();
                             dialog.dismiss();
                             final EditText diemxuatphat = add_Stop_Point_Dialog.findViewById(R.id.diem_xuat_phat);
+                            if (marker.getTitle().contains("+"))
+                            {
+                                diemxuatphat.setText(marker.getTitle().substring(0,marker.getTitle().indexOf('+')));
+                            }
+
                             ImageView exit_add_stop_point = add_Stop_Point_Dialog.findViewById(R.id.exit_add_stop_point);
                             exit_add_stop_point.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -460,7 +460,6 @@ public class MapActivity extends AppCompatActivity {
                                     double mLat = mLatLng.latitude;
                                     double mLong = mLatLng.longitude;
 
-
                                     Stop_Point stop_point = new Stop_Point(mDiemXuatPhat, mAddress, mProvince, mLat, mLong, mAr_Date, mLe_Date, mType, mMin_Cots, mMax_Cost);
                                     arrayListStopPoint.add(stop_point);
                                     add_Stop_Point_Dialog.dismiss();
@@ -469,31 +468,6 @@ public class MapActivity extends AppCompatActivity {
                                     Add_Stop_Point_Data add_stop_point_data = new Add_Stop_Point_Data(id, arrayListStopPoint);
                                     Map<String, String> map = new HashMap<>();
                                     map.put("Authorization", token);
-
-
-                                    //Bat dau them
-                                /*
-                                Call<Add_Stop_Point_Result> call=jsonPlaceHolderApi.addStopPoint(map,add_stop_point_data);
-                                call.enqueue(new Callback<Add_Stop_Point_Result>() {
-                                    @Override
-                                    public void onResponse(Call<Add_Stop_Point_Result> call, Response<Add_Stop_Point_Result> response) {
-                                        if(!response.isSuccessful())
-                                        {
-                                            Toast.makeText(MapActivity.this,"Ko Thanh cong"+response.code()+response.body(),Toast.LENGTH_SHORT).show();
-                                        }
-                                        else {
-                                            Toast.makeText(MapActivity.this,"Thanh cong",Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onFailure(Call<Add_Stop_Point_Result> call, Throwable t) {
-                                        Toast.makeText(MapActivity.this,t.getMessage(),Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                                arrayListStopPoint.clear();
-                                */
-
                                 }
                             });
                         }
@@ -517,43 +491,225 @@ public class MapActivity extends AppCompatActivity {
                 list_stop_point_selected_dialog.setContentView(R.layout.list_stop_point_selected_popup);
                 list_stop_point_selected_dialog.show();
                 CustomAdapterForListStopPoint customAdapterForListStopPoint;
-                ListView listView_stop_point=list_stop_point_selected_dialog.findViewById(R.id.list_stop_point_list_view);
-                ImageView exit= list_stop_point_selected_dialog.findViewById(R.id.exit_list_stop_point_review);
+                final ListView listView_stop_point = list_stop_point_selected_dialog.findViewById(R.id.list_stop_point_list_view);
+                listView_stop_point.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                        add_Stop_Point_Dialog.show();
+                        final EditText diemxuatphat = add_Stop_Point_Dialog.findViewById(R.id.diem_xuat_phat);
+                        diemxuatphat.setText("");
+                        ImageView exit_add_stop_point = add_Stop_Point_Dialog.findViewById(R.id.exit_add_stop_point);
+                        exit_add_stop_point.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                add_Stop_Point_Dialog.dismiss();
+                            }
+                        });
+                        final Spinner type1 = add_Stop_Point_Dialog.findViewById(R.id.restaurant);
+                        ArrayAdapter<CharSequence> adapter_byname1 = ArrayAdapter.createFromResource(MapActivity.this, R.array.service_type, android.R.layout.simple_spinner_item);
+                        adapter_byname1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        type1.setAdapter(adapter_byname1);
+                        final EditText address1 = add_Stop_Point_Dialog.findViewById(R.id.addresstext);
+                        address1.setText("");
+
+                        final EditText province1 = add_Stop_Point_Dialog.findViewById(R.id.provincetext);
+                        province1.setText("");
+
+                        final EditText mMinCost = add_Stop_Point_Dialog.findViewById(R.id.min_cost);
+                        mMinCost.setText("");
+                        final EditText mMaxCost = add_Stop_Point_Dialog.findViewById(R.id.max_cost);
+                        mMaxCost.setText("");
+                        // xu li time and date/*
+
+                        final EditText mtimeArrive = add_Stop_Point_Dialog.findViewById(R.id.timeArrial);
+
+                        mtimeArrive.setText("");
+                        final EditText mtimeLeave = add_Stop_Point_Dialog.findViewById(R.id.timeLeave);
+                        mtimeLeave.setText("");
+                        final EditText mDateArrive = add_Stop_Point_Dialog.findViewById(R.id.dateArrial);
+                        mDateArrive.setText("");
+                        final EditText mDateLeave = add_Stop_Point_Dialog.findViewById(R.id.dateLeave);
+                        mDateLeave.setText("");
+                        final ImageButton btnArrive = add_Stop_Point_Dialog.findViewById(R.id.btndateArrive);
+
+                        final ImageButton btnLeave = add_Stop_Point_Dialog.findViewById(R.id.btndateLeave);
+                        final Button ok_button = add_Stop_Point_Dialog.findViewById(R.id.ok_btt);
+
+
+                        btnArrive.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                final Calendar cal = Calendar.getInstance();
+                                int mDay = cal.get(Calendar.DAY_OF_MONTH);
+                                int mMonth = cal.get(Calendar.MONTH);
+                                int mYear = cal.get(Calendar.YEAR);
+
+                                DatePickerDialog datePickerDialog = new DatePickerDialog(MapActivity.this, new DatePickerDialog.OnDateSetListener() {
+                                    @Override
+                                    public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
+                                        mDateArrive.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                                    }
+
+                                    ;
+                                }, mYear, mMonth, mDay);
+                                datePickerDialog.setTitle(R.string.choose);
+                                datePickerDialog.show();
+                            }
+                        });
+
+                        btnLeave.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                final Calendar cal = Calendar.getInstance();
+                                int mDay = cal.get(Calendar.DAY_OF_MONTH);
+                                int mMonth = cal.get(Calendar.MONTH);
+                                int mYear = cal.get(Calendar.YEAR);
+
+                                DatePickerDialog datePickerDialog = new DatePickerDialog(MapActivity.this, new DatePickerDialog.OnDateSetListener() {
+                                    @Override
+                                    public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
+                                        mDateLeave.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                                    }
+
+                                    ;
+                                }, mYear, mMonth, mDay);
+                                datePickerDialog.setTitle(R.string.choose);
+                                datePickerDialog.show();
+                            }
+                        });
+
+                        mtimeArrive.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                final Calendar cal = Calendar.getInstance();
+
+                                int mHour = cal.get(Calendar.HOUR_OF_DAY);
+                                int mMinute = cal.get(Calendar.MINUTE);
+
+                                TimePickerDialog timePickerDialog = new TimePickerDialog(MapActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                                    @Override
+                                    public void onTimeSet(TimePicker timePicker, int hourOfday, int minute) {
+                                        mtimeArrive.setText(hourOfday + ":" + minute);
+                                    }
+
+                                    ;
+                                }, mHour, mMinute, false);
+                                timePickerDialog.setTitle(R.string.choose);
+                                timePickerDialog.show();
+                            }
+                        });
+
+
+                        mtimeLeave.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                final Calendar cal = Calendar.getInstance();
+                                int mHour = cal.get(Calendar.HOUR_OF_DAY);
+                                int mMinute = cal.get(Calendar.MINUTE);
+
+                                TimePickerDialog timePickerDialog = new TimePickerDialog(MapActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                                    @Override
+                                    public void onTimeSet(TimePicker timePicker, int hourOfday, int minute) {
+                                        mtimeLeave.setText(hourOfday + ":" + minute);
+                                    }
+
+                                    ;
+                                }, mHour, mMinute, false);
+                                timePickerDialog.setTitle(R.string.chooseTime);
+                                timePickerDialog.show();
+                            }
+                        });
+                        ok_button.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                String mDiemXuatPhat = diemxuatphat.getText().toString();
+                                String mAddress = address1.getText().toString();
+
+                                int mType;
+                                if (type1.getSelectedItem().toString().equals("Restaurant")) {
+                                    mType = 1;
+                                } else if (type1.getSelectedItem().toString().equals("Hotel")) {
+                                    mType = 2;
+                                } else if (type1.getSelectedItem().toString().equals("Rest Station")) {
+                                    mType = 3;
+                                } else {
+                                    mType = 4;
+                                }
+                                int mProvince = Integer.parseInt(province1.getText().toString());
+                                int mMin_Cots = Integer.parseInt(mMinCost.getText().toString());
+                                int mMax_Cost = Integer.parseInt(mMaxCost.getText().toString());
+
+                                Date arriveDate, leaveDate;
+                                long mAr_Date = 0;
+                                long mLe_Date = 0;
+                                //xu li covert to milisecond
+                                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+                                try {
+                                    arriveDate = sdf.parse(mDateArrive.getText().toString() + " " + mtimeArrive.getText().toString());
+                                    leaveDate = sdf.parse(mDateLeave.getText().toString() + " " + mtimeLeave.getText().toString());
+                                    mAr_Date = arriveDate.getTime();
+                                    mLe_Date = leaveDate.getTime();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+                                double mLat = arrayListStopPoint.get(position).getLat();
+                                double mLong = arrayListStopPoint.get(position).getMlong();
+                                Stop_Point stop_point = new Stop_Point(mDiemXuatPhat, mAddress, mProvince, mLat, mLong, mAr_Date, mLe_Date, mType, mMin_Cots, mMax_Cost);
+                                arrayListStopPoint.remove(position);
+                                arrayListStopPoint.add(position, stop_point);
+                                CustomAdapterForListStopPoint customAdapterForListStopPoint1 = new CustomAdapterForListStopPoint(list_stop_point_selected_dialog.getContext(), R.layout.list_stop_point_tour_info, arrayListStopPoint);
+                                listView_stop_point.setAdapter(customAdapterForListStopPoint1);
+                                add_Stop_Point_Dialog.dismiss();
+                            }
+                        });
+                        //Xoa cai cu va them cai moi
+
+                    }
+                });
+
+                listView_stop_point.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                    @Override
+                    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                        arrayListStopPoint.remove(position);
+                        CustomAdapterForListStopPoint customAdapterForListStopPoint1 = new CustomAdapterForListStopPoint(list_stop_point_selected_dialog.getContext(), R.layout.list_stop_point_tour_info, arrayListStopPoint);
+                        listView_stop_point.setAdapter(customAdapterForListStopPoint1);
+                        return false;
+                    }
+                });
+                ImageView exit = list_stop_point_selected_dialog.findViewById(R.id.exit_list_stop_point_review);
                 exit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         list_stop_point_selected_dialog.dismiss();
                     }
                 });
-                if (arrayListStopPoint.size()!=0)
-                {
-                    customAdapterForListStopPoint=new CustomAdapterForListStopPoint(list_stop_point_selected_dialog.getContext(),R.layout.list_stop_point_tour_info,arrayListStopPoint);
+                if (arrayListStopPoint.size() != 0) {
+                    customAdapterForListStopPoint = new CustomAdapterForListStopPoint(list_stop_point_selected_dialog.getContext(), R.layout.list_stop_point_tour_info, arrayListStopPoint);
                     listView_stop_point.setAdapter(customAdapterForListStopPoint);
-                    Button add_sp=list_stop_point_selected_dialog.findViewById(R.id.add_list_stop_point_to_tour);
+                    Button add_sp = list_stop_point_selected_dialog.findViewById(R.id.add_list_stop_point_to_tour);
 
                     add_sp.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Add_Stop_Point_Data add_stop_point_data=new Add_Stop_Point_Data(id,arrayListStopPoint);
-                            Map<String,String> map=new HashMap<>();
-                            map.put("Authorization",token);
-                            Call<Add_Stop_Point_Result> call=jsonPlaceHolderApi.addStopPoint(map,add_stop_point_data);
+                            Add_Stop_Point_Data add_stop_point_data = new Add_Stop_Point_Data(id, arrayListStopPoint);
+                            Map<String, String> map = new HashMap<>();
+                            map.put("Authorization", token);
+                            Call<Add_Stop_Point_Result> call = jsonPlaceHolderApi.addStopPoint(map, add_stop_point_data);
                             call.enqueue(new Callback<Add_Stop_Point_Result>() {
                                 @Override
                                 public void onResponse(Call<Add_Stop_Point_Result> call, Response<Add_Stop_Point_Result> response) {
-                                    if(!response.isSuccessful())
-                                    {
-                                        Toast.makeText(MapActivity.this,"Ko Thanh cong"+response.code()+response.body(),Toast.LENGTH_SHORT).show();
-                                    }
-                                    else {
+                                    if (!response.isSuccessful()) {
+                                        Toast.makeText(MapActivity.this, "Ko Thanh cong" + response.code() + response.body(), Toast.LENGTH_SHORT).show();
+                                    } else {
                                         list_stop_point_selected_dialog.dismiss();
-                                        Toast.makeText(MapActivity.this,"Thanh cong",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(MapActivity.this, "Thanh cong", Toast.LENGTH_SHORT).show();
                                     }
                                 }
 
                                 @Override
                                 public void onFailure(Call<Add_Stop_Point_Result> call, Throwable t) {
-                                    Toast.makeText(MapActivity.this,t.getMessage(),Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(MapActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             });
                             arrayListStopPoint.clear();
@@ -562,9 +718,6 @@ public class MapActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-
 
 
     }
@@ -594,10 +747,10 @@ public class MapActivity extends AppCompatActivity {
 
     private void mapping() {
         find_my_location = findViewById(R.id.gps);
-        search_icon=findViewById(R.id.search_icon);
-        mSearchText=findViewById(R.id.input_search);
-        list_stop_point_selected_dialog=new Dialog(this,android.R.style.Theme_Black_NoTitleBar_Fullscreen);
-        list_stop_point_selected=findViewById(R.id.list_stop_point_selected);
+        search_icon = findViewById(R.id.search_icon);
+        mSearchText = findViewById(R.id.input_search);
+        list_stop_point_selected_dialog = new Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+        list_stop_point_selected = findViewById(R.id.list_stop_point_selected);
     }
 
     private void initMap() {
@@ -607,8 +760,7 @@ public class MapActivity extends AppCompatActivity {
             public void onMapReady(GoogleMap googleMap) {
                 Toast.makeText(getApplicationContext(), "Map is ready", Toast.LENGTH_SHORT).show();
                 mMap = googleMap;
-                if (mLocationPermissionGranted)
-                {
+                if (mLocationPermissionGranted) {
                     someWork();
                 }
             }
@@ -664,7 +816,7 @@ public class MapActivity extends AppCompatActivity {
     }
 
 
-    private void moveCamera(LatLng latLng, float zoom,String title) {
+    private void moveCamera(LatLng latLng, float zoom, String title) {
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
         MarkerOptions options = new MarkerOptions()
                 .position(latLng)
@@ -673,24 +825,24 @@ public class MapActivity extends AppCompatActivity {
     }
 
 
-    private void FoundLocation()
-    {
-        progressDialog=new ProgressDialog(MapActivity.this);
+    private void FoundLocation() {
+        progressDialog = new ProgressDialog(MapActivity.this);
         progressDialog.setTitle("Status");
         progressDialog.setMessage("Progressing...");
         progressDialog.show();
         final LocationListener locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(),location.getLongitude()), DEFAULT_ZOOM));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), DEFAULT_ZOOM));
                 MarkerOptions options = new MarkerOptions()
-                        .position(new LatLng(location.getLatitude(),location.getLongitude()))
+                        .position(new LatLng(location.getLatitude(), location.getLongitude()))
                         .title("My Location");
                 mMap.addMarker(options);
                 mMap.setMyLocationEnabled(true);
                 mMap.getUiSettings().setMyLocationButtonEnabled(false);
                 progressDialog.dismiss();
             }
+
             @Override
             public void onStatusChanged(String provider, int status, Bundle extras) {
                 Log.d("Status Changed", String.valueOf(status));
@@ -716,15 +868,14 @@ public class MapActivity extends AppCompatActivity {
         criteria.setHorizontalAccuracy(Criteria.ACCURACY_HIGH);
         criteria.setVerticalAccuracy(Criteria.ACCURACY_HIGH);
 
-        final LocationManager locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        final LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         // This is the Best And IMPORTANT part
         final Looper looper = null;
-        locationManager.requestSingleUpdate(criteria,locationListener,looper);
+        locationManager.requestSingleUpdate(criteria, locationListener, looper);
     }
 
-    private void hideSoftKeyBoard()
-    {
+    private void hideSoftKeyBoard() {
         if (mSearchText.isFocusable() && mSearchText.onCheckIsTextEditor()) {
             InputMethodManager imm = (InputMethodManager) getSystemService(MapActivity.INPUT_METHOD_SERVICE);
             assert imm != null;
@@ -733,21 +884,19 @@ public class MapActivity extends AppCompatActivity {
     }
 
     private void geoLocate(String temp) {
-        String searchString=temp;
-        Geocoder geocoder=new Geocoder(MapActivity.this);
-        List<Address> list=new ArrayList<>();
+        String searchString = temp;
+        Geocoder geocoder = new Geocoder(MapActivity.this);
+        List<Address> list = new ArrayList<>();
         try {
-            list=geocoder.getFromLocationName(searchString,1);
+            list = geocoder.getFromLocationName(searchString, 1);
+        } catch (IOException e) {
+            Log.e(TAG, "geoLocate: IOException " + e.getMessage());
         }
-        catch (IOException e){
-            Log.e(TAG,"geoLocate: IOException "+e.getMessage());
-        }
-        if (list.size()>0)
-        {
-            Address address=list.get(0);
-            Log.d(TAG,"geoLocate:  found a location "+address.toString());
-            Toast.makeText(MapActivity.this,address.getFeatureName()+", "+address.getCountryName()+" ,Lat: "+address.getLatitude()+" ,Long: "+address.getLongitude(),Toast.LENGTH_SHORT).show();
-            moveCamera(new LatLng(address.getLatitude(),address.getLongitude()),DEFAULT_ZOOM,address.getAddressLine(0));
+        if (list.size() > 0) {
+            Address address = list.get(0);
+            Log.d(TAG, "geoLocate:  found a location " + address.toString());
+            Toast.makeText(MapActivity.this, address.getFeatureName() + ", " + address.getCountryName() + " ,Lat: " + address.getLatitude() + " ,Long: " + address.getLongitude(), Toast.LENGTH_SHORT).show();
+            moveCamera(new LatLng(address.getLatitude(), address.getLongitude()), DEFAULT_ZOOM, address.getAddressLine(0));
 
         }
     }

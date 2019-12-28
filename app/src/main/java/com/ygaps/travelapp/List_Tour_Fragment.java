@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -32,6 +33,7 @@ import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -94,6 +96,81 @@ public class List_Tour_Fragment extends Fragment  {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_list_tour, menu);
+
+        MenuItem item=menu.findItem(R.id.search_list_tour);
+
+        SearchView searchView= (SearchView) item.getActionView();
+
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+
+                int len_strFind=s.length();
+
+                s.toLowerCase();
+                if(len_strFind==0) { // tra ve list view dang co
+                    arrayAdapternew = new CustomAdapter(getContext(),R.layout.custom_layout_tour_listview, arrayList);
+                    arrayAdapternew.notifyDataSetChanged();
+                    lv.setAdapter(arrayAdapternew);
+                }
+                else
+                {
+                    List<Tour> Temp=new ArrayList<>(); // tao 1 array adapter moi
+                    for(int i=0;i<arrayList.size();i++)
+                    {
+                        Tour model=arrayList.get(i);
+                        String name=model.getName();
+
+                        String dataName="";
+
+                        if(name==null )// name null
+                        {
+                            continue;
+                        }
+                        if((len_strFind > name.length()))
+                            continue;
+
+
+                        int index=0;
+
+                        while(index<len_strFind) {
+                            if(index<name.length())
+                                dataName+=name.charAt(index);
+
+                            index++;
+//                            if(index==len_strFind)
+//                                break;
+                        }
+
+
+                        if((dataName.compareToIgnoreCase(s)) == 0 ) {
+                            Temp.add(model);
+                        }
+
+                    }
+
+                    if(Temp.size()>0) {
+                        arrayAdapternew = new CustomAdapter(getContext(), R.layout.custom_layout_tour_listview, Temp);
+                        arrayAdapternew.notifyDataSetChanged();
+                        lv.setAdapter(arrayAdapternew);
+                    }
+                    else
+                    {
+                        arrayAdapternew= new CustomAdapter(getContext(), R.layout.custom_layout_tour_listview, Temp);
+                        arrayAdapternew.notifyDataSetInvalidated();
+                        lv.setAdapter(arrayAdapternew);
+                    }
+                }
+                return false;
+            }
+        });
+
     }
 
     @Override

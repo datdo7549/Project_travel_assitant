@@ -14,17 +14,18 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ygaps.travelapp.Model.CommentResult_TourInfo;
+import com.ygaps.travelapp.Model.Review;
 import com.ygaps.travelapp.Model.onClickRecycleView;
 import com.ygaps.travelapp.R;
 
 import java.util.ArrayList;
 
 public class CustomAdapterForTourInfo_Comment extends RecyclerView.Adapter<CustomAdapterForTourInfo_Comment.HorizontalViewHolder> {
-    private ArrayList<CommentResult_TourInfo> arrayList;
+    private ArrayList<Review> arrayList;
 
 
     onClickRecycleView onClickRecycleView;
-    public CustomAdapterForTourInfo_Comment(ArrayList<CommentResult_TourInfo> arrayList,onClickRecycleView onClickRecycleView) {
+    public CustomAdapterForTourInfo_Comment(ArrayList<Review> arrayList, onClickRecycleView onClickRecycleView) {
         this.arrayList = arrayList;
         this.onClickRecycleView=onClickRecycleView;
 
@@ -41,7 +42,7 @@ public class CustomAdapterForTourInfo_Comment extends RecyclerView.Adapter<Custo
     @Override
     public void onBindViewHolder(@NonNull HorizontalViewHolder holder, final int position) {
             holder.name_user_comment.setText(arrayList.get(position).getName());
-            holder.comment_string.setText(arrayList.get(position).getComment());
+            holder.comment_string.setText(arrayList.get(position).getReview());
             holder.send_report_commnet.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

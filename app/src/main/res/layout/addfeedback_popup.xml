@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:background="@android:color/holo_orange_dark"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:textColor="#000"
+                android:textSize="25sp"
+                android:text="Feedback"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <ImageView
+                android:id="@+id/exit_rating"
+                android:layout_marginRight="5dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/exit"
+                android:layout_width="30dp"
+                android:layout_height="30dp"/>
+        </RelativeLayout>
+
+        <RatingBar
+            android:stepSize="1"
+            android:background="@android:color/holo_orange_light"
+            android:id="@+id/rating_point_feedback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:saveEnabled="true"
+            android:numStars="5"/>
+        <EditText
+            android:hint="Enter feedback"
+            android:background="@android:color/holo_orange_light"
+            android:id="@+id/feedback_edit"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"/>
+        <Button
+            android:text="Send"
+            android:layout_gravity="center"
+            android:id="@+id/send_feedback"
+            android:layout_width="wrap_content"
+            android:background="@drawable/border_radius_orange_button"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</RelativeLayout>

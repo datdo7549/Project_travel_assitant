@@ -9,6 +9,9 @@ import com.ygaps.travelapp.Model.FacebookLoginResult;
 import com.ygaps.travelapp.Model.Fb_data_login;
 import com.ygaps.travelapp.Model.GetCoordinate_Data;
 import com.ygaps.travelapp.Model.GetCoordinate_Result;
+import com.ygaps.travelapp.Model.GetFeedBackList_Result;
+import com.ygaps.travelapp.Model.GetReview_Data;
+import com.ygaps.travelapp.Model.GetReview_Result;
 import com.ygaps.travelapp.Model.GetSugestStopPoint_Result;
 import com.ygaps.travelapp.Model.GetSuggestStoppoint_Data;
 import com.ygaps.travelapp.Model.GoogleLoginResult;
@@ -27,9 +30,11 @@ import com.ygaps.travelapp.Model.RequestOTP_Result;
 import com.ygaps.travelapp.Model.SearchUserByKeyword_Result;
 import com.ygaps.travelapp.Model.SendCommentData;
 import com.ygaps.travelapp.Model.SendCommentResult;
+import com.ygaps.travelapp.Model.SendFeedback_Data;
 import com.ygaps.travelapp.Model.SendRatingData;
 import com.ygaps.travelapp.Model.SendRatingResult;
 import com.ygaps.travelapp.Model.SendReportComment_Data;
+import com.ygaps.travelapp.Model.SendReview_Data;
 import com.ygaps.travelapp.Model.SendTokenFirebaseToServer_Result;
 import com.ygaps.travelapp.Model.SendTokenFirebaseToSever_Data;
 import com.ygaps.travelapp.Model.TourInforResult;
@@ -135,4 +140,18 @@ public interface JsonPlaceHolderApi {
 
     @POST("tour/suggested-destination-list")
     Call<GetSugestStopPoint_Result> get_suggets_stop_point(@HeaderMap Map<String,String> headers,@Body GetSuggestStoppoint_Data getSuggestStoppoint_data);
+
+    @GET("tour/get/review-list")
+    Call<GetReview_Result> get_review(@HeaderMap Map<String,String> headers,@Query("tourId") int tourId,@Query("pageIndex") int pageIndex,@Query("pageSize") String pageSize);
+
+
+    @GET("tour/get/feedback-service")
+    Call<GetFeedBackList_Result> getFeedback(@HeaderMap Map<String,String> headers,@Query("serviceId") int serviceId,@Query("pageIndex") int pageIndex,@Query("pageSize") String pageSize);
+
+
+    @POST("tour/add/feedback-service")
+    Call<InviteMember_Result> send_feed_back(@HeaderMap Map<String,String> headers,@Body SendFeedback_Data sendFeedback_data);
+
+
+
 }

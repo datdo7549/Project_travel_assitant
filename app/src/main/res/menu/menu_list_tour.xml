@@ -2,6 +2,10 @@
 <menu  xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto">
 
-  <item android:id="@+id/search_list_tour" android:title="search" android:icon="@drawable/search" app:showAsAction="always" />
+  <item android:id="@+id/search_list_tour"
+      android:title="search"
+      android:icon="@drawable/search"
+      app:showAsAction="always"
+      app:actionViewClass="android.widget.SearchView"/>
   <item android:id="@+id/get_list_tour" android:title="Get list tour with (name,...)" />
 </menu>

@@ -22,12 +22,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
 import com.ygaps.travelapp.Adapter.CustomAdapter;
+import com.ygaps.travelapp.Model.Create_Tour_Data;
+import com.ygaps.travelapp.Model.Create_Tour_Result;
 import com.ygaps.travelapp.Model.InviteData;
 import com.ygaps.travelapp.Model.InviteMemberData;
 import com.ygaps.travelapp.Model.InviteMember_Result;
@@ -41,6 +44,7 @@ import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -58,6 +62,7 @@ public class my_tour_fragment extends Fragment {
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     private String token;
     private ArrayList<Tour> arrayList=new ArrayList<>();
+    private ArrayList<Tour> tours_current=new ArrayList<>();
     private CustomAdapter arrayAdapternew;
     private Button getMyListTour;
     private Dialog option_get_tour_popup;
@@ -67,6 +72,79 @@ public class my_tour_fragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_my_tour, menu);
+        MenuItem itemSearch=menu.findItem(R.id.search_my_tour);
+
+        SearchView searchView= (SearchView) itemSearch.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+
+                int len_strFind=s.length();
+
+                s.toLowerCase();
+                if(len_strFind==0) { // tra ve list view dang co
+                    arrayAdapternew = new CustomAdapter(getContext(),R.layout.custom_layout_tour_listview, tours_current);
+                    arrayAdapternew.notifyDataSetChanged();
+                    listView.setAdapter(arrayAdapternew);
+                }
+                else
+                {
+                    List<Tour> Temp=new ArrayList<>(); // tao 1 array adapter moi
+                    for(int i=0;i<tours_current.size();i++)
+                    {
+                        Tour model=tours_current.get(i);
+                        String name=model.getName();
+
+                        String dataName="";
+
+                        if(name==null )// name null
+                        {
+                            continue;
+                        }
+                        if((len_strFind > name.length()))
+                            continue;
+
+
+                        int index=0;
+
+                        while(index<len_strFind) {
+                            if(index<name.length())
+                                dataName+=name.charAt(index);
+
+                            index++;
+//                            if(index==len_strFind)
+//                                break;
+                        }
+
+
+                        if((dataName.compareToIgnoreCase(s)) == 0 ) {
+                            Temp.add(model);
+                        }
+
+                    }
+
+                    if(Temp.size()>0) {
+                        arrayAdapternew = new CustomAdapter(getContext(), R.layout.custom_layout_tour_listview, Temp);
+                        arrayAdapternew.notifyDataSetChanged();
+                        listView.setAdapter(arrayAdapternew);
+                    }
+                    else
+                    {
+                        arrayAdapternew= new CustomAdapter(getContext(), R.layout.custom_layout_tour_listview, Temp);
+                        arrayAdapternew.notifyDataSetInvalidated();
+                        listView.setAdapter(arrayAdapternew);
+                    }
+                }
+                return false;
+            }
+        });
+
     }
 
     @Override
@@ -154,12 +232,23 @@ public class my_tour_fragment extends Fragment {
                     arrayList = new ArrayList<>(total);
                     arrayList = response.body().getTours();
                     final Animation animation= AnimationUtils.loadAnimation(getContext(),R.anim.animation );
-                    arrayAdapternew = new CustomAdapter(getContext(), R.layout.custom_layout_tour_listview, arrayList);
+                    tours_current.clear();
+                    for (int i=0;i<arrayList.size();i++)
+                    {
+                        if (arrayList.get(i).getStatus()!=-1)
+                        {
+                            tours_current.add(arrayList.get(i));
+                        }
+                    }
+                    Toast.makeText(getContext(),tours_current.size()+"",Toast.LENGTH_SHORT).show();
+                    arrayAdapternew = new CustomAdapter(getContext(), R.layout.custom_layout_tour_listview, tours_current);
+                    arrayAdapternew.notifyDataSetChanged();
+                    listView.setAdapter(arrayAdapternew);
                     listView.setClipToOutline(true);
                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            if(arrayList.get(position).getCheck()==1)
+                            if(tours_current.get(position).getCheck()==1)
                             {
                                 LinearLayout edit_delete=view.findViewById(R.id.edit_delete);
                                 arrayList.get(position).setCheck(0);
@@ -167,7 +256,7 @@ public class my_tour_fragment extends Fragment {
                             }
                             else {
                                 Bundle bundle = new Bundle();
-                                bundle.putString("tour_id", arrayList.get(position).getId());
+                                bundle.putString("tour_id", tours_current.get(position).getId());
                                 bundle.putString("token", token);
                                 Intent intent = new Intent(getContext(), Tour_Info.class);
                                 intent.putExtras(bundle);
@@ -180,7 +269,7 @@ public class my_tour_fragment extends Fragment {
                         public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
                             final int d=position;
                             LinearLayout edit_delete=view.findViewById(R.id.edit_delete);
-                            arrayList.get(position).setCheck(1);
+                            tours_current.get(position).setCheck(1);
                             edit_delete.startAnimation(animation);
                             edit_delete.setVisibility(View.VISIBLE);
                             Button edit=view.findViewById(R.id.edit_tour);
@@ -192,7 +281,7 @@ public class my_tour_fragment extends Fragment {
                                     Bundle bundle=new Bundle();
                                     Intent intent=new Intent(getContext(),CreateActivity.class);
                                     bundle.putString("token",token);
-                                    bundle.putInt("id_tour",Integer.parseInt(arrayList.get(position).getId()));
+                                    bundle.putInt("id_tour",Integer.parseInt(tours_current.get(position).getId()));
                                     bundle.putString("name_temp",name_temp);
                                     bundle.putInt("mode",1);
                                     intent.putExtras(bundle);
@@ -202,29 +291,28 @@ public class my_tour_fragment extends Fragment {
                             delete.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-
-
-
+                                    Create_Tour_Data upadte_tour_data = new Create_Tour_Data(Integer.parseInt(tours_current.get(position).getId()), "", 12, 23, true, 1, 1, 1, 2, -1);
                                     Map<String, String> map = new HashMap<>();
                                     map.put("Authorization", token);
-
-                                    InviteData inviteData=new InviteData(arrayList.get(position).getId(),"650",false);
-                                    Call<InviteResult> call=jsonPlaceHolderApi.inviteMember(map,inviteData);
-                                    call.enqueue(new Callback<InviteResult>() {
+                                    Call<Create_Tour_Result> call = jsonPlaceHolderApi.updateTour(map, upadte_tour_data);
+                                    call.enqueue(new Callback<Create_Tour_Result>() {
                                         @Override
-                                        public void onResponse(Call<InviteResult> call, Response<InviteResult> response) {
-                                            if (!response.isSuccessful())
-                                            {
-                                                Toast.makeText(getContext(),"Invite failed",Toast.LENGTH_SHORT).show();
-                                            }
-                                            else {
-                                                Toast.makeText(getContext(),"Invite successfully: "+response.body().getMessage(),Toast.LENGTH_SHORT).show();
+                                        public void onResponse(Call<Create_Tour_Result> call, Response<Create_Tour_Result> response) {
+                                            if (!response.isSuccessful()) {
+                                                Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+                                            } else {
+
+                                                Toast.makeText(getContext(), "Successfully", Toast.LENGTH_SHORT).show();
+                                                tours_current.remove(position);
+                                                arrayAdapternew.notifyDataSetChanged();
+                                                listView.setAdapter(arrayAdapternew);
+
                                             }
                                         }
 
                                         @Override
-                                        public void onFailure(Call<InviteResult> call, Throwable t) {
-                                            Toast.makeText(getContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                                        public void onFailure(Call<Create_Tour_Result> call, Throwable t) {
+                                            Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
                                         }
                                     });
                                 }
@@ -233,8 +321,7 @@ public class my_tour_fragment extends Fragment {
                             return true;
                         }
                     });
-                    arrayAdapternew.notifyDataSetChanged();
-                    listView.setAdapter(arrayAdapternew);
+
                 }
             }
 
@@ -300,4 +387,8 @@ public class my_tour_fragment extends Fragment {
             }
         });
     }
+
+
+
+    
 }

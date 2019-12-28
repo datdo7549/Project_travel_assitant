@@ -106,13 +106,18 @@ public class Temp extends AppCompatActivity {
         btnAccept=findViewById(R.id.btnAccept);
         btnDecline=findViewById(R.id.btnDecline);
         layoutButton=findViewById(R.id.layoutButton);
-        layoutButton.setVisibility(LinearLayout.INVISIBLE);
+        //layoutButton.setVisibility(LinearLayout.INVISIBLE);
+
+
 
         Bundle layThongBao=new Bundle();
         layThongBao=intent.getExtras();
         token_user=layThongBao.getString("token_user");
         id_tour=layThongBao.getString("id_tour");
-        tvMessage.setText(layThongBao.getString("MESSAGE_BODY"));
+
+
+
+        tvMessage.setText(layThongBao.getString("MESSAGE_BODY",""));
 
 
 

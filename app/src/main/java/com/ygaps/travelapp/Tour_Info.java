@@ -42,12 +42,16 @@ import com.ygaps.travelapp.Adapter.CustomAdapterForTourInfo_Member;
 import com.ygaps.travelapp.Adapter.CustomAdapterForTourInfo_Rating;
 import com.ygaps.travelapp.Adapter.CustomAdapterForTourInfo_StopPoint;
 import com.ygaps.travelapp.Adapter.CustomAdapterUserSearch;
+import com.ygaps.travelapp.Adapter.CustomAdapter_Feedback;
 import com.ygaps.travelapp.Model.Add_Stop_Point_Data;
 import com.ygaps.travelapp.Model.Add_Stop_Point_Result;
 import com.ygaps.travelapp.Model.CommentResult_TourInfo;
 import com.ygaps.travelapp.Model.CoordList;
 import com.ygaps.travelapp.Model.CoordinateSet;
 import com.ygaps.travelapp.Model.Feedback;
+import com.ygaps.travelapp.Model.Feedback_2;
+import com.ygaps.travelapp.Model.GetFeedBackList_Result;
+import com.ygaps.travelapp.Model.GetReview_Result;
 import com.ygaps.travelapp.Model.GetSugestStopPoint_Result;
 import com.ygaps.travelapp.Model.GetSuggestStoppoint_Data;
 import com.ygaps.travelapp.Model.InviteData;
@@ -56,12 +60,15 @@ import com.ygaps.travelapp.Model.InviteResult;
 import com.ygaps.travelapp.Model.Member;
 import com.ygaps.travelapp.Model.Rating_result;
 import com.ygaps.travelapp.Model.RemoveStopPointResult;
+import com.ygaps.travelapp.Model.Review;
 import com.ygaps.travelapp.Model.SearchUserByKeyword_Result;
 import com.ygaps.travelapp.Model.SendCommentData;
 import com.ygaps.travelapp.Model.SendCommentResult;
+import com.ygaps.travelapp.Model.SendFeedback_Data;
 import com.ygaps.travelapp.Model.SendRatingData;
 import com.ygaps.travelapp.Model.SendRatingResult;
 import com.ygaps.travelapp.Model.SendReportComment_Data;
+import com.ygaps.travelapp.Model.SendReview_Data;
 import com.ygaps.travelapp.Model.StopPointResult_TourInfo;
 import com.ygaps.travelapp.Model.Stop_Point;
 import com.ygaps.travelapp.Model.TourInforResult;
@@ -125,6 +132,8 @@ public class Tour_Info extends AppCompatActivity {
     private Dialog send_comment_popup;
     private Dialog send_rating_popup;
     private Dialog search_user;
+
+    private Dialog add_feedback;
     private ImageView add_comment_of_user;
     private ImageView add_rating;
     private ImageView add_member;
@@ -142,6 +151,8 @@ public class Tour_Info extends AppCompatActivity {
 
 
     private ArrayList<CoordList> coordLists = new ArrayList<>();
+
+    private CustomAdapter_Feedback customAdapter_feedback;
 
 
     @Override
@@ -377,12 +388,13 @@ public class Tour_Info extends AppCompatActivity {
 
                         listView_stop_point.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
-                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            public void onItemClick(AdapterView<?> parent, View view, final int position, final long id) {
                                 if (stopPointResult_tourInfo.get(position).getCheck() == 1) {
                                     LinearLayout edit_delete_stop_point = view.findViewById(R.id.edit_delete_stop_point);
                                     stopPointResult_tourInfo.get(position).setCheck(0);
                                     edit_delete_stop_point.setVisibility(View.INVISIBLE);
                                 } else {
+
                                     //stop_point_info.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                                     stop_point_info.getWindow().addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
                                     stop_point_info.setContentView(R.layout.stop_point_info_popup);
@@ -392,9 +404,86 @@ public class Tour_Info extends AppCompatActivity {
                                     TextView cost_stop_point = stop_point_info.findViewById(R.id.cost_stop_point_info);
                                     TextView type_service = stop_point_info.findViewById(R.id.type_service_stop_point);
                                     ImageView exit_stop_point_info_popup = stop_point_info.findViewById(R.id.exit_stop_point_info_popup);
+
+                                    ImageView add_feedback_image=stop_point_info.findViewById(R.id.add_feedback);
+                                    Toast.makeText(getApplicationContext(),"id stop point ne: "+stopPointResult_tourInfo.get(position).getId()+"---"+stopPointResult_tourInfo.get(position).getLat(),Toast.LENGTH_SHORT).show();
+                                    Call<GetFeedBackList_Result> call1_5=jsonPlaceHolderApi.getFeedback(map,stopPointResult_tourInfo.get(position).getId(),1,"100");
+                                    call1_5.enqueue(new Callback<GetFeedBackList_Result>() {
+                                        @Override
+                                        public void onResponse(Call<GetFeedBackList_Result> call, Response<GetFeedBackList_Result> response) {
+                                            if (!response.isSuccessful())
+                                            {
+                                                Toast.makeText(getApplicationContext(),"Khong thanh cong",Toast.LENGTH_SHORT).show();
+                                            }
+                                            else {
+
+                                                ArrayList<Feedback_2> arrayFeedback=response.body().getFeedbackList();
+                                                ListView listView=stop_point_info.findViewById(R.id.list_feedback);
+                                                customAdapter_feedback=new CustomAdapter_Feedback(getApplicationContext(),R.layout.custom_feedback_stop_point,arrayFeedback);
+                                                listView.setAdapter(customAdapter_feedback);
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<GetFeedBackList_Result> call, Throwable t) {
+                                            Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+
+                                    add_feedback_image.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            add_feedback.getWindow().addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
+                                            add_feedback.setContentView(R.layout.addfeedback_popup);
+
+                                            final TextView feedback_textview=add_feedback.findViewById(R.id.feedback_edit);
+                                            Button add_feedback_btn=add_feedback.findViewById(R.id.send_feedback);
+                                            final RatingBar ratingBar = add_feedback.findViewById(R.id.rating_point_feedback);
+
+
+
+                                            add_feedback_btn.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    String feedback=feedback_textview.getText().toString();
+                                                    int point=(int)ratingBar.getRating();
+                                                    SendFeedback_Data sendFeedback_data=new SendFeedback_Data(stopPointResult_tourInfo.get(position).getId(),feedback,point);
+                                                    Call<InviteMember_Result> call1_6=jsonPlaceHolderApi.send_feed_back(map,sendFeedback_data);
+                                                    call1_6.enqueue(new Callback<InviteMember_Result>() {
+                                                        @Override
+                                                        public void onResponse(Call<InviteMember_Result> call, Response<InviteMember_Result> response) {
+                                                            if (!response.isSuccessful())
+                                                            {
+                                                                Toast.makeText(getApplicationContext(),"Khong thanh cong"+response.code(),Toast.LENGTH_SHORT).show();
+                                                            }else {
+                                                                Toast.makeText(getApplicationContext(),"Thanh cong",Toast.LENGTH_SHORT).show();
+                                                            }
+
+                                                        }
+                                                        @Override
+                                                        public void onFailure(Call<InviteMember_Result> call, Throwable t) {
+                                                            Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    });
+                                                }
+                                            });
+
+                                            add_feedback.show();
+
+
+
+
+
+                                        }
+                                    });
+
+
                                     exit_stop_point_info_popup.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
+
+
+
                                             stop_point_info.dismiss();
                                         }
                                     });
@@ -434,6 +523,7 @@ public class Tour_Info extends AppCompatActivity {
                                     cost_stop_point.setText(costBuild);
 
                                     type_service.setText(stopPointResult_tourInfo.get(position).getServiceTypeId() + "");
+
                                     stop_point_info.show();
                                 }
 
@@ -682,16 +772,42 @@ public class Tour_Info extends AppCompatActivity {
                     }
 
                     //Xu ly commnt
-                    if (arrayComment.size() != 0) {
-                        listView_comment.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
-                        listView_comment.setAdapter(new CustomAdapterForTourInfo_Comment(arrayComment, onClickRecycleView));
 
 
-                    } else {
-                        TextView comment_placeholder = findViewById(R.id.comment_placehoder);
-                        comment_placeholder.setVisibility(View.VISIBLE);
-                        listView_comment.setVisibility(View.GONE);
-                    }
+
+
+
+                    Call<GetReview_Result> call1_3=jsonPlaceHolderApi.get_review(map,Integer.parseInt(id_tour),1,"100");
+
+                    call1_3.enqueue(new Callback<GetReview_Result>() {
+                        @Override
+                        public void onResponse(Call<GetReview_Result> call, Response<GetReview_Result> response) {
+                            if (!response.isSuccessful())
+                            {
+                                Toast.makeText(getApplicationContext(),"Lay review ko thanh",Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+
+                               ArrayList<Review> arrayReview=response.body().getReviews();
+                                if (arrayReview.size() != 0) {
+                                    listView_comment.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+                                    listView_comment.setAdapter(new CustomAdapterForTourInfo_Comment(arrayReview, onClickRecycleView));
+
+                                } else {
+                                    TextView comment_placeholder = findViewById(R.id.comment_placehoder);
+                                    comment_placeholder.setVisibility(View.VISIBLE);
+                                    listView_comment.setVisibility(View.GONE);
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<GetReview_Result> call, Throwable t) {
+
+                        }
+                    });
+
+
 
                     //Xu ly member
                     if (arrayMember.size() != 0) {
@@ -734,7 +850,7 @@ public class Tour_Info extends AppCompatActivity {
             }
         });
 
-        add_comment_of_user.setOnClickListener(new View.OnClickListener() {
+        /*add_comment_of_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 send_comment_popup.setContentView(R.layout.send_comment_popup);
@@ -753,11 +869,11 @@ public class Tour_Info extends AppCompatActivity {
                         String comment_string = comment.getText().toString();
                         Map<String, String> map = new HashMap<>();
                         map.put("Authorization", token);
-                        SendCommentData sendCommentData = new SendCommentData(id_tour, user_id, comment_string);
-                        Call<SendCommentResult> call_1 = jsonPlaceHolderApi.sendComment(map, sendCommentData);
-                        call_1.enqueue(new Callback<SendCommentResult>() {
+                        SendReview_Data sendReview_data = new SendReview_Data(Integer.parseInt(id_tour), 4, comment_string);
+                        Call<InviteMember_Result> call_1 = jsonPlaceHolderApi.send_review(map, sendReview_data);
+                        call_1.enqueue(new Callback<InviteMember_Result>() {
                             @Override
-                            public void onResponse(Call<SendCommentResult> call, Response<SendCommentResult> response) {
+                            public void onResponse(Call<InviteMember_Result> call, Response<InviteMember_Result> response) {
                                 if (!response.isSuccessful()) {
                                     Toast.makeText(getApplicationContext(), "Gui comment khong thanh cong", Toast.LENGTH_SHORT).show();
                                 } else {
@@ -769,7 +885,7 @@ public class Tour_Info extends AppCompatActivity {
                             }
 
                             @Override
-                            public void onFailure(Call<SendCommentResult> call, Throwable t) {
+                            public void onFailure(Call<InviteMember_Result> call, Throwable t) {
                                 Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
@@ -777,7 +893,7 @@ public class Tour_Info extends AppCompatActivity {
                 });
                 send_comment_popup.show();
             }
-        });
+        });*/
 
         add_rating.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -993,6 +1109,10 @@ public class Tour_Info extends AppCompatActivity {
 
         search_user = new Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
         Objects.requireNonNull(search_user.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+
+        add_feedback = new Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+        Objects.requireNonNull(add_feedback.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
 
         add_member = findViewById(R.id.add_member);
