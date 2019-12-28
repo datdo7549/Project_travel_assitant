@@ -52,7 +52,7 @@ public class MyFireBaseService extends FirebaseMessagingService {
         Map data=remoteMessage.getData();
         RemoteMessage.Notification notification = remoteMessage.getNotification();
 
-
+        Log.d("message123","llll");
 
         SharedPreferences sharedPreferences=getSharedPreferences("com.ygaps.travel",MODE_PRIVATE);
         token_user=sharedPreferences.getString("token_user","");
@@ -62,13 +62,11 @@ public class MyFireBaseService extends FirebaseMessagingService {
 
 
 
-
-
         if (data.isEmpty()) { // message type is notification.
-            Log.d("data","isNull");
+            Log.d("data123","isNull");
             showNotification("Invite to join a Tour",remoteMessage.getNotification().getBody());
         } else { // message type is data.
-
+            Log.d("data123","deo null");
             StringBuilder temp=new StringBuilder();
 
             temp.append(data.get("hostName")).append(" invites you to Tour: ").append(data.get("name"));

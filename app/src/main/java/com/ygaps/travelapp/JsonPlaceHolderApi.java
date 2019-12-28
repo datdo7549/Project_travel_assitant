@@ -2,6 +2,7 @@ package com.ygaps.travelapp;
 
 import com.ygaps.travelapp.Model.Add_Stop_Point_Data;
 import com.ygaps.travelapp.Model.Add_Stop_Point_Result;
+import com.ygaps.travelapp.Model.ChatMemberOnRoad_Data;
 import com.ygaps.travelapp.Model.Create_Tour_Data;
 import com.ygaps.travelapp.Model.Create_Tour_Result;
 import com.ygaps.travelapp.Model.DataGoogleLogin;
@@ -10,6 +11,7 @@ import com.ygaps.travelapp.Model.Fb_data_login;
 import com.ygaps.travelapp.Model.GetCoordinate_Data;
 import com.ygaps.travelapp.Model.GetCoordinate_Result;
 import com.ygaps.travelapp.Model.GetFeedBackList_Result;
+import com.ygaps.travelapp.Model.GetNotification_Result;
 import com.ygaps.travelapp.Model.GetReview_Data;
 import com.ygaps.travelapp.Model.GetReview_Result;
 import com.ygaps.travelapp.Model.GetSugestStopPoint_Result;
@@ -152,6 +154,11 @@ public interface JsonPlaceHolderApi {
     @POST("tour/add/feedback-service")
     Call<InviteMember_Result> send_feed_back(@HeaderMap Map<String,String> headers,@Body SendFeedback_Data sendFeedback_data);
 
+    @POST("tour/notification")
+    Call<InviteMember_Result> chat_member(@HeaderMap Map<String,String> headers, @Body ChatMemberOnRoad_Data chatMemberOnRoad_data);
 
+
+    @GET("tour/notification-list")
+    Call<GetNotification_Result> get_notification(@HeaderMap Map<String,String> headers,@Query("tourId") String tourId,@Query("pageIndex") int pageIndex,@Query("pageSize") String pageSize);
 
 }

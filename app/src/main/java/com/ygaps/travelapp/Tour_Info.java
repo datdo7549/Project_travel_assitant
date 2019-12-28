@@ -154,6 +154,8 @@ public class Tour_Info extends AppCompatActivity {
 
     private CustomAdapter_Feedback customAdapter_feedback;
 
+    private ImageView follow_tour;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -215,6 +217,24 @@ public class Tour_Info extends AppCompatActivity {
         coordLists.add(cl4);
 
 
+        final Bundle bundle = getIntent().getExtras();
+        id_tour = bundle.getString("tour_id");
+        token = bundle.getString("token");
+        user_id = bundle.getString("user_id");
+        Toast.makeText(getApplicationContext(),"user id: "+user_id,Toast.LENGTH_SHORT).show();
+        follow_tour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle=new Bundle();
+                bundle.putString("tour_id",id_tour);
+                bundle.putString("user_id",user_id);
+                bundle.putString("token_1",token);
+                bundle.putInt("mode",1);
+                Intent intent=new Intent(getApplicationContext(),MapActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
         cover_tour_imagee = findViewById(R.id.cover_tour_image);
         final Transformation transformation = new MaskTransformation(getApplicationContext(), R.drawable.rounded_convers_transformation);
 
@@ -225,13 +245,10 @@ public class Tour_Info extends AppCompatActivity {
                 .into(cover_tour_imagee);
 
 
-        final Bundle bundle = getIntent().getExtras();
-        id_tour = bundle.getString("tour_id");
-        token = bundle.getString("token");
-        user_id = bundle.getString("user_id_string");
 
 
-        Toast.makeText(getApplicationContext(), "ID TOUR: " + id_tour, Toast.LENGTH_SHORT).show();
+
+        Toast.makeText(getApplicationContext(), "ID TOUR: " + id_tour+"   " +user_id, Toast.LENGTH_SHORT).show();
 
         onClickRecycleView = new onClickRecycleView() {
             @Override
@@ -1120,6 +1137,8 @@ public class Tour_Info extends AppCompatActivity {
         status = findViewById(R.id.status);
         isPrivate = findViewById(R.id.is_private_image);
         back = findViewById(R.id.back_to_main);
+
+        follow_tour=findViewById(R.id.follow_tour);
 
     }
 

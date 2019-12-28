@@ -67,13 +67,16 @@ public class my_tour_fragment extends Fragment {
     private Button getMyListTour;
     private Dialog option_get_tour_popup;
     private Button getMyTourPopUp;
+    private String user_id;
     public static final String URL="http://35.197.153.192:3000/";
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_my_tour, menu);
         MenuItem itemSearch=menu.findItem(R.id.search_my_tour);
-
+        final MainActivity activity = (MainActivity) getActivity();
+        user_id=activity.getUser_id();
+        Toast.makeText(getContext(),user_id+"",Toast.LENGTH_SHORT).show();
         SearchView searchView= (SearchView) itemSearch.getActionView();
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -257,6 +260,7 @@ public class my_tour_fragment extends Fragment {
                             else {
                                 Bundle bundle = new Bundle();
                                 bundle.putString("tour_id", tours_current.get(position).getId());
+                                bundle.putString("user_id",user_id);
                                 bundle.putString("token", token);
                                 Intent intent = new Intent(getContext(), Tour_Info.class);
                                 intent.putExtras(bundle);
@@ -390,5 +394,5 @@ public class my_tour_fragment extends Fragment {
 
 
 
-    
+
 }

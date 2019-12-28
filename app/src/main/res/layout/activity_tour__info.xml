@@ -20,13 +20,26 @@
                     android:id="@+id/cover_tour_image"
                     android:layout_width="match_parent"
                     android:layout_height="230dp"/>
-                <ImageView
+                <LinearLayout
                     android:layout_marginTop="20dp"
                     android:layout_marginRight="10dp"
                     android:layout_alignParentRight="true"
-                    android:id="@+id/is_private_image"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"/>
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/follow_tour"
+                        android:layout_marginRight="50dp"
+                        android:src="@drawable/eye"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"/>
+                    <ImageView
+                        android:id="@+id/is_private_image"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"/>
+
+                </LinearLayout>
+
                 <ImageView
                     android:id="@+id/back_to_main"
                     android:layout_marginTop="20dp"

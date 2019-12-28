@@ -46,13 +46,18 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.ygaps.travelapp.Adapter.CustomAdapterForListStopPoint;
+import com.ygaps.travelapp.Adapter.CustomAdapter_Notification_2;
 import com.ygaps.travelapp.Adapter.CustomAdapter_Suggest_Stop_Point;
 import com.ygaps.travelapp.Model.Add_Stop_Point_Data;
 import com.ygaps.travelapp.Model.Add_Stop_Point_Result;
+import com.ygaps.travelapp.Model.ChatMemberOnRoad_Data;
 import com.ygaps.travelapp.Model.CoordList;
 import com.ygaps.travelapp.Model.CoordinateSet;
+import com.ygaps.travelapp.Model.GetNotification_Result;
 import com.ygaps.travelapp.Model.GetSugestStopPoint_Result;
 import com.ygaps.travelapp.Model.GetSuggestStoppoint_Data;
+import com.ygaps.travelapp.Model.InviteMember_Result;
+import com.ygaps.travelapp.Model.Notification_2;
 import com.ygaps.travelapp.Model.Stop_Point;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -74,6 +79,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -93,6 +99,8 @@ public class MapActivity extends AppCompatActivity {
     private ImageView search_icon;
     private ImageView find_my_location;
     private ImageView list_stop_point_selected;
+    private ImageView chat_member;
+    private ImageView notification_text;
     private Button pk;
     //vars
     private Boolean mLocationPermissionGranted = false;
@@ -103,6 +111,7 @@ public class MapActivity extends AppCompatActivity {
     Dialog dialog;
     Dialog add_Stop_Point_Dialog;
     Dialog list_stop_point_selected_dialog;
+    private Dialog notifiaction_dialog;
     private String token;
     private int id;
     private ArrayList<Stop_Point> arrayListStopPoint = new ArrayList<>();
@@ -118,7 +127,12 @@ public class MapActivity extends AppCompatActivity {
 
     private LocationManager mLocationManager;
     private ArrayList<CoordList> coordLists = new ArrayList<>();
-
+    private int mode=0;
+    private String tour_id;
+    private String user_id;
+    private String token_1;
+    private CustomAdapter_Notification_2 customAdapter_notification_2;
+    private ArrayList<Notification_2> arrayList;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -141,11 +155,14 @@ public class MapActivity extends AppCompatActivity {
         add_Stop_Point_Dialog = new Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
 
 
-        token = bundle.getString("token");
-        id = bundle.getInt("ID");
+        token = bundle.getString("token","");
+        id = bundle.getInt("ID",0);
         dialog = new Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
 
-
+        int mode=bundle.getInt("mode",0);
+        tour_id=bundle.getString("tour_id");
+        user_id=bundle.getString("user_id");
+        token_1=bundle.getString("token_1");
         getLocationPermission();
         find_my_location.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,7 +177,78 @@ public class MapActivity extends AppCompatActivity {
                 }
             }
         });
-        find_suggest_stop_point();
+
+        if (mode==0)
+        {
+            find_suggest_stop_point();
+        }
+        else {
+            getDeviceLocation();
+            chat_member.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Map<String, String> map = new HashMap<>();
+                    map.put("Authorization", token_1);
+                    ChatMemberOnRoad_Data chatMemberOnRoad_data=new ChatMemberOnRoad_Data(tour_id,user_id,"Alooo vu");
+                    Call<InviteMember_Result> call=jsonPlaceHolderApi.chat_member(map,chatMemberOnRoad_data);
+                    call.enqueue(new Callback<InviteMember_Result>() {
+                        @Override
+                        public void onResponse(Call<InviteMember_Result> call, Response<InviteMember_Result> response) {
+                            if (!response.isSuccessful())
+                            {
+                                Toast.makeText(getApplicationContext(),"k thanh"+tour_id+"  "+user_id+ "  "+token_1+"   "+response.code(),Toast.LENGTH_SHORT).show();
+                            }else {
+                                Toast.makeText(getApplicationContext(),"thanh cong",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<InviteMember_Result> call, Throwable t) {
+                            Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            });
+
+            notification_text.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    notifiaction_dialog.setContentView(R.layout.notification_popup_text);
+                    final ListView listView=notifiaction_dialog.findViewById(R.id.list_notification_text);
+                    Map<String, String> map = new HashMap<>();
+                    map.put("Authorization", token_1);
+                    Call<GetNotification_Result> call=jsonPlaceHolderApi.get_notification(map,tour_id,1,"100");
+                    call.enqueue(new Callback<GetNotification_Result>() {
+                        @Override
+                        public void onResponse(Call<GetNotification_Result> call, Response<GetNotification_Result> response) {
+                            if (!response.isSuccessful())
+                            {
+                                Toast.makeText(getApplicationContext(),"Khong thanh",Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                Toast.makeText(getApplicationContext(),"thanh cong",Toast.LENGTH_SHORT).show();
+                                arrayList=response.body().getNotiList();
+                                if (arrayList.size()!=0) {
+
+                                    customAdapter_notification_2 = new CustomAdapter_Notification_2(getApplicationContext(), R.layout.custom_item_notification, arrayList);
+                                    listView.setAdapter(customAdapter_notification_2);
+                                }
+                                else {
+                                    Toast.makeText(getApplicationContext()," rong",Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<GetNotification_Result> call, Throwable t) {
+
+                        }
+                    });
+                    notifiaction_dialog.show();
+                }
+            });
+        }
+
     }
 
     private void find_suggest_stop_point() {
@@ -751,6 +839,10 @@ public class MapActivity extends AppCompatActivity {
         mSearchText = findViewById(R.id.input_search);
         list_stop_point_selected_dialog = new Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
         list_stop_point_selected = findViewById(R.id.list_stop_point_selected);
+        chat_member=findViewById(R.id.chat_member);
+        notification_text=findViewById(R.id.notification_text);
+        notifiaction_dialog = new Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+        Objects.requireNonNull(notifiaction_dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
 
     private void initMap() {
