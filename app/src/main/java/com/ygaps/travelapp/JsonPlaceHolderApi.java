@@ -32,13 +32,16 @@ import com.ygaps.travelapp.Model.RequestOTP_Result;
 import com.ygaps.travelapp.Model.SearchUserByKeyword_Result;
 import com.ygaps.travelapp.Model.SendCommentData;
 import com.ygaps.travelapp.Model.SendCommentResult;
+import com.ygaps.travelapp.Model.SendCoordinate_Data;
 import com.ygaps.travelapp.Model.SendFeedback_Data;
 import com.ygaps.travelapp.Model.SendRatingData;
 import com.ygaps.travelapp.Model.SendRatingResult;
 import com.ygaps.travelapp.Model.SendReportComment_Data;
 import com.ygaps.travelapp.Model.SendReview_Data;
+import com.ygaps.travelapp.Model.SendSpeed_Data;
 import com.ygaps.travelapp.Model.SendTokenFirebaseToServer_Result;
 import com.ygaps.travelapp.Model.SendTokenFirebaseToSever_Data;
+import com.ygaps.travelapp.Model.Send_noti_on_road_result;
 import com.ygaps.travelapp.Model.TourInforResult;
 import com.ygaps.travelapp.Model.UpdatePasswordData;
 import com.ygaps.travelapp.Model.UpdatePasswordResult;
@@ -50,6 +53,8 @@ import com.ygaps.travelapp.Model.User_register;
 import com.ygaps.travelapp.Model.VerifyOTP_Data;
 import com.ygaps.travelapp.Model.VerifyOTP_Result;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -161,4 +166,13 @@ public interface JsonPlaceHolderApi {
     @GET("tour/notification-list")
     Call<GetNotification_Result> get_notification(@HeaderMap Map<String,String> headers,@Query("tourId") String tourId,@Query("pageIndex") int pageIndex,@Query("pageSize") String pageSize);
 
+    @POST("tour/current-users-coordinate")
+    Call<ArrayList> send_get_coor(@HeaderMap Map<String,String> headers, @Body SendCoordinate_Data sendCoordinate_data);
+
+    @POST("tour/add/notification-on-road")
+    Call<InviteMember_Result> send_notification_on_road(@HeaderMap Map<String,String> headers, @Body SendSpeed_Data sendSpeed_data);
+
+
+    @GET("tour/get/noti-on-road")
+    Call<Send_noti_on_road_result> get_notification_on_road(@HeaderMap Map<String,String> headers, @Query("tourId") int tourId, @Query("pageIndex") int pageIndex, @Query("pageSize") String pageSize);
 }

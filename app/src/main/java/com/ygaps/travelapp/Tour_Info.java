@@ -99,6 +99,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.ygaps.travelapp.LoginActivity.URL;
+
 import static com.ygaps.travelapp.MapActivity.arrayProvince;
 
 import com.ygaps.travelapp.Model.onCLickRecycleView_Rating;
@@ -230,7 +231,7 @@ public class Tour_Info extends AppCompatActivity {
                 bundle.putString("user_id",user_id);
                 bundle.putString("token_1",token);
                 bundle.putInt("mode",1);
-                Intent intent=new Intent(getApplicationContext(),MapActivity.class);
+                Intent intent=new Intent(getApplicationContext(),MapTemp.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -563,7 +564,7 @@ public class Tour_Info extends AppCompatActivity {
                                         Bundle bundle1 = new Bundle();
                                         bundle1.putString("id_tour", String.valueOf(id));
                                         bundle1.putInt("id_stop_point", stopPointResult_tourInfo.get(position).getId());
-                                        bundle.putInt("type", 1);
+                                        bundle1.putInt("type", 1);
                                         update_stop_point.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                                         update_stop_point.setContentView(R.layout.add_stop_point);
                                         TextView title = update_stop_point.findViewById(R.id.title_add_stop_point);
@@ -579,8 +580,9 @@ public class Tour_Info extends AppCompatActivity {
                                             @Override
                                             public void onClick(View v) {
                                                 Bundle bundle2 = new Bundle();
+                                                bundle2.putString("token",token);
                                                 bundle2.putInt("type", 1);
-                                                Intent intent = new Intent(Tour_Info.this, MapActivity.class);
+                                                Intent intent = new Intent(Tour_Info.this, MapTemp.class);
                                                 intent.putExtras(bundle2);
                                                 startActivity(intent);
                                             }
@@ -1066,7 +1068,7 @@ public class Tour_Info extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putString("token", token);
                 bundle.putInt("ID", Integer.parseInt(id_tour));
-                Intent intent = new Intent(Tour_Info.this, MapActivity.class);
+                Intent intent = new Intent(Tour_Info.this, MapTemp.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

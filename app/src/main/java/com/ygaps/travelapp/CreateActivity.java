@@ -276,7 +276,7 @@ public class CreateActivity extends AppCompatActivity {
                                         Bundle bundle = new Bundle();
                                         bundle.putString("token", token);
                                         bundle.putInt("ID", ID);
-                                        Intent intent = new Intent(CreateActivity.this, MapActivity.class);
+                                        Intent intent = new Intent(CreateActivity.this, MapTemp.class); //phai k ma m cap quyen truoc het roi phai ko t xin quyen ben create tour het
                                         intent.putExtras(bundle);
                                         startActivity(intent);
                                     }
